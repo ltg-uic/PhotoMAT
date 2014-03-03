@@ -36,16 +36,12 @@ sub get {
     my ($parent_hash, $h, $r, $dbh, $table, $hash, $column_name, $membership_table, $parent_column) = @_;
     my $http_status = NOT_FOUND;
 
-print STDERR "table is $table\n";
-print STDERR "hash is ", Dumper($hash);
-
     my $path = $hash->{id} || 0;
     $path *= 1;
 
     if ($path) { 
         if ($membership_table) {
             $hash->{$table} = &Database::getRows($r, $dbh, qq[select t.* from $table t join $membership_table m ON t.id = m.$column_name where m.$parent_column=?], $path);
-print STDERR "select t.* from $table t join $membership_table m ON t.id = m.$column_name where m.$parent_column=$path\n";
         } else {
             $hash->{$table} = &Database::getRows($r, $dbh, qq[select * from $table where $column_name=?], $path);
         }
