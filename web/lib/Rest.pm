@@ -8,7 +8,7 @@ use Database;
 use JSON;
 use Net::SMTP;
 use Convert::UU qw(uudecode);
-use Apache2::Const qw(FORBIDDEN OK NOT_FOUND HTTP_CONFLICT);
+use Apache2::Const qw(FORBIDDEN HTTP_OK NOT_FOUND HTTP_CONFLICT);
 use Auth;
 
 
@@ -18,7 +18,7 @@ sub handleRest {
     my $dbh   = $parent_hash->{dbh};
     my $table  = $parent_hash->{table};
     my $hash = { id => $parent_hash->{path} };
-    my $http_status = OK;
+    my $http_status = HTTP_OK;
     my $method = $parent_hash->{method};
 
     if ($method eq 'GET') { 
@@ -33,12 +33,36 @@ sub handleRest {
     elsif ($method eq 'PUT') { 
         $http_status = put($parent_hash, $h, $adminRequired, $table, $r, $dbh);
     }
+    elsif ($method eq 'DELETE') { 
+        $http_status = del($parent_hash, $h, $adminRequired, $table, $r, $dbh);
+    }
 
 
     $parent_hash->{http_status} = $http_status;
     my $result = to_json($hash);
     print STDERR "RETURNING $http_status and hash is $result\n";
     return $result;
+}
+
+sub del { 
+    my ($parent_hash, $h, $adminRequired, $table, $r, $dbh) = @_;
+    my $person = &Auth::getPerson($r, $dbh);
+    if (!defined $person) { 
+        return FORBIDDEN;
+    }
+    if ($adminRequired->{$table}) { 
+        unless ($person->{is_admin}) { 
+            return FORBIDDEN;
+        }
+    }
+
+    my $id = $parent_hash->{path};
+
+    print STDERR "DELETE FROM $table where id=$id\n";
+
+    &Database::do($r, $dbh, qq[delete from $table where id=?], $id);
+
+    return HTTP_OK;
 }
 
 sub put { 
@@ -113,7 +137,7 @@ sub put {
     }
 
     $parent_hash->{http_content} = to_json($existingRow);
-    return 200;
+    return HTTP_OK;
 }
 
 sub post { 
@@ -133,7 +157,7 @@ sub post {
     my $value = $sequence->{nextval};
 
     $parent_hash->{http_content} = to_json({ id => $value});
-    return 200;
+    return HTTP_OK;
 }
 
 sub get { 
@@ -169,7 +193,7 @@ sub get {
     }
 
     if ($hash->{$table}) { 
-        $http_status = 200;
+        $http_status = HTTP_OK;
         foreach my $row (@{$hash->{$table}}) { 
             delete ($row->{password});
         }

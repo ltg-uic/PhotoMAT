@@ -6,7 +6,7 @@ use HTTP::Status;
 use Data::Dumper;
 use Database;
 use JSON;
-use Apache2::Const qw(FORBIDDEN OK NOT_FOUND DECLINED);
+use Apache2::Const qw(FORBIDDEN HTTP_OK NOT_FOUND DECLINED);
 use Net::SMTP;
 use Convert::UU qw(uudecode);
 use CGI;
