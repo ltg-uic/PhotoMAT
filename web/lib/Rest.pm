@@ -8,7 +8,7 @@ use Database;
 use JSON;
 use Net::SMTP;
 use Convert::UU qw(uudecode);
-use Apache2::Const qw(FORBIDDEN OK NOT_FOUND);
+use Apache2::Const qw(FORBIDDEN OK NOT_FOUND HTTP_CONFLICT);
 use Auth;
 
 
@@ -30,11 +30,72 @@ sub handleRest {
     elsif ($method eq 'POST') { 
         $http_status = post($parent_hash, $h, $adminRequired, $table, $r, $dbh);
     }
+    elsif ($method eq 'PUT') { 
+        $http_status = put($parent_hash, $h, $adminRequired, $table, $r, $dbh);
+    }
 
 
     $parent_hash->{http_status} = $http_status;
+    print STDERR "RETURNING $http_status\n";
     my $result = to_json($hash);
     return $result;
+}
+
+sub put { 
+    my ($parent_hash, $h, $adminRequired, $table, $r, $dbh) = @_;
+    my $person = &Auth::getPerson($r, $dbh);
+    if (!defined $person) { 
+        return FORBIDDEN;
+    }
+    if ($adminRequired->{$table}) { 
+        unless ($person->{is_admin}) { 
+            return FORBIDDEN;
+        }
+    }
+
+    my $body = $parent_hash->{content_in};
+    my $form = from_json($body);
+    if (defined ($form->{id})) { 
+        delete $form->{id};
+    }
+    my $id = $parent_hash->{path};
+
+    my $existingRow = &Database::getRow($r, $dbh, qq[select * from $table where id = ?], $id);
+
+    print STDERR "Existing row is ", Dumper ($existingRow);
+
+    if ($existingRow) { 
+    }
+    else { 
+        my @columns = ('id');
+        my @values = ($id);
+
+        my $tableColumns = &Database::getRows($r, $dbh, qq[select column_name, is_nullable from information_schema.columns where table_name=?], $table);
+
+        foreach my $tableColumn (@$tableColumns) { 
+            next if ($tableColumn->{column_name} eq 'id');
+            if ($tableColumn->{is_nullable} eq 'NO') {
+                if (!defined ($form->{$tableColumn->{column_name}})) {
+                    $parent_hash->{http_content} = to_json({ message => "Required field $tableColumn->{column_name} not specified"});
+                    return HTTP_CONFLICT;
+                }
+            }
+            if (defined ($form->{$tableColumn->{column_name}})) {
+                push (@columns, $tableColumn->{column_name});
+                push (@values, $form->{$tableColumn->{column_name}});
+            }
+        }
+
+        my $columnString = join (", ",  (map { "$_" }  @columns));
+        my $valueString = join (", ",  (map { "?"} @columns));
+
+        &Database::do($r, $dbh, qq[INSERT INTO $table ($columnString) values ($valueString)], @values);
+
+        $existingRow = &Database::getRow($r, $dbh, qq[select * from $table where id = ?], $id);
+    }
+
+    $parent_hash->{http_content} = to_json($existingRow);
+    return OK;
 }
 
 sub post { 

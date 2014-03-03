@@ -142,10 +142,18 @@ sub handler {
         $r->content_type($content_type);
         $r->print($text);
     }
+    else { 
+        print STDERR "HERE, status is $status\n";
+        if ($hash->{http_content}) { 
+            $r->content_type($content_type);
+            $r->print($hash->{http_content});
+        }
+    }
 
     $dbh->commit();
     $dbh->disconnect();
-    return $status;
+    $r->status($status);
+    return OK;
 }
 
 
