@@ -120,8 +120,9 @@ sub handler {
         $text = &Template::readFile ($q, $file, $hash, $h);
     }
 
-    if (defined($hash->{http_content})) { $text = $hash->{http_content}; }
-    if (defined($hash->{content_type})) { $content_type = $hash->{content_type};  }
+print STDERR "text is $text BUT content is $hash->{http_content}\n";    
+    if ($hash->{http_content}) { $text = $hash->{http_content}; }
+    if ($hash->{content_type}) { $content_type = $hash->{content_type};  }
 
     if (defined $hash->{REDIRECT}) {
         $r->status(HTTP_SEE_OTHER);
@@ -134,11 +135,11 @@ sub handler {
         return handleFile($r, $hash);
     }
 
-    my $status = $hash->{http_status} || OK;
+    my $status = $hash->{http_status} || 200;
     print STDERR "status is $status\n";
     print STDERR Dumper($hash);
 
-    if ($status == OK) { 
+    if ($status == 200) { 
         $r->content_type($content_type);
         $r->print($text);
     }

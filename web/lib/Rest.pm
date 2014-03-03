@@ -36,8 +36,8 @@ sub handleRest {
 
 
     $parent_hash->{http_status} = $http_status;
-    print STDERR "RETURNING $http_status\n";
     my $result = to_json($hash);
+    print STDERR "RETURNING $http_status and hash is $result\n";
     return $result;
 }
 
@@ -65,6 +65,24 @@ sub put {
     print STDERR "Existing row is ", Dumper ($existingRow);
 
     if ($existingRow) { 
+
+        my @columns;
+        my @values;
+
+        my $tableColumns = &Database::getRows($r, $dbh, qq[select column_name, is_nullable from information_schema.columns where table_name=?], $table);
+
+        foreach my $tableColumn (@$tableColumns) { 
+            next if ($tableColumn->{column_name} eq 'id');
+            if (defined ($form->{$tableColumn->{column_name}})) {
+                push (@columns, $tableColumn->{column_name});
+                push (@values, $form->{$tableColumn->{column_name}});
+            }
+        }
+        my $columnString = join (", ",  (map { "$_ = ?" }  @columns));
+
+        &Database::do($r, $dbh, qq[UPDATE $table set $columnString where id = ?], @values, $id);
+
+        $existingRow = &Database::getRow($r, $dbh, qq[select * from $table where id = ?], $id);
     }
     else { 
         my @columns = ('id');
@@ -95,7 +113,7 @@ sub put {
     }
 
     $parent_hash->{http_content} = to_json($existingRow);
-    return OK;
+    return 200;
 }
 
 sub post { 
@@ -115,7 +133,7 @@ sub post {
     my $value = $sequence->{nextval};
 
     $parent_hash->{http_content} = to_json({ id => $value});
-    return OK;
+    return 200;
 }
 
 sub get { 
@@ -151,7 +169,7 @@ sub get {
     }
 
     if ($hash->{$table}) { 
-        $http_status = OK;
+        $http_status = 200;
         foreach my $row (@{$hash->{$table}}) { 
             delete ($row->{password});
         }
