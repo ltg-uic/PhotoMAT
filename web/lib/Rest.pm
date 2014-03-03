@@ -9,6 +9,7 @@ use JSON;
 use Net::SMTP;
 use Convert::UU qw(uudecode);
 use Apache2::Const qw(FORBIDDEN OK NOT_FOUND);
+use Auth;
 
 
 sub handleRest {
@@ -18,19 +19,43 @@ sub handleRest {
     my $table  = $parent_hash->{table};
     my $hash = { id => $parent_hash->{path} };
     my $http_status = OK;
+    my $method = $parent_hash->{method};
 
-    if ($parent_hash->{method} eq 'GET') { 
+    if ($method eq 'GET') { 
         my $column_name = 'id';
         my $membership_table = undef;
         my $parent_column = undef;
         $http_status = get($parent_hash, $h, $r, $dbh, $table, $hash, $column_name, $membership_table, $parent_column);
     }
+    elsif ($method eq 'POST') { 
+        $http_status = post($parent_hash, $h, $adminRequired, $table, $r, $dbh);
+    }
+
 
     $parent_hash->{http_status} = $http_status;
     my $result = to_json($hash);
     return $result;
 }
 
+sub post { 
+    my ($parent_hash, $h, $adminRequired, $table, $r, $dbh) = @_;
+    my $person = &Auth::getPerson($r, $dbh);
+    if (!defined $person) { 
+        return FORBIDDEN;
+    }
+    if ($adminRequired->{$table}) { 
+        unless ($person->{is_admin}) { 
+            return FORBIDDEN;
+        }
+    }
+
+    my $sequenceName = $table."_id_seq";
+    my $sequence = &Database::getRow($r, $dbh, qq[select nextval('$sequenceName')]);
+    my $value = $sequence->{nextval};
+
+    $parent_hash->{http_content} = to_json({ id => $value});
+    return OK;
+}
 
 sub get { 
     my ($parent_hash, $h, $r, $dbh, $table, $hash, $column_name, $membership_table, $parent_column) = @_;

@@ -14,7 +14,7 @@ use Template;
 use File::Basename;
 use JSON;
 use Rest;
-#use CGI;
+use CGI;
 
 use Apache2::Const  qw(:http :common :log);
 use Apache2::Log;
@@ -48,7 +48,6 @@ sub handler {
         person => 1, 
         person_membership => 1, 
         camera => 1,
-        token => 1,
         deployment => 1,
         deployment_picture => 1,
         burst => 1, 
@@ -82,10 +81,14 @@ sub handler {
         #$q = new CGI($content);
 
         # check for real method
-        if ($method eq 'POST' && $h->{_method}) {
-            $orig_method = $method;
-            $method = $h->{_method};
-        }
+        # if ($method eq 'POST' && $h->{_method}) {
+        #     $orig_method = $method;
+        #     $method = $h->{_method};
+        # }
+        # 
+        # if ($method eq 'POST') { 
+        #     $h = getQueryStringHash($content);
+        # }
 
         $resp_headers->set (expires => "-1d");  # only in the case of non-safe methods
     }
@@ -132,6 +135,8 @@ sub handler {
     }
 
     my $status = $hash->{http_status} || OK;
+    print STDERR "status is $status\n";
+    print STDERR Dumper($hash);
 
     if ($status == OK) { 
         $r->content_type($content_type);

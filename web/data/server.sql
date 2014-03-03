@@ -47,9 +47,9 @@ COMMENT ON TABLE person IS 'A person may be a student or a teacher';
 COMMENT ON COLUMN person.password IS 'Password hashed using bcrypt';
 COMMENT ON COLUMN person.is_admin IS 'Admins are not limited to any particular school. Admins can create classes, schools, persons, and person_membership';
 
-INSERT INTO PERSON (first_name, last_name, password, email) values ('Andy', 'Avalon',  crypt('password', gen_salt('bf', 10)), 'a@example.com');
-INSERT INTO PERSON (first_name, last_name, password, email) values ('Betty', 'Belvidere',  crypt('password', gen_salt('bf', 10)), 'b@example.com');
-INSERT INTO PERSON (first_name, last_name, password, email) values ('Charlie', 'Chatterbox',  crypt('password', gen_salt('bf', 10)), 'c@example.com');
+-- INSERT INTO PERSON (first_name, last_name, password, email) values ('Andy', 'Avalon',  crypt('password', gen_salt('bf', 10)), 'a@example.com');
+-- INSERT INTO PERSON (first_name, last_name, password, email) values ('Betty', 'Belvidere',  crypt('password', gen_salt('bf', 10)), 'b@example.com');
+-- INSERT INTO PERSON (first_name, last_name, password, email) values ('Charlie', 'Chatterbox',  crypt('password', gen_salt('bf', 10)), 'c@example.com');
 
 
 
@@ -60,10 +60,10 @@ CREATE TABLE person_membership (
 COMMENT ON TABLE person_membership IS 'A person may be in multiple classes';
 
 
-insert into person_membership values (1, 1);
-insert into person_membership values (1, 2);
-insert into person_membership values (2, 1);
-insert into person_membership values (3, 1);
+-- insert into person_membership values (1, 1);
+-- insert into person_membership values (1, 2);
+-- insert into person_membership values (2, 1);
+-- insert into person_membership values (3, 1);
 
 
 CREATE TABLE token (
