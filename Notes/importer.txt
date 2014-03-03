@@ -1,0 +1,54 @@
+Importer app
+ - not just binary Garbage or not garbage
+ - Garbage or birds,
+ - Animate burst
+ -  
+
+
+ PhotoMat
+ - Make a call to virtual memory - get locally
+ - 
+
+
+Constraint
+- importer - iOS app
+- design of the backend 
+- Additional metadata
+- 
+
+
+
+
+Temperature
+Humidity
+
+Swipe left right for bursts
+pick up and drop labels
+
+Google maps integration
+pause and play
+
+timeline is helpful
+swipe label to left to delete
+new cell to add
+long tap to edit
+
+color the dots on the timeline
+- labelled vs non-labelled
+
+- examined
+- labeled 
+- deleted
+
+Initial state is grey
+delete - red
+label - green
+no action - stays grey
+
+- delete unrecoverable  - has a dialog box
+
+- Once you create a label, its default position is in the top
+= 
+
+
+Q: How to get nominal time?

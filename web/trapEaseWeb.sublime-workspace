@@ -1,0 +1,1805 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"http",
+				"http_status"
+			],
+			[
+				"in",
+				"insert	sql-insert"
+			],
+			[
+				"scho",
+				"school_id"
+			],
+			[
+				"ETRPerso",
+				"ETRPersonMembership"
+			],
+			[
+				"ET",
+				"ETRPerson"
+			],
+			[
+				"ETRD",
+				"ETRDeployment"
+			],
+			[
+				"ETRC",
+				"ETRClassMembership"
+			],
+			[
+				"ETRPer",
+				"ETRPerson"
+			],
+			[
+				"ETRPers",
+				"ETRPersonMembership"
+			],
+			[
+				"cre",
+				"create	sql-createTable"
+			],
+			[
+				"group",
+				"groupId"
+			],
+			[
+				"manage",
+				"manageGroups"
+			],
+			[
+				"admin",
+				"adminIds"
+			],
+			[
+				"fa",
+				"fakeH"
+			],
+			[
+				"fake",
+				"fakeParentHash"
+			],
+			[
+				"code",
+				"codeKeys"
+			],
+			[
+				"user",
+				"userid"
+			],
+			[
+				"grou",
+				"groupid"
+			],
+			[
+				"rest",
+				"restStr"
+			],
+			[
+				"inv",
+				"inviterId"
+			],
+			[
+				"body",
+				"bodyRow"
+			],
+			[
+				"op",
+				"option	Tag"
+			],
+			[
+				"create",
+				"CREATE"
+			],
+			[
+				"invi",
+				"inviteCode"
+			],
+			[
+				"var",
+				"VARCHAR"
+			],
+			[
+				"pr",
+				"PRIMARY"
+			],
+			[
+				"Upload",
+				"UploadPrice"
+			],
+			[
+				"CSRF",
+				"CSRF"
+			],
+			[
+				"red",
+				"redirectHash"
+			],
+			[
+				"list-st",
+				"list-style-type"
+			],
+			[
+				"th",
+				"thumb"
+			],
+			[
+				"virt",
+				"VirtualHost"
+			],
+			[
+				"price",
+				"priceincents"
+			],
+			[
+				"lib",
+				"libcryptopp"
+			],
+			[
+				"clean",
+				"cleanOpenSSL"
+			],
+			[
+				"bu",
+				"build-openssl"
+			],
+			[
+				"stat",
+				"statement_timestamp"
+			],
+			[
+				"num",
+				"numPagesToDisplay"
+			],
+			[
+				"numPages",
+				"numPagesToDisplay"
+			],
+			[
+				"numpa",
+				"numPagesFor"
+			],
+			[
+				"nor",
+				"normalizeFirst"
+			],
+			[
+				"nu",
+				"numPerPage"
+			],
+			[
+				"numPage",
+				"numPagesToDisplay"
+			],
+			[
+				"page",
+				"pageNum"
+			],
+			[
+				"n",
+				"numPerPage"
+			],
+			[
+				"Passwo",
+				"PasswordHelper"
+			],
+			[
+				"bor",
+				"border-spacing"
+			],
+			[
+				"desc",
+				"descWidth"
+			],
+			[
+				"des",
+				"descWidth"
+			],
+			[
+				"lin",
+				"lineHeight"
+			],
+			[
+				"tra",
+				"transactions"
+			],
+			[
+				"number",
+				"numberOfRowsPerPage"
+			],
+			[
+				"start",
+				"startRow"
+			],
+			[
+				"line",
+				"lineOffset"
+			],
+			[
+				"data",
+				"dataY"
+			],
+			[
+				"end",
+				"endRow"
+			],
+			[
+				"numb",
+				"numberOfRowsPerPage"
+			],
+			[
+				"numberOfRw",
+				"numberOfRowsOnFirstPage"
+			],
+			[
+				"numRo",
+				"numRowsForPage"
+			],
+			[
+				"dataY",
+				"dataYNextPage"
+			],
+			[
+				"su",
+				"summaryHeaderX"
+			],
+			[
+				"summ",
+				"summaryLineHeight"
+			],
+			[
+				"summar",
+				"summaryHeaderX"
+			],
+			[
+				"numberOfRows",
+				"numberOfRowsOnFirstPage"
+			],
+			[
+				"print",
+				"printPageHeader"
+			],
+			[
+				"His",
+				"HistoryHelper"
+			],
+			[
+				"YYYY",
+				"yyyy"
+			],
+			[
+				"am",
+				"amountChargedToCard"
+			],
+			[
+				"amount",
+				"amountChargedToCard"
+			],
+			[
+				"nav",
+				"navBarDiv"
+			],
+			[
+				"dele",
+				"deleteDataForEmail"
+			],
+			[
+				"connect",
+				"connectToDb"
+			],
+			[
+				"Pix2D",
+				"Pix2DocTest"
+			],
+			[
+				"cclas",
+				"cclast4"
+			],
+			[
+				"def",
+				"defaultPlanId"
+			],
+			[
+				"outpu",
+				"output_prefix"
+			],
+			[
+				"file",
+				"filePath"
+			],
+			[
+				"alre",
+				"alreadyCharged"
+			],
+			[
+				"groui",
+				"groupid"
+			],
+			[
+				"CH",
+				"Charge"
+			],
+			[
+				"amou",
+				"amountToAuth"
+			],
+			[
+				"strip",
+				"stripeId"
+			],
+			[
+				"outs",
+				"outstandingJobs"
+			],
+			[
+				"str",
+				"stripeCustomerId"
+			],
+			[
+				"capt",
+				"captureId"
+			],
+			[
+				"amoun",
+				"amountInCents"
+			],
+			[
+				"job",
+				"jobId"
+			],
+			[
+				"curre",
+				"currentCredit"
+			],
+			[
+				"curr",
+				"currentCredit"
+			],
+			[
+				"prima",
+				"primaryGroup"
+			],
+			[
+				"jo",
+				"jobPrice"
+			],
+			[
+				"gr",
+				"gr	perl-db-getRow"
+			],
+			[
+				"prim",
+				"primaryGroup"
+			],
+			[
+				"use",
+				"userId"
+			],
+			[
+				"refere",
+				"REFERENCES"
+			],
+			[
+				"Not",
+				"NOT"
+			],
+			[
+				"not",
+				"NOT"
+			],
+			[
+				"null",
+				"NULL"
+			],
+			[
+				"dir",
+				"dir_config"
+			],
+			[
+				"inc",
+				"include"
+			],
+			[
+				"signup",
+				"signupCCForm"
+			],
+			[
+				"nul",
+				"NULL"
+			],
+			[
+				"magin",
+				"margin-top"
+			],
+			[
+				"sess",
+				"sessionTokenFromBrowser"
+			],
+			[
+				"Refe",
+				"REFERENCES"
+			],
+			[
+				"cookie",
+				"cookie_from_browser"
+			],
+			[
+				"exi",
+				"exists"
+			],
+			[
+				"exti",
+				"existing"
+			],
+			[
+				"form",
+				"form-signin"
+			],
+			[
+				"sign",
+				"signupForm"
+			],
+			[
+				"teim",
+				"timestamp"
+			],
+			[
+				"no",
+				"NOT"
+			],
+			[
+				"color",
+				"border-color"
+			],
+			[
+				"res",
+				"resp_headers"
+			],
+			[
+				"attac",
+				"attachment"
+			],
+			[
+				"hand",
+				"handleFile"
+			],
+			[
+				"cont",
+				"content_type"
+			],
+			[
+				"mim",
+				"mime_type"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "data/server.sql",
+			"settings":
+			{
+				"buffer_size": 4481,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/Trap.pm",
+			"settings":
+			{
+				"buffer_size": 6906,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "lib/Rest.pm",
+			"settings":
+			{
+				"buffer_size": 849,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/aijaz/Library/Application Support/Sublime Text 3/Packages/User/trapEase.sublime-build",
+			"settings":
+			{
+				"buffer_size": 69,
+				"line_ending": "Unix",
+				"name": "untitled.sublime-build"
+			}
+		},
+		{
+			"file": "deploy.pl",
+			"settings":
+			{
+				"buffer_size": 1257,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/User/trapEase.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"ind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"explode",
+				"Export to HTML: Toggle Annotation Mode"
+			],
+			[
+				"packagt",
+				"Package Control: Remove Package"
+			],
+			[
+				"perl",
+				"Set Syntax: Perl"
+			],
+			[
+				"packa",
+				"Preferences: Browse Packages"
+			],
+			[
+				"package",
+				"Preferences: Browse Packages"
+			],
+			[
+				"export to	",
+				"Export to HTML: Toggle Annotation Mode"
+			],
+			[
+				"expo",
+				"Export to HTML: Toggle Annotation Mode"
+			],
+			[
+				"ssh",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"shell",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"mod",
+				"Set Syntax: ModernPerl"
+			],
+			[
+				"modp	",
+				"Set Syntax: ModernPerl"
+			],
+			[
+				"modp",
+				"Set Syntax: ModernPerl"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"sshell",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"shel",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"Snippet: ",
+				"Snippet: perl-db-do"
+			],
+			[
+				"open",
+				"File Navigator: Open"
+			],
+			[
+				"js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"javas",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"tab",
+				"View: Toggle Tabs"
+			],
+			[
+				"inde",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"tag",
+				"Tagify: Get tag list"
+			],
+			[
+				"upda",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"htm",
+				"Set Syntax: HTML"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"export",
+				"Export to HTML: Show Export Menu"
+			],
+			[
+				"set syn c",
+				"Set Syntax: C"
+			],
+			[
+				"view as",
+				"SublimeHighlight: view as HTML"
+			],
+			[
+				"copy",
+				"SublimeHighlight: copy to clipboard as RTF"
+			],
+			[
+				"cop",
+				"SublimeHighlight: copy to clipboard as RTF"
+			],
+			[
+				"copy rtf",
+				"SublimeHighlight: copy to clipboard as RTF"
+			],
+			[
+				"rtf",
+				"SublimeHighlight: copy to clipboard as RTF"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"reinde",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"alig",
+				"Preferences: Alignment Key Bindings – Default"
+			],
+			[
+				"bro",
+				"Preferences: Browse Packages"
+			],
+			[
+				"file",
+				"File Navigator: Open"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())",
+			"import urllib2,os; pf='Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please restart Sublime Text to finish installation')"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/aijaz/CocoaApps/TrapEase/web/htdocs/index2.html",
+		"/Users/aijaz/CocoaApps/TrapEase/web/htdocs/index.html",
+		"/Users/aijaz/CocoaApps/TrapEase/web/lib/Log.pm",
+		"/Users/aijaz/CocoaApps/TrapEase/web/lib/Session.pm",
+		"/Users/aijaz/CocoaApps/TrapEase/web/lib/Smtp.pm",
+		"/Users/aijaz/CocoaApps/TrapEase/web/lib/Template.pm",
+		"/Users/aijaz/.ssh/known_hosts",
+		"/Users/aijaz/CocoaApps/ID/web/lib/Groups.pm",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/manageGroups2.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/editGroup2.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/leaveGroup.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/leaveGroup2.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/bulkRequests2.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/updateGroup.html",
+		"/Users/aijaz/CocoaApps/ID/web/lib/BulkRequest.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/LeaveGroup.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/DeleteGroup.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/UpdateGroup.pm",
+		"/Users/aijaz/Dropbox/Clients/Moher/Temperature",
+		"/Users/aijaz/Dropbox/Clients/Moher/importer.txt",
+		"/Users/aijaz/CocoaApps/ID/web/lib/ApproveRequest.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/RejectRequest.pm",
+		"/Users/aijaz/CocoaApps/ID/web/database/p2pdb.sql",
+		"/Users/aijaz/CocoaApps/ID/web/lib/ProcessLoginForInvite.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/Smtp.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/Database.pm",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/approveRequest.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/rejectRequest.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/requestNotFound.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/actionPerformed.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/acceptInvite.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/acceptInvite2.html",
+		"/Users/aijaz/CocoaApps/ID/web/lib/SignupEmail.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/ConfirmSignup.pm",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/inviteAccepted.html",
+		"/Users/aijaz/CocoaApps/ID/web/lib/SignupCharge.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/Session.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/CreateUser.pm",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/confirmSignup2.html",
+		"/Users/aijaz/CocoaApps/ID/web/lib/InviteUtils.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/EditGroup.pm",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/groupSelectSnippet.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/groupSelectSnippetBilling.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/billing2.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/ccUpdateSuccess.html",
+		"/Users/aijaz/CocoaApps/ID/web/lib/CCUpdate.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/PassThrough.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/Template.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/WebInvite.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/P2PH.pm",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/upload.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/deleteGroup.html",
+		"/Users/aijaz/CocoaApps/ID/web/taskforest/htdocs/yui/build/event-delegate/event-delegate-min.js",
+		"/Users/aijaz/CocoaApps/ID/web/deploy.pl",
+		"/Users/aijaz/CocoaApps/ID/web/lib/Log.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/Ledger.pm",
+		"/Users/aijaz/Dropbox/SublimeText3/snippets/perl-db-getRows.sublime-snippet",
+		"/Users/aijaz/Dropbox/SublimeText3/snippets/perl-rlog.sublime-snippet",
+		"/Users/aijaz/Dropbox/SublimeText3/snippets/perl-log.sublime-snippet",
+		"/Users/aijaz/Dropbox/SublimeText3/snippets/perl-db-do.sublime-snippet",
+		"/Users/aijaz/Dropbox/SublimeText3/snippets/sql-insert.sublime-snippet",
+		"/Users/aijaz/Dropbox/SublimeText3/snippets/perl-db-getRow.sublime-snippet",
+		"/Users/aijaz/CocoaApps/ID/web/lib/BusinessStripe.pm",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/bulkRequests.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/ccUpdate.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/payDueAmount.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/editGroup.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/manageGroups.html",
+		"/Users/aijaz/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/aijaz/CocoaApps/ID/Pix2Doc.sublime-project",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/fonts/glyphicons-halflings-regular.woff",
+		"/Users/aijaz/CocoaApps/ID/web/lib/ConfirmForgot.pm",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/includes/ccRows.html",
+		"/Users/aijaz/CocoaApps/ID/web/lib/AcceptInvite.pm",
+		"/Users/aijaz/CocoaApps/ID/web/emmet.html",
+		"/Users/aijaz/CocoaApps/ViewFinder/ViewFinder/devices.txt",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/processLoginForInvite.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/processContact2.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/processContact.html",
+		"/Users/aijaz/CocoaApps/ID/web/lib/ProcessLogin.pm",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/privacyPolicy.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/processLogin.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/ProcessLoginForInvite.pm",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/paymentSucceeded.html",
+		"/Users/aijaz/CocoaApps/RestHelperClient/wipeUser.py",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/signup.html",
+		"/Users/aijaz/CocoaApps/ID/web/lib/AddGroup.pm",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/addGroup2.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/addGroup.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/includes/basicNav.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/js/signupStripe.js",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/includes/signupNav.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/confirmSignup.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/signupEmail.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/signupCharge2.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/signupCharge.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/includes/preTitle.html",
+		"/Users/aijaz/CocoaApps/ID/web/lib/ProcessForgot.pm",
+		"/Users/aijaz/CocoaApps/ID/web/makeMissingStripeCustomers.pl",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/processForgot.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/includes/loginForm.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/loginFail.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/login.html",
+		"/Users/aijaz/CocoaApps/ID/web/lib/Submit.pm",
+		"/Users/aijaz/CocoaApps/ID/web/genRows.pl",
+		"/Users/aijaz/CocoaApps/ID/web/lib/AdminCheck.pm",
+		"/Users/aijaz/CocoaApps/ID/web/taskforest/htdocs/about.html",
+		"/Users/aijaz/CocoaApps/ID/web/lib/GetBilling.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/P2P.pm",
+		"/Users/aijaz/CocoaApps/ID/web/docs/adminInput",
+		"/Users/aijaz/CocoaApps/ID/web/taskforest/htdocs/website/index.html",
+		"/Users/aijaz/CocoaApps/ID/web/taskforest/htdocs/website/about/index.html",
+		"/Users/aijaz/CocoaApps/ID/web/taskforest/htdocs/website/about/intro.html",
+		"/Users/aijaz/CocoaApps/ID/web/taskforest/htdocs/website/docs/index.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/chooseIndex.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/editeGroup2.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/billing.html",
+		"/Users/aijaz/CocoaApps/ID/web/taskforest/jobs/J_BACKUP_FILES",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/ccUpdateSuccessPaymentDue.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/ccUpdateSuccessFromApp.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/ccUpdateFailureFromApp.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/ccUpdateFailure.html",
+		"/Users/aijaz/CocoaApps/ID/web/lib/UserUpload.pm",
+		"/Users/aijaz/CocoaApps/ID/web/lib/UploadHelper.pm",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/manageGroup2.html",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/prices2.html",
+		"/Users/aijaz/CocoaApps/ID/web/lib/Price.pm",
+		"/Users/aijaz/CocoaApps/ID/web/htdocs/user/contact.html"
+	],
+	"find":
+	{
+		"height": 25.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"url",
+			"pix2doc.com",
+			"/Pix2Doc",
+			"Pix2Doc",
+			"ID",
+			"cd /usr/local/down/djbtools/ucspi-tcp-0.88\nmake\nmake setup check\n",
+			"/usr/local/down/qmailfiles",
+			"^ *",
+			". *",
+			"send",
+			"/var/log/qmail",
+			" --install-suggests",
+			"apt-get",
+			"o",
+			"\"tagger\"",
+			"\"imageId\"",
+			"\"tagName\"",
+			"\"burstId\"",
+			"\"imageDate\"",
+			"\"moonPhase\"",
+			"\"temperature\"",
+			"\"burstDate\"",
+			"\"description\"",
+			"\"caption\"",
+			"\"url\"",
+			"\"deploymentId\"",
+			"\"nominalMarkTime\"",
+			"\"deployer\"",
+			"\"camera\"",
+			"\"cameraElevationInRadians\"",
+			"\"cameraAzimuthInRadians\"",
+			"\"cameraHeightInCentimeters\"",
+			"\"notes\"",
+			"\"longitude\"",
+			"\"latitude\"",
+			"\"deploymentDate\"",
+			"\"model\"",
+			"\"make\"",
+			"\"classId\"",
+			"\"personId\"",
+			"\"isAdmin\"",
+			"\"email\"",
+			"\"password\"",
+			"\"lastName\"",
+			"\"firstName\"",
+			"\"schoolId\"",
+			"\"name\"",
+			"\"id\"",
+			"\"ETRSchool\"",
+			"\"ETRClass\"",
+			"\"ETRPerson\"",
+			"\"ETRPersonMembership\"",
+			"\"ETRCamera\"",
+			"\"ETRDeployment\"",
+			"\"ETRDeploymentPicture\"",
+			"\"ETRBurst\"",
+			"etr_tag",
+			"\"ETRImage\"",
+			"\"ETRTag\"",
+			"ETRDeployment",
+			"CREATE TABLE (\\S+)",
+			", (\\S+)",
+			"classId",
+			"personId",
+			"isAdmin",
+			"email",
+			"password",
+			"lastName",
+			"DOUBLE",
+			"SEQUENCE",
+			"Mac",
+			"grouphash",
+			"admin",
+			"log",
+			"parent_hash",
+			"http://",
+			"session->{email}",
+			"sendacceptemail",
+			"group",
+			"Group",
+			"group",
+			"sponson",
+			"username",
+			"ptppending",
+			"addPendingMembership",
+			"ptppendingmembership",
+			"csrftoken",
+			"session->{groupid}",
+			"writesession",
+			"insert into ptpsession",
+			"redirect",
+			"session->{stripeid}",
+			"session",
+			"insert into ptpsession(",
+			"insert ",
+			"signup",
+			"cardtoken",
+			"stripetoken",
+			"code",
+			"createUser.html",
+			"CreateUser",
+			"insert into ptpgroupmem",
+			"signupemail",
+			"$inviteCode",
+			"inviteCode",
+			"REDIRECT",
+			"getRow(",
+			"ptpinvite",
+			"explode",
+			"CASE",
+			"$groupDesc",
+			"$groupName",
+			"$groupId",
+			"redirect",
+			"nextval",
+			"exampleInputPassword1",
+			"exampleInputEmail1",
+			"descrip",
+			"description",
+			"groupid",
+			"$session->{groups}",
+			"groupdesc",
+			"grouplist => ''",
+			"basicNav.html",
+			"$groups",
+			"groupList",
+			"groupDesc",
+			"$session->{groups}"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"",
+			"CREATE TABLE \"\\1\"",
+			", \"\\1\"",
+			"The",
+			"Pix2Doc",
+			"$cookie_exp",
+			" ",
+			"",
+			"dbDo",
+			"basicNav.html",
+			"foreach (keys (%$session)) { $hash->{\"session_$_\"} = $session->{$_} }",
+			" ",
+			"    ",
+			"   "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "data/server.sql",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4481,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								207,
+								207
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "lib/Trap.pm",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6906,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2781,
+								2781
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Perl/Perl.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1324.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "lib/Rest.pm",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 849,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								813,
+								813
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Perl/Perl.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Users/aijaz/Library/Application Support/Sublime Text 3/Packages/User/trapEase.sublime-build",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 69,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								65,
+								65
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "deploy.pl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1257,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								652,
+								748
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"syntax": "Packages/Perl/Perl.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 104.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 112.0
+	},
+	"project": "trapEaseWeb.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"lo",
+				"lib/Log.pm"
+			],
+			[
+				"pas",
+				"lib/PassThrough.pm"
+			],
+			[
+				"ses",
+				"lib/Session.pm"
+			],
+			[
+				"genr",
+				"genRows.pl"
+			],
+			[
+				"mana",
+				"htdocs/user/manageGroups.html"
+			],
+			[
+				"update",
+				"lib/UpdateGroup.pm"
+			],
+			[
+				"leavegroup2",
+				"htdocs/user/leaveGroup2.html"
+			],
+			[
+				"leave",
+				"htdocs/user/leaveGroup.html"
+			],
+			[
+				"edit",
+				"lib/EditGroup.pm"
+			],
+			[
+				"sql",
+				"database/p2pdb.sql"
+			],
+			[
+				"bul",
+				"htdocs/user/bulkRequests.html"
+			],
+			[
+				"editgroup",
+				"htdocs/user/editGroup2.html"
+			],
+			[
+				"manage",
+				"htdocs/user/manageGroups.html"
+			],
+			[
+				"groups.p",
+				"lib/Groups.pm"
+			],
+			[
+				"groups",
+				"htdocs/user/manageGroups2.html"
+			],
+			[
+				"pro",
+				"lib/ProcessLoginForInvite.pm"
+			],
+			[
+				"processloginfor",
+				"lib/ProcessLoginForInvite.pm"
+			],
+			[
+				"psql",
+				"database/p2pdb.sql"
+			],
+			[
+				"smtp",
+				"lib/Smtp.pm"
+			],
+			[
+				"accep",
+				"lib/AcceptInvite.pm"
+			],
+			[
+				"welcom",
+				"htdocs/user/welcome.html"
+			],
+			[
+				"acce",
+				"lib/AcceptInvite.pm"
+			],
+			[
+				"session",
+				"lib/Session.pm"
+			],
+			[
+				"database",
+				"lib/Database.pm"
+			],
+			[
+				"sessio",
+				"lib/Session.pm"
+			],
+			[
+				"signup",
+				"lib/SignupCharge.pm"
+			],
+			[
+				"confirmsig",
+				"htdocs/confirmSignup2.html"
+			],
+			[
+				"signupemail.pm",
+				"lib/SignupEmail.pm"
+			],
+			[
+				"signupcharge",
+				"htdocs/signupCharge2.html"
+			],
+			[
+				"confirmsign",
+				"lib/ConfirmSignup.pm"
+			],
+			[
+				"signup.ht",
+				"htdocs/signup.html"
+			],
+			[
+				"processlogin",
+				"lib/ProcessLogin.pm"
+			],
+			[
+				"process",
+				"htdocs/processLogin.html"
+			],
+			[
+				"busin",
+				"lib/BusinessStripe.pm"
+			],
+			[
+				"sigup",
+				"htdocs/signup.html"
+			],
+			[
+				"loginfo",
+				"htdocs/includes/loginForm.html"
+			],
+			[
+				"login.",
+				"htdocs/login.html"
+			],
+			[
+				"acc",
+				"htdocs/acceptInvite.html"
+			],
+			[
+				"smt",
+				"lib/Smtp.pm"
+			],
+			[
+				"sm",
+				"lib/Smtp.pm"
+			],
+			[
+				"inviteu",
+				"lib/InviteUtils.pm"
+			],
+			[
+				"invite",
+				"lib/InviteUtils.pm"
+			],
+			[
+				"p2ph",
+				"lib/P2PH.pm"
+			],
+			[
+				"groups.pm",
+				"lib/Groups.pm"
+			],
+			[
+				"initeu",
+				"lib/InviteUtils.pm"
+			],
+			[
+				"dat",
+				"lib/Database.pm"
+			],
+			[
+				"p2pdb",
+				"database/p2pdb.sql"
+			],
+			[
+				"databas",
+				"lib/Database.pm"
+			],
+			[
+				"invit",
+				"lib/InviteUtils.pm"
+			],
+			[
+				"webin",
+				"lib/WebInvite.pm"
+			],
+			[
+				"inviteut",
+				"lib/InviteUtils.pm"
+			],
+			[
+				"webvi",
+				"lib/WebInvite.pm"
+			],
+			[
+				"editgrou2",
+				"htdocs/user/editGroup2.html"
+			],
+			[
+				"ccupdate.p",
+				"lib/CCUpdate.pm"
+			],
+			[
+				"billin",
+				"htdocs/user/billing2.html"
+			],
+			[
+				"ccrow",
+				"htdocs/includes/ccRows.html"
+			],
+			[
+				"group",
+				"lib/Groups.pm"
+			],
+			[
+				"ccupdate",
+				"lib/CCUpdate.pm"
+			],
+			[
+				"temp",
+				"lib/Template.pm"
+			],
+			[
+				"ccrows",
+				"htdocs/includes/ccRows.html"
+			],
+			[
+				"upload.html",
+				"htdocs/user/upload.html"
+			],
+			[
+				"prices",
+				"htdocs/user/prices2.html"
+			],
+			[
+				"billin2",
+				"htdocs/user/billing2.html"
+			],
+			[
+				"foo",
+				"htdocs/includes/foot.html"
+			],
+			[
+				"pass",
+				"lib/PassThrough.pm"
+			],
+			[
+				"templ",
+				"lib/Template.pm"
+			],
+			[
+				"nav",
+				"htdocs/includes/basicNav.html"
+			],
+			[
+				"uploadhe",
+				"lib/UploadHelper.pm"
+			],
+			[
+				"upload",
+				"lib/UserUpload.pm"
+			],
+			[
+				"datab",
+				"lib/Database.pm"
+			],
+			[
+				"login",
+				"lib/ProcessLogin.pm"
+			],
+			[
+				"invi",
+				"lib/InviteUtils.pm"
+			],
+			[
+				"p2p",
+				"lib/P2P.pm"
+			],
+			[
+				"adminsubm",
+				"lib/AdminSubmit.pm"
+			],
+			[
+				"pricing2",
+				"htdocs/pricing2.html"
+			],
+			[
+				"useru",
+				"lib/UserUpload.pm"
+			],
+			[
+				"data",
+				"lib/Database.pm"
+			],
+			[
+				"adminnex",
+				"docs/adminNext"
+			],
+			[
+				"nextjobm.",
+				"lib/NextJob.pm"
+			],
+			[
+				"admininpu",
+				"lib/AdminInput.pm"
+			],
+			[
+				"billingfrom",
+				"lib/BillingFromApp.pm"
+			],
+			[
+				"confir",
+				"lib/ConfirmForgot.pm"
+			],
+			[
+				"confirm",
+				"lib/ConfirmForgot.pm"
+			],
+			[
+				"sub",
+				"lib/Submit.pm"
+			],
+			[
+				"smpt",
+				"lib/Smtp.pm"
+			],
+			[
+				"submit",
+				"lib/Submit.pm"
+			],
+			[
+				"listall",
+				"lib/ListAll.pm"
+			],
+			[
+				"uploadhelp",
+				"lib/UploadHelper.pm"
+			],
+			[
+				"log",
+				"lib/Log.pm"
+			],
+			[
+				"basicnav",
+				"htdocs/includes/basicNav.html"
+			],
+			[
+				"uplo.pm",
+				"lib/UserUpload.pm"
+			],
+			[
+				"upload.pm",
+				"lib/UserUpload.pm"
+			],
+			[
+				"uplo",
+				"htdocs/user/upload.html"
+			],
+			[
+				"priva",
+				"htdocs/privacyPolicy.html"
+			],
+			[
+				"useragree",
+				"htdocs/userAgreement.html"
+			],
+			[
+				"adminche",
+				"lib/AdminCheck.pm"
+			],
+			[
+				"log.",
+				"lib/Log.pm"
+			],
+			[
+				"userinput",
+				"lib/UserInput.pm"
+			],
+			[
+				"jobs.pm",
+				"lib/Jobs.pm"
+			],
+			[
+				"logge",
+				"lib/LoggedStripe.pm"
+			],
+			[
+				"createuser.pm",
+				"lib/CreateUser.pm"
+			],
+			[
+				"paydue",
+				"lib/PayDueAmount.pm"
+			],
+			[
+				"userout",
+				"lib/UserOutput.pm"
+			],
+			[
+				"show",
+				"lib/ShowError.pm"
+			],
+			[
+				"histohel",
+				"lib/HistoryHelper.pm"
+			],
+			[
+				"signupcha",
+				"lib/SignupCharge.pm"
+			],
+			[
+				"confirm.pm",
+				"lib/ConfirmSignup.pm"
+			],
+			[
+				"sign.pm",
+				"lib/SignupEmail.pm"
+			],
+			[
+				"logou",
+				"lib/UserLogout.pm"
+			],
+			[
+				"uploadh",
+				"lib/UploadHelper.pm"
+			],
+			[
+				"adminch",
+				"lib/AdminCheck.pm"
+			],
+			[
+				"basic",
+				"htdocs/includes/basicNav.html"
+			],
+			[
+				"procpm",
+				"lib/ProcessLogin.pm"
+			],
+			[
+				"procel",
+				"htdocs/processLogin.html"
+			],
+			[
+				"bill",
+				"htdocs/user/billing2.html"
+			],
+			[
+				"post",
+				"htdocs/includes/postTitle.html"
+			],
+			[
+				"real",
+				"htdocs/realIndex.html"
+			],
+			[
+				"foot.ht",
+				"htdocs/includes/foot.html"
+			],
+			[
+				"rea",
+				"htdocs/realIndex.html"
+			],
+			[
+				"abou",
+				"taskforest/htdocs/about.html"
+			],
+			[
+				"scss",
+				"htdocs/css/sass/pix2doc.scss"
+			],
+			[
+				"confirmsignup2",
+				"htdocs/confirmSignup2.html"
+			],
+			[
+				"confirmsi",
+				"htdocs/confirmSignup.html"
+			],
+			[
+				"realin",
+				"htdocs/realIndex.html"
+			],
+			[
+				"stu",
+				"taskforest/stunnel.conf"
+			],
+			[
+				"taskf",
+				"taskforest/taskforest.cfg"
+			],
+			[
+				"famil",
+				"taskforest/families/F_BACKUP"
+			],
+			[
+				"subm",
+				"lib/Submit.pm"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 217.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

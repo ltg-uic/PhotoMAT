@@ -19,6 +19,8 @@
 		B4D1EC4C18BD729300E01EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3418BD729300E01EFE /* UIKit.framework */; };
 		B4D1EC5418BD729300E01EFE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4D1EC5218BD729300E01EFE /* InfoPlist.strings */; };
 		B4D1EC5618BD729300E01EFE /* TrapEaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D1EC5518BD729300E01EFE /* TrapEaseTests.m */; };
+		B4D1EC6318BD738400E01EFE /* EUCHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D1EC6118BD738400E01EFE /* EUCHomeViewController.m */; };
+		B4D1EC6418BD738400E01EFE /* EUCHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4D1EC6218BD738400E01EFE /* EUCHomeViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,9 @@
 		B4D1EC5118BD729300E01EFE /* TrapEaseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrapEaseTests-Info.plist"; sourceTree = "<group>"; };
 		B4D1EC5318BD729300E01EFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B4D1EC5518BD729300E01EFE /* TrapEaseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrapEaseTests.m; sourceTree = "<group>"; };
+		B4D1EC6018BD738400E01EFE /* EUCHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCHomeViewController.h; path = TrapEase/Controllers/EUCHomeViewController.h; sourceTree = "<group>"; };
+		B4D1EC6118BD738400E01EFE /* EUCHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCHomeViewController.m; path = TrapEase/Controllers/EUCHomeViewController.m; sourceTree = "<group>"; };
+		B4D1EC6218BD738400E01EFE /* EUCHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCHomeViewController.xib; path = TrapEase/Controllers/EUCHomeViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +112,7 @@
 		B4D1EC3618BD729300E01EFE /* TrapEase */ = {
 			isa = PBXGroup;
 			children = (
+				B4D1EC5F18BD732B00E01EFE /* Controllers */,
 				B4D1EC3F18BD729300E01EFE /* EUCAppDelegate.h */,
 				B4D1EC4018BD729300E01EFE /* EUCAppDelegate.m */,
 				B4D1EC4218BD729300E01EFE /* Images.xcassets */,
@@ -142,6 +148,17 @@
 				B4D1EC5218BD729300E01EFE /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B4D1EC5F18BD732B00E01EFE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B4D1EC6018BD738400E01EFE /* EUCHomeViewController.h */,
+				B4D1EC6118BD738400E01EFE /* EUCHomeViewController.m */,
+				B4D1EC6218BD738400E01EFE /* EUCHomeViewController.xib */,
+			);
+			name = Controllers;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +209,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Euclid Software, LLC";
 				TargetAttributes = {
+					B4D1EC2C18BD729300E01EFE = {
+						DevelopmentTeam = Y98EGXRXN9;
+					};
 					B4D1EC4718BD729300E01EFE = {
 						TestTargetID = B4D1EC2C18BD729300E01EFE;
 					};
@@ -221,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4D1EC3B18BD729300E01EFE /* InfoPlist.strings in Resources */,
+				B4D1EC6418BD738400E01EFE /* EUCHomeViewController.xib in Resources */,
 				B4D1EC4318BD729300E01EFE /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -242,6 +263,7 @@
 			files = (
 				B4D1EC4118BD729300E01EFE /* EUCAppDelegate.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
+				B4D1EC6318BD738400E01EFE /* EUCHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +384,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrapEase/TrapEase-Prefix.pch";
 				INFOPLIST_FILE = "TrapEase/TrapEase-Info.plist";
@@ -375,6 +398,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrapEase/TrapEase-Prefix.pch";
 				INFOPLIST_FILE = "TrapEase/TrapEase-Info.plist";
