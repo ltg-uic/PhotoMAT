@@ -5,6 +5,22 @@ use warnings;
 use DBI;
 use Data::Dumper;
 
+sub connectToDbCGI {
+    my $hostName    = 'localhost';
+    my $port        = 5432;
+    my $dbName      = 'trapdb';
+    my $userName    = 'trapuser';
+    my $pass        = 'trappass';
+    my $data_source = qq[dbi:Pg:database=$dbName;host=$hostName;port=$port];
+    my $dbh         = DBI->connect_cached($data_source, $userName, $pass, { AutoCommit => 0, RaiseError => 0 });
+
+    if (!defined $dbh) {
+        exit 1;
+    }
+    
+
+    return $dbh;
+}
 
 sub connectToDb {
     my $r           = shift;

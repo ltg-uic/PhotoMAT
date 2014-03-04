@@ -47,6 +47,7 @@ sub handleRest {
 sub del { 
     my ($parent_hash, $h, $adminRequired, $table, $r, $dbh) = @_;
     my $person = &Auth::getPerson($r, $dbh);
+    my $owner = " and owner = $person->{id}";
     if (!defined $person) { 
         return FORBIDDEN;
     }
@@ -55,12 +56,15 @@ sub del {
             return FORBIDDEN;
         }
     }
+    if ($person->{is_admin}) { 
+        $owner = "";
+    }
 
     my $id = $parent_hash->{path};
 
     print STDERR "DELETE FROM $table where id=$id\n";
 
-    &Database::do($r, $dbh, qq[delete from $table where id=?], $id);
+    &Database::do($r, $dbh, qq[delete from $table where id=? $owner], $id);
 
     return HTTP_OK;
 }
@@ -68,6 +72,7 @@ sub del {
 sub put { 
     my ($parent_hash, $h, $adminRequired, $table, $r, $dbh) = @_;
     my $person = &Auth::getPerson($r, $dbh);
+    my $owner = " and owner = $person->{id}";
     if (!defined $person) { 
         return FORBIDDEN;
     }
@@ -75,6 +80,9 @@ sub put {
         unless ($person->{is_admin}) { 
             return FORBIDDEN;
         }
+    }
+    if ($person->{is_admin}) { 
+        $owner = "";
     }
 
     my $body = $parent_hash->{content_in};
@@ -92,30 +100,40 @@ sub put {
 
         my @columns;
         my @values;
+        my $hasFile = 0;
 
         my $tableColumns = &Database::getRows($r, $dbh, qq[select column_name, is_nullable from information_schema.columns where table_name=?], $table);
 
         foreach my $tableColumn (@$tableColumns) { 
             next if ($tableColumn->{column_name} eq 'id');
+            next if ($tableColumn->{column_name} eq 'owner');
+            if ($tableColumn->{column_name} eq 'file_name') { 
+                $hasFile = 1;
+            }
             if (defined ($form->{$tableColumn->{column_name}})) {
                 push (@columns, $tableColumn->{column_name});
                 push (@values, $form->{$tableColumn->{column_name}});
             }
         }
+
         my $columnString = join (", ",  (map { "$_ = ?" }  @columns));
 
-        &Database::do($r, $dbh, qq[UPDATE $table set $columnString where id = ?], @values, $id);
+        &Database::do($r, $dbh, qq[UPDATE $table set $columnString where id = ? $owner], @values, $id);
 
         $existingRow = &Database::getRow($r, $dbh, qq[select * from $table where id = ?], $id);
     }
     else { 
-        my @columns = ('id');
-        my @values = ($id);
-
+        my @columns = ('id', 'owner');
+        my @values = ($id, $person->{id});
+        my $hasFile = 0;
         my $tableColumns = &Database::getRows($r, $dbh, qq[select column_name, is_nullable from information_schema.columns where table_name=?], $table);
 
         foreach my $tableColumn (@$tableColumns) { 
             next if ($tableColumn->{column_name} eq 'id');
+            next if ($tableColumn->{column_name} eq 'owner');
+            if ($tableColumn->{column_name} eq 'file_name') { 
+                $hasFile = 1;
+            }
             if ($tableColumn->{is_nullable} eq 'NO') {
                 if (!defined ($form->{$tableColumn->{column_name}})) {
                     $parent_hash->{http_content} = to_json({ message => "Required field $tableColumn->{column_name} not specified"});
@@ -128,6 +146,7 @@ sub put {
             }
         }
 
+
         my $columnString = join (", ",  (map { "$_" }  @columns));
         my $valueString = join (", ",  (map { "?"} @columns));
 
@@ -139,6 +158,7 @@ sub put {
     $parent_hash->{http_content} = to_json($existingRow);
     return HTTP_OK;
 }
+
 
 sub post { 
     my ($parent_hash, $h, $adminRequired, $table, $r, $dbh) = @_;

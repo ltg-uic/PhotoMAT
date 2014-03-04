@@ -29,6 +29,9 @@ sub handler {
     my $method        = $r->method();
     my $user          = $r->user() || '';
     my $resp_headers  = $r->headers_out();
+    my $cgi = CGI->new();
+
+
 
     my $q;
     my $orig_method;
@@ -91,11 +94,15 @@ sub handler {
         # }
 
         $resp_headers->set (expires => "-1d");  # only in the case of non-safe methods
+
+
+
     }
 
     $h->{path_info} = $path;
 
     my ($hash, $text);
+
     $hash = { 
               headers_out      => $resp_headers, 
               headers_in       => $r->headers_in(),
@@ -107,6 +114,7 @@ sub handler {
               content_in       => $content,
               user             => $user,
               path             => $path,
+              cgi              => $cgi,
           };
 
     my $table = $mappedFilename; 
@@ -120,7 +128,6 @@ sub handler {
         $text = &Template::readFile ($q, $file, $hash, $h);
     }
 
-print STDERR "text is $text BUT content is $hash->{http_content}\n";    
     if ($hash->{http_content}) { $text = $hash->{http_content}; }
     if ($hash->{content_type}) { $content_type = $hash->{content_type};  }
 
@@ -136,15 +143,12 @@ print STDERR "text is $text BUT content is $hash->{http_content}\n";
     }
 
     my $status = $hash->{http_status} || 200;
-    print STDERR "status is $status\n";
-    print STDERR Dumper($hash);
 
     if ($status == 200) { 
         $r->content_type($content_type);
         $r->print($text);
     }
     else { 
-        print STDERR "HERE, status is $status\n";
         if ($hash->{http_content}) { 
             $r->content_type($content_type);
             $r->print($hash->{http_content});

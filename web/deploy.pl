@@ -19,6 +19,8 @@ chdir "/Users/aijaz/CocoaApps/TrapEase/web";
 # copy htdocs
 doCmd('rsync -az --stats --exclude=".??*" htdocs/ root@trap.euclidsoftware.com:/usr/local/apache2/trap/htdocs');
 
+doCmd('rsync -az --stats --exclude=".??*" cgi-bin/ root@trap.euclidsoftware.com:/usr/local/apache2/trap/cgi-bin');
+
 # copy lib
 my $stats = doCmd('rsync -az --stats --exclude=".??*" lib/ root@trap.euclidsoftware.com:/usr/local/apache2/trap/lib');
 ($restart) = $stats =~ /Number of files transferred: (\d+)/s;

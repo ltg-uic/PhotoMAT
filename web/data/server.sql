@@ -88,6 +88,7 @@ INSERT INTO camera (make, model) values ('Trap', 'Gamma');
 
 CREATE TABLE deployment (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
+    , owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE
     , deployment_date TIMESTAMP NOT NULL
     , latitude NUMERIC (9,7) NULL
     , longitude NUMERIC (9,7)  NULL
@@ -96,34 +97,35 @@ CREATE TABLE deployment (
     , camera_azimuth_rad NUMERIC (9,7) NULL
     , camera_elevation_rad NUMERIC (9,7) NULL
     , camera INT NOT NULL REFERENCES camera(id) ON UPDATE CASCADE
-    , deployer INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE
     , nominal_mark_time TIMESTAMP NOT NULL
     , actual_mark_time TIMESTAMP NOT NULL
 );
 
 CREATE TABLE deployment_picture (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
+    , owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE
     , deployment_id INT NOT NULL REFERENCES deployment(id) ON DELETE CASCADE ON UPDATE CASCADE
     , file_name TEXT NOT NULL
-    , file_type TEXT NOT NULL
     , caption TEXT NULL
     , description TEXT NULL
 );
 
 CREATE TABLE burst (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
+    , owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE
     , burst_date TIMESTAMP not NULL
     , deployment_id INT NOT NULL REFERENCES deployment (id) ON DELETE CASCADE ON UPDATE CASCADE
     , temperature_in_celsius INT NULL
     , moon_phase varchar(32) NULL
 );
 
+
 CREATE TABLE image (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
+    , owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE
     , image_date TIMESTAMP NOT NULL
     , burst_date INT NOT NULL REFERENCES burst(id) ON DELETE CASCADE ON UPDATE CASCADE
     , file_name TEXT NOT NULL
-    , file_type TEXT NOT NULL
     -- exif data follows
     , width INT NOT NULL
     , height INT NOT NULL
@@ -136,11 +138,11 @@ CREATE TABLE image (
 
 CREATE TABLE tag (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
+    , owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE
     , tag_name VARCHAR(256) NOT NULL
     , image_id INT NOT NULL REFERENCES image(id) ON DELETE CASCADE ON UPDATE CASCADE
     , x INT NOT NULL 
     , y INT NOT NULL
-    , tagger INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE
 );
 
 
