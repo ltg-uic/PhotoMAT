@@ -1,0 +1,46 @@
+
+Notes
+
+Import - View
+ o Import my pictures
+ o Pull up picture
+
+ o Separate importing from labelling
+
+ o Analyze tab - select multiple deployment - superset of data
+
+ o Add to backpack button on every view
+
+ o 4 tabs
+   Import 
+   Filter
+     Not posted to central server until filtering is done.
+
+   Label
+    o Most of the time we import other people's labels
+
+    o Copy author's labels into mine - clone other people's data set
+
+    o Need to be able to ask - who has 
+
+    o Image set - 
+      a) My deployments
+      b) Suzy's deployment - read only
+      c) My clone of Suzy's deployment
+
+
+   Analyze
+    o Slect only 1 label set from the deployment
+
+   Notes
+
+
+Save to Knapsack - save screenshot
+Send to some server
+ Along with identity of person
+ Along with some metadata
+   if analyze view - 
+    what tag set you were working with
+    if we had multiple tag sets
+    metadata is what tag sets we drew from
+

@@ -93,6 +93,7 @@ CREATE TABLE deployment (
     , latitude NUMERIC (9,7) NULL
     , longitude NUMERIC (9,7)  NULL
     , notes TEXT NULL
+    , short_name VARCHAR (256)
     , camera_height_cm NUMERIC (7,2) NULL
     , camera_azimuth_rad NUMERIC (9,7) NULL
     , camera_elevation_rad NUMERIC (9,7) NULL
@@ -143,6 +144,8 @@ CREATE TABLE tag (
     , image_id INT NOT NULL REFERENCES image(id) ON DELETE CASCADE ON UPDATE CASCADE
     , x INT NOT NULL 
     , y INT NOT NULL
+    , deployment_id INT NOT NULL REFERENCES deployment (id) ON DELETE CASCADE ON UPDATE CASCADE
+
 );
 
 

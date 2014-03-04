@@ -15,7 +15,7 @@ sub getPerson {
     my ($r, $dbh) = @_;
 
     my $token = $r->headers_in->{"X-Trap-Token"};
-    print STDERR "token is $token\n";
+
     if (!defined $token) { 
         return undef;
     }
@@ -25,11 +25,13 @@ sub getPerson {
     if ($token eq 'AijazAuthToken') { 
         $person = &Database::getRow($r, $dbh, qq[select p.* from person p where id = 1]);
     }
+    elsif ($token eq 'AijazAuthToken2') { 
+        $person = &Database::getRow($r, $dbh, qq[select p.* from person p where id = 2]);
+    }
     else { 
-        $person = &Database::getRow($r, $dbh, qq[select p.* from person p join token t on t.person_id = person.id where t.token = ?], $token);
+        $person = &Database::getRow($r, $dbh, qq[select p.* from person p join token t on t.person_id = p.id where t.token = ?], $token);
     }
     
-    print STDERR Dumper($token);
     return $person;
 }
 

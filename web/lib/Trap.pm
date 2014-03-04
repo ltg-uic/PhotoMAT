@@ -36,8 +36,8 @@ sub handler {
     my $mappedFilename  = $r->filename();
     $mappedFilename =~ s/^$docRoot//;
 
-print STDERR "-----------------------\n";
-print STDERR "METHOD: $method, FILE: $mappedFilename\n";
+print STDERR "*********************************************************************\n";
+
     if ($method eq 'POST' && $mappedFilename  =~ /^\/?file/) { 
         $cgi = CGI->new();
         # don't read data if not 
@@ -147,10 +147,17 @@ print STDERR "METHOD: $method, FILE: $mappedFilename\n";
         return HTTP_SEE_OTHER;
     }
     elsif (defined $hash->{FILE}) {
-        return handleFile($r, $hash);
+        print STDERR "GOT FILE! $hash->{FILE}\n";
+        my $status = handleFile($r, $hash);
+        # $dbh->commit();
+        # $dbh->disconnect();
+#        $r->status($status);
+        return OK;
+
     }
 
     my $status = $hash->{http_status} || 200;
+    print STDERR "Status is $status\n";
 
     if ($status == 200) { 
         $r->content_type($content_type);
@@ -206,7 +213,7 @@ sub handleFile {
     my ($query, $hash) = @_;
     my $file = $hash->{FILE};
     
-    return OK if $file eq "__DONE__";
+    return HTTP_OK if $file eq "__DONE__";
 
     my $content_length         = -s $file;
     my ($name, $path, $suffix) = fileparse($file, qr{\..*});
@@ -238,7 +245,7 @@ sub handleFile {
 
     if (open (FILE, $file)) {
         my ($buffer, $length);
-        $query->headers_out->set("expires"             => "-1d");
+        $query->headers_out->set("expires"             => "7200s");
         $query->headers_out->set("Content-Length"      => $content_length);
         $query->headers_out->set("Content-Disposition" => "inline; filename=\"$file_name\"");
         $query->content_type($mime_type);
@@ -252,16 +259,16 @@ sub handleFile {
                 }
                 else {
                     close FILE;
-                    return OK;
+                    return HTTP_OK;
                 }
             }
             else {
                 close FILE;
-                return OK;
+                return HTTP_OK;
             }
         }
         close FILE;
-        return OK;
+        return HTTP_OK;
     }
     else {
         $query->headers_out->set("expires"             => "-1d");

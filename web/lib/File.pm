@@ -6,7 +6,7 @@ use HTTP::Status;
 use Data::Dumper;
 use Database;
 use JSON;
-use Apache2::Const qw(FORBIDDEN HTTP_OK NOT_FOUND DECLINED);
+use Apache2::Const qw(FORBIDDEN HTTP_OK NOT_FOUND HTTP_CONFLICT);
 use Net::SMTP;
 use Convert::UU qw(uudecode);
 use CGI;
@@ -18,16 +18,19 @@ sub handle {
     my $hash = {  };
     my $person = &Auth::getPerson($r, $dbh);
 
+    if (!$person) { 
+        $parent_hash->{http_status} = HTTP_CONFLICT;
+        return $hash;
+    }
+
     my $method = $parent_hash->{method};
     my $path = $parent_hash->{path} ;
     my ($table, $id) = split(/\//, $path);
 
-    print STDERR "table is $table and id is $id\n";
-
     my $pictureRow = &Database::getRow($r, $dbh, qq[select * from $table where id=?], $id);
     my $owner = $pictureRow->{owner};
-    print STDERR "table is $table owner is $owner and personid is $person->{id}\n";
-    print STDERR "pictureRow = ", Dumper($pictureRow);
+
+    print STDERR "pictureRow is ", Dumper($pictureRow);
 
     if ($method eq 'POST') { 
         if ($owner == $person->{id}) { 
