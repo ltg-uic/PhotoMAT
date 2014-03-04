@@ -30,12 +30,17 @@ sub handle {
     my $pictureRow = &Database::getRow($r, $dbh, qq[select * from $table where id=?], $id);
     my $owner = $pictureRow->{owner};
 
-    print STDERR "pictureRow is ", Dumper($pictureRow);
-
     if ($method eq 'POST') { 
         if ($owner == $person->{id}) { 
             # authorized to put
-            uploadFile($r, $id, $table, $parent_hash->{cgi});
+            
+            my $filePath = uploadFile($r, $id, $table, $parent_hash->{cgi});
+            if ($filePath) { 
+                $parent_hash->{http_content} = to_json ({ url => $filePath });
+            }
+            else { 
+                $parent_hash->{http_content} = to_json ({  });
+            }
         }
     }
     elsif ($method eq 'GET') { 
@@ -55,13 +60,12 @@ sub uploadFile {
 
     my $params = $cgi->Vars;
     my $filePath = "/usr/local/apache2/trap/images/$table"."_$id.jpg";
-    print STDERR "filePath is $filePath\n";
+    my $url = "/file/$table/$id";
     #print STDERR "params is ", Dumper($params);
 
     my $lightweight_fh  = $cgi->upload('file');
 
     if (defined $lightweight_fh) {
-        print STDERR "fh defined\n";
         my $io_handle = $lightweight_fh->handle;
         my $buffer;
         open (OUTFILE,'>', $filePath);
@@ -69,8 +73,10 @@ sub uploadFile {
             print OUTFILE $buffer;
         }
         close OUTFILE;
+        return $url;
+
     }
-    return $filePath;
+    return undef;
 }
 
 
