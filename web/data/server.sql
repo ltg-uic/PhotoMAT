@@ -124,7 +124,7 @@ CREATE TABLE image (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
     , owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE
     , image_date TIMESTAMP NOT NULL
-    , burst_date INT NOT NULL REFERENCES burst(id) ON DELETE CASCADE ON UPDATE CASCADE
+    , burst_id INT NOT NULL REFERENCES burst(id) ON DELETE CASCADE ON UPDATE CASCADE
     , file_name TEXT NOT NULL
     -- exif data follows
     , width INT NOT NULL

@@ -29,7 +29,19 @@ sub handler {
     my $method        = $r->method();
     my $user          = $r->user() || '';
     my $resp_headers  = $r->headers_out();
-    my $cgi = CGI->new();
+    my $cgi;
+
+    if ($path) { $path =~ s/\///; }
+    my $docRoot         = $r->document_root();
+    my $mappedFilename  = $r->filename();
+    $mappedFilename =~ s/^$docRoot//;
+
+print STDERR "-----------------------\n";
+print STDERR "METHOD: $method, FILE: $mappedFilename\n";
+    if ($method eq 'POST' && $mappedFilename  =~ /^\/?file/) { 
+        $cgi = CGI->new();
+        # don't read data if not 
+    }
 
 
 
@@ -58,10 +70,6 @@ sub handler {
         tag => 1,
     };
 
-    if ($path) { $path =~ s/\///; }
-    my $docRoot         = $r->document_root();
-    my $mappedFilename  = $r->filename();
-    $mappedFilename =~ s/^$docRoot//;
     my $file            = "$docRoot$mappedFilename";
     $r->log->debug("mappedFilename = $mappedFilename and file is $file and docRoot is $docRoot and path is $path");
     $Template::doc_root = $docRoot;

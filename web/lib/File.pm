@@ -26,16 +26,17 @@ sub handle {
 
     my $pictureRow = &Database::getRow($r, $dbh, qq[select * from $table where id=?], $id);
     my $owner = $pictureRow->{owner};
-    print STDERR "owner is $owner and personid is $person->{id}\n";
+    print STDERR "table is $table owner is $owner and personid is $person->{id}\n";
+    print STDERR "pictureRow = ", Dumper($pictureRow);
 
     if ($method eq 'POST') { 
-        if (1 || $owner == $person->{id}) { 
+        if ($owner == $person->{id}) { 
             # authorized to put
             uploadFile($r, $id, $table, $parent_hash->{cgi});
         }
     }
     elsif ($method eq 'GET') { 
-        $parent_hash->{REDIRECT} = "/usr/local/apache2/trap/images/$table"."_$id.jpg";
+        $parent_hash->{FILE} = "/usr/local/apache2/trap/images/$table"."_$id.jpg";
     }
     elsif ($method eq 'DELETE') { 
         if ($owner == $person->{id}) { 
