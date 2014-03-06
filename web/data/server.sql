@@ -88,7 +88,7 @@ INSERT INTO camera (make, model) values ('Trap', 'Gamma');
 
 CREATE TABLE deployment (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
-    , owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE
+    , owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE -- this is for internal use only. Do not use this column
     , deployment_date TIMESTAMP NOT NULL
     , latitude NUMERIC (9,7) NULL
     , longitude NUMERIC (9,7)  NULL
@@ -101,6 +101,7 @@ CREATE TABLE deployment (
     , nominal_mark_time TIMESTAMP NOT NULL
     , actual_mark_time TIMESTAMP NOT NULL
 );
+COMMENT ON COLUMN "deployment"."owner" IS 'This column is for internal use only. Do not use this column.';
 
 CREATE TABLE deployment_picture (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL

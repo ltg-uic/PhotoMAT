@@ -17,7 +17,7 @@ sub handleRest {
     my $r     = $parent_hash->{request};
     my $dbh   = $parent_hash->{dbh};
     my $table  = $parent_hash->{table};
-    my $hash = { id => $parent_hash->{path} };
+    my $hash = {  };
     my $http_status = HTTP_OK;
     my $method = $parent_hash->{method};
 
@@ -155,6 +155,8 @@ sub put {
         $existingRow = &Database::getRow($r, $dbh, qq[select * from $table where id = ?], $id);
     }
 
+    delete ($existingRow->{owner}); 
+
     $parent_hash->{http_content} = to_json($existingRow);
     return HTTP_OK;
 }
@@ -184,7 +186,13 @@ sub get {
     my ($parent_hash, $h, $r, $dbh, $table, $hash, $column_name, $membership_table, $parent_column) = @_;
     my $http_status = NOT_FOUND;
 
-    my $path = $hash->{id} || 0;
+    my $path = undef;
+    if (defined $hash->{id}) { 
+        $path = $hash->{id};
+    }
+    elsif (defined $parent_hash->{path}) { 
+        $path = $parent_hash->{path};
+    }
     $path *= 1;
 
     if ($path) { 
@@ -207,7 +215,6 @@ sub get {
             $cascade_column_name = $child->{child_table}."_id";
         }
         foreach my $row (@{$hash->{$table}}) { 
-
             get($parent_hash, $h, $r, $dbh, $child->{child_table}, $row, $cascade_column_name, $child->{membership_table}, $table."_id");
         }
     }
@@ -216,6 +223,7 @@ sub get {
         $http_status = HTTP_OK;
         foreach my $row (@{$hash->{$table}}) { 
             delete ($row->{password});
+            delete ($row->{owner});
         }
     }
 
