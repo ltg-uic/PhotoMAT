@@ -30,6 +30,20 @@
 		B4E6BD7118DDC37D00AC9D84 /* EUCLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD6F18DDC37D00AC9D84 /* EUCLabelViewController.xib */; };
 		B4E6BD7518DDC39300AC9D84 /* EUCAnalyzeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BD7318DDC39300AC9D84 /* EUCAnalyzeViewController.m */; };
 		B4E6BD7618DDC39300AC9D84 /* EUCAnalyzeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD7418DDC39300AC9D84 /* EUCAnalyzeViewController.xib */; };
+		B4E6BD8718DDC82600AC9D84 /* bar-chart.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD7918DDC82600AC9D84 /* bar-chart.png */; };
+		B4E6BD8818DDC82600AC9D84 /* bar-chart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD7A18DDC82600AC9D84 /* bar-chart@2x.png */; };
+		B4E6BD8918DDC82600AC9D84 /* download.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD7B18DDC82600AC9D84 /* download.png */; };
+		B4E6BD8A18DDC82600AC9D84 /* download@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD7C18DDC82600AC9D84 /* download@2x.png */; };
+		B4E6BD8B18DDC82600AC9D84 /* filter.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD7D18DDC82600AC9D84 /* filter.png */; };
+		B4E6BD8C18DDC82600AC9D84 /* filter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD7E18DDC82600AC9D84 /* filter@2x.png */; };
+		B4E6BD8D18DDC82600AC9D84 /* line-chart.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD7F18DDC82600AC9D84 /* line-chart.png */; };
+		B4E6BD8E18DDC82600AC9D84 /* line-chart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD8018DDC82600AC9D84 /* line-chart@2x.png */; };
+		B4E6BD8F18DDC82600AC9D84 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD8118DDC82600AC9D84 /* share.png */; };
+		B4E6BD9018DDC82600AC9D84 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD8218DDC82600AC9D84 /* share@2x.png */; };
+		B4E6BD9118DDC82600AC9D84 /* tag.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD8318DDC82600AC9D84 /* tag.png */; };
+		B4E6BD9218DDC82600AC9D84 /* tag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD8418DDC82600AC9D84 /* tag@2x.png */; };
+		B4E6BD9318DDC82600AC9D84 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD8518DDC82600AC9D84 /* trash.png */; };
+		B4E6BD9418DDC82600AC9D84 /* trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD8618DDC82600AC9D84 /* trash@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +91,20 @@
 		B4E6BD7218DDC39300AC9D84 /* EUCAnalyzeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCAnalyzeViewController.h; path = TrapEase/Controllers/EUCAnalyzeViewController.h; sourceTree = "<group>"; };
 		B4E6BD7318DDC39300AC9D84 /* EUCAnalyzeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCAnalyzeViewController.m; path = TrapEase/Controllers/EUCAnalyzeViewController.m; sourceTree = "<group>"; };
 		B4E6BD7418DDC39300AC9D84 /* EUCAnalyzeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCAnalyzeViewController.xib; path = TrapEase/Controllers/EUCAnalyzeViewController.xib; sourceTree = "<group>"; };
+		B4E6BD7918DDC82600AC9D84 /* bar-chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-chart.png"; sourceTree = "<group>"; };
+		B4E6BD7A18DDC82600AC9D84 /* bar-chart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar-chart@2x.png"; sourceTree = "<group>"; };
+		B4E6BD7B18DDC82600AC9D84 /* download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = download.png; sourceTree = "<group>"; };
+		B4E6BD7C18DDC82600AC9D84 /* download@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "download@2x.png"; sourceTree = "<group>"; };
+		B4E6BD7D18DDC82600AC9D84 /* filter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = filter.png; sourceTree = "<group>"; };
+		B4E6BD7E18DDC82600AC9D84 /* filter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "filter@2x.png"; sourceTree = "<group>"; };
+		B4E6BD7F18DDC82600AC9D84 /* line-chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line-chart.png"; sourceTree = "<group>"; };
+		B4E6BD8018DDC82600AC9D84 /* line-chart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line-chart@2x.png"; sourceTree = "<group>"; };
+		B4E6BD8118DDC82600AC9D84 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
+		B4E6BD8218DDC82600AC9D84 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
+		B4E6BD8318DDC82600AC9D84 /* tag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tag.png; sourceTree = "<group>"; };
+		B4E6BD8418DDC82600AC9D84 /* tag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tag@2x.png"; sourceTree = "<group>"; };
+		B4E6BD8518DDC82600AC9D84 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
+		B4E6BD8618DDC82600AC9D84 /* trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trash@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +167,7 @@
 		B4D1EC3618BD729300E01EFE /* TrapEase */ = {
 			isa = PBXGroup;
 			children = (
+				B4E6BD7718DDC82600AC9D84 /* Images */,
 				B4E6BD5418DDBB2500AC9D84 /* Support */,
 				B4D1EC5F18BD732B00E01EFE /* Controllers */,
 				B4D1EC3F18BD729300E01EFE /* EUCAppDelegate.h */,
@@ -207,6 +236,35 @@
 				B4E6BD5618DDBB5600AC9D84 /* EUCFileSystem.m */,
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		B4E6BD7718DDC82600AC9D84 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				B4E6BD7818DDC82600AC9D84 /* Icons */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		B4E6BD7818DDC82600AC9D84 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				B4E6BD7918DDC82600AC9D84 /* bar-chart.png */,
+				B4E6BD7A18DDC82600AC9D84 /* bar-chart@2x.png */,
+				B4E6BD7B18DDC82600AC9D84 /* download.png */,
+				B4E6BD7C18DDC82600AC9D84 /* download@2x.png */,
+				B4E6BD7D18DDC82600AC9D84 /* filter.png */,
+				B4E6BD7E18DDC82600AC9D84 /* filter@2x.png */,
+				B4E6BD7F18DDC82600AC9D84 /* line-chart.png */,
+				B4E6BD8018DDC82600AC9D84 /* line-chart@2x.png */,
+				B4E6BD8118DDC82600AC9D84 /* share.png */,
+				B4E6BD8218DDC82600AC9D84 /* share@2x.png */,
+				B4E6BD8318DDC82600AC9D84 /* tag.png */,
+				B4E6BD8418DDC82600AC9D84 /* tag@2x.png */,
+				B4E6BD8518DDC82600AC9D84 /* trash.png */,
+				B4E6BD8618DDC82600AC9D84 /* trash@2x.png */,
+			);
+			path = Icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,12 +348,26 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4E6BD8A18DDC82600AC9D84 /* download@2x.png in Resources */,
+				B4E6BD9218DDC82600AC9D84 /* tag@2x.png in Resources */,
 				B4D1EC3B18BD729300E01EFE /* InfoPlist.strings in Resources */,
+				B4E6BD9318DDC82600AC9D84 /* trash.png in Resources */,
+				B4E6BD8818DDC82600AC9D84 /* bar-chart@2x.png in Resources */,
 				B4E6BD7118DDC37D00AC9D84 /* EUCLabelViewController.xib in Resources */,
+				B4E6BD8C18DDC82600AC9D84 /* filter@2x.png in Resources */,
 				B4D1EC4318BD729300E01EFE /* Images.xcassets in Resources */,
 				B4E6BD6918DDC33C00AC9D84 /* EUCFilterViewController.xib in Resources */,
+				B4E6BD8F18DDC82600AC9D84 /* share.png in Resources */,
+				B4E6BD9118DDC82600AC9D84 /* tag.png in Resources */,
+				B4E6BD9418DDC82600AC9D84 /* trash@2x.png in Resources */,
+				B4E6BD8918DDC82600AC9D84 /* download.png in Resources */,
 				B4E6BD6418DDC30C00AC9D84 /* EUCImportViewController.xib in Resources */,
 				B4E6BD7618DDC39300AC9D84 /* EUCAnalyzeViewController.xib in Resources */,
+				B4E6BD8718DDC82600AC9D84 /* bar-chart.png in Resources */,
+				B4E6BD9018DDC82600AC9D84 /* share@2x.png in Resources */,
+				B4E6BD8B18DDC82600AC9D84 /* filter.png in Resources */,
+				B4E6BD8D18DDC82600AC9D84 /* line-chart.png in Resources */,
+				B4E6BD8E18DDC82600AC9D84 /* line-chart@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

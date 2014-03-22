@@ -19,6 +19,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Import", "Import")
+                                                        image:[UIImage imageNamed:@"download.png"]
+                                                selectedImage:nil];
     }
     return self;
 }

@@ -8,6 +8,10 @@
 
 #import "EUCAppDelegate.h"
 #import "EUCHomeViewController.h"
+#import "EUCImportViewController.h"
+#import "EUCFilterViewController.h"
+#import "EUCLabelViewController.h"
+#import "EUCAnalyzeViewController.h"
 
 @implementation EUCAppDelegate
 
@@ -16,6 +20,15 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    EUCImportViewController * import = [[EUCImportViewController alloc] initWithNibName:@"EUCImportViewController" bundle:nil];
+    EUCFilterViewController * filter = [[EUCFilterViewController alloc] initWithNibName:@"EUCFilterViewController" bundle:nil];
+    EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
+    EUCAnalyzeViewController * analyze = [[EUCAnalyzeViewController alloc] initWithNibName:@"EUCAnalyzeViewController" bundle:nil];
+    
+    self.homeViewController = [[EUCHomeViewController alloc] init];
+    self.homeViewController.viewControllers = @[import, filter, label, analyze];
+    self.window.rootViewController = self.homeViewController;
     [self.window makeKeyAndVisible];
     return YES;
 }

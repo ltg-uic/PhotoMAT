@@ -19,6 +19,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Filter", "Filter")
+                                                        image:[UIImage imageNamed:@"filter"]
+                                                selectedImage:nil];
+
     }
     return self;
 }

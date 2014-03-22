@@ -19,6 +19,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Tags", "Tags")
+                                                        image:[UIImage imageNamed:@"tag.png"]
+                                                selectedImage:nil];
+
     }
     return self;
 }

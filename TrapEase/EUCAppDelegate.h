@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class EUCHomeViewController;
+
 @interface EUCAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) EUCHomeViewController *homeViewController;
+
 
 @end
