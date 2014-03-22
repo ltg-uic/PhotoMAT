@@ -60,6 +60,8 @@
 		B4E6BE2618DE3ED100AC9D84 /* EUCCloudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE2418DE3ED100AC9D84 /* EUCCloudViewController.xib */; };
 		B4E6BE2A18DE3EE200AC9D84 /* EUCSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE2818DE3EE200AC9D84 /* EUCSettingsViewController.m */; };
 		B4E6BE2B18DE3EE200AC9D84 /* EUCSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE2918DE3EE200AC9D84 /* EUCSettingsViewController.xib */; };
+		B4E6BE3018DE44B900AC9D84 /* EUCImportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE2F18DE44B900AC9D84 /* EUCImportCell.m */; };
+		B4E6BE3218DE44D900AC9D84 /* EUCImportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE3118DE44D900AC9D84 /* EUCImportCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -141,6 +143,9 @@
 		B4E6BE2718DE3EE200AC9D84 /* EUCSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCSettingsViewController.h; path = TrapEase/Controllers/EUCSettingsViewController.h; sourceTree = "<group>"; };
 		B4E6BE2818DE3EE200AC9D84 /* EUCSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCSettingsViewController.m; path = TrapEase/Controllers/EUCSettingsViewController.m; sourceTree = "<group>"; };
 		B4E6BE2918DE3EE200AC9D84 /* EUCSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCSettingsViewController.xib; path = TrapEase/Controllers/EUCSettingsViewController.xib; sourceTree = "<group>"; };
+		B4E6BE2E18DE44B900AC9D84 /* EUCImportCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCImportCell.h; path = Cells/EUCImportCell.h; sourceTree = "<group>"; };
+		B4E6BE2F18DE44B900AC9D84 /* EUCImportCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCImportCell.m; path = Cells/EUCImportCell.m; sourceTree = "<group>"; };
+		B4E6BE3118DE44D900AC9D84 /* EUCImportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCImportCell.xib; path = Cells/EUCImportCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +208,7 @@
 		B4D1EC3618BD729300E01EFE /* TrapEase */ = {
 			isa = PBXGroup;
 			children = (
+				B4E6BE2C18DE442400AC9D84 /* Cells */,
 				B4E6BD7718DDC82600AC9D84 /* Images */,
 				B4E6BD5418DDBB2500AC9D84 /* Support */,
 				B4D1EC5F18BD732B00E01EFE /* Controllers */,
@@ -323,6 +329,16 @@
 			path = Icons;
 			sourceTree = "<group>";
 		};
+		B4E6BE2C18DE442400AC9D84 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B4E6BE2E18DE44B900AC9D84 /* EUCImportCell.h */,
+				B4E6BE2F18DE44B900AC9D84 /* EUCImportCell.m */,
+				B4E6BE3118DE44D900AC9D84 /* EUCImportCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -435,6 +451,7 @@
 				B4E6BE1418DE005500AC9D84 /* hiking@2x.png in Resources */,
 				B4E6BD8D18DDC82600AC9D84 /* line-chart.png in Resources */,
 				B4E6BE2618DE3ED100AC9D84 /* EUCCloudViewController.xib in Resources */,
+				B4E6BE3218DE44D900AC9D84 /* EUCImportCell.xib in Resources */,
 				B4E6BD8E18DDC82600AC9D84 /* line-chart@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,6 +507,7 @@
 				B4E6BD6818DDC33C00AC9D84 /* EUCFilterViewController.m in Sources */,
 				B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */,
 				B4E6BE1818DE008000AC9D84 /* EUCKnapsackViewController.m in Sources */,
+				B4E6BE3018DE44B900AC9D84 /* EUCImportCell.m in Sources */,
 				B4E6BE2A18DE3EE200AC9D84 /* EUCSettingsViewController.m in Sources */,
 				B4D1EC4118BD729300E01EFE /* EUCAppDelegate.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,

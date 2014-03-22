@@ -9,6 +9,7 @@
 #import "EUCImportViewController.h"
 
 @interface EUCImportViewController ()
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
