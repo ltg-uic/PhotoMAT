@@ -21,6 +21,7 @@
 		B4D1EC5618BD729300E01EFE /* TrapEaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D1EC5518BD729300E01EFE /* TrapEaseTests.m */; };
 		B4D1EC6318BD738400E01EFE /* EUCHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D1EC6118BD738400E01EFE /* EUCHomeViewController.m */; };
 		B4D1EC6418BD738400E01EFE /* EUCHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4D1EC6218BD738400E01EFE /* EUCHomeViewController.xib */; };
+		B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BD5618DDBB5600AC9D84 /* EUCFileSystem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		B4D1EC6018BD738400E01EFE /* EUCHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCHomeViewController.h; path = TrapEase/Controllers/EUCHomeViewController.h; sourceTree = "<group>"; };
 		B4D1EC6118BD738400E01EFE /* EUCHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCHomeViewController.m; path = TrapEase/Controllers/EUCHomeViewController.m; sourceTree = "<group>"; };
 		B4D1EC6218BD738400E01EFE /* EUCHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCHomeViewController.xib; path = TrapEase/Controllers/EUCHomeViewController.xib; sourceTree = "<group>"; };
+		B4E6BD5518DDBB5600AC9D84 /* EUCFileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCFileSystem.h; path = Support/EUCFileSystem.h; sourceTree = "<group>"; };
+		B4E6BD5618DDBB5600AC9D84 /* EUCFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCFileSystem.m; path = Support/EUCFileSystem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +115,7 @@
 		B4D1EC3618BD729300E01EFE /* TrapEase */ = {
 			isa = PBXGroup;
 			children = (
+				B4E6BD5418DDBB2500AC9D84 /* Support */,
 				B4D1EC5F18BD732B00E01EFE /* Controllers */,
 				B4D1EC3F18BD729300E01EFE /* EUCAppDelegate.h */,
 				B4D1EC4018BD729300E01EFE /* EUCAppDelegate.m */,
@@ -159,6 +163,15 @@
 			);
 			name = Controllers;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		B4E6BD5418DDBB2500AC9D84 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				B4E6BD5518DDBB5600AC9D84 /* EUCFileSystem.h */,
+				B4E6BD5618DDBB5600AC9D84 /* EUCFileSystem.m */,
+			);
+			name = Support;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */,
 				B4D1EC4118BD729300E01EFE /* EUCAppDelegate.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
 				B4D1EC6318BD738400E01EFE /* EUCHomeViewController.m in Sources */,
@@ -468,6 +482,7 @@
 				B4D1EC5B18BD729300E01EFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B4D1EC5C18BD729300E01EFE /* Build configuration list for PBXNativeTarget "TrapEaseTests" */ = {
 			isa = XCConfigurationList;
@@ -476,6 +491,7 @@
 				B4D1EC5E18BD729300E01EFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
