@@ -13,6 +13,8 @@
 #import "EUCLabelViewController.h"
 #import "EUCAnalyzeViewController.h"
 #import "EUCKnapsackViewController.h"
+#import "EUCCloudViewController.h"
+#import "EUCSettingsViewController.h"
 
 @implementation EUCAppDelegate
 
@@ -27,9 +29,11 @@
     EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
     EUCAnalyzeViewController * analyze = [[EUCAnalyzeViewController alloc] initWithNibName:@"EUCAnalyzeViewController" bundle:nil];
     EUCKnapsackViewController * knapsack = [[EUCKnapsackViewController alloc] initWithNibName:@"EUCKnapsackViewController" bundle:nil];
+    EUCCloudViewController * cloud = [[EUCCloudViewController alloc] initWithNibName:@"EUCCloudViewController" bundle:nil];
+    EUCSettingsViewController * settings = [[EUCSettingsViewController alloc] initWithNibName:@"EUCSettingsViewController" bundle:nil];
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
-    self.homeViewController.viewControllers = @[import, upload, label, analyze, knapsack];
+    self.homeViewController.viewControllers = @[import, upload, label, analyze, knapsack, cloud, settings];
     self.window.rootViewController = self.homeViewController;
     [self.window makeKeyAndVisible];
     return YES;

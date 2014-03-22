@@ -52,6 +52,14 @@
 		B4E6BE1418DE005500AC9D84 /* hiking@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE1218DE005500AC9D84 /* hiking@2x.png */; };
 		B4E6BE1818DE008000AC9D84 /* EUCKnapsackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE1618DE008000AC9D84 /* EUCKnapsackViewController.m */; };
 		B4E6BE1918DE008000AC9D84 /* EUCKnapsackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE1718DE008000AC9D84 /* EUCKnapsackViewController.xib */; };
+		B4E6BE1E18DE3EB400AC9D84 /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE1A18DE3EB400AC9D84 /* cloud.png */; };
+		B4E6BE1F18DE3EB400AC9D84 /* cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE1B18DE3EB400AC9D84 /* cloud@2x.png */; };
+		B4E6BE2018DE3EB400AC9D84 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE1C18DE3EB400AC9D84 /* gear.png */; };
+		B4E6BE2118DE3EB400AC9D84 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE1D18DE3EB400AC9D84 /* gear@2x.png */; };
+		B4E6BE2518DE3ED100AC9D84 /* EUCCloudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE2318DE3ED100AC9D84 /* EUCCloudViewController.m */; };
+		B4E6BE2618DE3ED100AC9D84 /* EUCCloudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE2418DE3ED100AC9D84 /* EUCCloudViewController.xib */; };
+		B4E6BE2A18DE3EE200AC9D84 /* EUCSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE2818DE3EE200AC9D84 /* EUCSettingsViewController.m */; };
+		B4E6BE2B18DE3EE200AC9D84 /* EUCSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE2918DE3EE200AC9D84 /* EUCSettingsViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +131,16 @@
 		B4E6BE1518DE008000AC9D84 /* EUCKnapsackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCKnapsackViewController.h; path = TrapEase/Controllers/EUCKnapsackViewController.h; sourceTree = "<group>"; };
 		B4E6BE1618DE008000AC9D84 /* EUCKnapsackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCKnapsackViewController.m; path = TrapEase/Controllers/EUCKnapsackViewController.m; sourceTree = "<group>"; };
 		B4E6BE1718DE008000AC9D84 /* EUCKnapsackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCKnapsackViewController.xib; path = TrapEase/Controllers/EUCKnapsackViewController.xib; sourceTree = "<group>"; };
+		B4E6BE1A18DE3EB400AC9D84 /* cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cloud.png; sourceTree = "<group>"; };
+		B4E6BE1B18DE3EB400AC9D84 /* cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cloud@2x.png"; sourceTree = "<group>"; };
+		B4E6BE1C18DE3EB400AC9D84 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		B4E6BE1D18DE3EB400AC9D84 /* gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear@2x.png"; sourceTree = "<group>"; };
+		B4E6BE2218DE3ED100AC9D84 /* EUCCloudViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCCloudViewController.h; path = TrapEase/Controllers/EUCCloudViewController.h; sourceTree = "<group>"; };
+		B4E6BE2318DE3ED100AC9D84 /* EUCCloudViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCCloudViewController.m; path = TrapEase/Controllers/EUCCloudViewController.m; sourceTree = "<group>"; };
+		B4E6BE2418DE3ED100AC9D84 /* EUCCloudViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCCloudViewController.xib; path = TrapEase/Controllers/EUCCloudViewController.xib; sourceTree = "<group>"; };
+		B4E6BE2718DE3EE200AC9D84 /* EUCSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCSettingsViewController.h; path = TrapEase/Controllers/EUCSettingsViewController.h; sourceTree = "<group>"; };
+		B4E6BE2818DE3EE200AC9D84 /* EUCSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCSettingsViewController.m; path = TrapEase/Controllers/EUCSettingsViewController.m; sourceTree = "<group>"; };
+		B4E6BE2918DE3EE200AC9D84 /* EUCSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCSettingsViewController.xib; path = TrapEase/Controllers/EUCSettingsViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +266,12 @@
 				B4E6BE1518DE008000AC9D84 /* EUCKnapsackViewController.h */,
 				B4E6BE1618DE008000AC9D84 /* EUCKnapsackViewController.m */,
 				B4E6BE1718DE008000AC9D84 /* EUCKnapsackViewController.xib */,
+				B4E6BE2218DE3ED100AC9D84 /* EUCCloudViewController.h */,
+				B4E6BE2318DE3ED100AC9D84 /* EUCCloudViewController.m */,
+				B4E6BE2418DE3ED100AC9D84 /* EUCCloudViewController.xib */,
+				B4E6BE2718DE3EE200AC9D84 /* EUCSettingsViewController.h */,
+				B4E6BE2818DE3EE200AC9D84 /* EUCSettingsViewController.m */,
+				B4E6BE2918DE3EE200AC9D84 /* EUCSettingsViewController.xib */,
 			);
 			name = Controllers;
 			path = ..;
@@ -273,6 +297,10 @@
 		B4E6BD7818DDC82600AC9D84 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				B4E6BE1A18DE3EB400AC9D84 /* cloud.png */,
+				B4E6BE1B18DE3EB400AC9D84 /* cloud@2x.png */,
+				B4E6BE1C18DE3EB400AC9D84 /* gear.png */,
+				B4E6BE1D18DE3EB400AC9D84 /* gear@2x.png */,
 				B4E6BE1118DE005500AC9D84 /* hiking.png */,
 				B4E6BE1218DE005500AC9D84 /* hiking@2x.png */,
 				B4E6BE0D18DDFF2F00AC9D84 /* upload.png */,
@@ -376,16 +404,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4E6BE1E18DE3EB400AC9D84 /* cloud.png in Resources */,
 				B4E6BE0F18DDFF2F00AC9D84 /* upload.png in Resources */,
 				B4E6BD8A18DDC82600AC9D84 /* download@2x.png in Resources */,
 				B4E6BD9218DDC82600AC9D84 /* tag@2x.png in Resources */,
+				B4E6BE1F18DE3EB400AC9D84 /* cloud@2x.png in Resources */,
 				B4D1EC3B18BD729300E01EFE /* InfoPlist.strings in Resources */,
+				B4E6BE2018DE3EB400AC9D84 /* gear.png in Resources */,
 				B4E6BD9318DDC82600AC9D84 /* trash.png in Resources */,
 				B4E6BD8818DDC82600AC9D84 /* bar-chart@2x.png in Resources */,
 				B4E6BE0C18DDFD3400AC9D84 /* EUCUploadViewController.xib in Resources */,
 				B4E6BE1318DE005500AC9D84 /* hiking.png in Resources */,
 				B4E6BD7118DDC37D00AC9D84 /* EUCLabelViewController.xib in Resources */,
 				B4E6BD8C18DDC82600AC9D84 /* filter@2x.png in Resources */,
+				B4E6BE2118DE3EB400AC9D84 /* gear@2x.png in Resources */,
 				B4E6BE1918DE008000AC9D84 /* EUCKnapsackViewController.xib in Resources */,
 				B4D1EC4318BD729300E01EFE /* Images.xcassets in Resources */,
 				B4E6BD6918DDC33C00AC9D84 /* EUCFilterViewController.xib in Resources */,
@@ -399,8 +431,10 @@
 				B4E6BE1018DDFF2F00AC9D84 /* upload@2x.png in Resources */,
 				B4E6BD9018DDC82600AC9D84 /* share@2x.png in Resources */,
 				B4E6BD8B18DDC82600AC9D84 /* filter.png in Resources */,
+				B4E6BE2B18DE3EE200AC9D84 /* EUCSettingsViewController.xib in Resources */,
 				B4E6BE1418DE005500AC9D84 /* hiking@2x.png in Resources */,
 				B4E6BD8D18DDC82600AC9D84 /* line-chart.png in Resources */,
+				B4E6BE2618DE3ED100AC9D84 /* EUCCloudViewController.xib in Resources */,
 				B4E6BD8E18DDC82600AC9D84 /* line-chart@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,11 +490,13 @@
 				B4E6BD6818DDC33C00AC9D84 /* EUCFilterViewController.m in Sources */,
 				B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */,
 				B4E6BE1818DE008000AC9D84 /* EUCKnapsackViewController.m in Sources */,
+				B4E6BE2A18DE3EE200AC9D84 /* EUCSettingsViewController.m in Sources */,
 				B4D1EC4118BD729300E01EFE /* EUCAppDelegate.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
 				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,
 				B4E6BE0B18DDFD3400AC9D84 /* EUCUploadViewController.m in Sources */,
 				B4E6BD7518DDC39300AC9D84 /* EUCAnalyzeViewController.m in Sources */,
+				B4E6BE2518DE3ED100AC9D84 /* EUCCloudViewController.m in Sources */,
 				B4E6BD6318DDC30C00AC9D84 /* EUCImportViewController.m in Sources */,
 				B4E6BD7018DDC37D00AC9D84 /* EUCLabelViewController.m in Sources */,
 			);
