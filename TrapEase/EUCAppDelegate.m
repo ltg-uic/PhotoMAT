@@ -12,6 +12,7 @@
 #import "EUCUploadViewController.h"
 #import "EUCLabelViewController.h"
 #import "EUCAnalyzeViewController.h"
+#import "EUCKnapsackViewController.h"
 
 @implementation EUCAppDelegate
 
@@ -25,9 +26,10 @@
     EUCUploadViewController * upload = [[EUCUploadViewController alloc] initWithNibName:@"EUCUploadViewController" bundle:nil];
     EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
     EUCAnalyzeViewController * analyze = [[EUCAnalyzeViewController alloc] initWithNibName:@"EUCAnalyzeViewController" bundle:nil];
+    EUCKnapsackViewController * knapsack = [[EUCKnapsackViewController alloc] initWithNibName:@"EUCKnapsackViewController" bundle:nil];
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
-    self.homeViewController.viewControllers = @[import, upload, label, analyze];
+    self.homeViewController.viewControllers = @[import, upload, label, analyze, knapsack];
     self.window.rootViewController = self.homeViewController;
     [self.window makeKeyAndVisible];
     return YES;
