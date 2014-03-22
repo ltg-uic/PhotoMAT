@@ -39,7 +39,7 @@ sub handleRest {
 
 
     $parent_hash->{http_status} = $http_status;
-    my $result = to_json($hash);
+    my $result = to_json($hash, {pretty=>1});
     print STDERR "RETURNING $http_status and hash is $result\n";
     return $result;
 }
@@ -136,7 +136,7 @@ sub put {
             }
             if ($tableColumn->{is_nullable} eq 'NO') {
                 if (!defined ($form->{$tableColumn->{column_name}})) {
-                    $parent_hash->{http_content} = to_json({ message => "Required field $tableColumn->{column_name} not specified"});
+                    $parent_hash->{http_content} = to_json({ message => "Required field $tableColumn->{column_name} not specified"}, {pretty=>1});
                     return HTTP_CONFLICT;
                 }
             }
@@ -157,7 +157,7 @@ sub put {
 
     delete ($existingRow->{owner}); 
 
-    $parent_hash->{http_content} = to_json($existingRow);
+    $parent_hash->{http_content} = to_json($existingRow, {pretty=>1});
     return HTTP_OK;
 }
 
@@ -178,7 +178,7 @@ sub post {
     my $sequence = &Database::getRow($r, $dbh, qq[select nextval('$sequenceName')]);
     my $value = $sequence->{nextval};
 
-    $parent_hash->{http_content} = to_json({ id => $value});
+    $parent_hash->{http_content} = to_json({ id => $value}, {pretty=>1});
     return HTTP_OK;
 }
 
@@ -190,7 +190,7 @@ sub get {
     if (defined $hash->{id}) { 
         $path = $hash->{id};
     }
-    elsif (defined $parent_hash->{path}) { 
+    elsif (defined $parent_hash->{path      }) { 
         $path = $parent_hash->{path};
     }
     $path *= 1;

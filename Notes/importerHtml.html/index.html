@@ -1,0 +1,833 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title></title>
+<style type="text/css">
+			
+                        img.status {
+                        margin-left: 2px; margin-right: 2px; margin-top: 2px; height: 11px; width: 11px;
+                        }
+                        
+                        img.checkbox-column {
+                        height: 11px; width: 11px; vertical-align: top; margin-top: 3px;
+                        }
+                        
+                        img.leaf {
+                        margin-left: 3px; margin-right:3px; margin-top: 2px; margin-bottom: 3px; height: 6px; width 6px;
+                        }
+                        
+                        img.parent {
+                        margin-left: 3px; margin-right:3px; margin-top: 2px; height: 10px; width: 10px;
+                        }
+			
+			th {
+			vertical-align: bottom;
+			
+			}
+			
+			td {
+			vertical-align: top;
+			}
+			
+			td,th {
+			
+			empty-cells: show;
+			}
+			
+			.top-right-border {
+			
+			}
+			
+			.no-border {
+			border-bottom: 0px;
+			border-left: 0px;
+			}
+			
+			
+			
+			
+			table {
+			
+			font-family: Helvetica, sans-serif;
+			font-size: 12px;
+			font-family: "Helvetica Neue", sans-serif;  font-size: 13px;			
+			
+			}
+
+			
+			
+			.wholeDocument {
+			font-family: "Helvetica Neue", sans-serif;  font-size: 13px;
+	
+			}
+		
+			
+			td.subcell {
+			border: none;
+			}
+			
+			td.content {
+			padding-left: 4px;
+			padding-bottom: 2px;
+			padding-top: 1px;
+			padding-right: 3px;
+			}
+			
+			.full {
+			height: 100%;
+			}
+			
+			.heighthack {
+                        
+                            height: 25px;
+                            
+			}
+			
+			div.titlepadding { 
+			padding-right:3px;
+			padding-left:6px;
+			padding-bottom:3px;
+			padding-top: 2px;
+			}
+			
+			
+					.summary_node {
+						background: rgba(0,0,0,.12);
+						margin-bottom: 1px;
+					}
+				
+			
+			div.column {   
+			padding-right: 3px;
+			padding-left: 4px;
+			padding-top: 0px;
+			padding-bottom: 0px;
+			margin-right: 1px;
+			}
+			
+			.labelpadding {
+			padding-right: 3px;
+			padding-top: 1px;
+			padding-left: 2px;
+			}
+			
+			.indicator {
+			white-space: nowrap;
+			text-align:right;
+			margin-right: 0px;
+			vertical-align: top;
+			padding-top: 1px;
+			padding-left: 0px;
+			}
+			
+			.wholedocgutter {
+			
+			}
+			
+			div.row {
+			}
+			
+			div.headerRow {
+			}
+			
+			.expanded {
+			display: inline;
+			}
+			.collapsed {
+			display: none;
+			}
+			
+            div.palette-hit-zone {
+                position: fixed;
+                bottom: 0px;
+				height: 33%;
+                left:50%;
+                width: 66%;
+                margin-left: -33%;
+            }
+
+			div.floating-palette {
+                -webkit-border-radius: 5px;
+                -webkit-transition: opacity is fade-in-out;
+                -webkit-transition-duration: 1s;
+				background-color: rgb(64, 64, 64);
+                opacity:0.7;
+				width: 88px;
+				height: 44px;
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                margin-left: -44px;
+			}
+            
+            div.palette-cell {
+                opacity:1;
+                margin-top: 6px;
+                margin-bottom: 6px;
+                position: absolute;
+                height: 32px;
+                width: 32px;
+            }
+            
+            div.cell-divider {
+                position: absolute;
+                margin-top: 6px;
+                margin-bottom: 6px;
+                margin-left: 44px;
+                height: 32px;
+                width:0px;
+                position:absolute;
+                left:0px;
+                border-right:rgb(207, 207, 207) 2px solid;
+            }
+			
+			
+			
+			
+			.note { 
+			padding-left: 5px;
+			padding-right: 3px; 
+			border: none; 
+			color:rgb(84,84,84) ;  font-size: 11px;font-size: 11px;
+			}
+			
+			/* Total table width is 595
+			Adjusted table width is 684 */
+			
+			.wholething {
+				width: auto;
+			}
+			
+			
+			table.row {
+				
+						width: 595px;
+						
+			
+			}
+			
+			
+    .col_width1 { 
+        width: 595px;  /* Actual width is 595 */
+    }
+
+    .col1 { 
+        
+    }
+
+    .colbackground1 { 
+        
+    }
+
+			
+			/* Level Styles */
+			
+			
+    .columntitle { 
+        font-weight: 600;  
+    }
+
+    .ns-Heading-1 { 
+        color:rgb(50,50,50) ;  font-family: "Helvetica Neue", sans-serif;  font-weight: 300;  font-size: 30px;}
+
+    .ns-Heading-2 { 
+        color:rgb(50,50,50) ;  font-family: "Helvetica Neue", sans-serif;  font-size: 18px;}
+
+    .ns-Heading-3 { 
+        font-family: "Helvetica Neue", sans-serif;  font-weight: 600;  font-size: 13px;}
+
+    .ns-Highlight:-Yellow { 
+        }
+
+    .ns-Highlight:-Red { 
+        }
+
+    .ns-Highlight:-Green { 
+        }
+
+    .ns-Purple { 
+        color:rgb(150,97,207) ;  }
+
+    .ns-Blue { 
+        color:rgb(58,142,237) ;  }
+
+    .ns-Bondi { 
+        color:rgb(0,191,192) ;  }
+
+    .ns-Green { 
+        color:rgb(103,187,53) ;  }
+
+    .ns-Yellow { 
+        color:rgb(255,187,0) ;  }
+
+    .ns-Orange { 
+        color:rgb(255,144,77) ;  }
+
+    .ns-Red { 
+        color:rgb(242,96,119) ;  }
+
+    .ns-Graphite { 
+        color:rgb(107,124,165) ;  }
+
+    .ns-bg-Heading-1 { 
+        }
+
+    .ns-bg-Heading-2 { 
+        }
+
+    .ns-bg-Heading-3 { 
+        }
+
+    .ns-bg-Highlight:-Yellow { 
+        background-color:rgba(255,187,0,0.25) ;  }
+
+    .ns-bg-Highlight:-Red { 
+        background-color:rgba(242,96,119,0.25) ;  }
+
+    .ns-bg-Highlight:-Green { 
+        background-color:rgba(103,187,53,0.25) ;  }
+
+    .ns-bg-Purple { 
+        }
+
+    .ns-bg-Blue { 
+        }
+
+    .ns-bg-Bondi { 
+        }
+
+    .ns-bg-Green { 
+        }
+
+    .ns-bg-Yellow { 
+        }
+
+    .ns-bg-Orange { 
+        }
+
+    .ns-bg-Red { 
+        }
+
+    .ns-bg-Graphite { 
+        }
+
+    .ns-gutter-Heading-1 { 
+        }
+
+    .ns-gutter-Heading-2 { 
+        }
+
+    .ns-gutter-Heading-3 { 
+        }
+
+    .ns-gutter-Highlight:-Yellow { 
+        }
+
+    .ns-gutter-Highlight:-Red { 
+        }
+
+    .ns-gutter-Highlight:-Green { 
+        }
+
+    .ns-gutter-Purple { 
+        }
+
+    .ns-gutter-Blue { 
+        }
+
+    .ns-gutter-Bondi { 
+        }
+
+    .ns-gutter-Green { 
+        }
+
+    .ns-gutter-Yellow { 
+        }
+
+    .ns-gutter-Orange { 
+        }
+
+    .ns-gutter-Red { 
+        }
+
+    .ns-gutter-Graphite { 
+        }
+</style>
+</head>
+<body class="wholeDocument"><table cellspacing="0" cellpadding="0" class="heighthack top-right-border">
+<!--Column Titles--><tr><td class=" colbackground1 col_width1"><div class="columntitle titlepadding">Topic<br>
+</div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor1"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level1 levelguttercolor1" style="width: 9px;"></td>
+<td class=" subcell wholedocgutter indicator level1 levelguttercolor1" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level1 levelguttercolor1" style=" width: 1px; "></td>
+<td class=" content level1 subcell">
+<span class=" ns-Heading-1 ns-bg-Heading-1" style='color:rgb(50,50,50) ;  font-family: "Helvetica Neue", sans-serif;  font-weight: 300;  font-size: 30px;'>iPad Importer REST API</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor1"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level1 levelguttercolor1" style="width: 9px;"></td>
+<td class=" subcell wholedocgutter indicator level1 levelguttercolor1" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level1 levelguttercolor1" style=" width: 1px; "></td>
+<td class=" content level1 subcell">
+<span class=" ns-Heading-2 ns-bg-Heading-2" style='color:rgb(50,50,50) ;  font-family: "Helvetica Neue", sans-serif;  font-size: 18px;'>Resources</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">The following tables are accessible via the REST API <br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">school<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">class<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">person<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">person_membership<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">token (this resource is different from the others, as will be seen below)<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">camera<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">deployment<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">deployment_picture<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">burst<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">image<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">tag<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor1"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level1 levelguttercolor1" style="width: 9px;"></td>
+<td class=" subcell wholedocgutter indicator level1 levelguttercolor1" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level1 levelguttercolor1" style=" width: 1px; "></td>
+<td class=" content level1 subcell">
+<span class=" ns-Heading-2 ns-bg-Heading-2" style='color:rgb(50,50,50) ;  font-family: "Helvetica Neue", sans-serif;  font-size: 18px;'>Authentication and Authorization</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">Every person has an email and password that they use to login.<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">In order to log in, a POST is sent to /token with the following raw data:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">{ "email": " <span><a href="mailto:a@example.com">a@example.com</a></span>", "password": "password" }<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">A successful login will return the following JSON:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">
+<span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>{"token":"X6VMY94sQRzYe2gFGdp2q3PLqAICSPiN"}</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">This token should be used in <span class="" style="font-weight: 900;  ">all subsequent</span> API as an auth header. For example:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">
+<span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>POST /school HTTP/1.1</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>Host: trap.euclidsoftware.com</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>X-Trap-Token: X6VMY94sQRzYe2gFGdp2q3PLqAICSPiN</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>Cache-Control: no-cache</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">As you can see in the database schema, some <span class="" style='font-family: "Source Sans Pro", sans-serif;  '>person</span>s are admins.  Only admins have write access to the following resources:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">school<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">class<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">person<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">person_membership<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">camera<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">Admins have write access to <span class="" style="font-weight: 900;  ">all</span> other resources, whether they own them or not.<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor1"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level1 levelguttercolor1" style="width: 9px;"></td>
+<td class=" subcell wholedocgutter indicator level1 levelguttercolor1" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level1 levelguttercolor1" style=" width: 1px; "></td>
+<td class=" content level1 subcell">
+<span class=" ns-Heading-2 ns-bg-Heading-2" style='color:rgb(50,50,50) ;  font-family: "Helvetica Neue", sans-serif;  font-size: 18px;'>Creating Resources</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">In order to create a resource, send it a POST with an empty body. This will return the following JSON:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">
+<span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>{"id”:”2”}</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">This <span class="" style="font-weight: 900;  ">id</span> will be used to identify this resource.  You can follow this POST with 1 or more PUT requests to create and update the resource.  For example, to create a deployment send a PUT to /deployment/2 (where 2 is the <span class="" style="font-weight: 900;  ">id</span> returned by the POST) with the following HTTP content:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">{ <br>  "deployment_date": "1/1/2014 0:0",<br>  "camera" : 1,<br>  "nominal_mark_time" : "1/1/2014 0:0",<br>  "actual_mark_time" : "1/1/2014 0:0"<br>}<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">Note that I have only included the required fields in this put. The rest of the fields will get default values.  If you don’t include a required field, you’ll get something like this:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor4"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level4 levelguttercolor4" style="width: 57px;"></td>
+<td class=" subcell wholedocgutter indicator level4 levelguttercolor4" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level4 levelguttercolor4" style=" width: 1px; "></td>
+<td class=" content level4 subcell">
+<span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>{"message":"Required field deployment_date not specified"}</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">Of course, you do not need to specify required fields once you’re updating a record. You only need to send the fields you want to update. If you send all the fields, that’s okay too. <br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">The result of the above PUT call to create a deployment will be the following JSON:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">
+<span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>{</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>   "deployment" : [</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>      {</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "deployment_date" : "2014-01-01 00:00:00",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "longitude" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "short_name" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "nominal_mark_time" : "2014-01-01 00:00:00",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "burst" : [],</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "actual_mark_time" : "2014-01-01 00:00:00",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "camera" : 1,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "camera_elevation_rad" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "deployment_picture" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "latitude" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "notes" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "camera_height_cm" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "id" : 2,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "camera_azimuth_rad" : null</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>      }</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>   ]</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>}</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor1"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level1 levelguttercolor1" style="width: 9px;"></td>
+<td class=" subcell wholedocgutter indicator level1 levelguttercolor1" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level1 levelguttercolor1" style=" width: 1px; "></td>
+<td class=" content level1 subcell">
+<span class=" ns-Heading-2 ns-bg-Heading-2" style='color:rgb(50,50,50) ;  font-family: "Helvetica Neue", sans-serif;  font-size: 18px;'>Updating Resources</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">Send a PUT to update a resource. For example, to update the camera for deployment #2 to 2, send /deployment/2 a PUT with the following JSON:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">{ <br>  "camera" : 2<br>}<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">This will return you the entire record:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">
+<span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>{</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>   "deployment" : [</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>      {</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "deployment_date" : "2014-01-01 00:00:00",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "longitude" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "short_name" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "nominal_mark_time" : "2014-01-01 00:00:00",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "burst" : [],</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "actual_mark_time" : "2014-01-01 00:00:00",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "camera" : 2,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "camera_elevation_rad" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "deployment_picture" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "latitude" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "notes" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "camera_height_cm" : null,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "id" : 2,</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "camera_azimuth_rad" : null</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>      }</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>   ]</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>}</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor1"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level1 levelguttercolor1" style="width: 9px;"></td>
+<td class=" subcell wholedocgutter indicator level1 levelguttercolor1" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level1 levelguttercolor1" style=" width: 1px; "></td>
+<td class=" content level1 subcell">
+<span class=" ns-Heading-2 ns-bg-Heading-2" style='color:rgb(50,50,50) ;  font-family: "Helvetica Neue", sans-serif;  font-size: 18px;'>Getting Resources</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">Send a resource a GET request to retrieve it. For example, to get the record for the camera with id 1, send a GET request to /camera/1. This will return the following JSON:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">
+<span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>{</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>   "camera" : [</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>      {</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "make" : "Trap",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "model" : "Alpha",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "id" : 1</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>      }</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>   ]</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>}</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">To get a list of all resources, send a GET request leaving off the I’d. For example. to retrieve all cameras, send a GET request to /camera.  This will return:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">
+<span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>{</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>   "camera" : [</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>      {</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "make" : "Trap",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "model" : "Alpha",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "id" : 1</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>      },</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>      {</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "make" : "Trap",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "model" : "Beta",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "id" : 2</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>      },</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>      {</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "make" : "Trap",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "model" : "Gamma",</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>         "id" : 3</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>      }</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>   ]</span><br><span class="" style='color:rgb(38,38,38) ;  font-family: "Source Sans Pro", sans-serif;  font-size: 14px;background-color:rgb(255,254,254) ;  '>}</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">In this version there is no way to limit the number of resources returned. This will be added in a future version.<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">The API supports cascading GETs. If you request a school, the API will also return all classes associated with that school.  This is represented as school -&gt; class.  The full list of cascading GETs is:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">school -&gt; class<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">class -&gt; person<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">deployment -&gt; deployment_picture<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">deployment -&gt; burst<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">burst -&gt; image<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">image -&gt; tag<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">For example, GETting /deployment/1 will return the associated bursts and deployment_pictures as well:<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor3"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level3 levelguttercolor3" style="width: 41px;"></td>
+<td class=" subcell wholedocgutter indicator level3 levelguttercolor3" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level3 levelguttercolor3" style=" width: 1px; "></td>
+<td class=" content level3 subcell">{<br>   "deployment" : [<br>      {<br>         "deployment_date" : "2014-01-01 00:00:00",<br>         "longitude" : null,<br>         "short_name" : null,<br>         "nominal_mark_time" : "2014-01-01 00:00:00",<br>         "burst" : [],<br>         "actual_mark_time" : "2014-01-01 00:00:00",<br>         "camera" : 1,<br>         "camera_elevation_rad" : null,<br>         "deployment_picture" : [<br>            {<br>               "file_name" : "myFile",<br>               "caption" : null,<br>               "deployment_id" : 1,<br>               "id" : 1,<br>               "description" : null<br>            }<br>         ],<br>         "camera_height_cm" : null,<br>         "notes" : null,<br>         "latitude" : null,<br>         "id" : 1,<br>         "camera_azimuth_rad" : null<br>      }<br>   ]<br>}<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor1"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level1 levelguttercolor1" style="width: 9px;"></td>
+<td class=" subcell wholedocgutter indicator level1 levelguttercolor1" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level1 levelguttercolor1" style=" width: 1px; "></td>
+<td class=" content level1 subcell">
+<span class=" ns-Heading-2 ns-bg-Heading-2" style='color:rgb(50,50,50) ;  font-family: "Helvetica Neue", sans-serif;  font-size: 18px;'>Images</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">To create a deployment_image or picture, first create a record as you normally would and then add the associated file. To add the file, send a POST to /deployment_picture/n or image/n where n is the record id. The POST should contain a file named ‘file’. Currently only JPG files are supported.<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">To view an image, send a GET to /deployment_picture/n or image/n<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor1"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level1 levelguttercolor1" style="width: 9px;"></td>
+<td class=" subcell wholedocgutter indicator level1 levelguttercolor1" style="width: 15px;"><img border="0" alt="V" class="parent" src="Expanded.png" title="expanded"></td>
+<td class=" subcell wholedocgutter labelpadding level1 levelguttercolor1" style=" width: 1px; "></td>
+<td class=" content level1 subcell">
+<span class=" ns-Heading-2 ns-bg-Heading-2" style='color:rgb(50,50,50) ;  font-family: "Helvetica Neue", sans-serif;  font-size: 18px;'>Deleting Resources</span><br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" altRow full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">Send a DELETE request to a resource to delete it. For example sending a delete request to /image/1 will delete that image.<br>
+</td>
+</tr></table></div></div></td></tr>
+<tr class="heighthack"><td class=" col1 colbackground1 col_width1" style=""><div class=" full"><div class=" full levelcolor2"><table border="0" cellspacing="0" cellpadding="0" style="height:100%" class=" col_width1 col1"><tr>
+<td class=" subcell wholedocgutter level2 levelguttercolor2" style="width: 25px;"></td>
+<td class=" subcell wholedocgutter indicator level2 levelguttercolor2" style="width: 15px;"><img border="0" alt="*" class="leaf" src="LeafRowHandle.png"></td>
+<td class=" subcell wholedocgutter labelpadding level2 levelguttercolor2" style=" width: 1px; "></td>
+<td class=" content level2 subcell">Deletes will also cascade per the rules for GET above. So be careful. If you delete a school you’re deleting all the deployments and images for that school.<br>
+</td>
+</tr></table></div></div></td></tr>
+</table></body>
+</html>

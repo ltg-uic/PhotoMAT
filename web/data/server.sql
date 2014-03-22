@@ -51,6 +51,8 @@ INSERT INTO PERSON (first_name, last_name, password, email) values ('Andy', 'Ava
 INSERT INTO PERSON (first_name, last_name, password, email) values ('Betty', 'Belvidere',  crypt('password', gen_salt('bf', 10)), 'b@example.com');
 INSERT INTO PERSON (first_name, last_name, password, email) values ('Charlie', 'Chatterbox',  crypt('password', gen_salt('bf', 10)), 'c@example.com');
 
+    INSERT INTO PERSON (first_name, last_name, password, email, is_admin) values ('Admin', 'One',  crypt('password', gen_salt('bf', 10)), 'admin@example.com');
+
 
 
 CREATE TABLE person_membership (

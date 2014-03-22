@@ -101,3 +101,16 @@ Send to some server
     if we had multiple tag sets
     metadata is what tag sets we drew from
 
+
+
+3/13
+
+New requirements
+----------------
+o Need to be able to import a picture from backpack from photo album
+o Resources web page
+
+o import metat page - 
+  o retrieve data - should be editable
+    
+
