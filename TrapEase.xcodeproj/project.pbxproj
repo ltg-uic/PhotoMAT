@@ -62,6 +62,10 @@
 		B4E6BE2B18DE3EE200AC9D84 /* EUCSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE2918DE3EE200AC9D84 /* EUCSettingsViewController.xib */; };
 		B4E6BE3018DE44B900AC9D84 /* EUCImportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE2F18DE44B900AC9D84 /* EUCImportCell.m */; };
 		B4E6BE3218DE44D900AC9D84 /* EUCImportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE3118DE44D900AC9D84 /* EUCImportCell.xib */; };
+		B4E6BE3718DE4CD200AC9D84 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E6BE3318DE4CD100AC9D84 /* AssetsLibrary.framework */; };
+		B4E6BE3818DE4CD200AC9D84 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E6BE3418DE4CD100AC9D84 /* AVFoundation.framework */; };
+		B4E6BE3918DE4CD200AC9D84 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E6BE3518DE4CD200AC9D84 /* CoreImage.framework */; };
+		B4E6BE3A18DE4CD200AC9D84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E6BE3618DE4CD200AC9D84 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +150,10 @@
 		B4E6BE2E18DE44B900AC9D84 /* EUCImportCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCImportCell.h; path = Cells/EUCImportCell.h; sourceTree = "<group>"; };
 		B4E6BE2F18DE44B900AC9D84 /* EUCImportCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCImportCell.m; path = Cells/EUCImportCell.m; sourceTree = "<group>"; };
 		B4E6BE3118DE44D900AC9D84 /* EUCImportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCImportCell.xib; path = Cells/EUCImportCell.xib; sourceTree = "<group>"; };
+		B4E6BE3318DE4CD100AC9D84 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		B4E6BE3418DE4CD100AC9D84 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B4E6BE3518DE4CD200AC9D84 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		B4E6BE3618DE4CD200AC9D84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +161,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4E6BE3718DE4CD200AC9D84 /* AssetsLibrary.framework in Frameworks */,
+				B4E6BE3818DE4CD200AC9D84 /* AVFoundation.framework in Frameworks */,
+				B4E6BE3918DE4CD200AC9D84 /* CoreImage.framework in Frameworks */,
+				B4E6BE3A18DE4CD200AC9D84 /* QuartzCore.framework in Frameworks */,
 				B4D1EC3318BD729300E01EFE /* CoreGraphics.framework in Frameworks */,
 				B4D1EC3518BD729300E01EFE /* UIKit.framework in Frameworks */,
 				B4D1EC3118BD729300E01EFE /* Foundation.framework in Frameworks */,
@@ -196,6 +208,10 @@
 		B4D1EC2F18BD729300E01EFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B4E6BE3318DE4CD100AC9D84 /* AssetsLibrary.framework */,
+				B4E6BE3418DE4CD100AC9D84 /* AVFoundation.framework */,
+				B4E6BE3518DE4CD200AC9D84 /* CoreImage.framework */,
+				B4E6BE3618DE4CD200AC9D84 /* QuartzCore.framework */,
 				B4D1EC3018BD729300E01EFE /* Foundation.framework */,
 				B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */,
 				B4D1EC3418BD729300E01EFE /* UIKit.framework */,
