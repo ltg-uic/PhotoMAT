@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>509C1751-EBC8-4DB7-A683-407B3F1D1F4A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TrapEase</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>CCD956EF-9034-428F-9D3B-3367E345C40E</key>
+		<string>ssh://bitbucket.org/euclidsoftware/trapease.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TrapEase.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>CCD956EF-9034-428F-9D3B-3367E345C40E</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://bitbucket.org/euclidsoftware/trapease.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CCD956EF-9034-428F-9D3B-3367E345C40E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CCD956EF-9034-428F-9D3B-3367E345C40E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TrapEase</string>
+		</dict>
+	</array>
+</dict>
+</plist>

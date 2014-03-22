@@ -1,5 +1,5 @@
 //
-//  EUCHomeViewController.h
+//  EUCAnalyzeViewController.h
 //  TrapEase
 //
 //  Created by Aijaz Ansari on 3/22/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EUCHomeViewController : UITabBarController
+@interface EUCAnalyzeViewController : UIViewController
 
 @end

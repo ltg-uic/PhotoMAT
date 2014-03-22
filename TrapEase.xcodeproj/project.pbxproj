@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35D4F084544C46C2BE466AC9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB35A88ACFB41A99F3E3EC4 /* libPods.a */; };
 		B4D1EC3118BD729300E01EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3018BD729300E01EFE /* Foundation.framework */; };
 		B4D1EC3318BD729300E01EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */; };
 		B4D1EC3518BD729300E01EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3418BD729300E01EFE /* UIKit.framework */; };
@@ -19,9 +20,16 @@
 		B4D1EC4C18BD729300E01EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3418BD729300E01EFE /* UIKit.framework */; };
 		B4D1EC5418BD729300E01EFE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4D1EC5218BD729300E01EFE /* InfoPlist.strings */; };
 		B4D1EC5618BD729300E01EFE /* TrapEaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D1EC5518BD729300E01EFE /* TrapEaseTests.m */; };
-		B4D1EC6318BD738400E01EFE /* EUCHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D1EC6118BD738400E01EFE /* EUCHomeViewController.m */; };
-		B4D1EC6418BD738400E01EFE /* EUCHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4D1EC6218BD738400E01EFE /* EUCHomeViewController.xib */; };
 		B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BD5618DDBB5600AC9D84 /* EUCFileSystem.m */; };
+		B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BD5918DDC26000AC9D84 /* EUCHomeViewController.m */; };
+		B4E6BD6318DDC30C00AC9D84 /* EUCImportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BD6118DDC30C00AC9D84 /* EUCImportViewController.m */; };
+		B4E6BD6418DDC30C00AC9D84 /* EUCImportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD6218DDC30C00AC9D84 /* EUCImportViewController.xib */; };
+		B4E6BD6818DDC33C00AC9D84 /* EUCFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BD6618DDC33C00AC9D84 /* EUCFilterViewController.m */; };
+		B4E6BD6918DDC33C00AC9D84 /* EUCFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD6718DDC33C00AC9D84 /* EUCFilterViewController.xib */; };
+		B4E6BD7018DDC37D00AC9D84 /* EUCLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BD6E18DDC37D00AC9D84 /* EUCLabelViewController.m */; };
+		B4E6BD7118DDC37D00AC9D84 /* EUCLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD6F18DDC37D00AC9D84 /* EUCLabelViewController.xib */; };
+		B4E6BD7518DDC39300AC9D84 /* EUCAnalyzeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BD7318DDC39300AC9D84 /* EUCAnalyzeViewController.m */; };
+		B4E6BD7618DDC39300AC9D84 /* EUCAnalyzeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD7418DDC39300AC9D84 /* EUCAnalyzeViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1FB35A88ACFB41A99F3E3EC4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		30CB9A6B881342BDB4DEA63F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B4D1EC2D18BD729300E01EFE /* TrapEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrapEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4D1EC3018BD729300E01EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -51,11 +61,22 @@
 		B4D1EC5118BD729300E01EFE /* TrapEaseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrapEaseTests-Info.plist"; sourceTree = "<group>"; };
 		B4D1EC5318BD729300E01EFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B4D1EC5518BD729300E01EFE /* TrapEaseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrapEaseTests.m; sourceTree = "<group>"; };
-		B4D1EC6018BD738400E01EFE /* EUCHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCHomeViewController.h; path = TrapEase/Controllers/EUCHomeViewController.h; sourceTree = "<group>"; };
-		B4D1EC6118BD738400E01EFE /* EUCHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCHomeViewController.m; path = TrapEase/Controllers/EUCHomeViewController.m; sourceTree = "<group>"; };
-		B4D1EC6218BD738400E01EFE /* EUCHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCHomeViewController.xib; path = TrapEase/Controllers/EUCHomeViewController.xib; sourceTree = "<group>"; };
 		B4E6BD5518DDBB5600AC9D84 /* EUCFileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCFileSystem.h; path = Support/EUCFileSystem.h; sourceTree = "<group>"; };
 		B4E6BD5618DDBB5600AC9D84 /* EUCFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCFileSystem.m; path = Support/EUCFileSystem.m; sourceTree = "<group>"; };
+		B4E6BD5818DDC26000AC9D84 /* EUCHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCHomeViewController.h; path = TrapEase/Controllers/EUCHomeViewController.h; sourceTree = "<group>"; };
+		B4E6BD5918DDC26000AC9D84 /* EUCHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCHomeViewController.m; path = TrapEase/Controllers/EUCHomeViewController.m; sourceTree = "<group>"; };
+		B4E6BD6018DDC30C00AC9D84 /* EUCImportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCImportViewController.h; path = TrapEase/Controllers/EUCImportViewController.h; sourceTree = "<group>"; };
+		B4E6BD6118DDC30C00AC9D84 /* EUCImportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCImportViewController.m; path = TrapEase/Controllers/EUCImportViewController.m; sourceTree = "<group>"; };
+		B4E6BD6218DDC30C00AC9D84 /* EUCImportViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCImportViewController.xib; path = TrapEase/Controllers/EUCImportViewController.xib; sourceTree = "<group>"; };
+		B4E6BD6518DDC33C00AC9D84 /* EUCFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCFilterViewController.h; path = TrapEase/Controllers/EUCFilterViewController.h; sourceTree = "<group>"; };
+		B4E6BD6618DDC33C00AC9D84 /* EUCFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCFilterViewController.m; path = TrapEase/Controllers/EUCFilterViewController.m; sourceTree = "<group>"; };
+		B4E6BD6718DDC33C00AC9D84 /* EUCFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCFilterViewController.xib; path = TrapEase/Controllers/EUCFilterViewController.xib; sourceTree = "<group>"; };
+		B4E6BD6D18DDC37D00AC9D84 /* EUCLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCLabelViewController.h; path = TrapEase/Controllers/EUCLabelViewController.h; sourceTree = "<group>"; };
+		B4E6BD6E18DDC37D00AC9D84 /* EUCLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCLabelViewController.m; path = TrapEase/Controllers/EUCLabelViewController.m; sourceTree = "<group>"; };
+		B4E6BD6F18DDC37D00AC9D84 /* EUCLabelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCLabelViewController.xib; path = TrapEase/Controllers/EUCLabelViewController.xib; sourceTree = "<group>"; };
+		B4E6BD7218DDC39300AC9D84 /* EUCAnalyzeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCAnalyzeViewController.h; path = TrapEase/Controllers/EUCAnalyzeViewController.h; sourceTree = "<group>"; };
+		B4E6BD7318DDC39300AC9D84 /* EUCAnalyzeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCAnalyzeViewController.m; path = TrapEase/Controllers/EUCAnalyzeViewController.m; sourceTree = "<group>"; };
+		B4E6BD7418DDC39300AC9D84 /* EUCAnalyzeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCAnalyzeViewController.xib; path = TrapEase/Controllers/EUCAnalyzeViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +87,7 @@
 				B4D1EC3318BD729300E01EFE /* CoreGraphics.framework in Frameworks */,
 				B4D1EC3518BD729300E01EFE /* UIKit.framework in Frameworks */,
 				B4D1EC3118BD729300E01EFE /* Foundation.framework in Frameworks */,
+				35D4F084544C46C2BE466AC9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +111,7 @@
 				B4D1EC4F18BD729300E01EFE /* TrapEaseTests */,
 				B4D1EC2F18BD729300E01EFE /* Frameworks */,
 				B4D1EC2E18BD729300E01EFE /* Products */,
+				30CB9A6B881342BDB4DEA63F /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +131,7 @@
 				B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */,
 				B4D1EC3418BD729300E01EFE /* UIKit.framework */,
 				B4D1EC4918BD729300E01EFE /* XCTest.framework */,
+				1FB35A88ACFB41A99F3E3EC4 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -157,9 +181,20 @@
 		B4D1EC5F18BD732B00E01EFE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B4D1EC6018BD738400E01EFE /* EUCHomeViewController.h */,
-				B4D1EC6118BD738400E01EFE /* EUCHomeViewController.m */,
-				B4D1EC6218BD738400E01EFE /* EUCHomeViewController.xib */,
+				B4E6BD5818DDC26000AC9D84 /* EUCHomeViewController.h */,
+				B4E6BD5918DDC26000AC9D84 /* EUCHomeViewController.m */,
+				B4E6BD6018DDC30C00AC9D84 /* EUCImportViewController.h */,
+				B4E6BD6118DDC30C00AC9D84 /* EUCImportViewController.m */,
+				B4E6BD6218DDC30C00AC9D84 /* EUCImportViewController.xib */,
+				B4E6BD6518DDC33C00AC9D84 /* EUCFilterViewController.h */,
+				B4E6BD6618DDC33C00AC9D84 /* EUCFilterViewController.m */,
+				B4E6BD6718DDC33C00AC9D84 /* EUCFilterViewController.xib */,
+				B4E6BD6D18DDC37D00AC9D84 /* EUCLabelViewController.h */,
+				B4E6BD6E18DDC37D00AC9D84 /* EUCLabelViewController.m */,
+				B4E6BD6F18DDC37D00AC9D84 /* EUCLabelViewController.xib */,
+				B4E6BD7218DDC39300AC9D84 /* EUCAnalyzeViewController.h */,
+				B4E6BD7318DDC39300AC9D84 /* EUCAnalyzeViewController.m */,
+				B4E6BD7418DDC39300AC9D84 /* EUCAnalyzeViewController.xib */,
 			);
 			name = Controllers;
 			path = ..;
@@ -181,9 +216,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B4D1EC5918BD729300E01EFE /* Build configuration list for PBXNativeTarget "TrapEase" */;
 			buildPhases = (
+				F0FA585A028947C28F010ADB /* Check Pods Manifest.lock */,
 				B4D1EC2918BD729300E01EFE /* Sources */,
 				B4D1EC2A18BD729300E01EFE /* Frameworks */,
 				B4D1EC2B18BD729300E01EFE /* Resources */,
+				34626F0EF4E344728D2E8176 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -254,8 +291,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4D1EC3B18BD729300E01EFE /* InfoPlist.strings in Resources */,
-				B4D1EC6418BD738400E01EFE /* EUCHomeViewController.xib in Resources */,
+				B4E6BD7118DDC37D00AC9D84 /* EUCLabelViewController.xib in Resources */,
 				B4D1EC4318BD729300E01EFE /* Images.xcassets in Resources */,
+				B4E6BD6918DDC33C00AC9D84 /* EUCFilterViewController.xib in Resources */,
+				B4E6BD6418DDC30C00AC9D84 /* EUCImportViewController.xib in Resources */,
+				B4E6BD7618DDC39300AC9D84 /* EUCAnalyzeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,15 +309,52 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		34626F0EF4E344728D2E8176 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F0FA585A028947C28F010ADB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B4D1EC2918BD729300E01EFE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4E6BD6818DDC33C00AC9D84 /* EUCFilterViewController.m in Sources */,
 				B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */,
 				B4D1EC4118BD729300E01EFE /* EUCAppDelegate.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
-				B4D1EC6318BD738400E01EFE /* EUCHomeViewController.m in Sources */,
+				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,
+				B4E6BD7518DDC39300AC9D84 /* EUCAnalyzeViewController.m in Sources */,
+				B4E6BD6318DDC30C00AC9D84 /* EUCImportViewController.m in Sources */,
+				B4E6BD7018DDC37D00AC9D84 /* EUCLabelViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +472,7 @@
 		};
 		B4D1EC5A18BD729300E01EFE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30CB9A6B881342BDB4DEA63F /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -409,6 +487,7 @@
 		};
 		B4D1EC5B18BD729300E01EFE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30CB9A6B881342BDB4DEA63F /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

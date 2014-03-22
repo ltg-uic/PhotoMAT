@@ -7,6 +7,7 @@
 //
 
 #import "EUCAppDelegate.h"
+#import "EUCHomeViewController.h"
 
 @implementation EUCAppDelegate
 

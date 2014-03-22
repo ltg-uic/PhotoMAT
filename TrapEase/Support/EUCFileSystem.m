@@ -11,6 +11,7 @@
 @implementation EUCFileSystem
 
 
+// Taken from http://stackoverflow.com/a/8036586/772526
 +(uint64_t)getFreeDiskspace {
     uint64_t totalSpace = 0;
     uint64_t totalFreeSpace = 0;
