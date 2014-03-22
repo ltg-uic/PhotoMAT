@@ -44,6 +44,10 @@
 		B4E6BD9218DDC82600AC9D84 /* tag@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD8418DDC82600AC9D84 /* tag@2x.png */; };
 		B4E6BD9318DDC82600AC9D84 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD8518DDC82600AC9D84 /* trash.png */; };
 		B4E6BD9418DDC82600AC9D84 /* trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BD8618DDC82600AC9D84 /* trash@2x.png */; };
+		B4E6BE0B18DDFD3400AC9D84 /* EUCUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE0918DDFD3400AC9D84 /* EUCUploadViewController.m */; };
+		B4E6BE0C18DDFD3400AC9D84 /* EUCUploadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE0A18DDFD3400AC9D84 /* EUCUploadViewController.xib */; };
+		B4E6BE0F18DDFF2F00AC9D84 /* upload.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE0D18DDFF2F00AC9D84 /* upload.png */; };
+		B4E6BE1018DDFF2F00AC9D84 /* upload@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE0E18DDFF2F00AC9D84 /* upload@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +109,11 @@
 		B4E6BD8418DDC82600AC9D84 /* tag@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tag@2x.png"; sourceTree = "<group>"; };
 		B4E6BD8518DDC82600AC9D84 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		B4E6BD8618DDC82600AC9D84 /* trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trash@2x.png"; sourceTree = "<group>"; };
+		B4E6BE0818DDFD3400AC9D84 /* EUCUploadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCUploadViewController.h; path = TrapEase/Controllers/EUCUploadViewController.h; sourceTree = "<group>"; };
+		B4E6BE0918DDFD3400AC9D84 /* EUCUploadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCUploadViewController.m; path = TrapEase/Controllers/EUCUploadViewController.m; sourceTree = "<group>"; };
+		B4E6BE0A18DDFD3400AC9D84 /* EUCUploadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCUploadViewController.xib; path = TrapEase/Controllers/EUCUploadViewController.xib; sourceTree = "<group>"; };
+		B4E6BE0D18DDFF2F00AC9D84 /* upload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upload.png; sourceTree = "<group>"; };
+		B4E6BE0E18DDFF2F00AC9D84 /* upload@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +233,9 @@
 				B4E6BD7218DDC39300AC9D84 /* EUCAnalyzeViewController.h */,
 				B4E6BD7318DDC39300AC9D84 /* EUCAnalyzeViewController.m */,
 				B4E6BD7418DDC39300AC9D84 /* EUCAnalyzeViewController.xib */,
+				B4E6BE0818DDFD3400AC9D84 /* EUCUploadViewController.h */,
+				B4E6BE0918DDFD3400AC9D84 /* EUCUploadViewController.m */,
+				B4E6BE0A18DDFD3400AC9D84 /* EUCUploadViewController.xib */,
 			);
 			name = Controllers;
 			path = ..;
@@ -249,6 +261,8 @@
 		B4E6BD7818DDC82600AC9D84 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				B4E6BE0D18DDFF2F00AC9D84 /* upload.png */,
+				B4E6BE0E18DDFF2F00AC9D84 /* upload@2x.png */,
 				B4E6BD7918DDC82600AC9D84 /* bar-chart.png */,
 				B4E6BD7A18DDC82600AC9D84 /* bar-chart@2x.png */,
 				B4E6BD7B18DDC82600AC9D84 /* download.png */,
@@ -348,11 +362,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4E6BE0F18DDFF2F00AC9D84 /* upload.png in Resources */,
 				B4E6BD8A18DDC82600AC9D84 /* download@2x.png in Resources */,
 				B4E6BD9218DDC82600AC9D84 /* tag@2x.png in Resources */,
 				B4D1EC3B18BD729300E01EFE /* InfoPlist.strings in Resources */,
 				B4E6BD9318DDC82600AC9D84 /* trash.png in Resources */,
 				B4E6BD8818DDC82600AC9D84 /* bar-chart@2x.png in Resources */,
+				B4E6BE0C18DDFD3400AC9D84 /* EUCUploadViewController.xib in Resources */,
 				B4E6BD7118DDC37D00AC9D84 /* EUCLabelViewController.xib in Resources */,
 				B4E6BD8C18DDC82600AC9D84 /* filter@2x.png in Resources */,
 				B4D1EC4318BD729300E01EFE /* Images.xcassets in Resources */,
@@ -364,6 +380,7 @@
 				B4E6BD6418DDC30C00AC9D84 /* EUCImportViewController.xib in Resources */,
 				B4E6BD7618DDC39300AC9D84 /* EUCAnalyzeViewController.xib in Resources */,
 				B4E6BD8718DDC82600AC9D84 /* bar-chart.png in Resources */,
+				B4E6BE1018DDFF2F00AC9D84 /* upload@2x.png in Resources */,
 				B4E6BD9018DDC82600AC9D84 /* share@2x.png in Resources */,
 				B4E6BD8B18DDC82600AC9D84 /* filter.png in Resources */,
 				B4E6BD8D18DDC82600AC9D84 /* line-chart.png in Resources */,
@@ -424,6 +441,7 @@
 				B4D1EC4118BD729300E01EFE /* EUCAppDelegate.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
 				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,
+				B4E6BE0B18DDFD3400AC9D84 /* EUCUploadViewController.m in Sources */,
 				B4E6BD7518DDC39300AC9D84 /* EUCAnalyzeViewController.m in Sources */,
 				B4E6BD6318DDC30C00AC9D84 /* EUCImportViewController.m in Sources */,
 				B4E6BD7018DDC37D00AC9D84 /* EUCLabelViewController.m in Sources */,
