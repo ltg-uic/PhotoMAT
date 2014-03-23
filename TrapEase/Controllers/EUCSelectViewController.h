@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
+@class EUCSelectCell;
+
 @interface EUCSelectViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -18,6 +20,8 @@
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil assetGroup: (ALAssetsGroup *) group;
+//-(void) configureSelectedForCell: (EUCSelectCell *) cell atIndexPath:(NSIndexPath *) indexPath;
+-(void) toggleCell: (EUCSelectCell *) cell atIndexPath:(NSIndexPath *) indexPath;
 
 
 @end

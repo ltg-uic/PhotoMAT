@@ -16,6 +16,8 @@ extern CGFloat defaultWideness;
 @property (strong, nonatomic) dispatch_queue_t backgroundQueue;
 - (IBAction)done:(id)sender;
 
+@property (strong, nonatomic) NSMutableArray *selected;
+
 @end
 
 @implementation EUCSelectViewController
@@ -27,6 +29,10 @@ extern CGFloat defaultWideness;
         // Custom initialization
         self.backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);//dispatch_queue_create("backgroundQueue", 0);
         _group = group;
+        _selected = [[NSMutableArray alloc] initWithCapacity:[_group numberOfAssets]];
+        for (NSInteger i = 0; i < [_group numberOfAssets]; i++) {
+            [_selected addObject:@YES];
+        }
     }
     return self;
 }
@@ -69,7 +75,7 @@ extern CGFloat defaultWideness;
     return [self.group numberOfAssets];
 }
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+-(EUCSelectCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     EUCSelectCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"selectCell" forIndexPath:indexPath];
 
     [self.group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:indexPath.row]
@@ -96,13 +102,37 @@ extern CGFloat defaultWideness;
                                               }
                                               UIImage * resizedImage = [self imageWithImage:image scaledToSize:size];
                                               cell.imageView.image = resizedImage;
-                                              cell.button.selected = YES;
+                                              cell.indexPath = indexPath;
+                                              cell.parentViewController = self;
+                                              [self configureSelectedForCell: cell atIndexPath:indexPath];
+                                              
                                           });
                                       });
                                   }
                               }];
     
     return cell;
+}
+
+-(void) configureSelectedForCell: (EUCSelectCell *) cell atIndexPath:(NSIndexPath *) indexPath {
+    if ([self.selected[indexPath.row] isEqual:@NO]) {
+        cell.mask.hidden = NO;
+        [cell.button setImage:[UIImage imageNamed:@"thumbs-down.png"] forState:UIControlStateNormal];
+    }
+    else {
+        cell.mask.hidden = YES;
+        [cell.button setImage:[UIImage imageNamed:@"thumbs-up.png"] forState:UIControlStateNormal];
+    }
+}
+
+-(void) toggleCell: (EUCSelectCell *) cell atIndexPath:(NSIndexPath *) indexPath {
+    if ([self.selected[indexPath.row] isEqual:@NO]) {
+        self.selected[indexPath.row] = @YES;
+    }
+    else {
+        self.selected[indexPath.row] = @NO;
+    }
+    [self configureSelectedForCell: cell atIndexPath:indexPath];
 }
 
 #pragma mark - CollectionViewDelegate
