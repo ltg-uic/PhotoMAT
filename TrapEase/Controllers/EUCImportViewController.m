@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
 @property (strong, nonatomic) NSMutableArray * groups;
-
+@property (strong, nonatomic) dispatch_queue_t backgroundQueue;
 
 @end
 
@@ -30,6 +30,8 @@
         self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Import", "Import")
                                                         image:[UIImage imageNamed:@"download.png"]
                                                 selectedImage:nil];
+        
+        self.backgroundQueue = dispatch_queue_create("backgroundQueue", 0);
     }
     return self;
 }
@@ -119,15 +121,23 @@
 
     ALAssetsGroup *groupForCell = self.groups[indexPath.row];
     [groupForCell setAssetsFilter:[ALAssetsFilter allPhotos]];
+    
+    CGImageRef posterImageRef = [groupForCell posterImage];
+    UIImage *posterImage = [UIImage imageWithCGImage:posterImageRef];
+    cell.imageView.image = posterImage;
+
     NSInteger numAssets = [groupForCell numberOfAssets];
     
     [groupForCell enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:numAssets - 1]
                                    options:0
                                 usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
                                     if (result != nil && index != NSNotFound) {
-                                        UIImage * image = [UIImage imageWithCGImage:[[result defaultRepresentation] fullScreenImage]];
-                                        cell.imageView.image = image;
-                                        *stop = YES;
+                                        dispatch_async(self.backgroundQueue, ^(void) {
+                                            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                                                UIImage * image = [UIImage imageWithCGImage:[[result defaultRepresentation] fullScreenImage]];
+                                                cell.imageView.image = image;
+                                            });
+                                        });
                                     }
                                 }];
     
@@ -145,6 +155,20 @@
 #pragma mark - FlowLayoutDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(314, 226);
+}
+
+
+#pragma mark - Image Size
+
+- (UIImage*)imageWithImage:(UIImage*)image
+              scaledToSize:(CGSize)newSize;
+{
+    UIGraphicsBeginImageContext( newSize );
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 
