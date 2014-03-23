@@ -32,7 +32,7 @@ CGFloat defaultWideness = 314.0/226.0;
                                                         image:[UIImage imageNamed:@"download.png"]
                                                 selectedImage:nil];
         
-        self.backgroundQueue = dispatch_queue_create("backgroundQueue", 0);
+        self.backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);//dispatch_queue_create("backgroundQueue", 0);
     }
     return self;
 }
@@ -123,10 +123,6 @@ CGFloat defaultWideness = 314.0/226.0;
     ALAssetsGroup *groupForCell = self.groups[indexPath.row];
     [groupForCell setAssetsFilter:[ALAssetsFilter allPhotos]];
     
-    CGImageRef posterImageRef = [groupForCell posterImage];
-    UIImage *posterImage = [UIImage imageWithCGImage:posterImageRef];
-    cell.imageView.image = posterImage;
-
     NSInteger numAssets = [groupForCell numberOfAssets];
     
     [groupForCell enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:numAssets - 1]
@@ -138,35 +134,21 @@ CGFloat defaultWideness = 314.0/226.0;
                                                 UIImage * image = [UIImage imageWithCGImage:[result aspectRatioThumbnail]];
                                                 CGFloat wideness = 1.0*image.size.width/image.size.height;
                                                 CGSize size;
-                                                NSLog(@"Image: %@ (%@)",
-                                                      [groupForCell valueForProperty:ALAssetsGroupPropertyName],
-                                                      NSStringFromCGSize(image.size)
-                                                      );
 
                                                 if (wideness > defaultWideness) {
-                                                    NSLog(@"wideness is greater (%f > %f", wideness, defaultWideness);
                                                     size.width = 314;
                                                     // width - height
                                                     // 314
                                                     size.height = 314/wideness;
-                                                    NSLog(@"setting height to %f", size.height);
                                                 }
                                                 else {
-                                                    NSLog(@"wideness is less (%f <= %f", wideness, defaultWideness);
                                                     size.height = 226;
                                                     // width - height
                                                     //         226
                                                     size.width = 226 * wideness;
-                                                    NSLog(@"setting width to %f", size.width);
                                                 }
                                                 UIImage * resizedImage = [self imageWithImage:image scaledToSize:size];
                                                 cell.imageView.image = resizedImage;
-//                                                cell.imageView.image = image;
-//                                                CGRect f = cell.imageView.frame;
-//                                                CGFloat effectiveImageHeight = image.size.height
-//                                                CGFloat delta = f.size.height - image.size.height;
-//                                                f.origin.y = delta;
-//                                                cell.imageView.frame = f;
                                             });
                                         });
                                     }
