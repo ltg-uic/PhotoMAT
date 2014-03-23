@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS camera;
 DROP TABLE IF EXISTS token;
 DROP TABLE IF EXISTS person_membership;
 DROP TABLE IF EXISTS person;
+DROP TABLE IF EXISTS person_group;
 DROP TABLE IF EXISTS class;
 DROP TABLE IF EXISTS school;
 
@@ -50,10 +51,12 @@ COMMENT ON COLUMN person.is_admin IS 'Admins are not limited to any particular s
 INSERT INTO PERSON (first_name, last_name, password, email) values ('Andy', 'Avalon',  crypt('password', gen_salt('bf', 10)), 'a@example.com');
 INSERT INTO PERSON (first_name, last_name, password, email) values ('Betty', 'Belvidere',  crypt('password', gen_salt('bf', 10)), 'b@example.com');
 INSERT INTO PERSON (first_name, last_name, password, email) values ('Charlie', 'Chatterbox',  crypt('password', gen_salt('bf', 10)), 'c@example.com');
+INSERT INTO PERSON (first_name, last_name, password, email, is_admin) values ('Admin', 'One',  crypt('password', gen_salt('bf', 10)), 'admin@example.com');
 
-    INSERT INTO PERSON (first_name, last_name, password, email, is_admin) values ('Admin', 'One',  crypt('password', gen_salt('bf', 10)), 'admin@example.com');
-
-
+CREATE TABLE person_group (
+      "id" SERIAL UNIQUE PRIMARY KEY NOT NULL
+    , person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 CREATE TABLE person_membership (
       person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE

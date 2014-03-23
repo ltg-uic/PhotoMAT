@@ -174,11 +174,29 @@ sub post {
         }
     }
 
-    my $sequenceName = $table."_id_seq";
-    my $sequence = &Database::getRow($r, $dbh, qq[select nextval('$sequenceName')]);
-    my $value = $sequence->{nextval};
+    my $count = $parent_hash->{path};
+    $count *= 1;
 
-    $parent_hash->{http_content} = to_json({ id => $value}, {pretty=>1});
+    my $sequenceName = $table."_id_seq";
+
+    if ($count && $count > 1) { 
+        my $ids = [];
+        my $sequence;
+        my $value;
+        for (my $n = 0; $n < $count; $n++) { 
+            $sequence = &Database::getRow($r, $dbh, qq[select nextval('$sequenceName')]);
+            $value = $sequence->{nextval};
+
+            push (@$ids, $value);
+        }
+        $parent_hash->{http_content} = to_json({ ids => $ids}, {pretty=>1});
+    }
+    else { 
+        my $sequence = &Database::getRow($r, $dbh, qq[select nextval('$sequenceName')]);
+        my $value = $sequence->{nextval};
+
+        $parent_hash->{http_content} = to_json({ id => $value}, {pretty=>1});
+    }
     return HTTP_OK;
 }
 
@@ -190,7 +208,7 @@ sub get {
     if (defined $hash->{id}) { 
         $path = $hash->{id};
     }
-    elsif (defined $parent_hash->{path      }) { 
+    elsif (defined $parent_hash->{path}) { 
         $path = $parent_hash->{path};
     }
     $path *= 1;
