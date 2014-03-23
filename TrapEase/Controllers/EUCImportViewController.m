@@ -9,6 +9,7 @@
 #import "EUCImportViewController.h"
 #import "EUCImportCell.h"
 #import "UIImage+ImageEffects.h"
+#import "EUCSelectViewController.h"
 
 #import <AssetsLibrary/AssetsLibrary.h>
 
@@ -168,10 +169,14 @@ CGFloat defaultWideness = 314.0/226.0;
 #pragma mark - UICollectionViewDelegate
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    UIImage * image = [self blurredSnapshot];
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
-    imageView.image = image;
-    [self.view.window addSubview:imageView];
+//    UIImage * image = [self blurredSnapshot];
+//    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
+//    imageView.image = image;
+//    [self.view.window addSubview:imageView];
+    
+    EUCSelectViewController * selectViewController = [[EUCSelectViewController alloc] initWithNibName:@"EUCSelectViewController" bundle:nil assetGroup:(ALAssetsGroup *) self.groups[indexPath.row]];
+    
+    [self presentViewController:selectViewController animated:YES completion:nil];
 }
 
 
@@ -196,6 +201,7 @@ CGFloat defaultWideness = 314.0/226.0;
 
 #pragma mark - blurring
 
+// from http://damir.me/ios7-blurring-techniques
 -(UIImage *)blurredSnapshot
 {
     // Create the image context

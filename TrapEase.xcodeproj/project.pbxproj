@@ -67,6 +67,14 @@
 		B4E6BE3918DE4CD200AC9D84 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E6BE3518DE4CD200AC9D84 /* CoreImage.framework */; };
 		B4E6BE3A18DE4CD200AC9D84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E6BE3618DE4CD200AC9D84 /* QuartzCore.framework */; };
 		B4E6BE3F18DE9EBC00AC9D84 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE3E18DE9EBC00AC9D84 /* UIImage+ImageEffects.m */; };
+		B4E6BE4318DEA37C00AC9D84 /* EUCSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE4118DEA37C00AC9D84 /* EUCSelectViewController.m */; };
+		B4E6BE4418DEA37C00AC9D84 /* EUCSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE4218DEA37C00AC9D84 /* EUCSelectViewController.xib */; };
+		B4E6BE4718DEA5BB00AC9D84 /* EUCSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE4618DEA5BB00AC9D84 /* EUCSelectCell.m */; };
+		B4E6BE4918DEA5E700AC9D84 /* EUCSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE4818DEA5E700AC9D84 /* EUCSelectCell.xib */; };
+		B4E6BE4E18DEA6DE00AC9D84 /* thumbs-down.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE4A18DEA6DE00AC9D84 /* thumbs-down.png */; };
+		B4E6BE4F18DEA6DE00AC9D84 /* thumbs-down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE4B18DEA6DE00AC9D84 /* thumbs-down@2x.png */; };
+		B4E6BE5018DEA6DE00AC9D84 /* thumbs-up.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE4C18DEA6DE00AC9D84 /* thumbs-up.png */; };
+		B4E6BE5118DEA6DE00AC9D84 /* thumbs-up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE4D18DEA6DE00AC9D84 /* thumbs-up@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +165,16 @@
 		B4E6BE3618DE4CD200AC9D84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B4E6BE3D18DE9EBC00AC9D84 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		B4E6BE3E18DE9EBC00AC9D84 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		B4E6BE4018DEA37C00AC9D84 /* EUCSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCSelectViewController.h; path = TrapEase/Controllers/EUCSelectViewController.h; sourceTree = "<group>"; };
+		B4E6BE4118DEA37C00AC9D84 /* EUCSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCSelectViewController.m; path = TrapEase/Controllers/EUCSelectViewController.m; sourceTree = "<group>"; };
+		B4E6BE4218DEA37C00AC9D84 /* EUCSelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCSelectViewController.xib; path = TrapEase/Controllers/EUCSelectViewController.xib; sourceTree = "<group>"; };
+		B4E6BE4518DEA5BB00AC9D84 /* EUCSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCSelectCell.h; path = Cells/EUCSelectCell.h; sourceTree = "<group>"; };
+		B4E6BE4618DEA5BB00AC9D84 /* EUCSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCSelectCell.m; path = Cells/EUCSelectCell.m; sourceTree = "<group>"; };
+		B4E6BE4818DEA5E700AC9D84 /* EUCSelectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCSelectCell.xib; path = Cells/EUCSelectCell.xib; sourceTree = "<group>"; };
+		B4E6BE4A18DEA6DE00AC9D84 /* thumbs-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-down.png"; sourceTree = "<group>"; };
+		B4E6BE4B18DEA6DE00AC9D84 /* thumbs-down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-down@2x.png"; sourceTree = "<group>"; };
+		B4E6BE4C18DEA6DE00AC9D84 /* thumbs-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up.png"; sourceTree = "<group>"; };
+		B4E6BE4D18DEA6DE00AC9D84 /* thumbs-up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,6 +316,9 @@
 				B4E6BE2718DE3EE200AC9D84 /* EUCSettingsViewController.h */,
 				B4E6BE2818DE3EE200AC9D84 /* EUCSettingsViewController.m */,
 				B4E6BE2918DE3EE200AC9D84 /* EUCSettingsViewController.xib */,
+				B4E6BE4018DEA37C00AC9D84 /* EUCSelectViewController.h */,
+				B4E6BE4118DEA37C00AC9D84 /* EUCSelectViewController.m */,
+				B4E6BE4218DEA37C00AC9D84 /* EUCSelectViewController.xib */,
 			);
 			name = Controllers;
 			path = ..;
@@ -323,6 +344,10 @@
 		B4E6BD7818DDC82600AC9D84 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				B4E6BE4A18DEA6DE00AC9D84 /* thumbs-down.png */,
+				B4E6BE4B18DEA6DE00AC9D84 /* thumbs-down@2x.png */,
+				B4E6BE4C18DEA6DE00AC9D84 /* thumbs-up.png */,
+				B4E6BE4D18DEA6DE00AC9D84 /* thumbs-up@2x.png */,
 				B4E6BE1A18DE3EB400AC9D84 /* cloud.png */,
 				B4E6BE1B18DE3EB400AC9D84 /* cloud@2x.png */,
 				B4E6BE1C18DE3EB400AC9D84 /* gear.png */,
@@ -355,6 +380,9 @@
 				B4E6BE2E18DE44B900AC9D84 /* EUCImportCell.h */,
 				B4E6BE2F18DE44B900AC9D84 /* EUCImportCell.m */,
 				B4E6BE3118DE44D900AC9D84 /* EUCImportCell.xib */,
+				B4E6BE4518DEA5BB00AC9D84 /* EUCSelectCell.h */,
+				B4E6BE4618DEA5BB00AC9D84 /* EUCSelectCell.m */,
+				B4E6BE4818DEA5E700AC9D84 /* EUCSelectCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -459,10 +487,13 @@
 				B4E6BD9318DDC82600AC9D84 /* trash.png in Resources */,
 				B4E6BD8818DDC82600AC9D84 /* bar-chart@2x.png in Resources */,
 				B4E6BE0C18DDFD3400AC9D84 /* EUCUploadViewController.xib in Resources */,
+				B4E6BE4E18DEA6DE00AC9D84 /* thumbs-down.png in Resources */,
 				B4E6BE1318DE005500AC9D84 /* hiking.png in Resources */,
 				B4E6BD7118DDC37D00AC9D84 /* EUCLabelViewController.xib in Resources */,
+				B4E6BE5018DEA6DE00AC9D84 /* thumbs-up.png in Resources */,
 				B4E6BD8C18DDC82600AC9D84 /* filter@2x.png in Resources */,
 				B4E6BE2118DE3EB400AC9D84 /* gear@2x.png in Resources */,
+				B4E6BE4918DEA5E700AC9D84 /* EUCSelectCell.xib in Resources */,
 				B4E6BE1918DE008000AC9D84 /* EUCKnapsackViewController.xib in Resources */,
 				B4D1EC4318BD729300E01EFE /* Images.xcassets in Resources */,
 				B4E6BD6918DDC33C00AC9D84 /* EUCFilterViewController.xib in Resources */,
@@ -473,12 +504,15 @@
 				B4E6BD6418DDC30C00AC9D84 /* EUCImportViewController.xib in Resources */,
 				B4E6BD7618DDC39300AC9D84 /* EUCAnalyzeViewController.xib in Resources */,
 				B4E6BD8718DDC82600AC9D84 /* bar-chart.png in Resources */,
+				B4E6BE4F18DEA6DE00AC9D84 /* thumbs-down@2x.png in Resources */,
 				B4E6BE1018DDFF2F00AC9D84 /* upload@2x.png in Resources */,
 				B4E6BD9018DDC82600AC9D84 /* share@2x.png in Resources */,
 				B4E6BD8B18DDC82600AC9D84 /* filter.png in Resources */,
 				B4E6BE2B18DE3EE200AC9D84 /* EUCSettingsViewController.xib in Resources */,
+				B4E6BE4418DEA37C00AC9D84 /* EUCSelectViewController.xib in Resources */,
 				B4E6BE1418DE005500AC9D84 /* hiking@2x.png in Resources */,
 				B4E6BD8D18DDC82600AC9D84 /* line-chart.png in Resources */,
+				B4E6BE5118DEA6DE00AC9D84 /* thumbs-up@2x.png in Resources */,
 				B4E6BE2618DE3ED100AC9D84 /* EUCCloudViewController.xib in Resources */,
 				B4E6BE3218DE44D900AC9D84 /* EUCImportCell.xib in Resources */,
 				B4E6BD8E18DDC82600AC9D84 /* line-chart@2x.png in Resources */,
@@ -536,9 +570,11 @@
 				B4E6BD6818DDC33C00AC9D84 /* EUCFilterViewController.m in Sources */,
 				B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */,
 				B4E6BE3F18DE9EBC00AC9D84 /* UIImage+ImageEffects.m in Sources */,
+				B4E6BE4318DEA37C00AC9D84 /* EUCSelectViewController.m in Sources */,
 				B4E6BE1818DE008000AC9D84 /* EUCKnapsackViewController.m in Sources */,
 				B4E6BE3018DE44B900AC9D84 /* EUCImportCell.m in Sources */,
 				B4E6BE2A18DE3EE200AC9D84 /* EUCSettingsViewController.m in Sources */,
+				B4E6BE4718DEA5BB00AC9D84 /* EUCSelectCell.m in Sources */,
 				B4D1EC4118BD729300E01EFE /* EUCAppDelegate.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
 				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,
