@@ -8,6 +8,7 @@
 
 #import "EUCImportViewController.h"
 #import "EUCImportCell.h"
+#import "UIImage+ImageEffects.h"
 
 #import <AssetsLibrary/AssetsLibrary.h>
 
@@ -166,6 +167,13 @@ CGFloat defaultWideness = 314.0/226.0;
 
 #pragma mark - UICollectionViewDelegate
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    UIImage * image = [self blurredSnapshot];
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
+    imageView.image = image;
+    [self.view.window addSubview:imageView];
+}
+
 
 #pragma mark - FlowLayoutDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -185,6 +193,33 @@ CGFloat defaultWideness = 314.0/226.0;
     
     return newImage;
 }
+
+#pragma mark - blurring
+
+-(UIImage *)blurredSnapshot
+{
+    // Create the image context
+    UIGraphicsBeginImageContextWithOptions(self.view.window.bounds.size, NO, self.view.window.screen.scale);
+    
+    // There he is! The new API method
+    [self.view.window drawViewHierarchyInRect:self.view.window.frame afterScreenUpdates:NO];
+    
+    // Get the snapshot
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // Now apply the blur effect using Apple's UIImageEffect category
+    UIImage *blurredSnapshotImage = [snapshotImage applyLightEffect];
+    
+    // Or apply any other effects available in "UIImage+ImageEffects.h"
+    // UIImage *blurredSnapshotImage = [snapshotImage applyDarkEffect];
+    // UIImage *blurredSnapshotImage = [snapshotImage applyExtraLightEffect];
+    
+    // Be nice and clean your mess up
+    UIGraphicsEndImageContext();
+    
+    return blurredSnapshotImage;
+}
+
 
 
 @end

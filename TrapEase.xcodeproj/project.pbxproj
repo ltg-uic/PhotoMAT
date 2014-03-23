@@ -66,6 +66,7 @@
 		B4E6BE3818DE4CD200AC9D84 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E6BE3418DE4CD100AC9D84 /* AVFoundation.framework */; };
 		B4E6BE3918DE4CD200AC9D84 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E6BE3518DE4CD200AC9D84 /* CoreImage.framework */; };
 		B4E6BE3A18DE4CD200AC9D84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4E6BE3618DE4CD200AC9D84 /* QuartzCore.framework */; };
+		B4E6BE3F18DE9EBC00AC9D84 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE3E18DE9EBC00AC9D84 /* UIImage+ImageEffects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -154,6 +155,8 @@
 		B4E6BE3418DE4CD100AC9D84 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B4E6BE3518DE4CD200AC9D84 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		B4E6BE3618DE4CD200AC9D84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B4E6BE3D18DE9EBC00AC9D84 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		B4E6BE3E18DE9EBC00AC9D84 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +227,7 @@
 		B4D1EC3618BD729300E01EFE /* TrapEase */ = {
 			isa = PBXGroup;
 			children = (
+				B4E6BE3C18DE9EBC00AC9D84 /* AppleCode */,
 				B4E6BE2C18DE442400AC9D84 /* Cells */,
 				B4E6BD7718DDC82600AC9D84 /* Images */,
 				B4E6BD5418DDBB2500AC9D84 /* Support */,
@@ -353,6 +357,15 @@
 				B4E6BE3118DE44D900AC9D84 /* EUCImportCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		B4E6BE3C18DE9EBC00AC9D84 /* AppleCode */ = {
+			isa = PBXGroup;
+			children = (
+				B4E6BE3D18DE9EBC00AC9D84 /* UIImage+ImageEffects.h */,
+				B4E6BE3E18DE9EBC00AC9D84 /* UIImage+ImageEffects.m */,
+			);
+			path = AppleCode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -522,6 +535,7 @@
 			files = (
 				B4E6BD6818DDC33C00AC9D84 /* EUCFilterViewController.m in Sources */,
 				B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */,
+				B4E6BE3F18DE9EBC00AC9D84 /* UIImage+ImageEffects.m in Sources */,
 				B4E6BE1818DE008000AC9D84 /* EUCKnapsackViewController.m in Sources */,
 				B4E6BE3018DE44B900AC9D84 /* EUCImportCell.m in Sources */,
 				B4E6BE2A18DE3EE200AC9D84 /* EUCSettingsViewController.m in Sources */,
