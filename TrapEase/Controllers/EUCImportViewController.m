@@ -41,6 +41,8 @@ CGFloat defaultWideness = 314.0/226.0;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     
