@@ -126,20 +126,20 @@
     UIImage *posterImage = [UIImage imageWithCGImage:posterImageRef];
     cell.imageView.image = posterImage;
 
-//    NSInteger numAssets = [groupForCell numberOfAssets];
-//    
-//    [groupForCell enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:numAssets - 1]
-//                                   options:0
-//                                usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-//                                    if (result != nil && index != NSNotFound) {
-//                                        dispatch_async(self.backgroundQueue, ^(void) {
-//                                            dispatch_async(dispatch_get_main_queue(), ^(void) {
-//                                                UIImage * image = [UIImage imageWithCGImage:[[result defaultRepresentation] fullScreenImage]];
-//                                                cell.imageView.image = image;
-//                                            });
-//                                        });
-//                                    }
-//                                }];
+    NSInteger numAssets = [groupForCell numberOfAssets];
+    
+    [groupForCell enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:numAssets - 1]
+                                   options:0
+                                usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                                    if (result != nil && index != NSNotFound) {
+                                        dispatch_async(self.backgroundQueue, ^(void) {
+                                            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                                                UIImage * image = [UIImage imageWithCGImage:[result aspectRatioThumbnail]];
+                                                cell.imageView.image = image;
+                                            });
+                                        });
+                                    }
+                                }];
     
     cell.label.text = [groupForCell valueForProperty:ALAssetsGroupPropertyName];
 
