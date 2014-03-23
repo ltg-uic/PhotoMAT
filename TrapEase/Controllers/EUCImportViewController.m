@@ -268,6 +268,7 @@ CGFloat defaultWideness = 314.0/226.0;
     bounds.size.height = bounds.size.width;
     bounds.size.width = boundHeight;
     transform = CGAffineTransformMakeTranslation(imageSize.height, imageSize.width/2.0);
+    
     transform = CGAffineTransformRotate(transform, M_PI / 2.0);
     
     UIGraphicsBeginImageContext(bounds.size);
@@ -291,9 +292,25 @@ CGFloat defaultWideness = 314.0/226.0;
     UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
+    
+    UIInterfaceOrientation sbOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if (sbOrientation == UIInterfaceOrientationLandscapeLeft) {
+        return [self rotateUIImage:imageCopy];
+    }
     return imageCopy;
 }
 
+// from http://stackoverflow.com/a/20004215/772526
+- (UIImage*)rotateUIImage:(UIImage*)sourceImage
+{
+    CGSize size = sourceImage.size;
+    UIGraphicsBeginImageContext(size);
+    [[UIImage imageWithCGImage:[sourceImage CGImage] scale:1.0 orientation:UIImageOrientationDown] drawInRect:CGRectMake(0,0,size.width ,size.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
 
 
 @end
