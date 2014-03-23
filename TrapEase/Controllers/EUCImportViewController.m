@@ -118,9 +118,19 @@
     EUCImportCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"importCell" forIndexPath:indexPath];
 
     ALAssetsGroup *groupForCell = self.groups[indexPath.row];
-    CGImageRef posterImageRef = [groupForCell posterImage];
-    UIImage *posterImage = [UIImage imageWithCGImage:posterImageRef];
-    cell.imageView.image = posterImage;
+    [groupForCell setAssetsFilter:[ALAssetsFilter allPhotos]];
+    NSInteger numAssets = [groupForCell numberOfAssets];
+    
+    [groupForCell enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:numAssets - 1]
+                                   options:0
+                                usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                                    if (result != nil && index != NSNotFound) {
+                                        UIImage * image = [UIImage imageWithCGImage:[[result defaultRepresentation] fullScreenImage]];
+                                        cell.imageView.image = image;
+                                        *stop = YES;
+                                    }
+                                }];
+    
     cell.label.text = [groupForCell valueForProperty:ALAssetsGroupPropertyName];
 
     return cell;
