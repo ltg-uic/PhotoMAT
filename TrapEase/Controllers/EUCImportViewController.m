@@ -11,6 +11,7 @@
 
 #import <AssetsLibrary/AssetsLibrary.h>
 
+CGFloat defaultWideness = 314.0/226.0;
 
 @interface EUCImportViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -135,7 +136,37 @@
                                         dispatch_async(self.backgroundQueue, ^(void) {
                                             dispatch_async(dispatch_get_main_queue(), ^(void) {
                                                 UIImage * image = [UIImage imageWithCGImage:[result aspectRatioThumbnail]];
-                                                cell.imageView.image = image;
+                                                CGFloat wideness = 1.0*image.size.width/image.size.height;
+                                                CGSize size;
+                                                NSLog(@"Image: %@ (%@)",
+                                                      [groupForCell valueForProperty:ALAssetsGroupPropertyName],
+                                                      NSStringFromCGSize(image.size)
+                                                      );
+
+                                                if (wideness > defaultWideness) {
+                                                    NSLog(@"wideness is greater (%f > %f", wideness, defaultWideness);
+                                                    size.width = 314;
+                                                    // width - height
+                                                    // 314
+                                                    size.height = 314/wideness;
+                                                    NSLog(@"setting height to %f", size.height);
+                                                }
+                                                else {
+                                                    NSLog(@"wideness is less (%f <= %f", wideness, defaultWideness);
+                                                    size.height = 226;
+                                                    // width - height
+                                                    //         226
+                                                    size.width = 226 * wideness;
+                                                    NSLog(@"setting width to %f", size.width);
+                                                }
+                                                UIImage * resizedImage = [self imageWithImage:image scaledToSize:size];
+                                                cell.imageView.image = resizedImage;
+//                                                cell.imageView.image = image;
+//                                                CGRect f = cell.imageView.frame;
+//                                                CGFloat effectiveImageHeight = image.size.height
+//                                                CGFloat delta = f.size.height - image.size.height;
+//                                                f.origin.y = delta;
+//                                                cell.imageView.frame = f;
                                             });
                                         });
                                     }

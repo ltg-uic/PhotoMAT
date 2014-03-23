@@ -13,7 +13,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="314" height="226"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="aW7-50-OmV">
+                    <imageView userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="aW7-50-OmV">
                         <rect key="frame" x="0.0" y="0.0" width="314" height="226"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
