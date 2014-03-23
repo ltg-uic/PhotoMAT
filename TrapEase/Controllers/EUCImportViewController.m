@@ -127,7 +127,15 @@
     
 }
 
+
+
 #pragma mark - UICollectionViewDelegate
+
+
+#pragma mark - FlowLayoutDelegate
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(314, 226);
+}
 
 
 @end

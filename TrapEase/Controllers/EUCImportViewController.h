@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EUCImportViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface EUCImportViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @end
