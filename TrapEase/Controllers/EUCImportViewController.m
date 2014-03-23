@@ -10,7 +10,6 @@
 #import "EUCImportCell.h"
 #import "UIImage+ImageEffects.h"
 #import "EUCSelectViewController.h"
-#import "EUCBlurSelectViewController.h"
 
 #import <AssetsLibrary/AssetsLibrary.h>
 
@@ -237,7 +236,7 @@ CGFloat defaultWideness = 314.0/226.0;
     return [self scaleAndRotateImage:blurredSnapshotImage];
 }
 
-
+// from http://stackoverflow.com/a/3526833/772526
 - (UIImage *)scaleAndRotateImage:(UIImage *)image {
     int kMaxResolution = 2048; // Or whatever
     
@@ -246,22 +245,20 @@ CGFloat defaultWideness = 314.0/226.0;
     CGFloat width = CGImageGetWidth(imgRef);
     CGFloat height = CGImageGetHeight(imgRef);
     
-    NSLog(@"Width = %f and height = %f", width, height);
-    
     
     CGAffineTransform transform = CGAffineTransformIdentity;
     CGRect bounds = CGRectMake(0, 0, width, height);
-//    if (width > kMaxResolution || height > kMaxResolution) {
-//        CGFloat ratio = width/height;
-//        if (ratio > 1) {
-//            bounds.size.width = kMaxResolution;
-//            bounds.size.height = roundf(bounds.size.width / ratio);
-//        }
-//        else {
-//            bounds.size.height = kMaxResolution;
-//            bounds.size.width = roundf(bounds.size.height * ratio);
-//        }
-//    }
+    if (width > kMaxResolution || height > kMaxResolution) {
+        CGFloat ratio = width/height;
+        if (ratio > 1) {
+            bounds.size.width = kMaxResolution;
+            bounds.size.height = roundf(bounds.size.width / ratio);
+        }
+        else {
+            bounds.size.height = kMaxResolution;
+            bounds.size.width = roundf(bounds.size.height * ratio);
+        }
+    }
     
     CGFloat scaleRatio = bounds.size.width / width;
     CGSize imageSize = CGSizeMake(CGImageGetWidth(imgRef), CGImageGetHeight(imgRef));
