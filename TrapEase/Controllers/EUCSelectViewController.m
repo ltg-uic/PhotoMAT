@@ -22,7 +22,7 @@ extern CGFloat defaultWideness;
 
 @implementation EUCSelectViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil assetGroup: (ALAssetsGroup *) group
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil assetGroup: (ALAssetsGroup *) group image: (UIImage *) image
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -33,6 +33,7 @@ extern CGFloat defaultWideness;
         for (NSInteger i = 0; i < [_group numberOfAssets]; i++) {
             [_selected addObject:@YES];
         }
+        _image = image;
     }
     return self;
 }
@@ -46,6 +47,8 @@ extern CGFloat defaultWideness;
     self.collectionView.delegate = self;
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"EUCSelectCell" bundle:nil] forCellWithReuseIdentifier:@"selectCell"];
+    
+    self.imageView.image = self.image;
     
 }
 
@@ -142,6 +145,10 @@ extern CGFloat defaultWideness;
 }
 
 #pragma mark - CollectionViewDelegate
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    EUCSelectCell * cell = (EUCSelectCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [self toggleCell:cell atIndexPath:indexPath];
+}
 
 #pragma mark - FlowLayoutDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -150,7 +157,7 @@ extern CGFloat defaultWideness;
 
 
 - (IBAction)done:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 @end

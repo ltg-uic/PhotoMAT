@@ -17,9 +17,11 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) ALAssetsGroup *group;
 @property (strong, nonatomic) NSMutableArray *assets;
+@property (strong, nonatomic) UIImage *image;
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil assetGroup: (ALAssetsGroup *) group;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil assetGroup: (ALAssetsGroup *) group image: (UIImage *) image;
 //-(void) configureSelectedForCell: (EUCSelectCell *) cell atIndexPath:(NSIndexPath *) indexPath;
 -(void) toggleCell: (EUCSelectCell *) cell atIndexPath:(NSIndexPath *) indexPath;
 

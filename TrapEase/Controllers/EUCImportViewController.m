@@ -169,14 +169,27 @@ CGFloat defaultWideness = 314.0/226.0;
 #pragma mark - UICollectionViewDelegate
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    UIImage * image = [self blurredSnapshot];
+    UIImage * image = [self blurredSnapshot];
 //    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
 //    imageView.image = image;
 //    [self.view.window addSubview:imageView];
     
-    EUCSelectViewController * selectViewController = [[EUCSelectViewController alloc] initWithNibName:@"EUCSelectViewController" bundle:nil assetGroup:(ALAssetsGroup *) self.groups[indexPath.row]];
+    EUCSelectViewController * selectViewController = [[EUCSelectViewController alloc] initWithNibName:@"EUCSelectViewController" bundle:nil assetGroup:(ALAssetsGroup *) self.groups[indexPath.row] image:image];
     
-    [self presentViewController:selectViewController animated:YES completion:nil];
+//    [self.view.window.rootViewController addChildViewController:selectViewController];
+//    
+//    UICollectionViewLayoutAttributes * attributes = [self.collectionView layoutAttributesForItemAtIndexPath:indexPath];
+//    CGRect startFrame = [self.view.window convertRect:attributes.frame toWindow:self.view.window];
+//    selectViewController.view.frame = startFrame;
+//    [self.view.window.rootViewController.view addSubview:selectViewController.view];
+//    
+//    [UIView animateWithDuration:0.25 animations:^{
+//        selectViewController.view.frame = self.view.window.frame;
+//    } completion:^(BOOL finished) {
+//        selectViewController.imageView.image = image;
+//    }];
+    
+    [self presentViewController:selectViewController animated:NO completion:nil];
 }
 
 
