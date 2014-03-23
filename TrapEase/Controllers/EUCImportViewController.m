@@ -10,6 +10,7 @@
 #import "EUCImportCell.h"
 #import "UIImage+ImageEffects.h"
 #import "EUCSelectViewController.h"
+#import "EUCBlurSelectViewController.h"
 
 #import <AssetsLibrary/AssetsLibrary.h>
 
@@ -170,24 +171,11 @@ CGFloat defaultWideness = 314.0/226.0;
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     UIImage * image = [self blurredSnapshot];
-//    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
-//    imageView.image = image;
-//    [self.view.window addSubview:imageView];
     
     EUCSelectViewController * selectViewController = [[EUCSelectViewController alloc] initWithNibName:@"EUCSelectViewController" bundle:nil assetGroup:(ALAssetsGroup *) self.groups[indexPath.row] image:image];
     
-//    [self.view.window.rootViewController addChildViewController:selectViewController];
-//    
-//    UICollectionViewLayoutAttributes * attributes = [self.collectionView layoutAttributesForItemAtIndexPath:indexPath];
-//    CGRect startFrame = [self.view.window convertRect:attributes.frame toWindow:self.view.window];
-//    selectViewController.view.frame = startFrame;
-//    [self.view.window.rootViewController.view addSubview:selectViewController.view];
-//    
-//    [UIView animateWithDuration:0.25 animations:^{
-//        selectViewController.view.frame = self.view.window.frame;
-//    } completion:^(BOOL finished) {
-//        selectViewController.imageView.image = image;
-//    }];
+//    EUCBlurSelectViewController * blurSelectViewController = [[EUCBlurSelectViewController alloc] initWithNibName:@"EUCBlurSelectViewController" bundle:nil];
+//    blurSelectViewController.image = image;
     
     [self presentViewController:selectViewController animated:NO completion:nil];
 }
@@ -226,6 +214,7 @@ CGFloat defaultWideness = 314.0/226.0;
     // Get the snapshot
     UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
     
+    
     // Now apply the blur effect using Apple's UIImageEffect category
     UIImage *blurredSnapshotImage = [snapshotImage applyLightEffect];
     
@@ -236,7 +225,76 @@ CGFloat defaultWideness = 314.0/226.0;
     // Be nice and clean your mess up
     UIGraphicsEndImageContext();
     
-    return blurredSnapshotImage;
+//    CGFloat scaleValue = 1.0;
+    
+//    CGRect subRect = CGRectMake(0, 0, self.view.window.frame.size.width / scaleValue, self.view.window.frame.size.height / scaleValue);
+//    CGImageRef subImage = CGImageCreateWithImageInRect(blurredSnapshotImage.CGImage, subRect);
+//    UIImage *backgroundImage = [UIImage imageWithCGImage:subImage];
+//    CGImageRelease(subImage);
+    
+    
+    // return blurredSnapshotImage;
+    return [self scaleAndRotateImage:blurredSnapshotImage];
+}
+
+
+- (UIImage *)scaleAndRotateImage:(UIImage *)image {
+    int kMaxResolution = 2048; // Or whatever
+    
+    CGImageRef imgRef = image.CGImage;
+    
+    CGFloat width = CGImageGetWidth(imgRef);
+    CGFloat height = CGImageGetHeight(imgRef);
+    
+    NSLog(@"Width = %f and height = %f", width, height);
+    
+    
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    CGRect bounds = CGRectMake(0, 0, width, height);
+//    if (width > kMaxResolution || height > kMaxResolution) {
+//        CGFloat ratio = width/height;
+//        if (ratio > 1) {
+//            bounds.size.width = kMaxResolution;
+//            bounds.size.height = roundf(bounds.size.width / ratio);
+//        }
+//        else {
+//            bounds.size.height = kMaxResolution;
+//            bounds.size.width = roundf(bounds.size.height * ratio);
+//        }
+//    }
+    
+    CGFloat scaleRatio = bounds.size.width / width;
+    CGSize imageSize = CGSizeMake(CGImageGetWidth(imgRef), CGImageGetHeight(imgRef));
+    CGFloat boundHeight;
+    
+    boundHeight = bounds.size.height;
+    bounds.size.height = bounds.size.width;
+    bounds.size.width = boundHeight;
+    transform = CGAffineTransformMakeTranslation(imageSize.height, imageSize.width/2.0);
+    transform = CGAffineTransformRotate(transform, M_PI / 2.0);
+    
+    UIGraphicsBeginImageContext(bounds.size);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    UIImageOrientation orient = image.imageOrientation;
+    
+    if (orient == UIImageOrientationRight || orient == UIImageOrientationLeft) {
+        CGContextScaleCTM(context, -scaleRatio, scaleRatio);
+        CGContextTranslateCTM(context, -height, 0);
+    }
+    else {
+        CGContextScaleCTM(context, scaleRatio, -scaleRatio);
+        CGContextTranslateCTM(context, 0, -264-height);
+    }
+    
+    CGContextConcatCTM(context, transform);
+    
+    CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, width, height), imgRef);
+    UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return imageCopy;
 }
 
 
