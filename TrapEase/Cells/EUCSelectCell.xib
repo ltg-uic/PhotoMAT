@@ -27,12 +27,18 @@
                             <action selector="toggle:" destination="Ets-sb-c9C" eventType="touchUpInside" id="Wd4-B0-GSI"/>
                         </connections>
                     </button>
+                    <view hidden="YES" alpha="0.69999999999999973" contentMode="scaleToFill" id="f4e-EP-SPP">
+                        <rect key="frame" x="0.0" y="0.0" width="314" height="226"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <connections>
                 <outlet property="button" destination="e84-Py-6Nd" id="Grc-BZ-G2G"/>
                 <outlet property="imageView" destination="ZGd-nc-C3T" id="ne7-cW-yN5"/>
+                <outlet property="mask" destination="f4e-EP-SPP" id="RX3-bc-ags"/>
             </connections>
         </collectionViewCell>
     </objects>

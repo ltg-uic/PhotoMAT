@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrapEase/Cells/EUCSelectCell.m"
-            timestampString = "417246921.392706"
+            timestampString = "417247892.188352"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
             landmarkName = "-toggle:"
             landmarkType = "5">
          </BreakpointContent>

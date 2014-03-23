@@ -8,15 +8,22 @@
 
 #import "EUCSelectCell.h"
 
+@interface EUCSelectCell ()
+{}
+@property (weak, nonatomic) IBOutlet UIView *mask;
+
+@end
+
+
 @implementation EUCSelectCell
 - (IBAction)toggle:(id)sender {
     self.rejected = !(self.rejected);
     if (self.rejected) {
-        NSLog(@"rejected");
+        self.mask.hidden = NO;
         [self.button setImage:[UIImage imageNamed:@"thumbs-down.png"] forState:UIControlStateNormal];
     }
     else {
-        NSLog(@"accepted");
+        self.mask.hidden = YES;
         [self.button setImage:[UIImage imageNamed:@"thumbs-up.png"] forState:UIControlStateNormal];
     }
     [self.button setNeedsDisplay];

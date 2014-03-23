@@ -14,6 +14,7 @@ extern CGFloat defaultWideness;
 @interface EUCSelectViewController ()
 
 @property (strong, nonatomic) dispatch_queue_t backgroundQueue;
+- (IBAction)done:(id)sender;
 
 @end
 
@@ -111,5 +112,9 @@ extern CGFloat defaultWideness;
     return CGSizeMake(314, 274);
 }
 
+
+- (IBAction)done:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
