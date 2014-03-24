@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *tagButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *analyzeButton;
 
-@property (strong, nonatomic) NSMutableArray *deployments;
+@property (strong, nonatomic) NSArray *deployments;
 
 
 @property (strong, nonatomic) EUCDeploymentDetailViewController  *detailViewController;

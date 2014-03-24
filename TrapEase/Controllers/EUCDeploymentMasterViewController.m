@@ -8,6 +8,8 @@
 
 #import "EUCDeploymentMasterViewController.h"
 #import "EUCDeploymentCell.h"
+#import "EUCNetwork.h"
+#import "EUCDatabase.h"
 
 @interface EUCDeploymentMasterViewController ()
 
@@ -21,6 +23,15 @@
     if (self) {
         // Custom initialization
         self.deployments = [[NSMutableArray alloc] initWithCapacity:64];
+        
+        [EUCNetwork getDeploymentsWithSuccessBlock:^(NSArray *deployments) {
+            [[EUCDatabase sharedInstance] refreshDeployments:deployments];
+            self.deployments = [[EUCDatabase sharedInstance] getDeployments];
+            [self.tableView reloadData];
+        } failureBlock:^(NSString *reason) {
+            ; // nothing to do if we are wise, and not expecting rainbows from the skies, not right away
+        }];
+        
     }
     return self;
 }
@@ -79,9 +90,11 @@
 - (void)configureCell:(EUCDeploymentCell *)cell
     forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.name.text = [NSString stringWithFormat:@"Name %d", indexPath.row];
+    NSDictionary * deployment = (NSDictionary *) self.deployments[indexPath.row];
+    
+    cell.name.text = deployment[@"names"];
     cell.school.text = [NSString stringWithFormat:@"School %d", indexPath.row];
-    cell.date.text = [NSString stringWithFormat:@"Date %d", indexPath.row];
+    cell.date.text = deployment[@"date"];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -73,7 +73,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     // check to see if database needs to be updated
     double currentVersion = 1.0;
     
-    NSString * sql = @"SELECT versionNumber from trapDatabaseVersion";
+    NSString * sql = @"SELECT versionNumber from databaseVersion";
     FMResultSet * rs = [self.db executeQuery:sql];
     double foundVersion = 0.0;
     while ([rs next]) {
@@ -100,6 +100,120 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         }
     }
     
+    
+}
+
+#pragma mark - deployments
+
+-(NSArray *) getDeployments {
+    NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:64];
+    
+    NSString * sql = @"select names, deployment_date from deployment order by deployment_date desc";
+    
+    FMResultSet * rs = [self.db executeQuery:sql];
+    
+    while ([rs next]) {
+        NSDictionary * row = @{@"names": [rs stringForColumnIndex:0],
+                               @"date": [rs stringForColumnIndex:1]
+                               };
+        
+        [array addObject:row];
+    }
+    [rs close];
+    
+    return [NSArray arrayWithArray:array];
+    
+}
+
+-(void) refreshDeployments: (NSArray *) deployments {
+    
+    [self clearTable: @"tag"];
+    [self clearTable:@"image"];
+    [self clearTable:@"burst"];
+    [self clearTable:@"deployment_picture"];
+    [self clearTable:@"deployment"];
+    
+    for (NSDictionary * deployment in deployments) {
+        [self saveDeployment: deployment];
+    }
+}
+
+-(void) saveDeployment: (NSDictionary *) deployment {
+    NSMutableArray * cols = [NSMutableArray arrayWithCapacity:16];
+    NSMutableArray * vals = [NSMutableArray arrayWithCapacity:16];
+    
+    NSMutableArray * people = [[NSMutableArray alloc] initWithCapacity:8];
+    for (NSDictionary * person in deployment[@"person"]) {
+        [people addObject:person[@"first_name"]];
+    }
+    NSString * names = [people componentsJoinedByString:@", "];
+    
+    [self addColumn: @"id" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"deployment_date" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"latitude" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"longitude" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"notes" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"short_name" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"camera_height_cm" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"camera_azimuth_rad" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"camera_elevation_rad" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"camera" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"nominal_mark_time" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"actual_mark_time" fromDictionary:deployment toColumns:cols andValues:vals];
+    
+    [cols addObject:@"names"];
+    [vals addObject:names];
+    
+    [self insertColumns:cols andValues:vals intoTable:@"deployment"];
+}
+
+
+-(void) clearTable: (NSString *) tableName {
+    [self.db executeUpdate:[NSString stringWithFormat:@"delete from %@", tableName]];
+}
+
+
+
+#pragma mark - writing helper functions
+
+-(NSString *) placeHoldersForColumns: (NSArray *) cols {
+    NSMutableArray * array = [NSMutableArray arrayWithCapacity:[cols count]];
+    for (int i = 0; i < [cols count] ; i++) {
+        [array addObject:@"?"];
+    }
+    return [array componentsJoinedByString:@", "];
+}
+
+-(void) addColumn: (NSString *) columnName
+    fromDictionary:(NSDictionary *) dict
+         toColumns: (NSMutableArray *) columns
+         andValues: (NSMutableArray *) values {
+    [self addValueOf:columnName asColumn:columnName fromDictionary:dict toColumns:columns andValues:values];
+}
+
+-(void) addValueOf: (NSString *) jsonKey
+          asColumn: (NSString *) columnName
+    fromDictionary:(NSDictionary *) dict
+         toColumns: (NSMutableArray *) columns
+         andValues: (NSMutableArray *) values {
+    
+    if (dict && dict[jsonKey]) {
+        [columns addObject:columnName];
+        [values addObject:dict[jsonKey]];
+    }
+}
+
+-(void) insertColumns: (NSArray *) cols andValues: (NSArray *) vals intoTable: (NSString *) table {
+    BOOL ok = [self.db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)",
+                                      table,
+                                      [cols componentsJoinedByString:@", "],
+                                      [self placeHoldersForColumns:cols]]
+                withArgumentsInArray:vals];
+    
+    if (!ok) {
+        //        [Flurry logEvent:@"ERROR" withParameters:@{ @"Type": @"bookmarkListUpdateFailed"}];
+        DDLogError(@"Couldn't insert into table %@: %@", table, [self.db lastErrorMessage]);
+    }
     
 }
 

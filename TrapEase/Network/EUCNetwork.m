@@ -54,6 +54,7 @@
     
     NSURL *URL = [network.sessionManager.baseURL URLByAppendingPathComponent:imageURL];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    
 //    NSString * sessionToken = [EUCKeyChain get:@"sessionToken"];
 //    if (sessionToken) {
 //        [request setValue:sessionToken forHTTPHeaderField:@"token"];

@@ -16,4 +16,8 @@
 
 +(EUCDatabase *) sharedInstance;
 
+-(void) refreshDeployments: (NSArray *) deployments;
+
+-(NSArray *) getDeployments;
+
 @end

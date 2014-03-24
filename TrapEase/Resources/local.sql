@@ -1,35 +1,70 @@
 
-create table trapDatabaseVersion (
+create table databaseVersion (
     versionNumber int not null default 1
 );
 
 
-create table trapSettings ( 
+create table settings ( 
       schoolId int not null default 0
     , classId int not null default 0
 );
 
 
--- insert into trapDatabaseVersion values(1);
--- insert into trapSettings values(0, 0);
+insert into databaseVersion values(1);
+insert into settings values(0, 0);
+
+CREATE TABLE school (
+      id SERIAL UNIQUE PRIMARY KEY NOT NULL
+    , name varchar(256) NOT NULL
+);
+
+CREATE TABLE class (
+      id SERIAL UNIQUE PRIMARY KEY NOT NULL
+    , name varchar(256) NOT NULL
+    , school_id INT NOT NULL REFERENCES school(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE person (
+      id SERIAL UNIQUE PRIMARY KEY NOT NULL
+    , first_name varchar(256) NOT NULL
+    , last_name varchar(256) NOT NULL
+    , password char(60) NOT NULL
+    , email VARCHAR(256) UNIQUE NOT NULL
+    , is_admin BOOLEAN NOT NULL DEFAULT FALSE
+);
+create index i_person_email on person(email);
+
+CREATE TABLE person_membership (
+      person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE
+    , class_id INT NOT NULL REFERENCES class(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE camera (
+      id SERIAL UNIQUE PRIMARY KEY NOT NULL
+    , make VARCHAR(256) NOT NULL
+    , model VARCHAR(256)
+);
 
 
-create table trapPendingPictures (
+
+
+
+
+create table pendingPictures (
       assetURL text not null
     , pictureId int not null
     , resource text not null default 'image' -- image or deployment_picture
     , done int not null default 0
 );
-create index pending_done on trapPendingPictures(done);
+create index pending_done on pendingPictures(done);
 
-create table trapCurrentPeople (
+create table currentPeople (
       id int NOT null
 );
 
 
 CREATE TABLE deployment (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
-    , owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE -- this is for internal use only. Do not use this column
     , deployment_date TIMESTAMP NOT NULL
     , latitude NUMERIC (9,7) NULL
     , longitude NUMERIC (9,7)  NULL
@@ -41,6 +76,7 @@ CREATE TABLE deployment (
     , camera INT NOT NULL REFERENCES camera(id) ON UPDATE CASCADE
     , nominal_mark_time TIMESTAMP NOT NULL
     , actual_mark_time TIMESTAMP NOT NULL
+    , names TEXT NOT NULL
 );
 create index i_dep_id on deployment(id);
 
