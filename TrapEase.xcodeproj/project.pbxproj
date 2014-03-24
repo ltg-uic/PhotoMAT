@@ -75,6 +75,9 @@
 		B4E6BE4F18DEA6DE00AC9D84 /* thumbs-down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE4B18DEA6DE00AC9D84 /* thumbs-down@2x.png */; };
 		B4E6BE5018DEA6DE00AC9D84 /* thumbs-up.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE4C18DEA6DE00AC9D84 /* thumbs-up.png */; };
 		B4E6BE5118DEA6DE00AC9D84 /* thumbs-up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE4D18DEA6DE00AC9D84 /* thumbs-up@2x.png */; };
+		B4E6BE5918DF9F6400AC9D84 /* trap.db in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE5818DF9F6400AC9D84 /* trap.db */; };
+		B4E6BE5D18DF9F9800AC9D84 /* EUCDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE5C18DF9F9800AC9D84 /* EUCDatabase.m */; };
+		B4E6BE6118DFB77B00AC9D84 /* EUCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE6018DFB77B00AC9D84 /* EUCNetwork.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +178,11 @@
 		B4E6BE4B18DEA6DE00AC9D84 /* thumbs-down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-down@2x.png"; sourceTree = "<group>"; };
 		B4E6BE4C18DEA6DE00AC9D84 /* thumbs-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up.png"; sourceTree = "<group>"; };
 		B4E6BE4D18DEA6DE00AC9D84 /* thumbs-up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up@2x.png"; sourceTree = "<group>"; };
+		B4E6BE5818DF9F6400AC9D84 /* trap.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = trap.db; sourceTree = "<group>"; };
+		B4E6BE5B18DF9F9800AC9D84 /* EUCDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCDatabase.h; path = Data/EUCDatabase.h; sourceTree = "<group>"; };
+		B4E6BE5C18DF9F9800AC9D84 /* EUCDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDatabase.m; path = Data/EUCDatabase.m; sourceTree = "<group>"; };
+		B4E6BE5F18DFB77B00AC9D84 /* EUCNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCNetwork.h; path = Network/EUCNetwork.h; sourceTree = "<group>"; };
+		B4E6BE6018DFB77B00AC9D84 /* EUCNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCNetwork.m; path = Network/EUCNetwork.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +253,9 @@
 		B4D1EC3618BD729300E01EFE /* TrapEase */ = {
 			isa = PBXGroup;
 			children = (
+				B4E6BE5E18DFB76000AC9D84 /* Network */,
+				B4E6BE5A18DF9F6D00AC9D84 /* Data */,
+				B4E6BE5718DF9F6400AC9D84 /* Resources */,
 				B4E6BE3C18DE9EBC00AC9D84 /* AppleCode */,
 				B4E6BE2C18DE442400AC9D84 /* Cells */,
 				B4E6BD7718DDC82600AC9D84 /* Images */,
@@ -396,6 +407,32 @@
 			path = AppleCode;
 			sourceTree = "<group>";
 		};
+		B4E6BE5718DF9F6400AC9D84 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B4E6BE5818DF9F6400AC9D84 /* trap.db */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B4E6BE5A18DF9F6D00AC9D84 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				B4E6BE5B18DF9F9800AC9D84 /* EUCDatabase.h */,
+				B4E6BE5C18DF9F9800AC9D84 /* EUCDatabase.m */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		B4E6BE5E18DFB76000AC9D84 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				B4E6BE5F18DFB77B00AC9D84 /* EUCNetwork.h */,
+				B4E6BE6018DFB77B00AC9D84 /* EUCNetwork.m */,
+			);
+			name = Network;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -495,6 +532,7 @@
 				B4E6BE2118DE3EB400AC9D84 /* gear@2x.png in Resources */,
 				B4E6BE4918DEA5E700AC9D84 /* EUCSelectCell.xib in Resources */,
 				B4E6BE1918DE008000AC9D84 /* EUCKnapsackViewController.xib in Resources */,
+				B4E6BE5918DF9F6400AC9D84 /* trap.db in Resources */,
 				B4D1EC4318BD729300E01EFE /* Images.xcassets in Resources */,
 				B4E6BD6918DDC33C00AC9D84 /* EUCFilterViewController.xib in Resources */,
 				B4E6BD8F18DDC82600AC9D84 /* share.png in Resources */,
@@ -579,10 +617,12 @@
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
 				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,
 				B4E6BE0B18DDFD3400AC9D84 /* EUCUploadViewController.m in Sources */,
+				B4E6BE6118DFB77B00AC9D84 /* EUCNetwork.m in Sources */,
 				B4E6BD7518DDC39300AC9D84 /* EUCAnalyzeViewController.m in Sources */,
 				B4E6BE2518DE3ED100AC9D84 /* EUCCloudViewController.m in Sources */,
 				B4E6BD6318DDC30C00AC9D84 /* EUCImportViewController.m in Sources */,
 				B4E6BD7018DDC37D00AC9D84 /* EUCLabelViewController.m in Sources */,
+				B4E6BE5D18DF9F9800AC9D84 /* EUCDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

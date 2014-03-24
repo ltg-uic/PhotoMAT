@@ -16,13 +16,41 @@
 #import "EUCCloudViewController.h"
 #import "EUCSettingsViewController.h"
 
+#import "EUCDatabase.h"
+#import "DDLog.h"
+#import "DDFileLogger.h"
+#import "DDTTYLogger.h"
+
 @implementation EUCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    
+    /*
+     ** ********************************************************************
+     ** LOGGING START
+     ** ********************************************************************
+     */
+    DDFileLogger * fileLogger = [[DDFileLogger alloc] init];
+    fileLogger.rollingFrequency = 60 * 60 * 24; // 24 hour rolling
+    fileLogger.logFileManager.maximumNumberOfLogFiles = 7;
+    fileLogger.maximumFileSize = 1024 * 1024;
+    
+    [DDLog addLogger:fileLogger];
+#ifdef DEBUG
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+#endif
+    /*
+     ** ********************************************************************
+     ** LOGGING END
+     ** ********************************************************************
+     */
+    
     
     EUCImportViewController * import = [[EUCImportViewController alloc] initWithNibName:@"EUCImportViewController" bundle:nil];
     EUCUploadViewController * upload = [[EUCUploadViewController alloc] initWithNibName:@"EUCUploadViewController" bundle:nil];
