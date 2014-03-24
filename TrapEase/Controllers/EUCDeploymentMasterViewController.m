@@ -63,7 +63,6 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return 40;
     return [self.deployments count];
 }
 

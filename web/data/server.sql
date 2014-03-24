@@ -53,10 +53,6 @@ INSERT INTO PERSON (first_name, last_name, password, email) values ('Betty', 'Be
 INSERT INTO PERSON (first_name, last_name, password, email) values ('Charlie', 'Chatterbox',  crypt('password', gen_salt('bf', 10)), 'c@example.com');
 INSERT INTO PERSON (first_name, last_name, password, email, is_admin) values ('Admin', 'One',  crypt('password', gen_salt('bf', 10)), 'admin@example.com');
 
-CREATE TABLE person_group (
-      "id" SERIAL UNIQUE PRIMARY KEY NOT NULL
-    , person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
 
 CREATE TABLE person_membership (
       person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -107,6 +103,13 @@ CREATE TABLE deployment (
     , actual_mark_time TIMESTAMP NOT NULL
 );
 COMMENT ON COLUMN "deployment"."owner" IS 'This column is for internal use only. Do not use this column.';
+
+
+CREATE TABLE deployment_person (
+      person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE
+    , deployment_id INT NOT NULL REFERENCES deployment(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE INDEX i_deployment_person_deployment on deployment_person(deployment_id);
 
 CREATE TABLE deployment_picture (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
@@ -164,6 +167,7 @@ CREATE index i_get_cascade_parent on get_cascade(parent_table);
 
 INSERT INTO get_cascade values ('school', 'class');
 INSERT INTO get_cascade values ('class', 'person', 'person_membership');
+INSERT INTO get_cascade values ('deployment', 'person', 'deployment_person');
 INSERT INTO get_cascade values ('deployment', 'deployment_picture');
 INSERT INTO get_cascade values ('deployment', 'burst');
 INSERT INTO get_cascade values ('burst', 'image');
