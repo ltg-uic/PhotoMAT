@@ -82,8 +82,11 @@
 		B4E6BE6A18DFBE5300AC9D84 /* deployments@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE6818DFBE5300AC9D84 /* deployments@2x.png */; };
 		B4E6BE6E18DFBE9700AC9D84 /* EUCDeploymentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE6C18DFBE9700AC9D84 /* EUCDeploymentsViewController.m */; };
 		B4E6BE6F18DFBE9700AC9D84 /* EUCDeploymentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE6D18DFBE9700AC9D84 /* EUCDeploymentsViewController.xib */; };
-		B4E6BE7118DFC18C00AC9D84 /* EUCDeploymentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE7018DFC18C00AC9D84 /* EUCDeploymentCell.xib */; };
 		B4E6BE7418DFC51300AC9D84 /* EUCDeploymentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE7318DFC51300AC9D84 /* EUCDeploymentCell.m */; };
+		B4E6BE7818DFD0DD00AC9D84 /* EUCDeploymentSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE7618DFD0DD00AC9D84 /* EUCDeploymentSplitViewController.m */; };
+		B4E6BE8218DFD47700AC9D84 /* EUCDeploymentMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE8018DFD47700AC9D84 /* EUCDeploymentMasterViewController.m */; };
+		B4E6BE8318DFD47700AC9D84 /* EUCDeploymentMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE8118DFD47700AC9D84 /* EUCDeploymentMasterViewController.xib */; };
+		B4E6BE8518DFDB5B00AC9D84 /* EUCDeploymentMasterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE8418DFDB5B00AC9D84 /* EUCDeploymentMasterCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,9 +197,14 @@
 		B4E6BE6B18DFBE9700AC9D84 /* EUCDeploymentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCDeploymentsViewController.h; path = TrapEase/Controllers/EUCDeploymentsViewController.h; sourceTree = "<group>"; };
 		B4E6BE6C18DFBE9700AC9D84 /* EUCDeploymentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDeploymentsViewController.m; path = TrapEase/Controllers/EUCDeploymentsViewController.m; sourceTree = "<group>"; };
 		B4E6BE6D18DFBE9700AC9D84 /* EUCDeploymentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCDeploymentsViewController.xib; path = TrapEase/Controllers/EUCDeploymentsViewController.xib; sourceTree = "<group>"; };
-		B4E6BE7018DFC18C00AC9D84 /* EUCDeploymentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCDeploymentCell.xib; path = Cells/EUCDeploymentCell.xib; sourceTree = "<group>"; };
 		B4E6BE7218DFC51300AC9D84 /* EUCDeploymentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCDeploymentCell.h; path = Cells/EUCDeploymentCell.h; sourceTree = "<group>"; };
 		B4E6BE7318DFC51300AC9D84 /* EUCDeploymentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDeploymentCell.m; path = Cells/EUCDeploymentCell.m; sourceTree = "<group>"; };
+		B4E6BE7518DFD0DD00AC9D84 /* EUCDeploymentSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCDeploymentSplitViewController.h; path = TrapEase/Controllers/EUCDeploymentSplitViewController.h; sourceTree = "<group>"; };
+		B4E6BE7618DFD0DD00AC9D84 /* EUCDeploymentSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDeploymentSplitViewController.m; path = TrapEase/Controllers/EUCDeploymentSplitViewController.m; sourceTree = "<group>"; };
+		B4E6BE7F18DFD47700AC9D84 /* EUCDeploymentMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCDeploymentMasterViewController.h; path = TrapEase/Controllers/EUCDeploymentMasterViewController.h; sourceTree = "<group>"; };
+		B4E6BE8018DFD47700AC9D84 /* EUCDeploymentMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDeploymentMasterViewController.m; path = TrapEase/Controllers/EUCDeploymentMasterViewController.m; sourceTree = "<group>"; };
+		B4E6BE8118DFD47700AC9D84 /* EUCDeploymentMasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCDeploymentMasterViewController.xib; path = TrapEase/Controllers/EUCDeploymentMasterViewController.xib; sourceTree = "<group>"; };
+		B4E6BE8418DFDB5B00AC9D84 /* EUCDeploymentMasterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCDeploymentMasterCell.xib; path = Cells/EUCDeploymentMasterCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +355,11 @@
 				B4E6BE6B18DFBE9700AC9D84 /* EUCDeploymentsViewController.h */,
 				B4E6BE6C18DFBE9700AC9D84 /* EUCDeploymentsViewController.m */,
 				B4E6BE6D18DFBE9700AC9D84 /* EUCDeploymentsViewController.xib */,
+				B4E6BE7518DFD0DD00AC9D84 /* EUCDeploymentSplitViewController.h */,
+				B4E6BE7618DFD0DD00AC9D84 /* EUCDeploymentSplitViewController.m */,
+				B4E6BE7F18DFD47700AC9D84 /* EUCDeploymentMasterViewController.h */,
+				B4E6BE8018DFD47700AC9D84 /* EUCDeploymentMasterViewController.m */,
+				B4E6BE8118DFD47700AC9D84 /* EUCDeploymentMasterViewController.xib */,
 			);
 			name = Controllers;
 			path = ..;
@@ -415,7 +428,7 @@
 				B4E6BE4818DEA5E700AC9D84 /* EUCSelectCell.xib */,
 				B4E6BE7218DFC51300AC9D84 /* EUCDeploymentCell.h */,
 				B4E6BE7318DFC51300AC9D84 /* EUCDeploymentCell.m */,
-				B4E6BE7018DFC18C00AC9D84 /* EUCDeploymentCell.xib */,
+				B4E6BE8418DFDB5B00AC9D84 /* EUCDeploymentMasterCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -551,6 +564,7 @@
 				B4E6BE4E18DEA6DE00AC9D84 /* thumbs-down.png in Resources */,
 				B4E6BE1318DE005500AC9D84 /* hiking.png in Resources */,
 				B4E6BD7118DDC37D00AC9D84 /* EUCLabelViewController.xib in Resources */,
+				B4E6BE8318DFD47700AC9D84 /* EUCDeploymentMasterViewController.xib in Resources */,
 				B4E6BE5018DEA6DE00AC9D84 /* thumbs-up.png in Resources */,
 				B4E6BD8C18DDC82600AC9D84 /* filter@2x.png in Resources */,
 				B4E6BE2118DE3EB400AC9D84 /* gear@2x.png in Resources */,
@@ -573,10 +587,10 @@
 				B4E6BE2B18DE3EE200AC9D84 /* EUCSettingsViewController.xib in Resources */,
 				B4E6BE4418DEA37C00AC9D84 /* EUCSelectViewController.xib in Resources */,
 				B4E6BE1418DE005500AC9D84 /* hiking@2x.png in Resources */,
+				B4E6BE8518DFDB5B00AC9D84 /* EUCDeploymentMasterCell.xib in Resources */,
 				B4E6BD8D18DDC82600AC9D84 /* line-chart.png in Resources */,
 				B4E6BE5118DEA6DE00AC9D84 /* thumbs-up@2x.png in Resources */,
 				B4E6BE2618DE3ED100AC9D84 /* EUCCloudViewController.xib in Resources */,
-				B4E6BE7118DFC18C00AC9D84 /* EUCDeploymentCell.xib in Resources */,
 				B4E6BE3218DE44D900AC9D84 /* EUCImportCell.xib in Resources */,
 				B4E6BD8E18DDC82600AC9D84 /* line-chart@2x.png in Resources */,
 				B4E6BE6F18DFBE9700AC9D84 /* EUCDeploymentsViewController.xib in Resources */,
@@ -644,8 +658,10 @@
 				B4E6BE6E18DFBE9700AC9D84 /* EUCDeploymentsViewController.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
 				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,
+				B4E6BE8218DFD47700AC9D84 /* EUCDeploymentMasterViewController.m in Sources */,
 				B4E6BE0B18DDFD3400AC9D84 /* EUCUploadViewController.m in Sources */,
 				B4E6BE6118DFB77B00AC9D84 /* EUCNetwork.m in Sources */,
+				B4E6BE7818DFD0DD00AC9D84 /* EUCDeploymentSplitViewController.m in Sources */,
 				B4E6BD7518DDC39300AC9D84 /* EUCAnalyzeViewController.m in Sources */,
 				B4E6BE2518DE3ED100AC9D84 /* EUCCloudViewController.m in Sources */,
 				B4E6BD6318DDC30C00AC9D84 /* EUCImportViewController.m in Sources */,

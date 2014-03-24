@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EUCDeploymentCell : UICollectionViewCell
+@interface EUCDeploymentCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *button;
 - (IBAction)toggleSelected:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *name;
