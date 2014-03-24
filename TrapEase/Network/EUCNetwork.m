@@ -34,7 +34,9 @@
 {
     self = [super init];
     if (self) {
-        _sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"https://rest.pix2doc.com"]];
+        _sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://trap.euclidsoftware.com"]];
+//        [_sessionManager.requestSerializer setValue:sessionToken forHTTPHeaderField:@"token"];
+
     }
     return self;
 }
@@ -70,6 +72,21 @@
                                       completionBlock(response, filePath, error);
                                   }];
     [downloadTask resume];
+    
+}
+
++(void) getDeploymentsWithSuccessBlock: (EUCDeploymentsSuccessBlock) successBlock failureBlock: (EUCDeploymentsFailureBlock) failureBlock {
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
+    
+    [network.sessionManager GET:@"/deployment"
+                     parameters:nil
+                        success:^(NSURLSessionDataTask *task, id responseObject) {
+                            NSDictionary * result = (NSDictionary *) responseObject;
+                            successBlock(result[@"deployment"]);
+                        }
+                        failure:^(NSURLSessionDataTask *task, NSError *error) {
+                            failureBlock([NSString stringWithFormat:@"Error: %@", error]);
+                        }];
     
 }
 

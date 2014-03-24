@@ -106,8 +106,8 @@ COMMENT ON COLUMN "deployment"."owner" IS 'This column is for internal use only.
 
 
 CREATE TABLE deployment_person (
-      person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE
-    , deployment_id INT NOT NULL REFERENCES deployment(id) ON DELETE CASCADE ON UPDATE CASCADE
+      deployment_id INT NOT NULL REFERENCES deployment(id) ON DELETE CASCADE ON UPDATE CASCADE
+    , person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 CREATE INDEX i_deployment_person_deployment on deployment_person(deployment_id);
 
