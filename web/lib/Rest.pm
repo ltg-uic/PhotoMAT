@@ -12,6 +12,8 @@ use Apache2::Const qw(FORBIDDEN HTTP_OK NOT_FOUND HTTP_CONFLICT);
 use Auth;
 
 
+# additions - param to POST
+
 sub handleRest {
     my ($parent_hash, $h, $adminRequired) = @_;
     my $r     = $parent_hash->{request};

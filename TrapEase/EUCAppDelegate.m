@@ -13,9 +13,9 @@
 #import "EUCKnapsackViewController.h"
 #import "EUCCloudViewController.h"
 #import "EUCSettingsViewController.h"
-#import "EUCDeploymentsViewController.h"
 #import "EUCDeploymentSplitViewController.h"
 #import "EUCDeploymentMasterViewController.h"
+#import "EUCDeploymentDetailViewController.h"
 
 #import "EUCDatabase.h"
 #import "DDLog.h"
@@ -54,17 +54,17 @@
     
     
 //    EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
-    EUCAnalyzeViewController * analyze = [[EUCAnalyzeViewController alloc] initWithNibName:@"EUCAnalyzeViewController" bundle:nil];
     EUCCloudViewController * cloud = [[EUCCloudViewController alloc] initWithNibName:@"EUCCloudViewController" bundle:nil];
     EUCSettingsViewController * settings = [[EUCSettingsViewController alloc] initWithNibName:@"EUCSettingsViewController" bundle:nil];
-    EUCDeploymentsViewController * deployments = [[EUCDeploymentsViewController alloc] initWithNibName:@"EUCDeploymentsViewController" bundle:nil];
     EUCDeploymentSplitViewController * dsvc = [[EUCDeploymentSplitViewController alloc] init];
     EUCDeploymentMasterViewController * master = [[EUCDeploymentMasterViewController alloc] initWithNibName:@"EUCDeploymentMasterViewController" bundle:nil];
+    EUCDeploymentDetailViewController * detail = [[EUCDeploymentDetailViewController alloc] initWithNibName:@"EUCDeploymentDetailViewController" bundle:nil];
+    master.detailViewController = detail;
     
-    dsvc.viewControllers = @[master, analyze];
+    dsvc.viewControllers = @[master, detail];
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
-    self.homeViewController.viewControllers = @[dsvc, deployments, cloud, settings];
+    self.homeViewController.viewControllers = @[dsvc, cloud, settings];
     self.window.rootViewController = self.homeViewController;
     [self.window makeKeyAndVisible];
     return YES;

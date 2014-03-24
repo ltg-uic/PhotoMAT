@@ -7,6 +7,7 @@ create table databaseVersion (
 create table settings ( 
       schoolId int not null default 0
     , classId int not null default 0
+    , visibility TEXT NOT NULL default 'class' -- class, school or all
 );
 
 
