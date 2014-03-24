@@ -78,6 +78,12 @@
 		B4E6BE5918DF9F6400AC9D84 /* trap.db in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE5818DF9F6400AC9D84 /* trap.db */; };
 		B4E6BE5D18DF9F9800AC9D84 /* EUCDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE5C18DF9F9800AC9D84 /* EUCDatabase.m */; };
 		B4E6BE6118DFB77B00AC9D84 /* EUCNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE6018DFB77B00AC9D84 /* EUCNetwork.m */; };
+		B4E6BE6918DFBE5300AC9D84 /* deployments.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE6718DFBE5300AC9D84 /* deployments.png */; };
+		B4E6BE6A18DFBE5300AC9D84 /* deployments@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE6818DFBE5300AC9D84 /* deployments@2x.png */; };
+		B4E6BE6E18DFBE9700AC9D84 /* EUCDeploymentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE6C18DFBE9700AC9D84 /* EUCDeploymentsViewController.m */; };
+		B4E6BE6F18DFBE9700AC9D84 /* EUCDeploymentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE6D18DFBE9700AC9D84 /* EUCDeploymentsViewController.xib */; };
+		B4E6BE7118DFC18C00AC9D84 /* EUCDeploymentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE7018DFC18C00AC9D84 /* EUCDeploymentCell.xib */; };
+		B4E6BE7418DFC51300AC9D84 /* EUCDeploymentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE7318DFC51300AC9D84 /* EUCDeploymentCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +189,14 @@
 		B4E6BE5C18DF9F9800AC9D84 /* EUCDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDatabase.m; path = Data/EUCDatabase.m; sourceTree = "<group>"; };
 		B4E6BE5F18DFB77B00AC9D84 /* EUCNetwork.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCNetwork.h; path = Network/EUCNetwork.h; sourceTree = "<group>"; };
 		B4E6BE6018DFB77B00AC9D84 /* EUCNetwork.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCNetwork.m; path = Network/EUCNetwork.m; sourceTree = "<group>"; };
+		B4E6BE6718DFBE5300AC9D84 /* deployments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deployments.png; sourceTree = "<group>"; };
+		B4E6BE6818DFBE5300AC9D84 /* deployments@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "deployments@2x.png"; sourceTree = "<group>"; };
+		B4E6BE6B18DFBE9700AC9D84 /* EUCDeploymentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCDeploymentsViewController.h; path = TrapEase/Controllers/EUCDeploymentsViewController.h; sourceTree = "<group>"; };
+		B4E6BE6C18DFBE9700AC9D84 /* EUCDeploymentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDeploymentsViewController.m; path = TrapEase/Controllers/EUCDeploymentsViewController.m; sourceTree = "<group>"; };
+		B4E6BE6D18DFBE9700AC9D84 /* EUCDeploymentsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCDeploymentsViewController.xib; path = TrapEase/Controllers/EUCDeploymentsViewController.xib; sourceTree = "<group>"; };
+		B4E6BE7018DFC18C00AC9D84 /* EUCDeploymentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCDeploymentCell.xib; path = Cells/EUCDeploymentCell.xib; sourceTree = "<group>"; };
+		B4E6BE7218DFC51300AC9D84 /* EUCDeploymentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCDeploymentCell.h; path = Cells/EUCDeploymentCell.h; sourceTree = "<group>"; };
+		B4E6BE7318DFC51300AC9D84 /* EUCDeploymentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDeploymentCell.m; path = Cells/EUCDeploymentCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +344,9 @@
 				B4E6BE4018DEA37C00AC9D84 /* EUCSelectViewController.h */,
 				B4E6BE4118DEA37C00AC9D84 /* EUCSelectViewController.m */,
 				B4E6BE4218DEA37C00AC9D84 /* EUCSelectViewController.xib */,
+				B4E6BE6B18DFBE9700AC9D84 /* EUCDeploymentsViewController.h */,
+				B4E6BE6C18DFBE9700AC9D84 /* EUCDeploymentsViewController.m */,
+				B4E6BE6D18DFBE9700AC9D84 /* EUCDeploymentsViewController.xib */,
 			);
 			name = Controllers;
 			path = ..;
@@ -355,6 +372,8 @@
 		B4E6BD7818DDC82600AC9D84 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				B4E6BE6718DFBE5300AC9D84 /* deployments.png */,
+				B4E6BE6818DFBE5300AC9D84 /* deployments@2x.png */,
 				B4E6BE4A18DEA6DE00AC9D84 /* thumbs-down.png */,
 				B4E6BE4B18DEA6DE00AC9D84 /* thumbs-down@2x.png */,
 				B4E6BE4C18DEA6DE00AC9D84 /* thumbs-up.png */,
@@ -394,6 +413,9 @@
 				B4E6BE4518DEA5BB00AC9D84 /* EUCSelectCell.h */,
 				B4E6BE4618DEA5BB00AC9D84 /* EUCSelectCell.m */,
 				B4E6BE4818DEA5E700AC9D84 /* EUCSelectCell.xib */,
+				B4E6BE7218DFC51300AC9D84 /* EUCDeploymentCell.h */,
+				B4E6BE7318DFC51300AC9D84 /* EUCDeploymentCell.m */,
+				B4E6BE7018DFC18C00AC9D84 /* EUCDeploymentCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -521,9 +543,11 @@
 				B4E6BE1F18DE3EB400AC9D84 /* cloud@2x.png in Resources */,
 				B4D1EC3B18BD729300E01EFE /* InfoPlist.strings in Resources */,
 				B4E6BE2018DE3EB400AC9D84 /* gear.png in Resources */,
+				B4E6BE6A18DFBE5300AC9D84 /* deployments@2x.png in Resources */,
 				B4E6BD9318DDC82600AC9D84 /* trash.png in Resources */,
 				B4E6BD8818DDC82600AC9D84 /* bar-chart@2x.png in Resources */,
 				B4E6BE0C18DDFD3400AC9D84 /* EUCUploadViewController.xib in Resources */,
+				B4E6BE6918DFBE5300AC9D84 /* deployments.png in Resources */,
 				B4E6BE4E18DEA6DE00AC9D84 /* thumbs-down.png in Resources */,
 				B4E6BE1318DE005500AC9D84 /* hiking.png in Resources */,
 				B4E6BD7118DDC37D00AC9D84 /* EUCLabelViewController.xib in Resources */,
@@ -552,8 +576,10 @@
 				B4E6BD8D18DDC82600AC9D84 /* line-chart.png in Resources */,
 				B4E6BE5118DEA6DE00AC9D84 /* thumbs-up@2x.png in Resources */,
 				B4E6BE2618DE3ED100AC9D84 /* EUCCloudViewController.xib in Resources */,
+				B4E6BE7118DFC18C00AC9D84 /* EUCDeploymentCell.xib in Resources */,
 				B4E6BE3218DE44D900AC9D84 /* EUCImportCell.xib in Resources */,
 				B4E6BD8E18DDC82600AC9D84 /* line-chart@2x.png in Resources */,
+				B4E6BE6F18DFBE9700AC9D84 /* EUCDeploymentsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,11 +635,13 @@
 				B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */,
 				B4E6BE3F18DE9EBC00AC9D84 /* UIImage+ImageEffects.m in Sources */,
 				B4E6BE4318DEA37C00AC9D84 /* EUCSelectViewController.m in Sources */,
+				B4E6BE7418DFC51300AC9D84 /* EUCDeploymentCell.m in Sources */,
 				B4E6BE1818DE008000AC9D84 /* EUCKnapsackViewController.m in Sources */,
 				B4E6BE3018DE44B900AC9D84 /* EUCImportCell.m in Sources */,
 				B4E6BE2A18DE3EE200AC9D84 /* EUCSettingsViewController.m in Sources */,
 				B4E6BE4718DEA5BB00AC9D84 /* EUCSelectCell.m in Sources */,
 				B4D1EC4118BD729300E01EFE /* EUCAppDelegate.m in Sources */,
+				B4E6BE6E18DFBE9700AC9D84 /* EUCDeploymentsViewController.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
 				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,
 				B4E6BE0B18DDFD3400AC9D84 /* EUCUploadViewController.m in Sources */,

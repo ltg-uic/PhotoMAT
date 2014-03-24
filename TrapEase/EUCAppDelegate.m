@@ -8,13 +8,12 @@
 
 #import "EUCAppDelegate.h"
 #import "EUCHomeViewController.h"
-#import "EUCImportViewController.h"
-#import "EUCUploadViewController.h"
 #import "EUCLabelViewController.h"
 #import "EUCAnalyzeViewController.h"
 #import "EUCKnapsackViewController.h"
 #import "EUCCloudViewController.h"
 #import "EUCSettingsViewController.h"
+#import "EUCDeploymentsViewController.h"
 
 #import "EUCDatabase.h"
 #import "DDLog.h"
@@ -52,16 +51,14 @@
      */
     
     
-    EUCImportViewController * import = [[EUCImportViewController alloc] initWithNibName:@"EUCImportViewController" bundle:nil];
-    EUCUploadViewController * upload = [[EUCUploadViewController alloc] initWithNibName:@"EUCUploadViewController" bundle:nil];
     EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
     EUCAnalyzeViewController * analyze = [[EUCAnalyzeViewController alloc] initWithNibName:@"EUCAnalyzeViewController" bundle:nil];
-    EUCKnapsackViewController * knapsack = [[EUCKnapsackViewController alloc] initWithNibName:@"EUCKnapsackViewController" bundle:nil];
     EUCCloudViewController * cloud = [[EUCCloudViewController alloc] initWithNibName:@"EUCCloudViewController" bundle:nil];
     EUCSettingsViewController * settings = [[EUCSettingsViewController alloc] initWithNibName:@"EUCSettingsViewController" bundle:nil];
+    EUCDeploymentsViewController * deployments = [[EUCDeploymentsViewController alloc] initWithNibName:@"EUCDeploymentsViewController" bundle:nil];
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
-    self.homeViewController.viewControllers = @[import, upload, label, analyze, knapsack, cloud, settings];
+    self.homeViewController.viewControllers = @[deployments, label, analyze, cloud, settings];
     self.window.rootViewController = self.homeViewController;
     [self.window makeKeyAndVisible];
     return YES;
