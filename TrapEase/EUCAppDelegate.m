@@ -59,12 +59,14 @@
     EUCDeploymentSplitViewController * dsvc = [[EUCDeploymentSplitViewController alloc] init];
     EUCDeploymentMasterViewController * master = [[EUCDeploymentMasterViewController alloc] initWithNibName:@"EUCDeploymentMasterViewController" bundle:nil];
     EUCDeploymentDetailViewController * detail = [[EUCDeploymentDetailViewController alloc] initWithNibName:@"EUCDeploymentDetailViewController" bundle:nil];
+    EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
+    EUCAnalyzeViewController * analyze = [[EUCAnalyzeViewController alloc] initWithNibName:@"EUCAnalyzeViewController" bundle:nil];
     master.detailViewController = detail;
     
     dsvc.viewControllers = @[master, detail];
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
-    self.homeViewController.viewControllers = @[dsvc, cloud, settings];
+    self.homeViewController.viewControllers = @[dsvc, label, analyze, cloud, settings];
     self.window.rootViewController = self.homeViewController;
     [self.window makeKeyAndVisible];
     return YES;

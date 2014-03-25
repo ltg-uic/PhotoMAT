@@ -12,8 +12,6 @@
 
 @interface EUCDeploymentMasterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *tagButton;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *analyzeButton;
 
 @property (strong, nonatomic) NSArray *deployments;
 
@@ -22,6 +20,4 @@
 
 - (IBAction)handleAdd:(id)sender;
 - (IBAction)handleRefresh:(id)sender;
-- (IBAction)handleTag:(id)sender;
-- (IBAction)handleAnalyze:(id)sender;
 @end

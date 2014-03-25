@@ -87,6 +87,14 @@
 		B4E6BE8518DFDB5B00AC9D84 /* EUCDeploymentMasterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE8418DFDB5B00AC9D84 /* EUCDeploymentMasterCell.xib */; };
 		B4E6BE8918E0729900AC9D84 /* EUCDeploymentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE8718E0729900AC9D84 /* EUCDeploymentDetailViewController.m */; };
 		B4E6BE8A18E0729900AC9D84 /* EUCDeploymentDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE8818E0729900AC9D84 /* EUCDeploymentDetailViewController.xib */; };
+		B4E6BE9318E13C5800AC9D84 /* thumbs-up-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE8B18E13C5800AC9D84 /* thumbs-up-selected.png */; };
+		B4E6BE9418E13C5800AC9D84 /* thumbs-up-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE8C18E13C5800AC9D84 /* thumbs-up-selected@2x.png */; };
+		B4E6BE9518E13C5800AC9D84 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE8D18E13C5800AC9D84 /* camera.png */; };
+		B4E6BE9618E13C5800AC9D84 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE8E18E13C5800AC9D84 /* camera@2x.png */; };
+		B4E6BE9718E13C5800AC9D84 /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE8F18E13C5800AC9D84 /* photo.png */; };
+		B4E6BE9818E13C5800AC9D84 /* photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE9018E13C5800AC9D84 /* photo@2x.png */; };
+		B4E6BE9918E13C5800AC9D84 /* users.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE9118E13C5800AC9D84 /* users.png */; };
+		B4E6BE9A18E13C5800AC9D84 /* users@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE9218E13C5800AC9D84 /* users@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +213,14 @@
 		B4E6BE8618E0729900AC9D84 /* EUCDeploymentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCDeploymentDetailViewController.h; path = TrapEase/Controllers/EUCDeploymentDetailViewController.h; sourceTree = "<group>"; };
 		B4E6BE8718E0729900AC9D84 /* EUCDeploymentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDeploymentDetailViewController.m; path = TrapEase/Controllers/EUCDeploymentDetailViewController.m; sourceTree = "<group>"; };
 		B4E6BE8818E0729900AC9D84 /* EUCDeploymentDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCDeploymentDetailViewController.xib; path = TrapEase/Controllers/EUCDeploymentDetailViewController.xib; sourceTree = "<group>"; };
+		B4E6BE8B18E13C5800AC9D84 /* thumbs-up-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up-selected.png"; sourceTree = "<group>"; };
+		B4E6BE8C18E13C5800AC9D84 /* thumbs-up-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbs-up-selected@2x.png"; sourceTree = "<group>"; };
+		B4E6BE8D18E13C5800AC9D84 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		B4E6BE8E18E13C5800AC9D84 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
+		B4E6BE8F18E13C5800AC9D84 /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo.png; sourceTree = "<group>"; };
+		B4E6BE9018E13C5800AC9D84 /* photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo@2x.png"; sourceTree = "<group>"; };
+		B4E6BE9118E13C5800AC9D84 /* users.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = users.png; sourceTree = "<group>"; };
+		B4E6BE9218E13C5800AC9D84 /* users@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "users@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,6 +401,14 @@
 		B4E6BD7818DDC82600AC9D84 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				B4E6BE8B18E13C5800AC9D84 /* thumbs-up-selected.png */,
+				B4E6BE8C18E13C5800AC9D84 /* thumbs-up-selected@2x.png */,
+				B4E6BE8D18E13C5800AC9D84 /* camera.png */,
+				B4E6BE8E18E13C5800AC9D84 /* camera@2x.png */,
+				B4E6BE8F18E13C5800AC9D84 /* photo.png */,
+				B4E6BE9018E13C5800AC9D84 /* photo@2x.png */,
+				B4E6BE9118E13C5800AC9D84 /* users.png */,
+				B4E6BE9218E13C5800AC9D84 /* users@2x.png */,
 				B4E6BE6718DFBE5300AC9D84 /* deployments.png */,
 				B4E6BE6818DFBE5300AC9D84 /* deployments@2x.png */,
 				B4E6BE4A18DEA6DE00AC9D84 /* thumbs-down.png */,
@@ -549,14 +573,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4E6BE9318E13C5800AC9D84 /* thumbs-up-selected.png in Resources */,
 				B4E6BE1E18DE3EB400AC9D84 /* cloud.png in Resources */,
 				B4E6BE0F18DDFF2F00AC9D84 /* upload.png in Resources */,
 				B4E6BD8A18DDC82600AC9D84 /* download@2x.png in Resources */,
+				B4E6BE9618E13C5800AC9D84 /* camera@2x.png in Resources */,
 				B4E6BD9218DDC82600AC9D84 /* tag@2x.png in Resources */,
 				B4E6BE1F18DE3EB400AC9D84 /* cloud@2x.png in Resources */,
 				B4D1EC3B18BD729300E01EFE /* InfoPlist.strings in Resources */,
 				B4E6BE2018DE3EB400AC9D84 /* gear.png in Resources */,
 				B4E6BE6A18DFBE5300AC9D84 /* deployments@2x.png in Resources */,
+				B4E6BE9918E13C5800AC9D84 /* users.png in Resources */,
 				B4E6BD9318DDC82600AC9D84 /* trash.png in Resources */,
 				B4E6BD8818DDC82600AC9D84 /* bar-chart@2x.png in Resources */,
 				B4E6BE0C18DDFD3400AC9D84 /* EUCUploadViewController.xib in Resources */,
@@ -566,9 +593,11 @@
 				B4E6BD7118DDC37D00AC9D84 /* EUCLabelViewController.xib in Resources */,
 				B4E6BE8318DFD47700AC9D84 /* EUCDeploymentMasterViewController.xib in Resources */,
 				B4E6BE5018DEA6DE00AC9D84 /* thumbs-up.png in Resources */,
+				B4E6BE9418E13C5800AC9D84 /* thumbs-up-selected@2x.png in Resources */,
 				B4E6BD8C18DDC82600AC9D84 /* filter@2x.png in Resources */,
 				B4E6BE2118DE3EB400AC9D84 /* gear@2x.png in Resources */,
 				B4E6BE4918DEA5E700AC9D84 /* EUCSelectCell.xib in Resources */,
+				B4E6BE9518E13C5800AC9D84 /* camera.png in Resources */,
 				B4E6BE1918DE008000AC9D84 /* EUCKnapsackViewController.xib in Resources */,
 				B4E6BE5918DF9F6400AC9D84 /* trap.db in Resources */,
 				B4D1EC4318BD729300E01EFE /* Images.xcassets in Resources */,
@@ -587,12 +616,15 @@
 				B4E6BE2B18DE3EE200AC9D84 /* EUCSettingsViewController.xib in Resources */,
 				B4E6BE8A18E0729900AC9D84 /* EUCDeploymentDetailViewController.xib in Resources */,
 				B4E6BE4418DEA37C00AC9D84 /* EUCSelectViewController.xib in Resources */,
+				B4E6BE9718E13C5800AC9D84 /* photo.png in Resources */,
 				B4E6BE1418DE005500AC9D84 /* hiking@2x.png in Resources */,
+				B4E6BE9818E13C5800AC9D84 /* photo@2x.png in Resources */,
 				B4E6BE8518DFDB5B00AC9D84 /* EUCDeploymentMasterCell.xib in Resources */,
 				B4E6BD8D18DDC82600AC9D84 /* line-chart.png in Resources */,
 				B4E6BE5118DEA6DE00AC9D84 /* thumbs-up@2x.png in Resources */,
 				B4E6BE2618DE3ED100AC9D84 /* EUCCloudViewController.xib in Resources */,
 				B4E6BE3218DE44D900AC9D84 /* EUCImportCell.xib in Resources */,
+				B4E6BE9A18E13C5800AC9D84 /* users@2x.png in Resources */,
 				B4E6BD8E18DDC82600AC9D84 /* line-chart@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

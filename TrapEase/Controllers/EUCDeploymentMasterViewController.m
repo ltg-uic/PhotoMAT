@@ -13,6 +13,7 @@
 #import "EUCDeploymentDetailViewController.h"
 
 @interface EUCDeploymentMasterViewController ()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
 
 @end
 

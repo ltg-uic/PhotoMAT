@@ -6,9 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EUCDeploymentMasterViewController">
             <connections>
-                <outlet property="analyzeButton" destination="Avt-1L-frk" id="Avy-JU-pQL"/>
+                <outlet property="refreshButton" destination="fkC-1v-gJK" id="bfW-xG-OMk"/>
                 <outlet property="tableView" destination="yQC-wm-1Sa" id="V2E-02-YbC"/>
-                <outlet property="tagButton" destination="vrF-yC-asl" id="k1S-UG-03Q"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -39,18 +38,6 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="5zF-es-hGv"/>
-                        <barButtonItem image="tag.png" id="vrF-yC-asl">
-                            <connections>
-                                <action selector="handleTag:" destination="-1" id="BxZ-Q0-2YU"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="fTP-Tm-1LI"/>
-                        <barButtonItem image="line-chart.png" id="Avt-1L-frk">
-                            <connections>
-                                <action selector="handleAnalyze:" destination="-1" id="q65-fn-6XW"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="7tp-Ze-wNz"/>
                     </items>
                 </toolbar>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deployments" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8y3-lp-8B4">
@@ -65,8 +52,4 @@
             <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
-    <resources>
-        <image name="line-chart.png" width="28" height="14"/>
-        <image name="tag.png" width="28" height="28"/>
-    </resources>
 </document>
