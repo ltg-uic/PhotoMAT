@@ -143,9 +143,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSMutableArray * vals = [NSMutableArray arrayWithCapacity:16];
     
     NSMutableArray * people = [[NSMutableArray alloc] initWithCapacity:8];
-    for (NSDictionary * person in deployment[@"person"]) {
-        [people addObject:person[@"first_name"]];
-    }
+    NSDictionary * person = deployment[@"person"];
+    [people addObject:person[@"first_name"]];
+
     NSString * names = [people componentsJoinedByString:@", "];
     
     [self addColumn: @"id" fromDictionary:deployment toColumns:cols andValues:vals];

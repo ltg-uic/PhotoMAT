@@ -69,6 +69,7 @@
     
     self.editView.hidden = !self.editViewVisible;
     
+    
     self.addBurstsButton.hidden = self.isEdit;
     self.doneButton.hidden = !self.isEdit;
 }
