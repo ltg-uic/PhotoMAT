@@ -10,6 +10,7 @@
 #import "EUCDeploymentCell.h"
 #import "EUCNetwork.h"
 #import "EUCDatabase.h"
+#import "EUCDeploymentDetailViewController.h"
 
 @interface EUCDeploymentMasterViewController ()
 
@@ -54,6 +55,8 @@
 }
 
 - (IBAction)handleAdd:(id)sender {
+    [self.detailViewController clearEditView];
+    self.detailViewController.editViewVisible = YES;
 }
 
 - (IBAction)handleRefresh:(id)sender {

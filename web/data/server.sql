@@ -127,6 +127,7 @@ CREATE TABLE burst (
     , deployment_id INT NOT NULL REFERENCES deployment (id) ON DELETE CASCADE ON UPDATE CASCADE
     , temperature_in_celsius INT NULL
     , moon_phase varchar(32) NULL
+    , notes TEXT 
 );
 
 

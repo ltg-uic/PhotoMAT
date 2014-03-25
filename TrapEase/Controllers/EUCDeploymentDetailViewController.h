@@ -10,4 +10,12 @@
 
 @interface EUCDeploymentDetailViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIView *editView;
+
+
+@property (assign, nonatomic) BOOL editViewVisible;
+@property (assign, nonatomic) BOOL isEdit;
+
+-(void) clearEditView;
+
 @end
