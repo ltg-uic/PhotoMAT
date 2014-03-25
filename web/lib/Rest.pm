@@ -27,7 +27,8 @@ sub handleRest {
         my $column_name = 'id';
         my $membership_table = undef;
         my $parent_column = undef;
-        $http_status = get($parent_hash, $h, $r, $dbh, $table, $hash, $column_name, $membership_table, $parent_column);
+        my $expand_path  = undef;
+        $http_status = get($parent_hash, $h, $r, $dbh, $table, $hash, $column_name, $membership_table, $parent_column, $expand_path);
     }
     elsif ($method eq 'POST') { 
         $http_status = post($parent_hash, $h, $adminRequired, $table, $r, $dbh);
@@ -203,19 +204,22 @@ sub post {
 }
 
 sub get { 
-    my ($parent_hash, $h, $r, $dbh, $table, $hash, $column_name, $membership_table, $parent_column) = @_;
+    my ($parent_hash, $h, $r, $dbh, $table, $hash, $column_name, $membership_table, $parent_column, $expand_path) = @_;
     my $http_status = NOT_FOUND;
 
-    my $path = undef;
+    my $path;
     if (defined $hash->{id}) { 
         $path = $hash->{id};
     }
     elsif (defined $parent_hash->{path}) { 
         $path = $parent_hash->{path};
+        $path =~ s/\D//g;
     }
-    $path *= 1;
 
-    if ($path) { 
+    if ($expand_path) { 
+        $hash->{$table} = &Database::getRow($r, $dbh, qq[select * from $table where $column_name=?], $expand_path);
+    }
+    elsif ($path) { 
         if ($membership_table) {
             $hash->{$table} = &Database::getRows($r, $dbh, qq[select t.* from $table t join $membership_table m ON t.id = m.$column_name where m.$parent_column=?], $path);
         } else {
@@ -228,6 +232,7 @@ sub get {
     }
 
     # now cascade 
+    # as defined cascade go from 1 to many
     my $children = &Database::getRows($r, $dbh, qq[select child_table, membership_table from get_cascade where parent_table=?], $table);
     foreach my $child (@$children) { 
         my $cascade_column_name = $table."_id";
@@ -235,15 +240,31 @@ sub get {
             $cascade_column_name = $child->{child_table}."_id";
         }
         foreach my $row (@{$hash->{$table}}) { 
-            get($parent_hash, $h, $r, $dbh, $child->{child_table}, $row, $cascade_column_name, $child->{membership_table}, $table."_id");
+            get($parent_hash, $h, $r, $dbh, $child->{child_table}, $row, $cascade_column_name, $child->{membership_table}, $table."_id", undef);
         }
     }
 
     if ($hash->{$table}) { 
         $http_status = HTTP_OK;
+        if (ref ($hash->{$table}) eq 'HASH') { 
+            delete $hash->{$table}->{password};
+            delete $hash->{$table}->{owner};
+        }
+        else { 
+            foreach my $row (@{$hash->{$table}}) { 
+                delete ($row->{password});
+                delete ($row->{owner});
+            }
+        }
+    }
+
+    # now expand
+    $children = &Database::getRows($r, $dbh, qq[select child_table from get_expand where parent_table=?], $table);
+    foreach my $child (@$children) { 
+        my $expand_column_name = 'id';
+        my $childTableName = $child->{child_table};
         foreach my $row (@{$hash->{$table}}) { 
-            delete ($row->{password});
-            delete ($row->{owner});
+            get($parent_hash, $h, $r, $dbh, $childTableName, $row, $expand_column_name, undef, undef, $row->{$childTableName."_id"});
         }
     }
 

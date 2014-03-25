@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS get_expand;
 DROP TABLE IF EXISTS get_cascade;
 DROP TABLE IF EXISTS tag;
 DROP TABLE IF EXISTS image;
@@ -11,6 +12,9 @@ DROP TABLE IF EXISTS person;
 DROP TABLE IF EXISTS person_group;
 DROP TABLE IF EXISTS class;
 DROP TABLE IF EXISTS school;
+
+-- added deployment person_id
+
 
 CREATE TABLE school (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
@@ -51,7 +55,7 @@ COMMENT ON COLUMN person.is_admin IS 'Admins are not limited to any particular s
 INSERT INTO PERSON (first_name, last_name, password, email) values ('Andy', 'Avalon',  crypt('password', gen_salt('bf', 10)), 'a@example.com');
 INSERT INTO PERSON (first_name, last_name, password, email) values ('Betty', 'Belvidere',  crypt('password', gen_salt('bf', 10)), 'b@example.com');
 INSERT INTO PERSON (first_name, last_name, password, email) values ('Charlie', 'Chatterbox',  crypt('password', gen_salt('bf', 10)), 'c@example.com');
-INSERT INTO PERSON (first_name, last_name, password, email, is_admin) values ('Admin', 'One',  crypt('password', gen_salt('bf', 10)), 'admin@example.com');
+INSERT INTO PERSON (first_name, last_name, password, email, is_admin) values ('Admin', 'One',  crypt('password', gen_salt('bf', 10)), 'admin@example.com', true);
 
 
 CREATE TABLE person_membership (
@@ -90,6 +94,7 @@ INSERT INTO camera (make, model) values ('Trap', 'Gamma');
 CREATE TABLE deployment (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
     , owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE -- this is for internal use only. Do not use this column
+    , person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE
     , deployment_date TIMESTAMP NOT NULL
     , latitude NUMERIC (9,7) NULL
     , longitude NUMERIC (9,7)  NULL
@@ -105,11 +110,11 @@ CREATE TABLE deployment (
 COMMENT ON COLUMN "deployment"."owner" IS 'This column is for internal use only. Do not use this column.';
 
 
-CREATE TABLE deployment_person (
-      deployment_id INT NOT NULL REFERENCES deployment(id) ON DELETE CASCADE ON UPDATE CASCADE
-    , person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-CREATE INDEX i_deployment_person_deployment on deployment_person(deployment_id);
+-- CREATE TABLE deployment_person (
+--       deployment_id INT NOT NULL REFERENCES deployment(id) ON DELETE CASCADE ON UPDATE CASCADE
+--     , person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE
+-- );
+-- CREATE INDEX i_deployment_person_deployment on deployment_person(deployment_id);
 
 CREATE TABLE deployment_picture (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
@@ -168,9 +173,15 @@ CREATE index i_get_cascade_parent on get_cascade(parent_table);
 
 INSERT INTO get_cascade values ('school', 'class');
 INSERT INTO get_cascade values ('class', 'person', 'person_membership');
-INSERT INTO get_cascade values ('deployment', 'person', 'deployment_person');
 INSERT INTO get_cascade values ('deployment', 'deployment_picture');
 INSERT INTO get_cascade values ('deployment', 'burst');
 INSERT INTO get_cascade values ('burst', 'image');
 INSERT INTO get_cascade values ('image', 'tag');
 
+CREATE TABLE get_expand (
+      parent_table varchar(256) NOT NULL
+    , child_table varchar(256) NOT NULL
+);
+CREATE index i_get_expand_parent on get_expand(parent_table);
+
+INSERT INTO get_expand values ('deployment', 'person');

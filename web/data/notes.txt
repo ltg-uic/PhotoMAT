@@ -112,5 +112,14 @@ o Resources web page
 
 o import metat page - 
   o retrieve data - should be editable
-    
+
+
+
+
+login
+sets
+labels (page should indicate set)
+analysis (page should indicate sets, somehow)
+resources (web browser with pre-defined links)
+photos (select one photo from album, blow up to full screen)
 

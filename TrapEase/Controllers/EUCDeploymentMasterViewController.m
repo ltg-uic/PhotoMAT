@@ -56,8 +56,13 @@
 }
 
 - (IBAction)handleAdd:(id)sender {
-    [self.detailViewController clearEditView];
-    self.detailViewController.editViewVisible = YES;
+//    [self.detailViewController clearEditView];
+//    self.detailViewController.editViewVisible = YES;
+    EUCDeploymentDetailViewController * detail = [[EUCDeploymentDetailViewController alloc] initWithNibName:@"EUCDeploymentDetailViewController" bundle:nil];
+    detail.editViewVisible = YES;
+    detail.isEdit = NO;
+    detail.modalPresentationStyle = UIModalPresentationPageSheet;
+    [self presentViewController:detail animated:YES completion:nil];
 }
 
 - (IBAction)handleRefresh:(id)sender {
@@ -104,5 +109,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 88;
 }
+
+
 
 @end

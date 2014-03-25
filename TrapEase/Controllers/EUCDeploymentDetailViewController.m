@@ -46,7 +46,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.editViewVisible = NO;
     CGRect frame = self.shortName.frame;
     frame.size.height = 48;
     self.shortName.frame = frame;
@@ -67,6 +66,8 @@
     if (!self.editViewVisible) {
         [self clearEditView];
     }
+    
+    self.editView.hidden = !self.editViewVisible;
     
     self.addBurstsButton.hidden = self.isEdit;
     self.doneButton.hidden = !self.isEdit;
