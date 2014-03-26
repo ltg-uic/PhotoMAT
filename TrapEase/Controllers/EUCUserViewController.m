@@ -9,6 +9,7 @@
 
 #import "EUCUserViewController.h"
 #import "EUCDatabase.h"
+#import "EUCNetwork.h"
 
 @interface EUCUserViewController ()
 @property (weak, nonatomic) IBOutlet UIPickerView *school;
@@ -19,7 +20,11 @@
 @property (assign, nonatomic) NSInteger schoolRow;
 @property (assign, nonatomic) NSInteger classRow;
 @property (assign, nonatomic) NSInteger groupRow;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *visibility;
 
+- (IBAction)refresh:(id)sender;
+- (IBAction)done:(id)sender;
 @end
 
 @implementation EUCUserViewController
@@ -42,6 +47,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.activityIndicator.hidden = YES;
+    
     self.school.dataSource = self;
     self.school.delegate = self;
     self.classRoom.dataSource = self;
@@ -53,13 +60,63 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [self refreshControlsWithData];
+}
+
+-(void) refreshControlsWithData {
     self.schools = [[EUCDatabase sharedInstance] schools];
+    
+    self.schoolRow = self.classRow = self.groupRow = 0;
+    
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    NSDictionary * settings = db.settings;
+    NSString * visibility = settings[@"visibility"];
+    if ([visibility isEqualToString:@"class"]) {
+        self.visibility.selectedSegmentIndex = 0;
+    }
+    else if ([visibility isEqualToString:@"school"]) {
+        self.visibility.selectedSegmentIndex = 1;
+    }
+    else {
+        self.visibility.selectedSegmentIndex = 2;
+    }
+    
+    
+    for (NSDictionary * school in self.schools) {
+        if ([school[@"id"] isEqualToNumber:settings[@"schoolId"]]) {
+            for (NSDictionary * classRoom in school[@"class"]) {
+                if ([classRoom[@"id"] isEqualToNumber: settings[@"classId"]]) {
+                    for (NSDictionary * person in classRoom[@"person"]) {
+                        if ([person[@"id"] isEqualToNumber:settings[@"personId"]]) {
+                            [self reloadAllPickers];
+                            return;
+                        }
+                        self.groupRow = self.groupRow + 1;
+                    }
+                }
+                self.classRow = self.classRow + 1;
+            }
+            break;
+        }
+        self.schoolRow = self.schoolRow + 1;
+    }
+
+    // if you got here, you didn't find a match for all 3, school, class and group
+    self.schoolRow = self.classRow = self.groupRow = 0;
+
+    
+    [self reloadAllPickers];
+    
+}
+
+-(void) reloadAllPickers {
     [self.school reloadAllComponents];
     [self.classRoom reloadAllComponents];
     [self.group reloadAllComponents];
+    [self.school selectRow:self.schoolRow inComponent:0 animated:YES];
+    [self.classRoom selectRow:self.classRow inComponent:0 animated:YES];
+    [self.group selectRow:self.groupRow inComponent:0 animated:YES];
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -128,11 +185,53 @@
     }
 }
 
-//-(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-//    return 44;
-//}
-//
-//-(CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-//    return 390;
-//}
+
+- (IBAction)refresh:(id)sender {
+    self.activityIndicator.hidden = NO;
+    [EUCNetwork getSchoolsWithSuccessBlock:^(NSArray *objects) {
+        self.activityIndicator.hidden = YES;
+        
+        EUCDatabase * db = [EUCDatabase sharedInstance];
+        [db refreshSchools: objects];
+        
+        [self refreshControlsWithData];
+        
+    } failureBlock:^(NSString *reason) {
+        self.activityIndicator.hidden = YES;
+        
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                             message:reason
+                                                            delegate:self
+                                                   cancelButtonTitle:nil
+                                                   otherButtonTitles:@"OK", nil];
+        
+        [alertView show];
+        
+    }];
+}
+
+- (IBAction)done:(id)sender {
+    NSString * visibilityString;
+    if (self.visibility.selectedSegmentIndex == 0) {
+        visibilityString = @"class";
+    }
+    else if (self.visibility.selectedSegmentIndex == 1) {
+        visibilityString = @"school";
+    }
+    else {
+        visibilityString = @"world";
+    }
+    
+    NSDictionary * settings = @{
+        @"schoolId": self.schools[self.schoolRow][@"id"],
+        @"classId": self.schools[self.schoolRow][@"class"][self.classRow][@"id"],
+        @"personId": self.schools[self.schoolRow][@"class"][self.classRow][@"person"][self.groupRow][@"id"],
+        @"visibility": visibilityString
+        };
+    
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    db.settings = settings;
+}
+
+        
 @end

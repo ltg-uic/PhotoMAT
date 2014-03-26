@@ -7,12 +7,13 @@ create table databaseVersion (
 create table settings ( 
       schoolId int not null default 0
     , classId int not null default 0
+    , personId int not null default 0
     , visibility TEXT NOT NULL default 'class' -- class, school or all
 );
 
 
 insert into databaseVersion values(1);
-insert into settings values(0, 0, 'school');
+insert into settings values(0, 0, 0, 'school');
 
 CREATE TABLE school (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL

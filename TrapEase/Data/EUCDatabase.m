@@ -15,7 +15,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 #define kDBFileName @"trap.db"
 #define kDBBaseName @"trap"
 
-@interface EUCDatabase ()
+@interface EUCDatabase () {
+    NSDictionary * _settings;
+}
 @property (strong, nonatomic) FMDatabase * db;
 @end
 
@@ -103,7 +105,46 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 }
 
+#pragma mark - settings
+-(NSDictionary *)settings {
+    if (_settings) {
+        return _settings;
+    }
+    
+    NSString * sql = @"select schoolId, classId, personId, visibility from settings";
+    FMResultSet * rs = [self.db executeQuery:sql];
+    if ([rs next]) {
+        _settings = @{@"schoolId": @([rs intForColumnIndex:0]),
+                      @"classId": @([rs intForColumnIndex:1]),
+                      @"personId": @([rs intForColumnIndex:2]),
+                      @"visibility": [rs stringForColumnIndex:3]
+                      };
+    }
+
+    [rs close];
+    
+    return _settings;
+}
+
+-(void)setSettings:(NSDictionary *)settings {
+    NSString * sql = @"update settings set schoolId=?, classId=?, personId=?, visibility=?";
+    
+    [self.db executeUpdate:sql, settings[@"schoolId"], settings[@"classId"], settings[@"personId"], settings[@"visibility"]];
+    
+}
+
 #pragma mark - schools
+
+-(BOOL)hasSchools {
+    NSString * sql = @"select id from school";
+    FMResultSet * rs = [self.db executeQuery:sql];
+    if ([rs next]) {
+        [rs close];
+        return YES;
+    }
+    [rs close];
+    return NO;
+}
 
 -(void) refreshSchools: (NSArray *) schools {
     [self clearTable:@"person"];

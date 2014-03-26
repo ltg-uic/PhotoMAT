@@ -73,10 +73,16 @@
     self.homeViewController = [[EUCHomeViewController alloc] init];
     self.homeViewController.viewControllers = @[user, dsvc, label, analyze, cloud, settings];
     
-    EUCConnectingViewController * connect = [[EUCConnectingViewController alloc] initWithNibName:@"EUCConnectingViewController" bundle:nil];
-    self.window.rootViewController = connect;
+    // check to see if you have school data
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    if ([db hasSchools]) {
+        self.window.rootViewController = self.homeViewController;
+    }
+    else {
+        EUCConnectingViewController * connect = [[EUCConnectingViewController alloc] initWithNibName:@"EUCConnectingViewController" bundle:nil];
+        self.window.rootViewController = connect;
+    }
 
-//    self.window.rootViewController = self.homeViewController;
     [self.window makeKeyAndVisible];
     return YES;
 }

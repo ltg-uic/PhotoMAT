@@ -13,6 +13,8 @@
 @interface EUCDatabase : NSObject
 
 @property (readonly, nonatomic) FMDatabase * db;
+@property (strong, nonatomic) NSDictionary *settings;
+
 
 +(EUCDatabase *) sharedInstance;
 
@@ -23,5 +25,7 @@
 -(void) refreshSchools: (NSArray *) schools;
 
 -(NSArray *) schools;
+
+-(BOOL) hasSchools;
 
 @end
