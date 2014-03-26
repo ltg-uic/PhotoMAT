@@ -19,7 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Deployments", "Deployments")
+        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Sets", "Sets")
                                                         image:[UIImage imageNamed:@"deployments.png"]
                                                 selectedImage:nil];
 
