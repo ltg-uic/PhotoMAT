@@ -83,7 +83,7 @@
     else {
         self.visibility.selectedSegmentIndex = 2;
     }
-    
+        
     
     for (NSDictionary * school in self.schools) {
         if ([school[@"id"] isEqualToNumber:settings[@"schoolId"]]) {

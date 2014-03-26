@@ -172,7 +172,7 @@ CGFloat defaultWideness = 314.0/226.0;
     UIImage * image = [self blurredSnapshot];
     
     EUCSelectViewController * selectViewController = [[EUCSelectViewController alloc] initWithNibName:@"EUCSelectViewController" bundle:nil assetGroup:(ALAssetsGroup *) self.groups[indexPath.row] image:image];
-        
+    
     [self presentViewController:selectViewController animated:NO completion:nil];
 }
 
@@ -214,19 +214,9 @@ CGFloat defaultWideness = 314.0/226.0;
     // Now apply the blur effect using Apple's UIImageEffect category
     UIImage *blurredSnapshotImage = [snapshotImage applyLightEffect];
     
-    // Or apply any other effects available in "UIImage+ImageEffects.h"
-    // UIImage *blurredSnapshotImage = [snapshotImage applyDarkEffect];
-    // UIImage *blurredSnapshotImage = [snapshotImage applyExtraLightEffect];
     
     // Be nice and clean your mess up
     UIGraphicsEndImageContext();
-    
-//    CGFloat scaleValue = 1.0;
-    
-//    CGRect subRect = CGRectMake(0, 0, self.view.window.frame.size.width / scaleValue, self.view.window.frame.size.height / scaleValue);
-//    CGImageRef subImage = CGImageCreateWithImageInRect(blurredSnapshotImage.CGImage, subRect);
-//    UIImage *backgroundImage = [UIImage imageWithCGImage:subImage];
-//    CGImageRelease(subImage);
     
     
     // return blurredSnapshotImage;

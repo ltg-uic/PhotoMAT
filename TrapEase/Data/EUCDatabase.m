@@ -131,6 +131,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     [self.db executeUpdate:sql, settings[@"schoolId"], settings[@"classId"], settings[@"personId"], settings[@"visibility"]];
     
+    _settings = [NSDictionary dictionaryWithDictionary:settings]; // make a copy of the settings, and leave the original one untouched
+    
 }
 
 #pragma mark - schools

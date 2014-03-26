@@ -123,3 +123,150 @@ analysis (page should indicate sets, somehow)
 resources (web browser with pre-defined links)
 photos (select one photo from album, blow up to full screen)
 
+
+
+
+
+
+select * from deployment where owner in (select person_id from person_membership where class_id in (select class_id from person_membership where person_id=1));
+
+
+select m.person_id from person_membership m join person_membership n on n.person_id=1 and m.class_id = n.class_id;
+select distinct(m.person_id) from person_membership m join person_membership n on m.class_id = n.class_id and n.person_id=4;
+
+
+select * from 
+deployment d join 
+person_membership m 
+on d.owner=m.person_id 
+join person_membership n on 
+m.class_id = n.class_id and n.person_id = 1;
+
+
+
+select * from 
+deployment d join (
+select distinct(m.person_id) from person_membership m join person_membership n on m.class_id = n.class_id and n.person_id=4) p
+on d.owner=p.person_id
+;
+
+
+
+
+my class only: 
+select * from deployment d join 
+(select distinct(m.person_id) from person_membership m join person_membership n on m.class_id = n.class_id and n.person_id=4) p 
+on d.owner=p.person_id;
+
+
+select * from deployment d join 
+(select distinct(m.person_id) from person_membership m join person_membership n on m.class_id = n.class_id and n.person_id=4) p 
+on d.owner=p.person_id;
+
+
+
+
+my school
+
+select distinct(school_id) from person_membership n join class c on n.class_id = c.id and n.person_id=1;
+
+
+persons that are in school 1
+trapdb=> select distinct(m.person_id) from person_membership m join class c0 on c0.id = m.class_id and c0.school_id=1;
+
+persons that are in same school as person 1
+select distinct(m.person_id) from person_membership m join class c0 on c0.id = m.class_id join (SELECT distinct(school_id) from person_membership n join class c on n.class_id = c.id and n.person_id=1) s on s.school_id = c0.school_id
+
+
+
+select distinct(m.person_id) from person_membership m join class c0 on c0.id = m.class_id join (SELECT distinct(school_id) from person_membership n join class c on n.class_id = c.id and n.person_id=3) s on s.school_id = c0.school_id
+
+
+
+deployments from persons in same school as pers 1
+select * from deployment d join (select distinct(m.person_id) from person_membership m join class c0 on c0.id = m.class_id join (SELECT distinct(school_id) from person_membership n join class c on n.class_id = c.id and n.person_id=3) s on s.school_id = c0.school_id) p on d.person_id = p.person_id
+
+
+
+
+
+my class only: 
+select * from deployment d join 
+(select distinct(m.person_id) from person_membership m join person_membership n on m.class_id = n.class_id and n.person_id=4) p 
+on d.owner=p.person_id;
+
+select * from deployment d join (select distinct(m.person_id) from person_membership m join class c0 on c0.id = m.class_id join (SELECT distinct(school_id) from person_membership n join class c on n.class_id = c.id and n.person_id=3) s on s.school_id = c0.school_id) p on d.person_id = p.person_id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
