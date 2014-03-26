@@ -16,6 +16,7 @@
 #import "EUCDeploymentSplitViewController.h"
 #import "EUCDeploymentMasterViewController.h"
 #import "EUCDeploymentDetailViewController.h"
+#import "EUCUserViewController.h"
 
 #import "EUCDatabase.h"
 #import "DDLog.h"
@@ -63,12 +64,14 @@
     EUCDeploymentDetailViewController * detail = [[EUCDeploymentDetailViewController alloc] initWithNibName:@"EUCDeploymentDetailViewController" bundle:nil];
     EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
     EUCAnalyzeViewController * analyze = [[EUCAnalyzeViewController alloc] initWithNibName:@"EUCAnalyzeViewController" bundle:nil];
+    EUCUserViewController * user = [[EUCUserViewController alloc] initWithNibName:@"EUCUserViewController" bundle:nil];
+    
     master.detailViewController = detail;
     
     dsvc.viewControllers = @[master, detail];
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
-    self.homeViewController.viewControllers = @[dsvc, label, analyze, cloud, settings];
+    self.homeViewController.viewControllers = @[user, dsvc, label, analyze, cloud, settings];
     
     EUCConnectingViewController * connect = [[EUCConnectingViewController alloc] initWithNibName:@"EUCConnectingViewController" bundle:nil];
     self.window.rootViewController = connect;

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EUCUserViewController : UIViewController
+@interface EUCUserViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @end
