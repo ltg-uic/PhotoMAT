@@ -22,4 +22,6 @@
 
 -(void) refreshSchools: (NSArray *) schools;
 
+-(NSArray *) schools;
+
 @end

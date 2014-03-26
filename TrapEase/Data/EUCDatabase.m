@@ -106,6 +106,94 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 #pragma mark - schools
 
 -(void) refreshSchools: (NSArray *) schools {
+    [self clearTable:@"person"];
+    [self clearTable:@"class"];
+    [self clearTable:@"school"];
+    [self clearTable:@"person_membership"];
+    
+    
+    for (NSDictionary * school in schools) {
+        [self saveSchool: school];
+    }
+}
+
+-(void) saveSchool: (NSDictionary *) school {
+    [self.db executeUpdate:@"insert into school (id, name) values (?, ?)", school[@"id"], school[@"name"]];
+    
+    if (school[@"class"] != [NSNull null]) {
+        for (NSDictionary * classRoom in school[@"class"]) {
+            [self saveClass: classRoom];
+        }
+    }
+}
+
+-(void) saveClass: (NSDictionary *) classRoom {
+    [self.db executeUpdate:@"insert into class (id, name, school_id) values (?, ?, ?)", classRoom[@"id"], classRoom[@"name"], classRoom[@"school_id"]];
+    
+    if (classRoom[@"person"] != [NSNull null]) {
+        for (NSDictionary * person in classRoom[@"person"]) {
+            [self savePerson: person forClass: classRoom[@"id"]];
+        }
+    }
+}
+
+-(void) savePerson: (NSDictionary *) person forClass: (NSNumber *) classId {
+    [self.db executeUpdate:@"insert or replace into person (id, first_name, last_name) values (?, ?, ?)", person[@"id"], person[@"first_name"], person[@"last_name"]];
+    [self.db executeUpdate:@"insert into person_membership (person_id, class_id) values(?, ?)", person[@"id"], classId];
+}
+
+-(NSArray *) schools {
+    NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:8];
+    NSString * sql = @"select id, name from school order by name";
+    FMResultSet * rs = [self.db executeQuery:sql];
+    while ([rs next]) {
+        NSInteger schoolId = [rs intForColumnIndex:0];
+        
+        NSMutableDictionary * row = [NSMutableDictionary dictionaryWithCapacity:3];
+        row[@"id"] = @(schoolId);
+        row[@"name"] = [rs stringForColumnIndex:1];
+        row[@"class"] = [self classRoomsForSchool: schoolId];
+        
+        [array addObject:row];
+    }
+    
+    return array;
+}
+
+-(NSArray *) classRoomsForSchool: (NSInteger) schoolId {
+    NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:8];
+    NSString * sql = @"select id, name from class where school_id = ? order by name";
+    FMResultSet * rs = [self.db executeQuery:sql, @(schoolId)];
+    while ([rs next]) {
+        NSInteger classId = [rs intForColumnIndex:0];
+        
+        NSMutableDictionary * row = [NSMutableDictionary dictionaryWithCapacity:3];
+        row[@"id"] = @(classId);
+        row[@"name"] = [rs stringForColumnIndex:1];
+        row[@"person"] = [self personsForClass: classId];
+        
+        [array addObject:row];
+    }
+    
+    return array;
+}
+
+-(NSArray *) personsForClass: (NSInteger) classId {
+    NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:32];
+    NSString * sql = @"select p.id, p.first_name, p.last_name from person p join person_membership m on p.id = m.person_id where m.class_id = ? order by p.first_name";
+    FMResultSet * rs = [self.db executeQuery:sql, @(classId)];
+    while ([rs next]) {
+        NSInteger personId = [rs intForColumnIndex:0];
+        
+        NSMutableDictionary * row = [NSMutableDictionary dictionaryWithCapacity:3];
+        row[@"id"] = @(personId);
+        row[@"firstName"] = [rs stringForColumnIndex:1];
+        row[@"lastName"] = [rs stringForColumnIndex:2];
+        
+        [array addObject:row];
+    }
+    
+    return array;
 }
 
 #pragma mark - deployments

@@ -7,11 +7,13 @@
 //
 
 #import "EUCUserViewController.h"
+#import "EUCDatabase.h"
 
 @interface EUCUserViewController ()
 @property (weak, nonatomic) IBOutlet UIPickerView *school;
 @property (weak, nonatomic) IBOutlet UIPickerView *classRoom;
 @property (weak, nonatomic) IBOutlet UIPickerView *group;
+@property (strong, nonatomic) NSArray *schools;
 
 @end
 
@@ -25,7 +27,6 @@
         self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Group", "Group")
                                                         image:[UIImage imageNamed:@"users.png"]
                                                 selectedImage:nil];
-
     }
     return self;
 }
@@ -41,6 +42,13 @@
     self.classRoom.delegate = self;
     self.group.dataSource = self;
     self.group.delegate = self;
+    
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.schools = [[EUCDatabase sharedInstance] schools];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,7 +60,22 @@
 #pragma mark - UIPickerViewDataSource
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return 5;
+    
+    if (pickerView == self.school) {
+        return [self.schools count];
+    }
+    else if (pickerView == self.classRoom) {
+        NSInteger schoolRow = [self.school selectedRowInComponent:0];
+        return ([self.schools[schoolRow][@"class"] count]);
+    }
+    else if (pickerView == self.group) {
+        NSInteger schoolRow = [self.school selectedRowInComponent:0];
+        NSInteger classRow = [self.classRoom selectedRowInComponent:0];
+        return ([self.schools[schoolRow][@"class"][classRow][@"person"] count]);
+    }
+    else {
+        return 0;
+    }
 }
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -62,18 +85,32 @@
 #pragma mark - UIPickerViewDelegate
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [NSString stringWithFormat:@"Row %d", row];
+    if (pickerView == self.school) {
+        return self.schools[row][@"name"];
+    }
+    else if (pickerView == self.classRoom) {
+        NSInteger schoolRow = [self.school selectedRowInComponent:0];
+        return (self.schools[schoolRow][@"class"][row][@"name"]);
+    }
+    else if (pickerView == self.group) {
+        NSInteger schoolRow = [self.school selectedRowInComponent:0];
+        NSInteger classRow = [self.classRoom selectedRowInComponent:0];
+        return (self.schools[schoolRow][@"class"][classRow][@"person"][row][@"first_name"]);
+    }
+    else {
+        return @"";
+    }
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
 }
 
--(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-    return 44;
-}
-
--(CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-    return 390;
-}
+//-(CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
+//    return 44;
+//}
+//
+//-(CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
+//    return 390;
+//}
 @end

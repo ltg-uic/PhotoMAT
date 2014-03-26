@@ -12,7 +12,7 @@ create table settings (
 
 
 insert into databaseVersion values(1);
-insert into settings values(0, 0);
+insert into settings values(0, 0, 'school');
 
 CREATE TABLE school (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
@@ -29,11 +29,8 @@ CREATE TABLE person (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
     , first_name varchar(256) NOT NULL
     , last_name varchar(256) NOT NULL
-    , password char(60) NOT NULL
-    , email VARCHAR(256) UNIQUE NOT NULL
     , is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );
-create index i_person_email on person(email);
 
 CREATE TABLE person_membership (
       person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE
