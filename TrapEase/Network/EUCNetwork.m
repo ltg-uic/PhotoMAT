@@ -76,19 +76,28 @@
     
 }
 
-+(void) getDeploymentsWithSuccessBlock: (EUCDeploymentsSuccessBlock) successBlock failureBlock: (EUCDeploymentsFailureBlock) failureBlock {
++(void) getObject: (NSString *) object WithSuccessBlock: (EUCGetSuccessBlock) successBlock failureBlock: (EUCGetFailureBlock) failureBlock {
     EUCNetwork * network = [EUCNetwork sharedNetwork];
     
-    [network.sessionManager GET:@"/deployment"
+    [network.sessionManager GET:[NSString stringWithFormat:@"/%@", object]
                      parameters:nil
                         success:^(NSURLSessionDataTask *task, id responseObject) {
                             NSDictionary * result = (NSDictionary *) responseObject;
-                            successBlock(result[@"deployment"]);
+                            successBlock(result[object]);
                         }
                         failure:^(NSURLSessionDataTask *task, NSError *error) {
                             failureBlock([NSString stringWithFormat:@"Error: %@", error]);
                         }];
     
+}
+
+
++(void) getSchoolsWithSuccessBlock:(EUCSchoolSuccessBlock)successBlock failureBlock:(EUCSchoolFailureBlock)failureBlock {
+    [EUCNetwork getObject:@"school" WithSuccessBlock:successBlock failureBlock:failureBlock];
+}
+
++(void)getDeploymentsWithSuccessBlock:(EUCDeploymentsSuccessBlock)successBlock failureBlock:(EUCDeploymentsFailureBlock)failureBlock {
+    [EUCNetwork getObject:@"deployment" WithSuccessBlock:successBlock failureBlock:failureBlock];
 }
 
 

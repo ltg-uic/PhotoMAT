@@ -7,6 +7,7 @@
 //
 
 #import "EUCHomeViewController.h"
+#import "EUCConnectingViewController.h"
 
 @interface EUCHomeViewController ()
 
@@ -28,7 +29,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.automaticallyAdjustsScrollViewInsets = YES;
+    
 }
+
+//-(void) viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    EUCConnectingViewController * connect = [[EUCConnectingViewController alloc] initWithNibName:@"EUCConnectingViewController" bundle:nil];
+//    [self presentViewController:connect animated:YES completion:nil];
+//
+//}
+
 
 - (void)didReceiveMemoryWarning
 {

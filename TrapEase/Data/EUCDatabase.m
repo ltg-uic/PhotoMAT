@@ -103,6 +103,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 }
 
+#pragma mark - schools
+
+-(void) refreshSchools: (NSArray *) schools {
+}
+
 #pragma mark - deployments
 
 -(NSArray *) getDeployments {

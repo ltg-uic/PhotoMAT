@@ -20,4 +20,6 @@
 
 -(NSArray *) getDeployments;
 
+-(void) refreshSchools: (NSArray *) schools;
+
 @end

@@ -14,8 +14,20 @@ typedef void(^EUCBlock)(void);
 typedef void(^EUCNetworkSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject);
 typedef void(^EUCNetworkFailureBlock)(AFHTTPRequestOperation *operation, NSError *error);
 
-typedef void(^EUCDeploymentsSuccessBlock)(NSArray * deployments);
-typedef void(^EUCDeploymentsFailureBlock)(NSString * reason);
+typedef void(^EUCGetSuccessBlock)(NSArray * objects);
+typedef void(^EUCGetFailureBlock)(NSString * reason);
+
+
+typedef EUCGetSuccessBlock EUCDeploymentsSuccessBlock;
+typedef EUCGetFailureBlock EUCDeploymentsFailureBlock;
+typedef EUCGetSuccessBlock EUCSchoolSuccessBlock;
+typedef EUCGetFailureBlock EUCSchoolFailureBlock;
+
+//typedef void(^EUCDeploymentsSuccessBlock)(NSArray * deployments);
+//typedef void(^EUCDeploymentsFailureBlock)(NSString * reason);
+
+//typedef void(^EUCSchoolsSuccessBlock)(NSArray * schools);
+//typedef void(^EUCSchoolsFailureBlock)(NSString * reason);
 
 typedef void(^EUCDownloadTaskCompletionBlock)(NSURLResponse * response, NSURL * filePath, NSError * error);
 
@@ -23,7 +35,9 @@ typedef void(^EUCDownloadTaskCompletionBlock)(NSURLResponse * response, NSURL * 
 
 +(void) downloadImage:(NSString *) imageURL toFile: (NSString *) filePath completion: (EUCDownloadTaskCompletionBlock) completionBlock;
 
++(void) getObject: (NSString *) object WithSuccessBlock: (EUCGetSuccessBlock) successBlock failureBlock: (EUCGetFailureBlock) failureBlock;
 
 +(void) getDeploymentsWithSuccessBlock: (EUCDeploymentsSuccessBlock) successBlock failureBlock: (EUCDeploymentsFailureBlock) failureBlock;
++(void) getSchoolsWithSuccessBlock: (EUCSchoolSuccessBlock) successBlock failureBlock: (EUCSchoolFailureBlock) failureBlock;
 
 @end

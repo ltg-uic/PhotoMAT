@@ -95,6 +95,10 @@
 		B4E6BE9818E13C5800AC9D84 /* photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE9018E13C5800AC9D84 /* photo@2x.png */; };
 		B4E6BE9918E13C5800AC9D84 /* users.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE9118E13C5800AC9D84 /* users.png */; };
 		B4E6BE9A18E13C5800AC9D84 /* users@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE9218E13C5800AC9D84 /* users@2x.png */; };
+		B4E6BE9F18E23BA500AC9D84 /* EUCUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BE9D18E23BA500AC9D84 /* EUCUserViewController.m */; };
+		B4E6BEA018E23BA500AC9D84 /* EUCUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BE9E18E23BA500AC9D84 /* EUCUserViewController.xib */; };
+		B4E6BEA418E23D8200AC9D84 /* EUCConnectingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BEA218E23D8200AC9D84 /* EUCConnectingViewController.m */; };
+		B4E6BEA518E23D8200AC9D84 /* EUCConnectingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BEA318E23D8200AC9D84 /* EUCConnectingViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,6 +225,12 @@
 		B4E6BE9018E13C5800AC9D84 /* photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo@2x.png"; sourceTree = "<group>"; };
 		B4E6BE9118E13C5800AC9D84 /* users.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = users.png; sourceTree = "<group>"; };
 		B4E6BE9218E13C5800AC9D84 /* users@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "users@2x.png"; sourceTree = "<group>"; };
+		B4E6BE9C18E23BA500AC9D84 /* EUCUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCUserViewController.h; path = TrapEase/Controllers/EUCUserViewController.h; sourceTree = "<group>"; };
+		B4E6BE9D18E23BA500AC9D84 /* EUCUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCUserViewController.m; path = TrapEase/Controllers/EUCUserViewController.m; sourceTree = "<group>"; };
+		B4E6BE9E18E23BA500AC9D84 /* EUCUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCUserViewController.xib; path = TrapEase/Controllers/EUCUserViewController.xib; sourceTree = "<group>"; };
+		B4E6BEA118E23D8200AC9D84 /* EUCConnectingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCConnectingViewController.h; path = TrapEase/Controllers/EUCConnectingViewController.h; sourceTree = "<group>"; };
+		B4E6BEA218E23D8200AC9D84 /* EUCConnectingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCConnectingViewController.m; path = TrapEase/Controllers/EUCConnectingViewController.m; sourceTree = "<group>"; };
+		B4E6BEA318E23D8200AC9D84 /* EUCConnectingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCConnectingViewController.xib; path = TrapEase/Controllers/EUCConnectingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -376,6 +386,12 @@
 				B4E6BE8618E0729900AC9D84 /* EUCDeploymentDetailViewController.h */,
 				B4E6BE8718E0729900AC9D84 /* EUCDeploymentDetailViewController.m */,
 				B4E6BE8818E0729900AC9D84 /* EUCDeploymentDetailViewController.xib */,
+				B4E6BE9C18E23BA500AC9D84 /* EUCUserViewController.h */,
+				B4E6BE9D18E23BA500AC9D84 /* EUCUserViewController.m */,
+				B4E6BE9E18E23BA500AC9D84 /* EUCUserViewController.xib */,
+				B4E6BEA118E23D8200AC9D84 /* EUCConnectingViewController.h */,
+				B4E6BEA218E23D8200AC9D84 /* EUCConnectingViewController.m */,
+				B4E6BEA318E23D8200AC9D84 /* EUCConnectingViewController.xib */,
 			);
 			name = Controllers;
 			path = ..;
@@ -539,7 +555,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = EUC;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Euclid Software, LLC";
 				TargetAttributes = {
 					B4D1EC2C18BD729300E01EFE = {
@@ -578,6 +594,7 @@
 				B4E6BE0F18DDFF2F00AC9D84 /* upload.png in Resources */,
 				B4E6BD8A18DDC82600AC9D84 /* download@2x.png in Resources */,
 				B4E6BE9618E13C5800AC9D84 /* camera@2x.png in Resources */,
+				B4E6BEA018E23BA500AC9D84 /* EUCUserViewController.xib in Resources */,
 				B4E6BD9218DDC82600AC9D84 /* tag@2x.png in Resources */,
 				B4E6BE1F18DE3EB400AC9D84 /* cloud@2x.png in Resources */,
 				B4D1EC3B18BD729300E01EFE /* InfoPlist.strings in Resources */,
@@ -608,6 +625,7 @@
 				B4E6BD8918DDC82600AC9D84 /* download.png in Resources */,
 				B4E6BD6418DDC30C00AC9D84 /* EUCImportViewController.xib in Resources */,
 				B4E6BD7618DDC39300AC9D84 /* EUCAnalyzeViewController.xib in Resources */,
+				B4E6BEA518E23D8200AC9D84 /* EUCConnectingViewController.xib in Resources */,
 				B4E6BD8718DDC82600AC9D84 /* bar-chart.png in Resources */,
 				B4E6BE4F18DEA6DE00AC9D84 /* thumbs-down@2x.png in Resources */,
 				B4E6BE1018DDFF2F00AC9D84 /* upload@2x.png in Resources */,
@@ -677,6 +695,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4E6BE9F18E23BA500AC9D84 /* EUCUserViewController.m in Sources */,
 				B4E6BE8918E0729900AC9D84 /* EUCDeploymentDetailViewController.m in Sources */,
 				B4E6BD6818DDC33C00AC9D84 /* EUCFilterViewController.m in Sources */,
 				B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */,
@@ -688,6 +707,7 @@
 				B4E6BE2A18DE3EE200AC9D84 /* EUCSettingsViewController.m in Sources */,
 				B4E6BE4718DEA5BB00AC9D84 /* EUCSelectCell.m in Sources */,
 				B4D1EC4118BD729300E01EFE /* EUCAppDelegate.m in Sources */,
+				B4E6BEA418E23D8200AC9D84 /* EUCConnectingViewController.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
 				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,
 				B4E6BE8218DFD47700AC9D84 /* EUCDeploymentMasterViewController.m in Sources */,
@@ -744,7 +764,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -784,7 +803,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -847,7 +865,6 @@
 		B4D1EC5D18BD729300E01EFE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TrapEase.app/TrapEase";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -870,7 +887,6 @@
 		B4D1EC5E18BD729300E01EFE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/TrapEase.app/TrapEase";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

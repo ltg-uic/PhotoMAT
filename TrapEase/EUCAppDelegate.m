@@ -22,6 +22,8 @@
 #import "DDFileLogger.h"
 #import "DDTTYLogger.h"
 
+#import "EUCConnectingViewController.h"
+
 @implementation EUCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -67,7 +69,11 @@
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
     self.homeViewController.viewControllers = @[dsvc, label, analyze, cloud, settings];
-    self.window.rootViewController = self.homeViewController;
+    
+    EUCConnectingViewController * connect = [[EUCConnectingViewController alloc] initWithNibName:@"EUCConnectingViewController" bundle:nil];
+    self.window.rootViewController = connect;
+
+//    self.window.rootViewController = self.homeViewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
