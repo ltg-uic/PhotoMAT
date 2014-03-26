@@ -172,10 +172,7 @@ CGFloat defaultWideness = 314.0/226.0;
     UIImage * image = [self blurredSnapshot];
     
     EUCSelectViewController * selectViewController = [[EUCSelectViewController alloc] initWithNibName:@"EUCSelectViewController" bundle:nil assetGroup:(ALAssetsGroup *) self.groups[indexPath.row] image:image];
-    
-//    EUCBlurSelectViewController * blurSelectViewController = [[EUCBlurSelectViewController alloc] initWithNibName:@"EUCBlurSelectViewController" bundle:nil];
-//    blurSelectViewController.image = image;
-    
+        
     [self presentViewController:selectViewController animated:NO completion:nil];
 }
 
