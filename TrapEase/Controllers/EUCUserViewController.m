@@ -55,7 +55,10 @@
     self.classRoom.delegate = self;
     self.group.dataSource = self;
     self.group.delegate = self;
-    
+
+    [self.visibility addTarget:self
+                         action:@selector(done:)
+               forControlEvents:UIControlEventValueChanged];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -183,6 +186,7 @@
     else {
         self.groupRow = [self.group selectedRowInComponent:0];
     }
+    [self done:nil];
 }
 
 
