@@ -180,7 +180,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 -(void) savePerson: (NSDictionary *) person forClass: (NSNumber *) classId {
-    [self.db executeUpdate:@"insert or replace into person (id, first_name, last_name, class_id) values (?, ?, ?)", person[@"id"], person[@"first_name"], person[@"last_name"], person[@"class_id"]];
+    [self.db executeUpdate:@"insert or replace into person (id, first_name, last_name, class_id) values (?, ?, ?, ?)", person[@"id"], person[@"first_name"], person[@"last_name"], person[@"class_id"]];
 }
 
 -(NSArray *) schools {
@@ -242,12 +242,12 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(NSArray *) getDeployments {
     NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:64];
     
-    NSString * sql = @"select names, deployment_date from deployment order by deployment_date desc";
+    NSString * sql = @"select person_name, deployment_date from deployment order by deployment_date desc";
     
     FMResultSet * rs = [self.db executeQuery:sql];
     
     while ([rs next]) {
-        NSDictionary * row = @{@"names": [rs stringForColumnIndex:0],
+        NSDictionary * row = @{@"person_name": [rs stringForColumnIndex:0],
                                @"date": [rs stringForColumnIndex:1]
                                };
         
@@ -273,14 +273,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 -(void) saveDeployment: (NSDictionary *) deployment {
-    NSMutableArray * cols = [NSMutableArray arrayWithCapacity:16];
-    NSMutableArray * vals = [NSMutableArray arrayWithCapacity:16];
+    NSMutableArray * cols = [NSMutableArray arrayWithCapacity:13];
+    NSMutableArray * vals = [NSMutableArray arrayWithCapacity:13];
     
-    NSMutableArray * people = [[NSMutableArray alloc] initWithCapacity:8];
-    NSDictionary * person = deployment[@"person"];
-    [people addObject:person[@"first_name"]];
-
-    NSString * names = [people componentsJoinedByString:@", "];
     
     [self addColumn: @"id" fromDictionary:deployment toColumns:cols andValues:vals];
     [self addColumn: @"deployment_date" fromDictionary:deployment toColumns:cols andValues:vals];
@@ -294,9 +289,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self addColumn: @"camera" fromDictionary:deployment toColumns:cols andValues:vals];
     [self addColumn: @"nominal_mark_time" fromDictionary:deployment toColumns:cols andValues:vals];
     [self addColumn: @"actual_mark_time" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"person_name" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"class_name" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"school_name" fromDictionary:deployment toColumns:cols andValues:vals];
     
-    [cols addObject:@"names"];
-    [vals addObject:names];
     
     [self insertColumns:cols andValues:vals intoTable:@"deployment"];
 }

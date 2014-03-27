@@ -31,6 +31,7 @@ CREATE TABLE person (
     , first_name varchar(256) NOT NULL
     , last_name varchar(256) NOT NULL
     , is_admin BOOLEAN NOT NULL DEFAULT FALSE
+    , class_id INT NOT NULL REFERENCES class(id)
 );
 
 CREATE TABLE person_membership (
@@ -75,7 +76,9 @@ CREATE TABLE deployment (
     , camera INT NOT NULL REFERENCES camera(id) ON UPDATE CASCADE
     , nominal_mark_time TIMESTAMP NOT NULL
     , actual_mark_time TIMESTAMP NOT NULL
-    , names TEXT NOT NULL
+    , person_name TEXT NOT NULL
+    , class_name TEXT NOT NULL
+    , school_name TEXT NOT NULL
 );
 create index i_dep_id on deployment(id);
 

@@ -235,6 +235,7 @@
     
     EUCDatabase * db = [EUCDatabase sharedInstance];
     db.settings = settings;
+    [EUCNetwork updatePersonId:settings[@"personId"]];
 }
 
         

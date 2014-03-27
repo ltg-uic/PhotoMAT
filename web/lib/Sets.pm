@@ -33,7 +33,7 @@ sub handle {
 
     if ($path eq 'class') { 
         $sql = qq[
-            select d.id, d.person_id, d.short_name, p.first_name, d.deployment_date, p.class_id, c.name, s.name 
+            select d.*, p.first_name as person_name, c.name as class_name, s.name as school_name
             from deployment d 
             join person p on p.id = d.person_id  
             join person q on q.class_id=p.class_id  
@@ -46,7 +46,7 @@ sub handle {
     }
     elsif ($path eq 'school') { 
         $sql = qq[
-            select d.id, d.person_id, d.short_name, p.first_name, d.deployment_date, p.class_id, c.name, s.name 
+            select d.*, p.first_name as person_name, c.name as class_name, s.name as school_name
             from deployment d 
             join person p on p.id = d.person_id  
             join class c on c.id=p.class_id 
@@ -60,7 +60,7 @@ sub handle {
     }
     else { 
         $sql = qq[
-            select d.id, d.person_id, d.short_name, p.first_name, d.deployment_date, p.class_id, c.name, s.name 
+            select d.*, p.first_name as person_name, c.name as class_name, s.name as school_name
             from deployment d 
             join person p on p.id = d.person_id  
             join class c on c.id=p.class_id 

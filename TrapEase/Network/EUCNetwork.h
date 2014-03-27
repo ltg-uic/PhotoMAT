@@ -32,7 +32,8 @@ typedef void(^EUCDownloadTaskCompletionBlock)(NSURLResponse * response, NSURL * 
 
 +(void) getObject: (NSString *) object WithSuccessBlock: (EUCGetSuccessBlock) successBlock failureBlock: (EUCGetFailureBlock) failureBlock;
 
-+(void) getDeploymentsWithSuccessBlock: (EUCDeploymentsSuccessBlock) successBlock failureBlock: (EUCDeploymentsFailureBlock) failureBlock;
++(void) getDeploymentsWithVisibility: (NSString *) visibility andSuccessBlock: (EUCDeploymentsSuccessBlock) successBlock failureBlock: (EUCDeploymentsFailureBlock) failureBlock;
 +(void) getSchoolsWithSuccessBlock: (EUCSchoolSuccessBlock) successBlock failureBlock: (EUCSchoolFailureBlock) failureBlock;
 
++(void) updatePersonId: (NSNumber *) personId;
 @end

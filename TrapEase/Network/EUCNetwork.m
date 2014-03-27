@@ -41,6 +41,10 @@
     return self;
 }
 
++(void)updatePersonId:(NSNumber *)personId {
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
+    [network.sessionManager.requestSerializer setValue:[NSString stringWithFormat:@"WouldntItBeCool%d", [personId intValue]] forHTTPHeaderField:@"X-Trap-Token"];
+}
 
 +(void)downloadImage:(NSString *)imageURL toFile:(NSString *)filePath completion:(EUCDownloadTaskCompletionBlock)completionBlock {
     NSFileManager * fileManager = [NSFileManager defaultManager];
@@ -96,8 +100,18 @@
     [EUCNetwork getObject:@"school" WithSuccessBlock:successBlock failureBlock:failureBlock];
 }
 
-+(void)getDeploymentsWithSuccessBlock:(EUCDeploymentsSuccessBlock)successBlock failureBlock:(EUCDeploymentsFailureBlock)failureBlock {
-    [EUCNetwork getObject:@"deployment" WithSuccessBlock:successBlock failureBlock:failureBlock];
++(void)getDeploymentsWithVisibility: (NSString *) visibility andSuccessBlock:(EUCDeploymentsSuccessBlock)successBlock failureBlock:(EUCDeploymentsFailureBlock)failureBlock {
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
+    
+    [network.sessionManager GET:[NSString stringWithFormat:@"/sets.json/%@", visibility]
+                     parameters:nil
+                        success:^(NSURLSessionDataTask *task, id responseObject) {
+                            NSDictionary * result = (NSDictionary *) responseObject;
+                            successBlock(result[@"sets"]);
+                        }
+                        failure:^(NSURLSessionDataTask *task, NSError *error) {
+                            failureBlock([NSString stringWithFormat:@"Error: %@", error]);
+                        }];
 }
 
 

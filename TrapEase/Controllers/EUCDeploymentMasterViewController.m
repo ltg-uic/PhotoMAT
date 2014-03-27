@@ -26,14 +26,7 @@
         // Custom initialization
         self.deployments = [[NSMutableArray alloc] initWithCapacity:64];
         
-        [EUCNetwork getDeploymentsWithSuccessBlock:^(NSArray *deployments) {
-            [[EUCDatabase sharedInstance] refreshDeployments:deployments];
-            self.deployments = [[EUCDatabase sharedInstance] getDeployments];
-            [self.tableView reloadData];
-        } failureBlock:^(NSString *reason) {
-            ; // nothing to do if we are wise, and not expecting rainbows from the skies, not right away
-        }];
-        
+        [self handleRefresh:nil];
     }
     return self;
 }
@@ -66,6 +59,15 @@
 }
 
 - (IBAction)handleRefresh:(id)sender {
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    NSString * visibility = db.settings[@"visibility"];
+    [EUCNetwork getDeploymentsWithVisibility:visibility andSuccessBlock:^(NSArray *deployments) {
+        [[EUCDatabase sharedInstance] refreshDeployments:deployments];
+        self.deployments = [[EUCDatabase sharedInstance] getDeployments];
+        [self.tableView reloadData];
+    } failureBlock:^(NSString *reason) {
+        ; // nothing to do if we are wise, and not expecting rainbows from the skies, not right away
+    }];
 }
 
 - (IBAction)handleTag:(id)sender {
@@ -101,7 +103,7 @@
 {
     NSDictionary * deployment = (NSDictionary *) self.deployments[indexPath.row];
     
-    cell.name.text = deployment[@"names"];
+    cell.name.text = deployment[@"person_name"];
     cell.school.text = [NSString stringWithFormat:@"School %ld", (long)indexPath.row];
     cell.date.text = deployment[@"date"];
 }
