@@ -27,10 +27,50 @@ sub handle {
 
     my $method = $parent_hash->{method};
 
-    if ($method eq 'GET') { 
-        $parent_hash->{FILE} = "/usr/local/apache2/trap/images/$table"."_$id.jpg";
+    my $path = $parent_hash->{path};
+
+    my $sql;
+
+    if ($path eq 'class') { 
+        $sql = qq[
+            select d.id, d.person_id, d.short_name, p.first_name, d.deployment_date, p.class_id, c.name, s.name 
+            from deployment d 
+            join person p on p.id = d.person_id  
+            join person q on q.class_id=p.class_id  
+            join class c on c.id=p.class_id 
+            join school s on s.id = c.school_id 
+            where q.id=?
+            order by d.deployment_date desc
+        ];
+        $hash->{sets} = &Database::getRows($r, $dbh, $sql, $myUserId);
+    }
+    elsif ($path eq 'school') { 
+        $sql = qq[
+            select d.id, d.person_id, d.short_name, p.first_name, d.deployment_date, p.class_id, c.name, s.name 
+            from deployment d 
+            join person p on p.id = d.person_id  
+            join class c on c.id=p.class_id 
+            join school s on s.id = c.school_id
+            join class c2 on c2.school_id = s.id
+            join person q on q.class_id = c2.id
+            where q.id = ?
+            order by d.deployment_date desc
+        ];
+        $hash->{sets} = &Database::getRows($r, $dbh, $sql, $myUserId);
+    }
+    else { 
+        $sql = qq[
+            select d.id, d.person_id, d.short_name, p.first_name, d.deployment_date, p.class_id, c.name, s.name 
+            from deployment d 
+            join person p on p.id = d.person_id  
+            join class c on c.id=p.class_id 
+            join school s on s.id = c.school_id
+            order by d.deployment_date desc
+        ];
+        $hash->{sets} = &Database::getRows($r, $dbh, $sql);
     }
 
+    $parent_hash->{http_content} = to_json($hash);
     return $hash;
 }
 

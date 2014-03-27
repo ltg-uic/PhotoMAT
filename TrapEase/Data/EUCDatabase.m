@@ -152,7 +152,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self clearTable:@"person"];
     [self clearTable:@"class"];
     [self clearTable:@"school"];
-    [self clearTable:@"person_membership"];
     
     
     for (NSDictionary * school in schools) {
@@ -181,8 +180,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 -(void) savePerson: (NSDictionary *) person forClass: (NSNumber *) classId {
-    [self.db executeUpdate:@"insert or replace into person (id, first_name, last_name) values (?, ?, ?)", person[@"id"], person[@"first_name"], person[@"last_name"]];
-    [self.db executeUpdate:@"insert into person_membership (person_id, class_id) values(?, ?)", person[@"id"], classId];
+    [self.db executeUpdate:@"insert or replace into person (id, first_name, last_name, class_id) values (?, ?, ?)", person[@"id"], person[@"first_name"], person[@"last_name"], person[@"class_id"]];
 }
 
 -(NSArray *) schools {
@@ -223,7 +221,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 -(NSArray *) personsForClass: (NSInteger) classId {
     NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:32];
-    NSString * sql = @"select p.id, p.first_name, p.last_name from person p join person_membership m on p.id = m.person_id where m.class_id = ? order by p.first_name";
+    NSString * sql = @"select p.id, p.first_name, p.last_name from person p  where p.class_id = ? order by p.first_name";
     FMResultSet * rs = [self.db executeQuery:sql, @(classId)];
     while ([rs next]) {
         NSInteger personId = [rs intForColumnIndex:0];

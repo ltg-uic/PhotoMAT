@@ -7,9 +7,7 @@ DROP TABLE IF EXISTS deployment_picture;
 DROP TABLE IF EXISTS deployment;
 DROP TABLE IF EXISTS camera;
 DROP TABLE IF EXISTS token;
-DROP TABLE IF EXISTS person_membership;
 DROP TABLE IF EXISTS person;
-DROP TABLE IF EXISTS person_group;
 DROP TABLE IF EXISTS class;
 DROP TABLE IF EXISTS school;
 
@@ -46,29 +44,30 @@ CREATE TABLE person (
     , password char(60) NOT NULL
     , email VARCHAR(256) UNIQUE NOT NULL
     , is_admin BOOLEAN NOT NULL DEFAULT FALSE
+    , class_id INT NOT NULL REFERENCES class(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 create index i_person_email on person(email);
 COMMENT ON TABLE person IS 'A person may be a student or a teacher';
 COMMENT ON COLUMN person.password IS 'Password hashed using bcrypt';
 COMMENT ON COLUMN person.is_admin IS 'Admins are not limited to any particular school. Admins can create classes, schools, persons, and person_membership';
 
-INSERT INTO PERSON (first_name, last_name, password, email) values ('Andy', 'Avalon',  crypt('password', gen_salt('bf', 10)), 'a@example.com');
-INSERT INTO PERSON (first_name, last_name, password, email) values ('Betty', 'Belvidere',  crypt('password', gen_salt('bf', 10)), 'b@example.com');
-INSERT INTO PERSON (first_name, last_name, password, email) values ('Charlie', 'Chatterbox',  crypt('password', gen_salt('bf', 10)), 'c@example.com');
-INSERT INTO PERSON (first_name, last_name, password, email, is_admin) values ('Admin', 'One',  crypt('password', gen_salt('bf', 10)), 'admin@example.com', true);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Andy', 'Avalon',  crypt('password', gen_salt('bf', 10)), 'a@example.com', 1);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Betty', 'Belvidere',  crypt('password', gen_salt('bf', 10)), 'b@example.com', 1);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Charlie', 'Chatterbox',  crypt('password', gen_salt('bf', 10)), 'c@example.com', 2);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Darlene', 'Dingleberry',  crypt('password', gen_salt('bf', 10)), 'd@example.com', 2);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Edward', 'Earhart',  crypt('password', gen_salt('bf', 10)), 'e@example.com', 3);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Francis', 'Finnegan',  crypt('password', gen_salt('bf', 10)), 'f@example.com', 3);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Gerald', 'Gamma',  crypt('password', gen_salt('bf', 10)), 'g@example.com', 4);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Harriet', 'Humboldt',  crypt('password', gen_salt('bf', 10)), 'h@example.com', 4);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Inigo', 'Infante',  crypt('password', gen_salt('bf', 10)), 'i@example.com', 5);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Josephine', 'Jufoon',  crypt('password', gen_salt('bf', 10)), 'j@example.com', 5);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Karl', 'Klavet',  crypt('password', gen_salt('bf', 10)), 'k@example.com', 6);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Linda', 'Lang',  crypt('password', gen_salt('bf', 10)), 'l@example.com', 6);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Marty', 'McInerny',  crypt('password', gen_salt('bf', 10)), 'm@example.com', 7);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Nancy', 'Nickleback',  crypt('password', gen_salt('bf', 10)), 'n@example.com', 7);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id) values ('Oliver', 'Oolong',  crypt('password', gen_salt('bf', 10)), 'o@example.com', 8);
+INSERT INTO PERSON (first_name, last_name, password, email, class_id, is_admin) values ('Admin', 'One',  crypt('password', gen_salt('bf', 10)), 'admin@example.com', 1, true);
 
-
-CREATE TABLE person_membership (
-      person_id INT NOT NULL REFERENCES person(id) ON DELETE CASCADE ON UPDATE CASCADE
-    , class_id INT NOT NULL REFERENCES class(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-COMMENT ON TABLE person_membership IS 'A person may be in multiple classes';
-
-
-insert into person_membership values (1, 1);
-insert into person_membership values (1, 2);
-insert into person_membership values (2, 1);
-insert into person_membership values (3, 1);
 
 
 CREATE TABLE token (
@@ -172,7 +171,7 @@ CREATE TABLE get_cascade (
 CREATE index i_get_cascade_parent on get_cascade(parent_table);
 
 INSERT INTO get_cascade values ('school', 'class');
-INSERT INTO get_cascade values ('class', 'person', 'person_membership');
+INSERT INTO get_cascade values ('class', 'person');
 INSERT INTO get_cascade values ('deployment', 'deployment_picture');
 INSERT INTO get_cascade values ('deployment', 'burst');
 INSERT INTO get_cascade values ('burst', 'image');
@@ -185,3 +184,41 @@ CREATE TABLE get_expand (
 CREATE index i_get_expand_parent on get_expand(parent_table);
 
 INSERT INTO get_expand values ('deployment', 'person');
+
+
+
+-- temp deployments
+
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (1, 1, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (1, 1, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (2, 2, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (2, 2, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (3, 3, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (3, 3, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (4, 4, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (4, 4, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (5, 5, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (5, 5, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (6, 6, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (6, 6, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (7, 7, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (7, 7, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (8, 8, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (8, 8, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (9, 9, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (9, 9, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (10, 10, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (10, 10, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (11, 11, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (11, 11, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (12, 12, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (12, 12, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (13, 13, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (13, 13, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (14, 14, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (14, 14, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (15, 15, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+insert into deployment(owner, person_id, deployment_date, camera, nominal_mark_time, actual_mark_time) values (15, 15, statement_timestamp(), 1, statement_timestamp(), statement_timestamp());
+
+
+
