@@ -16,7 +16,7 @@ extern CGFloat defaultWideness;
 @property (strong, nonatomic) dispatch_queue_t backgroundQueue;
 - (IBAction)done:(id)sender;
 @property (strong, nonatomic) NSMutableArray *bursts; // array of arrays of images
-
+@property (strong, nonatomic) NSMutableArray *currentBurstSubIndexes;
 
 @property (strong, nonatomic) NSMutableArray *selected;
 
@@ -53,29 +53,37 @@ extern CGFloat defaultWideness;
     NSTimeInterval burstDelta = 60;
     
     [self.group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-        if (burstIndex == -1) {
-            burstIndex++;
-            burstSubIndex++;
-            [self.bursts addObject:[NSMutableArray arrayWithArray:@[@(index)]]];
-            lastDate = [asset valueForProperty:ALAssetPropertyDate];
-        }
-        else {
-            // most of the code happens here
-            NSDate * thisAssetsDate = [asset valueForProperty:ALAssetPropertyDate];
-            NSTimeInterval delta = [thisAssetsDate timeIntervalSinceDate:lastDate];
-            if (abs(delta) < burstDelta) {
+        if (asset != nil) {
+            if (burstIndex == -1) {
+                burstIndex++;
                 burstSubIndex++;
-                [self.bursts[burstIndex] addObject:@(index)];
+                [self.bursts addObject:[NSMutableArray arrayWithArray:@[@(index)]]];
                 lastDate = [asset valueForProperty:ALAssetPropertyDate];
             }
             else {
-                burstIndex++;
-                [self.bursts addObject:[NSMutableArray arrayWithArray:@[@(index)]]];
-                burstSubIndex = 0;
-                lastDate = [asset valueForProperty:ALAssetPropertyDate];
+                // most of the code happens here
+                NSDate * thisAssetsDate = [asset valueForProperty:ALAssetPropertyDate];
+                NSTimeInterval delta = [thisAssetsDate timeIntervalSinceDate:lastDate];
+                if (abs(delta) < burstDelta) {
+                    burstSubIndex++;
+                    [self.bursts[burstIndex] addObject:@(index)];
+                    lastDate = [asset valueForProperty:ALAssetPropertyDate];
+                }
+                else {
+                    burstIndex++;
+                    [self.bursts addObject:[NSMutableArray arrayWithArray:@[@(index)]]];
+                    burstSubIndex = 0;
+                    lastDate = [asset valueForProperty:ALAssetPropertyDate];
+                }
             }
         }
     }];
+    
+    self.currentBurstSubIndexes = [NSMutableArray arrayWithCapacity:[self.bursts count]];  // contains subIndexes
+    for (NSInteger i = 0; i < [self.bursts count]; i++) {
+        [self.currentBurstSubIndexes addObject:@(0)];
+    }
+    
 
 }
 
@@ -123,7 +131,9 @@ extern CGFloat defaultWideness;
 -(EUCSelectCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     EUCSelectCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"selectCell" forIndexPath:indexPath];
 
-    NSInteger assetIndex = [self.bursts[indexPath.row][0] integerValue];
+    NSInteger subIndex = [self.currentBurstSubIndexes[indexPath.row] integerValue];
+    NSInteger assetIndex = [self.bursts[indexPath.row][subIndex] integerValue];
+    NSLog(@"subIndex is %ld and assetIndex is %ld out of total %ld", subIndex, assetIndex, [self.group numberOfAssets]);
     
     [self.group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:assetIndex]
                                  options:0
@@ -190,8 +200,53 @@ extern CGFloat defaultWideness;
 
 #pragma mark - CollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+//    EUCSelectCell * cell = (EUCSelectCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//    [self toggleCell:cell atIndexPath:indexPath];
+    NSInteger currentSubIndex = [self.currentBurstSubIndexes[indexPath.row] integerValue];
+    currentSubIndex++;
+    NSInteger count = [self.bursts[indexPath.row] count];
+    
+    if (currentSubIndex >= count) {
+        currentSubIndex = 0;
+    }
+    self.currentBurstSubIndexes[indexPath.row] = @(currentSubIndex);
+
+    NSInteger subIndex = [self.currentBurstSubIndexes[indexPath.row] integerValue];
+    NSInteger assetIndex = [self.bursts[indexPath.row][subIndex] integerValue];
+    NSLog(@"subIndex is %ld and assetIndex is %ld out of total %ld", subIndex, assetIndex, [self.group numberOfAssets]);
     EUCSelectCell * cell = (EUCSelectCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [self toggleCell:cell atIndexPath:indexPath];
+    [self.group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:assetIndex]
+                                 options:0
+                              usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+                                  if (result != nil && index != NSNotFound) {
+                                      dispatch_async(self.backgroundQueue, ^(void) {
+                                          dispatch_async(dispatch_get_main_queue(), ^(void) {
+                                              UIImage * image = [UIImage imageWithCGImage:[result aspectRatioThumbnail]];
+                                              CGFloat wideness = 1.0*image.size.width/image.size.height;
+                                              CGSize size;
+                                              
+                                              if (wideness > defaultWideness) {
+                                                  size.width = 314;
+                                                  // width - height
+                                                  // 314
+                                                  size.height = 314/wideness;
+                                              }
+                                              else {
+                                                  size.height = 226;
+                                                  // width - height
+                                                  //         226
+                                                  size.width = 226 * wideness;
+                                              }
+                                              UIImage * resizedImage = [self imageWithImage:image scaledToSize:size];
+                                              cell.imageView.image = resizedImage;
+                                              cell.indexPath = indexPath;
+                                              [self configureSelectedForCell: cell atIndexPath:indexPath];
+                                              
+                                          });
+                                      });
+                                  }
+                              }];
+
 }
 
 #pragma mark - FlowLayoutDelegate
