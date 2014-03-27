@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		35D4F084544C46C2BE466AC9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB35A88ACFB41A99F3E3EC4 /* libPods.a */; };
+		B43658D518E4B95F0017672E /* EUCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658D418E4B95F0017672E /* EUCImage.m */; };
+		B43658D818E4B9A30017672E /* EUCBurst.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658D718E4B9A30017672E /* EUCBurst.m */; };
 		B4D1EC3118BD729300E01EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3018BD729300E01EFE /* Foundation.framework */; };
 		B4D1EC3318BD729300E01EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */; };
 		B4D1EC3518BD729300E01EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3418BD729300E01EFE /* UIKit.framework */; };
@@ -115,6 +117,10 @@
 		1FB35A88ACFB41A99F3E3EC4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CB9A6B881342BDB4DEA63F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		B43658D118E3F19C0017672E /* EUCVisibilityChangedDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EUCVisibilityChangedDelegate.h; path = TrapEase/Controllers/EUCVisibilityChangedDelegate.h; sourceTree = "<group>"; };
+		B43658D318E4B95F0017672E /* EUCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCImage.h; path = Model/EUCImage.h; sourceTree = "<group>"; };
+		B43658D418E4B95F0017672E /* EUCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCImage.m; path = Model/EUCImage.m; sourceTree = "<group>"; };
+		B43658D618E4B9A30017672E /* EUCBurst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCBurst.h; path = Model/EUCBurst.h; sourceTree = "<group>"; };
+		B43658D718E4B9A30017672E /* EUCBurst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCBurst.m; path = Model/EUCBurst.m; sourceTree = "<group>"; };
 		B4D1EC2D18BD729300E01EFE /* TrapEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrapEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4D1EC3018BD729300E01EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -263,6 +269,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B43658D218E4B9490017672E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B43658D318E4B95F0017672E /* EUCImage.h */,
+				B43658D418E4B95F0017672E /* EUCImage.m */,
+				B43658D618E4B9A30017672E /* EUCBurst.h */,
+				B43658D718E4B9A30017672E /* EUCBurst.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		B4D1EC2418BD729300E01EFE = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +319,7 @@
 		B4D1EC3618BD729300E01EFE /* TrapEase */ = {
 			isa = PBXGroup;
 			children = (
+				B43658D218E4B9490017672E /* Model */,
 				B4E6BE5E18DFB76000AC9D84 /* Network */,
 				B4E6BE5A18DF9F6D00AC9D84 /* Data */,
 				B4E6BE5718DF9F6400AC9D84 /* Resources */,
@@ -698,6 +716,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4E6BE9F18E23BA500AC9D84 /* EUCUserViewController.m in Sources */,
+				B43658D518E4B95F0017672E /* EUCImage.m in Sources */,
 				B4E6BE8918E0729900AC9D84 /* EUCDeploymentDetailViewController.m in Sources */,
 				B4E6BD6818DDC33C00AC9D84 /* EUCFilterViewController.m in Sources */,
 				B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */,
@@ -718,6 +737,7 @@
 				B4E6BE7818DFD0DD00AC9D84 /* EUCDeploymentSplitViewController.m in Sources */,
 				B4E6BD7518DDC39300AC9D84 /* EUCAnalyzeViewController.m in Sources */,
 				B4E6BE2518DE3ED100AC9D84 /* EUCCloudViewController.m in Sources */,
+				B43658D818E4B9A30017672E /* EUCBurst.m in Sources */,
 				B4E6BD6318DDC30C00AC9D84 /* EUCImportViewController.m in Sources */,
 				B4E6BD7018DDC37D00AC9D84 /* EUCLabelViewController.m in Sources */,
 				B4E6BE5D18DF9F9800AC9D84 /* EUCDatabase.m in Sources */,

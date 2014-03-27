@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EUCSelectViewController">
             <connections>
+                <outlet property="activityIndicator" destination="ARi-uV-ree" id="lGj-tH-Uxv"/>
                 <outlet property="collectionView" destination="fGf-tb-Zdx" id="9Iq-9n-MWl"/>
                 <outlet property="imageView" destination="HIU-3B-aOK" id="ahI-XU-zTd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -44,6 +45,10 @@
                         <action selector="done:" destination="-1" eventType="touchUpInside" id="IC1-l5-mXw"/>
                     </connections>
                 </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="ARi-uV-ree">
+                    <rect key="frame" x="918" y="716" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

@@ -8,6 +8,8 @@
 
 #import "EUCSelectViewController.h"
 #import "EUCSelectCell.h"
+#import "EUCBurst.h"
+#import "EUCImage.h"
 
 extern CGFloat defaultWideness;
 
@@ -20,6 +22,7 @@ extern CGFloat defaultWideness;
 
 @property (strong, nonatomic) NSMutableArray *selected;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @end
 
 @implementation EUCSelectViewController
@@ -57,7 +60,11 @@ extern CGFloat defaultWideness;
             if (burstIndex == -1) {
                 burstIndex++;
                 burstSubIndex++;
-                [self.bursts addObject:[NSMutableArray arrayWithArray:@[@(index)]]];
+                EUCBurst * burst = [[EUCBurst alloc] init];
+                EUCImage * image = [[EUCImage alloc] initWithIndex:index andUrl:[asset valueForProperty:ALAssetPropertyAssetURL]];
+                [self.bursts addObject:burst];
+                [burst.images addObject:image];
+
                 lastDate = [asset valueForProperty:ALAssetPropertyDate];
             }
             else {
@@ -66,12 +73,17 @@ extern CGFloat defaultWideness;
                 NSTimeInterval delta = [thisAssetsDate timeIntervalSinceDate:lastDate];
                 if (abs(delta) < burstDelta) {
                     burstSubIndex++;
-                    [self.bursts[burstIndex] addObject:@(index)];
+                    EUCBurst * burst = self.bursts[burstIndex];
+                    EUCImage * image = [[EUCImage alloc] initWithIndex:index andUrl:[asset valueForProperty:ALAssetPropertyAssetURL]];
+                    [burst.images addObject:image];
                     lastDate = [asset valueForProperty:ALAssetPropertyDate];
                 }
                 else {
                     burstIndex++;
-                    [self.bursts addObject:[NSMutableArray arrayWithArray:@[@(index)]]];
+                    EUCBurst * newBurst = [[EUCBurst alloc] init];
+                    EUCImage * image = [[EUCImage alloc] initWithIndex:index andUrl:[asset valueForProperty:ALAssetPropertyAssetURL]];
+                    [self.bursts addObject:newBurst];
+                    [newBurst.images addObject:image];
                     burstSubIndex = 0;
                     lastDate = [asset valueForProperty:ALAssetPropertyDate];
                 }
@@ -98,6 +110,8 @@ extern CGFloat defaultWideness;
     [self.collectionView registerNib:[UINib nibWithNibName:@"EUCSelectCell" bundle:nil] forCellWithReuseIdentifier:@"selectCell"];
     
     self.imageView.image = self.image;
+    
+    self.activityIndicator.hidden = YES;
     
 }
 
@@ -139,7 +153,10 @@ extern CGFloat defaultWideness;
 
 -(void) configureCell: (EUCSelectCell *) cell atIndexPath: (NSIndexPath *) indexPath {
     NSInteger subIndex = [self.currentBurstSubIndexes[indexPath.row] integerValue];
-    NSInteger assetIndex = [self.bursts[indexPath.row][subIndex] integerValue];
+    EUCBurst * burst = self.bursts[indexPath.row];
+    EUCImage * image = burst.images[subIndex];
+    NSInteger assetIndex = image.index;
+    
     NSLog(@"subIndex is %ld and assetIndex is %ld out of total %ld", subIndex, assetIndex, [self.group numberOfAssets]);
     
     [self.group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:assetIndex]
@@ -207,16 +224,16 @@ extern CGFloat defaultWideness;
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 //    EUCSelectCell * cell = (EUCSelectCell *)[collectionView cellForItemAtIndexPath:indexPath];
 //    [self toggleCell:cell atIndexPath:indexPath];
-    
-    NSInteger count = [self.bursts[indexPath.row] count];
-    if (count == 1) {
+    EUCBurst * burst = self.bursts[indexPath.row];
+    NSInteger numImagesInBurst = [burst.images count];
+    if (numImagesInBurst == 1) {
         return; // no toggling here
     }
     
     NSInteger currentSubIndex = [self.currentBurstSubIndexes[indexPath.row] integerValue];
     currentSubIndex++;
     
-    if (currentSubIndex >= count) {
+    if (currentSubIndex >= numImagesInBurst) {
         currentSubIndex = 0;
     }
     self.currentBurstSubIndexes[indexPath.row] = @(currentSubIndex);
@@ -233,6 +250,22 @@ extern CGFloat defaultWideness;
 
 
 - (IBAction)done:(id)sender {
+    // now construct an array of bursts { id => $id, images = [urls] }
+
+    self.activityIndicator.hidden = NO;
+    
+    NSInteger maxBursts = [self.bursts count];
+    NSMutableArray * bursts = [NSMutableArray arrayWithCapacity:maxBursts/8];
+    
+    for (NSInteger i = 0; i < maxBursts; i++) {
+        if ([self.selected[i] isEqual:@YES]) {
+            NSMutableDictionary * burst = [[NSMutableDictionary alloc] init];
+            NSMutableArray * images = [NSMutableArray arrayWithCapacity:6];
+            
+            
+        }
+    }
+    
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
