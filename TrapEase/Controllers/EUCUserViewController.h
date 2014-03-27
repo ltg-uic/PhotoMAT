@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EUCVisibilityChangedDelegate.h"
 
 @interface EUCUserViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (weak, nonatomic) id<EUCVisibilityChangedDelegate> visibilityDelegate;
 
 @end

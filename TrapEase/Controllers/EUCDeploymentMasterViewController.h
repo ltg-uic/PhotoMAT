@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EUCVisibilityChangedDelegate.h"
 
 @class EUCDeploymentDetailViewController;
 
-@interface EUCDeploymentMasterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface EUCDeploymentMasterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, EUCVisibilityChangedDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSArray *deployments;

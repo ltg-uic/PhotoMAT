@@ -114,6 +114,7 @@
 /* Begin PBXFileReference section */
 		1FB35A88ACFB41A99F3E3EC4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CB9A6B881342BDB4DEA63F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		B43658D118E3F19C0017672E /* EUCVisibilityChangedDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EUCVisibilityChangedDelegate.h; path = TrapEase/Controllers/EUCVisibilityChangedDelegate.h; sourceTree = "<group>"; };
 		B4D1EC2D18BD729300E01EFE /* TrapEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrapEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4D1EC3018BD729300E01EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -392,6 +393,7 @@
 				B4E6BEA118E23D8200AC9D84 /* EUCConnectingViewController.h */,
 				B4E6BEA218E23D8200AC9D84 /* EUCConnectingViewController.m */,
 				B4E6BEA318E23D8200AC9D84 /* EUCConnectingViewController.xib */,
+				B43658D118E3F19C0017672E /* EUCVisibilityChangedDelegate.h */,
 			);
 			name = Controllers;
 			path = ..;

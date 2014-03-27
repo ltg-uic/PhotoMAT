@@ -14,7 +14,7 @@
 
 @interface EUCDeploymentMasterViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
-
+@property (assign, nonatomic) BOOL refreshNeeded;
 @end
 
 @implementation EUCDeploymentMasterViewController
@@ -39,9 +39,15 @@
     self.tableView.delegate = self;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"EUCDeploymentMasterCell" bundle:nil] forCellReuseIdentifier:@"deploymentMasterCell"];
-
 }
 
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (self.refreshNeeded) {
+        self.refreshNeeded = NO;
+        [self handleRefresh:nil];
+    }
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -76,6 +82,10 @@
 - (IBAction)handleAnalyze:(id)sender {
 }
 
+#pragma mark - VisibilityChangedDelegate
+-(void)visibilityChanged {
+    self.refreshNeeded = YES;
+}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

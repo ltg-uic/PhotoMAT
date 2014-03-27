@@ -73,6 +73,8 @@
     self.homeViewController = [[EUCHomeViewController alloc] init];
     self.homeViewController.viewControllers = @[user, dsvc, label, analyze, cloud, settings];
     
+    user.visibilityDelegate = master;
+    
     // check to see if you have school data
     EUCDatabase * db = [EUCDatabase sharedInstance];
     if ([db hasSchools]) {
