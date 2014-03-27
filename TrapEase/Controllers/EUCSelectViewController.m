@@ -13,14 +13,13 @@
 
 extern CGFloat defaultWideness;
 
+
 @interface EUCSelectViewController ()
 
 @property (strong, nonatomic) dispatch_queue_t backgroundQueue;
 - (IBAction)done:(id)sender;
 @property (strong, nonatomic) NSMutableArray *bursts; // array of arrays of images
 @property (strong, nonatomic) NSMutableArray *currentBurstSubIndexes;
-
-@property (strong, nonatomic) NSMutableArray *selected;
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @end
@@ -34,10 +33,6 @@ extern CGFloat defaultWideness;
         // Custom initialization
         self.backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);//dispatch_queue_create("backgroundQueue", 0);
         _group = group;
-        _selected = [[NSMutableArray alloc] initWithCapacity:[_group numberOfAssets]];
-        for (NSInteger i = 0; i < [_group numberOfAssets]; i++) {
-            [_selected addObject:@YES];
-        }
         _image = image;
         [self createBurstGroups];
     }
@@ -194,7 +189,8 @@ extern CGFloat defaultWideness;
 }
 
 -(void) configureSelectedForCell: (EUCSelectCell *) cell atIndexPath:(NSIndexPath *) indexPath {
-    if ([self.selected[indexPath.row] isEqual:@NO]) {
+    EUCBurst * burst = self.bursts[indexPath.row];
+    if (burst.selected == NO) {
         cell.mask.hidden = NO;
         CGRect f = CGRectMake((cell.imageView.frame.size.width - cell.imageView.image.size.width)/2,
                               (cell.imageView.frame.size.height - cell.imageView.image.size.height),
@@ -211,19 +207,13 @@ extern CGFloat defaultWideness;
 }
 
 -(void) toggleCell: (EUCSelectCell *) cell atIndexPath:(NSIndexPath *) indexPath {
-    if ([self.selected[indexPath.row] isEqual:@NO]) {
-        self.selected[indexPath.row] = @YES;
-    }
-    else {
-        self.selected[indexPath.row] = @NO;
-    }
+    EUCBurst * burst = self.bursts[indexPath.row];
+    burst.selected = !(burst.selected);
     [self configureSelectedForCell: cell atIndexPath:indexPath];
 }
 
 #pragma mark - CollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    EUCSelectCell * cell = (EUCSelectCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    [self toggleCell:cell atIndexPath:indexPath];
     EUCBurst * burst = self.bursts[indexPath.row];
     NSInteger numImagesInBurst = [burst.images count];
     if (numImagesInBurst == 1) {
@@ -250,23 +240,8 @@ extern CGFloat defaultWideness;
 
 
 - (IBAction)done:(id)sender {
-    // now construct an array of bursts { id => $id, images = [urls] }
-
-    self.activityIndicator.hidden = NO;
-    
-    NSInteger maxBursts = [self.bursts count];
-    NSMutableArray * bursts = [NSMutableArray arrayWithCapacity:maxBursts/8];
-    
-    for (NSInteger i = 0; i < maxBursts; i++) {
-        if ([self.selected[i] isEqual:@YES]) {
-            NSMutableDictionary * burst = [[NSMutableDictionary alloc] init];
-            NSMutableArray * images = [NSMutableArray arrayWithCapacity:6];
-            
-            
-        }
-    }
-    
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self.selectionDoneDelegate selectionDone:self.bursts];
+    [self.presentingViewController.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 
 @end

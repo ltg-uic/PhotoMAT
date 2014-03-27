@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EUCImportViewController.h"
 
-@interface EUCDeploymentDetailViewController : UIViewController
+@interface EUCDeploymentDetailViewController : UIViewController <EUCImportDoneDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *editView;
 

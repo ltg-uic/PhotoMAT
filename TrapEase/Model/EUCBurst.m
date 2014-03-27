@@ -15,6 +15,7 @@
     self = [super init];
     if (self) {
         _images = [[NSMutableArray alloc] initWithCapacity:6];
+        _selected = YES;
     }
     return self;
 }

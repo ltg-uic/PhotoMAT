@@ -9,7 +9,6 @@
 #import "EUCImportViewController.h"
 #import "EUCImportCell.h"
 #import "UIImage+ImageEffects.h"
-#import "EUCSelectViewController.h"
 
 #import <AssetsLibrary/AssetsLibrary.h>
 
@@ -20,7 +19,6 @@ CGFloat defaultWideness = 314.0/226.0;
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
 @property (strong, nonatomic) NSMutableArray * groups;
 @property (strong, nonatomic) dispatch_queue_t backgroundQueue;
-
 @end
 
 @implementation EUCImportViewController
@@ -172,8 +170,14 @@ CGFloat defaultWideness = 314.0/226.0;
     UIImage * image = [self blurredSnapshot];
     
     EUCSelectViewController * selectViewController = [[EUCSelectViewController alloc] initWithNibName:@"EUCSelectViewController" bundle:nil assetGroup:(ALAssetsGroup *) self.groups[indexPath.row] image:image];
+    selectViewController.selectionDoneDelegate = self;
     
     [self presentViewController:selectViewController animated:NO completion:nil];
+}
+
+#pragma mark - EUCSelectionDoneDelegate
+-(void) selectionDone:(NSMutableArray *)bursts {
+    [self.importDoneDelegate importDone:bursts];
 }
 
 

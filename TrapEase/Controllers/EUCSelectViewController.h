@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
+@protocol EUCSelectionDoneDelegate <NSObject>
+
+-(void) selectionDone: (NSMutableArray *) bursts;
+
+@end
+
 @class EUCSelectCell;
 
 @interface EUCSelectViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
@@ -18,7 +24,7 @@
 @property (strong, nonatomic) ALAssetsGroup *group;
 @property (strong, nonatomic) NSMutableArray *assets;
 @property (strong, nonatomic) UIImage *image;
-
+@property (weak, nonatomic) id<EUCSelectionDoneDelegate> selectionDoneDelegate;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil assetGroup: (ALAssetsGroup *) group image: (UIImage *) image;

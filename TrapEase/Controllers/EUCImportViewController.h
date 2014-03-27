@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EUCSelectViewController.h"
 
-@interface EUCImportViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@protocol EUCImportDoneDelegate <NSObject>
 
+-(void) importDone: (NSMutableArray *) bursts;
+
+@end
+
+@interface EUCImportViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, EUCSelectionDoneDelegate>
+
+@property (weak, nonatomic) id<EUCImportDoneDelegate> importDoneDelegate;
 @end

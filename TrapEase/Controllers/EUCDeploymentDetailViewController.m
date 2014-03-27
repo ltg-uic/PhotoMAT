@@ -7,7 +7,6 @@
 //
 
 #import "EUCDeploymentDetailViewController.h"
-#import "EUCImportViewController.h"
 
 @interface EUCDeploymentDetailViewController ()
 
@@ -24,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *addDeploymentImageButton;
 @property (weak, nonatomic) IBOutlet UIButton *addBurstsButton;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (strong, nonatomic) NSMutableArray *importedBursts;
+
 
 - (IBAction)addImage:(id)sender;
 - (IBAction)addBursts:(id)sender;
@@ -78,6 +79,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - ImportDoneDelegate
+-(void)importDone:(NSMutableArray *)bursts {
+    self.importedBursts = bursts;
 }
 
 #pragma mark - edit view

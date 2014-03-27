@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrapEase/Controllers/EUCImportViewController.m"
-            timestampString = "417566465.352286"
+            timestampString = "417644947.368223"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "-blurredSnapshot"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrapEase/Controllers/EUCImportViewController.m"
-            timestampString = "417284137.171509"
+            timestampString = "417644947.368223"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "-viewDidLoad"
             landmarkType = "5">
             <Locations>
@@ -72,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrapEase/Controllers/EUCImportViewController.m"
-            timestampString = "417284137.171509"
+            timestampString = "417644947.368223"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "-didReceiveMemoryWarning"
             landmarkType = "5">
          </BreakpointContent>
@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrapEase/Controllers/EUCImportViewController.m"
-            timestampString = "417567375.713341"
+            timestampString = "417644947.368223"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "-scaleAndRotateImage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrapEase/Controllers/EUCImportViewController.m"
-            timestampString = "417567375.713341"
+            timestampString = "417644947.368223"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "-scaleAndRotateImage:"
             landmarkType = "5">
          </BreakpointContent>
