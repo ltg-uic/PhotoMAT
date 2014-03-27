@@ -208,10 +208,13 @@ extern CGFloat defaultWideness;
 //    EUCSelectCell * cell = (EUCSelectCell *)[collectionView cellForItemAtIndexPath:indexPath];
 //    [self toggleCell:cell atIndexPath:indexPath];
     
+    NSInteger count = [self.bursts[indexPath.row] count];
+    if (count == 1) {
+        return; // no toggling here
+    }
     
     NSInteger currentSubIndex = [self.currentBurstSubIndexes[indexPath.row] integerValue];
     currentSubIndex++;
-    NSInteger count = [self.bursts[indexPath.row] count];
     
     if (currentSubIndex >= count) {
         currentSubIndex = 0;
