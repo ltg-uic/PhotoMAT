@@ -66,12 +66,15 @@
 
 - (IBAction)handleRefresh:(id)sender {
     EUCDatabase * db = [EUCDatabase sharedInstance];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     NSString * visibility = db.settings[@"visibility"];
     [EUCNetwork getDeploymentsWithVisibility:visibility andSuccessBlock:^(NSArray *deployments) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         [[EUCDatabase sharedInstance] refreshDeployments:deployments];
         self.deployments = [[EUCDatabase sharedInstance] getDeployments];
         [self.tableView reloadData];
     } failureBlock:^(NSString *reason) {
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
         ; // nothing to do if we are wise, and not expecting rainbows from the skies, not right away
     }];
 }
