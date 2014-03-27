@@ -23,11 +23,6 @@ typedef EUCGetFailureBlock EUCDeploymentsFailureBlock;
 typedef EUCGetSuccessBlock EUCSchoolSuccessBlock;
 typedef EUCGetFailureBlock EUCSchoolFailureBlock;
 
-//typedef void(^EUCDeploymentsSuccessBlock)(NSArray * deployments);
-//typedef void(^EUCDeploymentsFailureBlock)(NSString * reason);
-
-//typedef void(^EUCSchoolsSuccessBlock)(NSArray * schools);
-//typedef void(^EUCSchoolsFailureBlock)(NSString * reason);
 
 typedef void(^EUCDownloadTaskCompletionBlock)(NSURLResponse * response, NSURL * filePath, NSError * error);
 

@@ -76,14 +76,14 @@
     
 }
 
-+(void) getObject: (NSString *) object WithSuccessBlock: (EUCGetSuccessBlock) successBlock failureBlock: (EUCGetFailureBlock) failureBlock {
++(void) getObject: (NSString *) resourceName WithSuccessBlock: (EUCGetSuccessBlock) successBlock failureBlock: (EUCGetFailureBlock) failureBlock {
     EUCNetwork * network = [EUCNetwork sharedNetwork];
     
-    [network.sessionManager GET:[NSString stringWithFormat:@"/%@", object]
+    [network.sessionManager GET:[NSString stringWithFormat:@"/%@", resourceName]
                      parameters:nil
                         success:^(NSURLSessionDataTask *task, id responseObject) {
                             NSDictionary * result = (NSDictionary *) responseObject;
-                            successBlock(result[object]);
+                            successBlock(result[resourceName]);
                         }
                         failure:^(NSURLSessionDataTask *task, NSError *error) {
                             failureBlock([NSString stringWithFormat:@"Error: %@", error]);
