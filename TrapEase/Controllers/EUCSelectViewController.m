@@ -15,6 +15,8 @@ extern CGFloat defaultWideness;
 
 @property (strong, nonatomic) dispatch_queue_t backgroundQueue;
 - (IBAction)done:(id)sender;
+@property (strong, nonatomic) NSMutableArray *bursts; // array of arrays of images
+
 
 @property (strong, nonatomic) NSMutableArray *selected;
 
@@ -34,8 +36,47 @@ extern CGFloat defaultWideness;
             [_selected addObject:@YES];
         }
         _image = image;
+        [self createBurstGroups];
     }
     return self;
+}
+
+-(void) createBurstGroups {
+    self.bursts = [[NSMutableArray alloc] init];
+
+    // each item in the array of arrays is an index of the asset
+    
+    __block NSInteger burstIndex = -1;
+    __block NSInteger burstSubIndex = -1;
+    __block NSDate * lastDate;
+    
+    NSTimeInterval burstDelta = 60;
+    
+    [self.group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+        if (burstIndex == -1) {
+            burstIndex++;
+            burstSubIndex++;
+            [self.bursts addObject:[NSMutableArray arrayWithArray:@[@(index)]]];
+            lastDate = [asset valueForProperty:ALAssetPropertyDate];
+        }
+        else {
+            // most of the code happens here
+            NSDate * thisAssetsDate = [asset valueForProperty:ALAssetPropertyDate];
+            NSTimeInterval delta = [thisAssetsDate timeIntervalSinceDate:lastDate];
+            if (abs(delta) < burstDelta) {
+                burstSubIndex++;
+                [self.bursts[burstIndex] addObject:@(index)];
+                lastDate = [asset valueForProperty:ALAssetPropertyDate];
+            }
+            else {
+                burstIndex++;
+                [self.bursts addObject:[NSMutableArray arrayWithArray:@[@(index)]]];
+                burstSubIndex = 0;
+                lastDate = [asset valueForProperty:ALAssetPropertyDate];
+            }
+        }
+    }];
+
 }
 
 - (void)viewDidLoad
@@ -75,13 +116,16 @@ extern CGFloat defaultWideness;
 #pragma mark - CollectionViewDataSource
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.group numberOfAssets];
+    // return [self.group numberOfAssets];
+    return [self.bursts count];
 }
 
 -(EUCSelectCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     EUCSelectCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"selectCell" forIndexPath:indexPath];
 
-    [self.group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:indexPath.row]
+    NSInteger assetIndex = [self.bursts[indexPath.row][0] integerValue];
+    
+    [self.group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:assetIndex]
                                  options:0
                               usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
                                   if (result != nil && index != NSNotFound) {
