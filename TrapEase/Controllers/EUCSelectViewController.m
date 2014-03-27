@@ -131,6 +131,13 @@ extern CGFloat defaultWideness;
 -(EUCSelectCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     EUCSelectCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"selectCell" forIndexPath:indexPath];
 
+    [self configureCell:cell atIndexPath:indexPath];
+    
+    return cell;
+}
+
+
+-(void) configureCell: (EUCSelectCell *) cell atIndexPath: (NSIndexPath *) indexPath {
     NSInteger subIndex = [self.currentBurstSubIndexes[indexPath.row] integerValue];
     NSInteger assetIndex = [self.bursts[indexPath.row][subIndex] integerValue];
     NSLog(@"subIndex is %ld and assetIndex is %ld out of total %ld", subIndex, assetIndex, [self.group numberOfAssets]);
@@ -167,8 +174,6 @@ extern CGFloat defaultWideness;
                                       });
                                   }
                               }];
-    
-    return cell;
 }
 
 -(void) configureSelectedForCell: (EUCSelectCell *) cell atIndexPath:(NSIndexPath *) indexPath {
@@ -202,6 +207,8 @@ extern CGFloat defaultWideness;
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 //    EUCSelectCell * cell = (EUCSelectCell *)[collectionView cellForItemAtIndexPath:indexPath];
 //    [self toggleCell:cell atIndexPath:indexPath];
+    
+    
     NSInteger currentSubIndex = [self.currentBurstSubIndexes[indexPath.row] integerValue];
     currentSubIndex++;
     NSInteger count = [self.bursts[indexPath.row] count];
@@ -211,41 +218,8 @@ extern CGFloat defaultWideness;
     }
     self.currentBurstSubIndexes[indexPath.row] = @(currentSubIndex);
 
-    NSInteger subIndex = [self.currentBurstSubIndexes[indexPath.row] integerValue];
-    NSInteger assetIndex = [self.bursts[indexPath.row][subIndex] integerValue];
-    NSLog(@"subIndex is %ld and assetIndex is %ld out of total %ld", subIndex, assetIndex, [self.group numberOfAssets]);
     EUCSelectCell * cell = (EUCSelectCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    [self.group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:assetIndex]
-                                 options:0
-                              usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-                                  if (result != nil && index != NSNotFound) {
-                                      dispatch_async(self.backgroundQueue, ^(void) {
-                                          dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                              UIImage * image = [UIImage imageWithCGImage:[result aspectRatioThumbnail]];
-                                              CGFloat wideness = 1.0*image.size.width/image.size.height;
-                                              CGSize size;
-                                              
-                                              if (wideness > defaultWideness) {
-                                                  size.width = 314;
-                                                  // width - height
-                                                  // 314
-                                                  size.height = 314/wideness;
-                                              }
-                                              else {
-                                                  size.height = 226;
-                                                  // width - height
-                                                  //         226
-                                                  size.width = 226 * wideness;
-                                              }
-                                              UIImage * resizedImage = [self imageWithImage:image scaledToSize:size];
-                                              cell.imageView.image = resizedImage;
-                                              cell.indexPath = indexPath;
-                                              [self configureSelectedForCell: cell atIndexPath:indexPath];
-                                              
-                                          });
-                                      });
-                                  }
-                              }];
+    [self configureCell:cell atIndexPath:indexPath];
 
 }
 
