@@ -79,11 +79,6 @@
     }];
 }
 
-- (IBAction)handleTag:(id)sender {
-}
-
-- (IBAction)handleAnalyze:(id)sender {
-}
 
 #pragma mark - VisibilityChangedDelegate
 -(void)visibilityChanged {
@@ -117,7 +112,7 @@
     NSDictionary * deployment = (NSDictionary *) self.deployments[indexPath.row];
     
     cell.name.text = deployment[@"person_name"];
-    cell.school.text = [NSString stringWithFormat:@"School %ld", (long)indexPath.row];
+    cell.school.text = [NSString stringWithFormat:@"%@, %@", deployment[@"school_name"], deployment[@"class_name"]];
     cell.date.text = deployment[@"date"];
 }
 

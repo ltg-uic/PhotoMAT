@@ -24,6 +24,7 @@
 #import "DDTTYLogger.h"
 
 #import "EUCConnectingViewController.h"
+#import "EUCNetwork.h"
 
 @implementation EUCAppDelegate
 
@@ -55,6 +56,12 @@
      ** ********************************************************************
      */
     
+    // initialize network with person id
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    NSDictionary * dbSettings = db.settings;
+    [EUCNetwork updatePersonId:dbSettings[@"personId"]];
+    
+    
     
 //    EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
     EUCCloudViewController * cloud = [[EUCCloudViewController alloc] initWithNibName:@"EUCCloudViewController" bundle:nil];
@@ -76,7 +83,7 @@
     user.visibilityDelegate = master;
     
     // check to see if you have school data
-    EUCDatabase * db = [EUCDatabase sharedInstance];
+
     if ([db hasSchools]) {
         self.window.rootViewController = self.homeViewController;
     }

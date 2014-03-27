@@ -242,13 +242,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(NSArray *) getDeployments {
     NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:64];
     
-    NSString * sql = @"select person_name, deployment_date from deployment order by deployment_date desc";
+    NSString * sql = @"select person_name, deployment_date, school_name, class_name from deployment order by deployment_date desc";
     
     FMResultSet * rs = [self.db executeQuery:sql];
     
     while ([rs next]) {
         NSDictionary * row = @{@"person_name": [rs stringForColumnIndex:0],
-                               @"date": [rs stringForColumnIndex:1]
+                               @"date": [rs stringForColumnIndex:1],
+                               @"school_name": [rs stringForColumnIndex:2],
+                               @"class_name": [rs stringForColumnIndex:3]
                                };
         
         [array addObject:row];
