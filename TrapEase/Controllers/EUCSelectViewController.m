@@ -240,7 +240,15 @@ extern CGFloat defaultWideness;
 
 
 - (IBAction)done:(id)sender {
-    [self.selectionDoneDelegate selectionDone:self.bursts];
+    NSMutableArray * selectedBursts = [NSMutableArray arrayWithCapacity:[self.bursts count]];
+    
+    [self.bursts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        EUCBurst * burst = (EUCBurst *) obj;
+        if (burst.selected) {
+            [selectedBursts addObject:burst];
+        }
+    }];
+    [self.selectionDoneDelegate selectionDone:selectedBursts];
     [self.presentingViewController.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 

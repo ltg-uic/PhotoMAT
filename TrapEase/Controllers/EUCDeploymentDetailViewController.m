@@ -11,7 +11,7 @@
 #import "EUCBurst.h"
 #import "EUCImage.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "UIImage+ImageEffects.h"
+#import "EUCImageUtilities.h"
 
 
 CGFloat defaultDeploymentWideness = 96.0/64.0;
@@ -37,6 +37,10 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
 @property (strong, nonatomic) NSMutableArray *burstImages;
 @property (strong, nonatomic) ALAssetsLibrary *assetsLibrary;
 
+@property (assign, nonatomic) BOOL hasLibrary;
+@property (assign, nonatomic) BOOL hasCamera;
+@property (strong, nonatomic) UIImagePickerController *picker;
+@property (strong, nonatomic) UIPopoverController *popover;
 
 
 
@@ -133,6 +137,26 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
 }
 
 - (IBAction)addImage:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Select Source", @"selectSource")
+                                                             delegate:self
+                                                    cancelButtonTitle:nil
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:
+                                  nil];
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [actionSheet addButtonWithTitle:NSLocalizedString(@"Camera", @"Camera")];
+        self.hasCamera = YES;
+    }
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        [actionSheet addButtonWithTitle:NSLocalizedString(@"Photo Library", @"Photo Library")];
+        self.hasLibrary = YES;
+    }
+    
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    [actionSheet showFromRect:[(UIButton *)sender frame] inView:self.view animated:YES];
+
 }
 
 - (IBAction)addBursts:(id)sender {
@@ -188,7 +212,7 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
                 //         226
                 size.width = 64 * wideness;
             }
-            UIImage * resizedImage = [self imageWithImage:image scaledToSize:size];
+            UIImage * resizedImage = [EUCImageUtilities imageWithImage:image scaledToSize:size];
             cell.imageView.image = resizedImage;
         }
 
@@ -221,120 +245,89 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
 }
 
 
-#pragma mark - Image Size
 
-- (UIImage*)imageWithImage:(UIImage*)image
-              scaledToSize:(CGSize)newSize;
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    UIGraphicsBeginImageContext( newSize );
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    NSInteger i = buttonIndex;
+    BOOL useLibrary = NO;
+    BOOL useCamera = NO;
     
-    return newImage;
-}
-
-#pragma mark - blurring
-
-// from http://damir.me/ios7-blurring-techniques
--(UIImage *)blurredSnapshot
-{
-    // Create the image context
-    UIGraphicsBeginImageContextWithOptions(self.view.window.bounds.size, NO, self.view.window.screen.scale);
-    
-    // There he is! The new API method
-    [self.view.window drawViewHierarchyInRect:self.view.window.frame afterScreenUpdates:NO];
-    
-    // Get the snapshot
-    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-    
-    // Now apply the blur effect using Apple's UIImageEffect category
-    UIImage *blurredSnapshotImage = [snapshotImage applyLightEffect];
-    
-    
-    // Be nice and clean your mess up
-    UIGraphicsEndImageContext();
-    
-    
-    // return blurredSnapshotImage;
-    return [self scaleAndRotateImage:blurredSnapshotImage];
-}
-
-// from http://stackoverflow.com/a/3526833/772526
-- (UIImage *)scaleAndRotateImage:(UIImage *)image {
-    int kMaxResolution = 2048; // Or whatever
-    
-    CGImageRef imgRef = image.CGImage;
-    
-    CGFloat width = CGImageGetWidth(imgRef);
-    CGFloat height = CGImageGetHeight(imgRef);
-    
-    
-    CGAffineTransform transform = CGAffineTransformIdentity;
-    CGRect bounds = CGRectMake(0, 0, width, height);
-    if (width > kMaxResolution || height > kMaxResolution) {
-        CGFloat ratio = width/height;
-        if (ratio > 1) {
-            bounds.size.width = kMaxResolution;
-            bounds.size.height = roundf(bounds.size.width / ratio);
+    if (self.hasLibrary) {
+        if (self.hasCamera) {
+            if (i == 0) { useCamera = YES; }
+            else if (i == 1) { useLibrary = YES; }
         }
         else {
-            bounds.size.height = kMaxResolution;
-            bounds.size.width = roundf(bounds.size.height * ratio);
+            if (i == 0) { useLibrary = YES; }
+        }
+    }
+    else {
+        if (self.hasCamera) {
+            if (i == 0) { useCamera = YES; }
         }
     }
     
-    CGFloat scaleRatio = bounds.size.width / width;
-    CGSize imageSize = CGSizeMake(CGImageGetWidth(imgRef), CGImageGetHeight(imgRef));
-    CGFloat boundHeight;
-    
-    boundHeight = bounds.size.height;
-    bounds.size.height = bounds.size.width;
-    bounds.size.width = boundHeight;
-    transform = CGAffineTransformMakeTranslation(imageSize.height, imageSize.width/2.0);
-    
-    transform = CGAffineTransformRotate(transform, M_PI / 2.0);
-    
-    UIGraphicsBeginImageContext(bounds.size);
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    UIImageOrientation orient = image.imageOrientation;
-    
-    if (orient == UIImageOrientationRight || orient == UIImageOrientationLeft) {
-        CGContextScaleCTM(context, -scaleRatio, scaleRatio);
-        CGContextTranslateCTM(context, -height, 0);
+    if (useLibrary) {
+        self.picker = [[UIImagePickerController alloc] init];
+        self.picker.delegate = self;
+        self.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        self.popover = [[UIPopoverController alloc] initWithContentViewController:self.picker];
+        [self.popover presentPopoverFromRect:self.addDeploymentImageButton.bounds
+                                      inView:self.addDeploymentImageButton
+                    permittedArrowDirections:UIPopoverArrowDirectionAny
+                                    animated:YES];
     }
-    else {
-        CGContextScaleCTM(context, scaleRatio, -scaleRatio);
-        CGContextTranslateCTM(context, 0, -264-height);
+    else if (useCamera) {
+        self.picker = [[UIImagePickerController alloc] init];
+        self.picker.delegate = self;
+        self.picker.allowsEditing = NO;
+        self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        self.popover = [[UIPopoverController alloc] initWithContentViewController:self.picker];
+        [self.popover presentPopoverFromRect:self.addDeploymentImageButton.bounds
+                                      inView:self.addDeploymentImageButton
+                    permittedArrowDirections:UIPopoverArrowDirectionAny
+                                    animated:YES];
     }
     
-    CGContextConcatCTM(context, transform);
     
-    CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0, 0, width, height), imgRef);
-    UIImage *imageCopy = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    
-    UIInterfaceOrientation sbOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if (sbOrientation == UIInterfaceOrientationLandscapeLeft) {
-        return [self rotateUIImage:imageCopy];
-    }
-    return imageCopy;
 }
 
-// from http://stackoverflow.com/a/20004215/772526
-- (UIImage*)rotateUIImage:(UIImage*)sourceImage
+#pragma mark - UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    CGSize size = sourceImage.size;
-    UIGraphicsBeginImageContext(size);
-    [[UIImage imageWithCGImage:[sourceImage CGImage] scale:1.0 orientation:UIImageOrientationDown] drawInRect:CGRectMake(0,0,size.width ,size.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+    // Picking Image from Camera/ Library
+    [picker dismissViewControllerAnimated:YES completion:^{}];
+    UIImage * selectedImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     
-    return newImage;
+    if (!selectedImage)
+    {
+        return;
+    }
+    
+    NSTimeInterval seconds = NSTimeIntervalSince1970;
+    
+    NSString * fileName = [NSString stringWithFormat:@"local_%f.jpg", seconds];
+    NSURL *documentsDirectoryURL = [NSURL URLWithString:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]];
+    NSString * filePath = [documentsDirectoryURL path];
+    NSString * fullPath = [filePath stringByAppendingPathComponent:fileName];
+    
+    //    // via http://ios-funda.blogspot.com/2013/03/uiactionsheet-example.html
+    //    // Adjusting Image Orientation
+    NSData *data = UIImageJPEGRepresentation(selectedImage, 1.0);
+    UIImage *tmp = [UIImage imageWithData:data];
+    UIImage *fixed = [UIImage imageWithCGImage:tmp.CGImage
+                                         scale:0.5f
+                                   orientation:selectedImage.imageOrientation];
+    selectedImage = fixed;
+    
+    [UIImageJPEGRepresentation(selectedImage, 1.0) writeToFile:fullPath atomically:NO];
+    
+    
+    
+//    self.completionBlock(fileName);
+    
+    
 }
 
 
