@@ -14,6 +14,8 @@
 		B43658DD18E4E43B0017672E /* EUCDeploymentImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43658DC18E4E43B0017672E /* EUCDeploymentImageCell.xib */; };
 		B43658E018E5213F0017672E /* EUCImageUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658DF18E5213F0017672E /* EUCImageUtilities.m */; };
 		B43658E418E5356B0017672E /* EUCDeploymentImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658E318E5356B0017672E /* EUCDeploymentImage.m */; };
+		B43658E818E542480017672E /* EUCImageDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658E618E542480017672E /* EUCImageDisplayViewController.m */; };
+		B43658E918E542480017672E /* EUCImageDisplayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43658E718E542480017672E /* EUCImageDisplayViewController.xib */; };
 		B4D1EC3118BD729300E01EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3018BD729300E01EFE /* Foundation.framework */; };
 		B4D1EC3318BD729300E01EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */; };
 		B4D1EC3518BD729300E01EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3418BD729300E01EFE /* UIKit.framework */; };
@@ -132,6 +134,9 @@
 		B43658DF18E5213F0017672E /* EUCImageUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCImageUtilities.m; path = Support/EUCImageUtilities.m; sourceTree = "<group>"; };
 		B43658E218E5356B0017672E /* EUCDeploymentImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCDeploymentImage.h; path = Model/EUCDeploymentImage.h; sourceTree = "<group>"; };
 		B43658E318E5356B0017672E /* EUCDeploymentImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDeploymentImage.m; path = Model/EUCDeploymentImage.m; sourceTree = "<group>"; };
+		B43658E518E542480017672E /* EUCImageDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCImageDisplayViewController.h; path = TrapEase/Controllers/EUCImageDisplayViewController.h; sourceTree = "<group>"; };
+		B43658E618E542480017672E /* EUCImageDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCImageDisplayViewController.m; path = TrapEase/Controllers/EUCImageDisplayViewController.m; sourceTree = "<group>"; };
+		B43658E718E542480017672E /* EUCImageDisplayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCImageDisplayViewController.xib; path = TrapEase/Controllers/EUCImageDisplayViewController.xib; sourceTree = "<group>"; };
 		B4D1EC2D18BD729300E01EFE /* TrapEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrapEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4D1EC3018BD729300E01EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -425,6 +430,9 @@
 				B4E6BEA218E23D8200AC9D84 /* EUCConnectingViewController.m */,
 				B4E6BEA318E23D8200AC9D84 /* EUCConnectingViewController.xib */,
 				B43658D118E3F19C0017672E /* EUCVisibilityChangedDelegate.h */,
+				B43658E518E542480017672E /* EUCImageDisplayViewController.h */,
+				B43658E618E542480017672E /* EUCImageDisplayViewController.m */,
+				B43658E718E542480017672E /* EUCImageDisplayViewController.xib */,
 			);
 			name = Controllers;
 			path = ..;
@@ -683,6 +691,7 @@
 				B4E6BE3218DE44D900AC9D84 /* EUCImportCell.xib in Resources */,
 				B4E6BE9A18E13C5800AC9D84 /* users@2x.png in Resources */,
 				B4E6BD8E18DDC82600AC9D84 /* line-chart@2x.png in Resources */,
+				B43658E918E542480017672E /* EUCImageDisplayViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,6 +766,7 @@
 				B4E6BE6118DFB77B00AC9D84 /* EUCNetwork.m in Sources */,
 				B4E6BE7818DFD0DD00AC9D84 /* EUCDeploymentSplitViewController.m in Sources */,
 				B4E6BD7518DDC39300AC9D84 /* EUCAnalyzeViewController.m in Sources */,
+				B43658E818E542480017672E /* EUCImageDisplayViewController.m in Sources */,
 				B4E6BE2518DE3ED100AC9D84 /* EUCCloudViewController.m in Sources */,
 				B43658D818E4B9A30017672E /* EUCBurst.m in Sources */,
 				B4E6BD6318DDC30C00AC9D84 /* EUCImportViewController.m in Sources */,

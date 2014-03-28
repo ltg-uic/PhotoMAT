@@ -13,7 +13,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "EUCImageUtilities.h"
 #import "EUCDeploymentImage.h"
-
+#import "EUCImageDisplayViewController.h"
 
 CGFloat defaultDeploymentWideness = 96.0/64.0;
 
@@ -329,6 +329,16 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
         }
         else {
             // view
+            UIImage * image = [EUCImageUtilities blurredSnapshotForWindow:self.view.window];
+            
+            EUCImageDisplayViewController * display =
+            [[EUCImageDisplayViewController alloc] initWithNibName:@"EUCImageDisplayViewController"
+                                                            bundle:nil
+                                                   backgroundImage:image
+                                                          assetURL:self.selectedImage.url];
+            
+            [self presentViewController:display animated:NO completion:nil];
+
         }
     }
     
