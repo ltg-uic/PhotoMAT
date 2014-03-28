@@ -242,8 +242,8 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Image", @"image")
                                                              delegate:self
                                                     cancelButtonTitle:nil
-                                               destructiveButtonTitle:@"Delete"
-                                                    otherButtonTitles: @"View",
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles: @"View", @"Delete",
                                   nil];
     actionSheet.tag = 1;
     actionSheet.destructiveButtonIndex = 1;
@@ -345,14 +345,22 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
         return;
     }
     
-    // from http://stackoverflow.com/questions/10166575/photo-taken-with-camera-does-not-contain-any-alasset-metadata≥
-    [self.assetsLibrary writeImageToSavedPhotosAlbum:selectedImage.CGImage
-                                 metadata:[info objectForKey:UIImagePickerControllerMediaMetadata]
-                          completionBlock:^(NSURL *assetURL, NSError *error) {
-                              EUCImage * image = [[EUCImage alloc] initWithIndex:0 andUrl:assetURL];
-                              [self.addedImages addObject:image];
-                              [self.deploymentImages reloadData];
-                          }];
+    if (self.picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+        // from http://stackoverflow.com/questions/10166575/photo-taken-with-camera-does-not-contain-any-alasset-metadata≥
+        [self.assetsLibrary writeImageToSavedPhotosAlbum:selectedImage.CGImage
+                                                metadata:[info objectForKey:UIImagePickerControllerMediaMetadata]
+                                         completionBlock:^(NSURL *assetURL, NSError *error) {
+                                             EUCImage * image = [[EUCImage alloc] initWithIndex:0 andUrl:assetURL];
+                                             [self.addedImages addObject:image];
+                                             [self.deploymentImages reloadData];
+                                         }];
+    }
+    else {
+        NSURL * assetURL = [info valueForKey:UIImagePickerControllerReferenceURL];
+        EUCImage * image = [[EUCImage alloc] initWithIndex:0 andUrl:assetURL];
+        [self.addedImages addObject:image];
+        [self.deploymentImages reloadData];
+    }
     
 }
 
