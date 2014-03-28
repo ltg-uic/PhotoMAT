@@ -306,25 +306,7 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
         return;
     }
     
-//    NSTimeInterval seconds = NSTimeIntervalSince1970;
-//    
-//    NSString * fileName = [NSString stringWithFormat:@"local_%f.jpg", seconds];
-//    NSURL *documentsDirectoryURL = [NSURL URLWithString:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]];
-//    NSString * filePath = [documentsDirectoryURL path];
-//    NSString * fullPath = [filePath stringByAppendingPathComponent:fileName];
-    
-    //    // via http://ios-funda.blogspot.com/2013/03/uiactionsheet-example.html
-    //    // Adjusting Image Orientation
-//    NSData *data = UIImageJPEGRepresentation(selectedImage, 1.0);
-//    UIImage *tmp = [UIImage imageWithData:data];
-//    UIImage *fixed = [UIImage imageWithCGImage:tmp.CGImage
-//                                         scale:0.5f
-//                                   orientation:selectedImage.imageOrientation];
-//    selectedImage = fixed;
-    
-//    [UIImageJPEGRepresentation(selectedImage, 1.0) writeToFile:fullPath atomically:NO];
-//    EUCDeploymentImage * image = [[EUCDeploymentImage alloc] init];
-    
+    // from http://stackoverflow.com/questions/10166575/photo-taken-with-camera-does-not-contain-any-alasset-metadata
     [self.assetsLibrary writeImageToSavedPhotosAlbum:selectedImage.CGImage
                                  metadata:[info objectForKey:UIImagePickerControllerMediaMetadata]
                           completionBlock:^(NSURL *assetURL, NSError *error) {
@@ -332,13 +314,7 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
                               [self.addedImages addObject:image];
                               [self.deploymentImages reloadData];
                           }];
-    
-//    image.fileName = filePath;
-//    [self.addedImages addObject:image];
-    
-//    self.completionBlock(fileName);
-    
-    
+        
 }
 
 
