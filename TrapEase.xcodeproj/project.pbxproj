@@ -13,6 +13,7 @@
 		B43658DB18E4E4200017672E /* EUCDeploymentImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658DA18E4E4200017672E /* EUCDeploymentImageCell.m */; };
 		B43658DD18E4E43B0017672E /* EUCDeploymentImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43658DC18E4E43B0017672E /* EUCDeploymentImageCell.xib */; };
 		B43658E018E5213F0017672E /* EUCImageUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658DF18E5213F0017672E /* EUCImageUtilities.m */; };
+		B43658E418E5356B0017672E /* EUCDeploymentImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658E318E5356B0017672E /* EUCDeploymentImage.m */; };
 		B4D1EC3118BD729300E01EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3018BD729300E01EFE /* Foundation.framework */; };
 		B4D1EC3318BD729300E01EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */; };
 		B4D1EC3518BD729300E01EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3418BD729300E01EFE /* UIKit.framework */; };
@@ -129,6 +130,8 @@
 		B43658DC18E4E43B0017672E /* EUCDeploymentImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCDeploymentImageCell.xib; path = Cells/EUCDeploymentImageCell.xib; sourceTree = "<group>"; };
 		B43658DE18E5213F0017672E /* EUCImageUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCImageUtilities.h; path = Support/EUCImageUtilities.h; sourceTree = "<group>"; };
 		B43658DF18E5213F0017672E /* EUCImageUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCImageUtilities.m; path = Support/EUCImageUtilities.m; sourceTree = "<group>"; };
+		B43658E218E5356B0017672E /* EUCDeploymentImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCDeploymentImage.h; path = Model/EUCDeploymentImage.h; sourceTree = "<group>"; };
+		B43658E318E5356B0017672E /* EUCDeploymentImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDeploymentImage.m; path = Model/EUCDeploymentImage.m; sourceTree = "<group>"; };
 		B4D1EC2D18BD729300E01EFE /* TrapEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrapEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4D1EC3018BD729300E01EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -284,6 +287,8 @@
 				B43658D418E4B95F0017672E /* EUCImage.m */,
 				B43658D618E4B9A30017672E /* EUCBurst.h */,
 				B43658D718E4B9A30017672E /* EUCBurst.m */,
+				B43658E218E5356B0017672E /* EUCDeploymentImage.h */,
+				B43658E318E5356B0017672E /* EUCDeploymentImage.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -747,6 +752,7 @@
 				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,
 				B4E6BE8218DFD47700AC9D84 /* EUCDeploymentMasterViewController.m in Sources */,
 				B4E6BE0B18DDFD3400AC9D84 /* EUCUploadViewController.m in Sources */,
+				B43658E418E5356B0017672E /* EUCDeploymentImage.m in Sources */,
 				B43658DB18E4E4200017672E /* EUCDeploymentImageCell.m in Sources */,
 				B4E6BE6118DFB77B00AC9D84 /* EUCNetwork.m in Sources */,
 				B4E6BE7818DFD0DD00AC9D84 /* EUCDeploymentSplitViewController.m in Sources */,

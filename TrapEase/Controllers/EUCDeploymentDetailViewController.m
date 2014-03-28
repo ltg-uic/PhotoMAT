@@ -12,6 +12,7 @@
 #import "EUCImage.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "EUCImageUtilities.h"
+#import "EUCDeploymentImage.h"
 
 
 CGFloat defaultDeploymentWideness = 96.0/64.0;
@@ -186,15 +187,15 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
 -(EUCDeploymentImageCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     EUCDeploymentImageCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"deploymentImageCell" forIndexPath:indexPath];
     
-    EUCImage * image;
-
+    EUCImage * burstImage;
     if (collectionView == self.bursts) {
-        image = self.burstImages[indexPath.row];
+        burstImage = self.burstImages[indexPath.row];
     }
     else {
-        image = self.addedImages[indexPath.row];
+        burstImage = self.addedImages[indexPath.row];
     }
-    [self.assetsLibrary assetForURL:image.url resultBlock:^(ALAsset *asset) {
+    
+    [self.assetsLibrary assetForURL:burstImage.url resultBlock:^(ALAsset *asset) {
         if (asset != nil) {
             UIImage * image = [UIImage imageWithCGImage:[asset aspectRatioThumbnail]];
             CGFloat wideness = 1.0*image.size.width/image.size.height;
@@ -215,7 +216,7 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
             UIImage * resizedImage = [EUCImageUtilities imageWithImage:image scaledToSize:size];
             cell.imageView.image = resizedImage;
         }
-
+        
     } failureBlock:^(NSError *error) {
         UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Cannot open image"
                                                              message:@"The image could not be found"
@@ -297,7 +298,7 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     // Picking Image from Camera/ Library
-    [picker dismissViewControllerAnimated:YES completion:^{}];
+    [self.popover dismissPopoverAnimated:YES];
     UIImage * selectedImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     
     if (!selectedImage)
@@ -305,25 +306,35 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
         return;
     }
     
-    NSTimeInterval seconds = NSTimeIntervalSince1970;
-    
-    NSString * fileName = [NSString stringWithFormat:@"local_%f.jpg", seconds];
-    NSURL *documentsDirectoryURL = [NSURL URLWithString:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]];
-    NSString * filePath = [documentsDirectoryURL path];
-    NSString * fullPath = [filePath stringByAppendingPathComponent:fileName];
+//    NSTimeInterval seconds = NSTimeIntervalSince1970;
+//    
+//    NSString * fileName = [NSString stringWithFormat:@"local_%f.jpg", seconds];
+//    NSURL *documentsDirectoryURL = [NSURL URLWithString:[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject]];
+//    NSString * filePath = [documentsDirectoryURL path];
+//    NSString * fullPath = [filePath stringByAppendingPathComponent:fileName];
     
     //    // via http://ios-funda.blogspot.com/2013/03/uiactionsheet-example.html
     //    // Adjusting Image Orientation
-    NSData *data = UIImageJPEGRepresentation(selectedImage, 1.0);
-    UIImage *tmp = [UIImage imageWithData:data];
-    UIImage *fixed = [UIImage imageWithCGImage:tmp.CGImage
-                                         scale:0.5f
-                                   orientation:selectedImage.imageOrientation];
-    selectedImage = fixed;
+//    NSData *data = UIImageJPEGRepresentation(selectedImage, 1.0);
+//    UIImage *tmp = [UIImage imageWithData:data];
+//    UIImage *fixed = [UIImage imageWithCGImage:tmp.CGImage
+//                                         scale:0.5f
+//                                   orientation:selectedImage.imageOrientation];
+//    selectedImage = fixed;
     
-    [UIImageJPEGRepresentation(selectedImage, 1.0) writeToFile:fullPath atomically:NO];
+//    [UIImageJPEGRepresentation(selectedImage, 1.0) writeToFile:fullPath atomically:NO];
+//    EUCDeploymentImage * image = [[EUCDeploymentImage alloc] init];
     
+    [self.assetsLibrary writeImageToSavedPhotosAlbum:selectedImage.CGImage
+                                 metadata:[info objectForKey:UIImagePickerControllerMediaMetadata]
+                          completionBlock:^(NSURL *assetURL, NSError *error) {
+                              EUCImage * image = [[EUCImage alloc] initWithIndex:0 andUrl:assetURL];
+                              [self.addedImages addObject:image];
+                              [self.deploymentImages reloadData];
+                          }];
     
+//    image.fileName = filePath;
+//    [self.addedImages addObject:image];
     
 //    self.completionBlock(fileName);
     
