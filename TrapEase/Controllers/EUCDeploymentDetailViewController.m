@@ -42,7 +42,8 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
 @property (assign, nonatomic) BOOL hasCamera;
 @property (strong, nonatomic) UIImagePickerController *picker;
 @property (strong, nonatomic) UIPopoverController *popover;
-
+@property (weak, nonatomic) EUCImage * selectedImage;
+@property (weak, nonatomic) NSMutableArray * selectedImageSource;
 
 
 - (IBAction)addImage:(id)sender;
@@ -144,6 +145,7 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
                                                destructiveButtonTitle:nil
                                                     otherButtonTitles:
                                   nil];
+    actionSheet.tag = 0;
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         [actionSheet addButtonWithTitle:NSLocalizedString(@"Camera", @"Camera")];
@@ -155,7 +157,6 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
         self.hasLibrary = YES;
     }
     
-    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     [actionSheet showFromRect:[(UIButton *)sender frame] inView:self.view animated:YES];
 
 }
@@ -237,12 +238,33 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
 #pragma mark - UICollectionViewDelegate
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    UIImage * image = [self blurredSnapshot];
-//    
-//    EUCSelectViewController * selectViewController = [[EUCSelectViewController alloc] initWithNibName:@"EUCSelectViewController" bundle:nil assetGroup:(ALAssetsGroup *) self.groups[indexPath.row] image:image];
-//    selectViewController.selectionDoneDelegate = self;
-//    
-//    [self presentViewController:selectViewController animated:NO completion:nil];
+    
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Image", @"image")
+                                                             delegate:self
+                                                    cancelButtonTitle:nil
+                                               destructiveButtonTitle:@"Delete"
+                                                    otherButtonTitles: @"View",
+                                  nil];
+    actionSheet.tag = 1;
+    actionSheet.destructiveButtonIndex = 1;
+    
+    UICollectionViewCell * sender = [collectionView cellForItemAtIndexPath:indexPath];
+    if (collectionView == self.bursts) {
+        self.selectedImageSource = self.burstImages;
+        self.selectedImage = self.burstImages[indexPath.row];
+    }
+    else if (collectionView == self.deploymentImages) {
+        self.selectedImageSource = self.addedImages;
+        self.selectedImage = self.addedImages[indexPath.row];
+    }
+    else {
+        self.selectedImageSource = nil;
+        self.selectedImage = nil;
+    }
+    
+    CGRect frame = [self.view convertRect:sender.frame fromView:sender.superview];
+    [actionSheet showFromRect:frame inView:self.view animated:YES];
+    
 }
 
 
@@ -250,47 +272,65 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
 #pragma mark - UIActionSheetDelegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSInteger i = buttonIndex;
-    BOOL useLibrary = NO;
-    BOOL useCamera = NO;
-    
-    if (self.hasLibrary) {
-        if (self.hasCamera) {
-            if (i == 0) { useCamera = YES; }
-            else if (i == 1) { useLibrary = YES; }
+    if (actionSheet.tag == 0) {
+        NSInteger i = buttonIndex;
+        BOOL useLibrary = NO;
+        BOOL useCamera = NO;
+        
+        if (self.hasLibrary) {
+            if (self.hasCamera) {
+                if (i == 0) { useCamera = YES; }
+                else if (i == 1) { useLibrary = YES; }
+            }
+            else {
+                if (i == 0) { useLibrary = YES; }
+            }
         }
         else {
-            if (i == 0) { useLibrary = YES; }
+            if (self.hasCamera) {
+                if (i == 0) { useCamera = YES; }
+            }
+        }
+        
+        if (useLibrary) {
+            self.picker = [[UIImagePickerController alloc] init];
+            self.picker.delegate = self;
+            self.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            self.popover = [[UIPopoverController alloc] initWithContentViewController:self.picker];
+            [self.popover presentPopoverFromRect:self.addDeploymentImageButton.bounds
+                                          inView:self.addDeploymentImageButton
+                        permittedArrowDirections:UIPopoverArrowDirectionAny
+                                        animated:YES];
+        }
+        else if (useCamera) {
+            self.picker = [[UIImagePickerController alloc] init];
+            self.picker.delegate = self;
+            self.picker.allowsEditing = NO;
+            self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            self.popover = [[UIPopoverController alloc] initWithContentViewController:self.picker];
+            [self.popover presentPopoverFromRect:self.addDeploymentImageButton.bounds
+                                          inView:self.addDeploymentImageButton
+                        permittedArrowDirections:UIPopoverArrowDirectionAny
+                                        animated:YES];
         }
     }
-    else {
-        if (self.hasCamera) {
-            if (i == 0) { useCamera = YES; }
+    else if (actionSheet.tag == 1) { // view/delete
+        if (buttonIndex ==  1) {
+            // delete
+            [self.selectedImageSource removeObject:self.selectedImage];
+            if (self.selectedImageSource == self.burstImages) {
+                [self.bursts reloadData];
+            }
+            else {
+                [self.deploymentImages reloadData];
+            }
+            self.selectedImageSource = nil;
+            self.selectedImage = nil;
+        }
+        else {
+            // view
         }
     }
-    
-    if (useLibrary) {
-        self.picker = [[UIImagePickerController alloc] init];
-        self.picker.delegate = self;
-        self.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        self.popover = [[UIPopoverController alloc] initWithContentViewController:self.picker];
-        [self.popover presentPopoverFromRect:self.addDeploymentImageButton.bounds
-                                      inView:self.addDeploymentImageButton
-                    permittedArrowDirections:UIPopoverArrowDirectionAny
-                                    animated:YES];
-    }
-    else if (useCamera) {
-        self.picker = [[UIImagePickerController alloc] init];
-        self.picker.delegate = self;
-        self.picker.allowsEditing = NO;
-        self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-        self.popover = [[UIPopoverController alloc] initWithContentViewController:self.picker];
-        [self.popover presentPopoverFromRect:self.addDeploymentImageButton.bounds
-                                      inView:self.addDeploymentImageButton
-                    permittedArrowDirections:UIPopoverArrowDirectionAny
-                                    animated:YES];
-    }
-    
     
 }
 
@@ -301,12 +341,11 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
     [self.popover dismissPopoverAnimated:YES];
     UIImage * selectedImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     
-    if (!selectedImage)
-    {
+    if (!selectedImage) {
         return;
     }
     
-    // from http://stackoverflow.com/questions/10166575/photo-taken-with-camera-does-not-contain-any-alasset-metadata
+    // from http://stackoverflow.com/questions/10166575/photo-taken-with-camera-does-not-contain-any-alasset-metadata≥
     [self.assetsLibrary writeImageToSavedPhotosAlbum:selectedImage.CGImage
                                  metadata:[info objectForKey:UIImagePickerControllerMediaMetadata]
                           completionBlock:^(NSURL *assetURL, NSError *error) {
@@ -314,7 +353,7 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
                               [self.addedImages addObject:image];
                               [self.deploymentImages reloadData];
                           }];
-        
+    
 }
 
 

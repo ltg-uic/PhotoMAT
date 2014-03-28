@@ -151,9 +151,7 @@ extern CGFloat defaultWideness;
     EUCBurst * burst = self.bursts[indexPath.row];
     EUCImage * image = burst.images[subIndex];
     NSInteger assetIndex = image.index;
-    
-    NSLog(@"subIndex is %ld and assetIndex is %ld out of total %ld", subIndex, assetIndex, [self.group numberOfAssets]);
-    
+        
     [self.group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:assetIndex]
                                  options:0
                               usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
