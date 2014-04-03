@@ -10,7 +10,6 @@
 #import "EUCHomeViewController.h"
 #import "EUCLabelViewController.h"
 #import "EUCAnalyzeViewController.h"
-#import "EUCKnapsackViewController.h"
 #import "EUCCloudViewController.h"
 #import "EUCSettingsViewController.h"
 #import "EUCDeploymentSplitViewController.h"
@@ -19,7 +18,6 @@
 #import "EUCUserViewController.h"
 
 #import "EUCDatabase.h"
-#import "DDLog.h"
 #import "DDFileLogger.h"
 #import "DDTTYLogger.h"
 
@@ -60,10 +58,7 @@
     EUCDatabase * db = [EUCDatabase sharedInstance];
     NSDictionary * dbSettings = db.settings;
     [EUCNetwork updatePersonId:dbSettings[@"personId"]];
-    
-    
-    
-//    EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
+
     EUCCloudViewController * cloud = [[EUCCloudViewController alloc] initWithNibName:@"EUCCloudViewController" bundle:nil];
     EUCSettingsViewController * settings = [[EUCSettingsViewController alloc] initWithNibName:@"EUCSettingsViewController" bundle:nil];
     EUCDeploymentSplitViewController * dsvc = [[EUCDeploymentSplitViewController alloc] init];
