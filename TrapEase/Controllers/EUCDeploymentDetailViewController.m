@@ -236,12 +236,16 @@ typedef enum : NSUInteger {
         [self alertForRequiredField:@"deployment name"];
         return NO;
     }
-    if ([NSString isStringEmpty:self.nominal.text]) {
+    if (self.nominalDate == nil) {
         [self alertForRequiredField:@"nominal time"];
         return NO;
     }
-    if ([NSString isStringEmpty:self.actual.text]) {
+    if (self.actualDate == nil) {
         [self alertForRequiredField:@"nominal time"];
+        return NO;
+    }
+    if ([NSString isStringEmpty:self.trapNumber.text]) {
+        [self alertForRequiredField:@"camera trap number"];
         return NO;
     }
     return YES;
@@ -464,6 +468,9 @@ typedef enum : NSUInteger {
     NSDictionary * settings = [[EUCDatabase sharedInstance] settings];
     NSInteger personId = settings[@"personId"];
     NSInteger cameraId = 1; // hardcoded for now
+    NSString * trapNumberString = self.trapNumber.text;
+    NSInteger trapNumber = [trapNumberString integerValue];
+    
     
     
 }
