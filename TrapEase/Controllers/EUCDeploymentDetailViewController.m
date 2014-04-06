@@ -61,6 +61,7 @@ typedef enum : NSUInteger {
 @property (assign, nonatomic) EUCDateEditingMode dateEditingMode;
 
 @property (strong, nonatomic) EUCDatePickerViewController *datePickerViewController;
+@property (strong, nonatomic) NSDateFormatter *format;
 
 
 
@@ -83,6 +84,9 @@ typedef enum : NSUInteger {
         _assetsLibrary = [[ALAssetsLibrary alloc] init];
         _addedImages = [[NSMutableArray alloc] init];
         _burstImages = [[NSMutableArray alloc] init];
+        _format = [[NSDateFormatter alloc] init];
+        [_format setDateFormat:@"MMM dd, yyyy hh:mm a"];
+
     }
     return self;
 }
@@ -205,6 +209,7 @@ typedef enum : NSUInteger {
 - (IBAction)enterNominal:(id)sender {
     self.dateEditingMode = editingNominal;
     self.datePickerViewController = [[EUCDatePickerViewController alloc] initWithNibName:@"EUCDatePickerViewController" bundle:nil date:self.nominalDate];
+    self.datePickerViewController.delegate = self;
     
     self.popover = [[UIPopoverController alloc] initWithContentViewController:self.datePickerViewController];
     [self.popover presentPopoverFromRect:self.nominalButton.frame
@@ -217,6 +222,7 @@ typedef enum : NSUInteger {
 - (IBAction)enterActual:(id)sender {
     self.dateEditingMode = editingActual;
     self.datePickerViewController = [[EUCDatePickerViewController alloc] initWithNibName:@"EUCDatePickerViewController" bundle:nil date:self.actualDate];
+    self.datePickerViewController.delegate = self;
     
     self.popover = [[UIPopoverController alloc] initWithContentViewController:self.datePickerViewController];
     [self.popover presentPopoverFromRect:self.actualButton.frame
@@ -470,11 +476,14 @@ typedef enum : NSUInteger {
 
 #pragma mark - EUCDatePickerViewControllerDelegate
 -(void) dateChangedTo:(NSDate *)date {
+    
     if (self.dateEditingMode == editingNominal) {
         self.nominalDate = date;
+        [self.nominalButton setTitle:[self.format stringFromDate:date] forState:UIControlStateNormal];
     }
     else {
         self.actualDate = date;
+        [self.actualButton setTitle:[self.format stringFromDate:date] forState:UIControlStateNormal];
     }
 }
 
