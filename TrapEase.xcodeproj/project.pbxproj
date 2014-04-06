@@ -16,6 +16,7 @@
 		B43658E418E5356B0017672E /* EUCDeploymentImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658E318E5356B0017672E /* EUCDeploymentImage.m */; };
 		B43658E818E542480017672E /* EUCImageDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658E618E542480017672E /* EUCImageDisplayViewController.m */; };
 		B43658E918E542480017672E /* EUCImageDisplayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43658E718E542480017672E /* EUCImageDisplayViewController.xib */; };
+		B43658EE18F18BF10017672E /* NSString+EUCStringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658ED18F18BF10017672E /* NSString+EUCStringExtensions.m */; };
 		B4D1EC3118BD729300E01EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3018BD729300E01EFE /* Foundation.framework */; };
 		B4D1EC3318BD729300E01EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */; };
 		B4D1EC3518BD729300E01EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3418BD729300E01EFE /* UIKit.framework */; };
@@ -137,6 +138,8 @@
 		B43658E518E542480017672E /* EUCImageDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCImageDisplayViewController.h; path = TrapEase/Controllers/EUCImageDisplayViewController.h; sourceTree = "<group>"; };
 		B43658E618E542480017672E /* EUCImageDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCImageDisplayViewController.m; path = TrapEase/Controllers/EUCImageDisplayViewController.m; sourceTree = "<group>"; };
 		B43658E718E542480017672E /* EUCImageDisplayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCImageDisplayViewController.xib; path = TrapEase/Controllers/EUCImageDisplayViewController.xib; sourceTree = "<group>"; };
+		B43658EC18F18BF10017672E /* NSString+EUCStringExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+EUCStringExtensions.h"; path = "Support/NSString+EUCStringExtensions.h"; sourceTree = "<group>"; };
+		B43658ED18F18BF10017672E /* NSString+EUCStringExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+EUCStringExtensions.m"; path = "Support/NSString+EUCStringExtensions.m"; sourceTree = "<group>"; };
 		B4D1EC2D18BD729300E01EFE /* TrapEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrapEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4D1EC3018BD729300E01EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -445,6 +448,8 @@
 				B4E6BD5618DDBB5600AC9D84 /* EUCFileSystem.m */,
 				B43658DE18E5213F0017672E /* EUCImageUtilities.h */,
 				B43658DF18E5213F0017672E /* EUCImageUtilities.m */,
+				B43658EC18F18BF10017672E /* NSString+EUCStringExtensions.h */,
+				B43658ED18F18BF10017672E /* NSString+EUCStringExtensions.m */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -750,6 +755,7 @@
 				B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */,
 				B4E6BE3F18DE9EBC00AC9D84 /* UIImage+ImageEffects.m in Sources */,
 				B4E6BE4318DEA37C00AC9D84 /* EUCSelectViewController.m in Sources */,
+				B43658EE18F18BF10017672E /* NSString+EUCStringExtensions.m in Sources */,
 				B4E6BE7418DFC51300AC9D84 /* EUCDeploymentCell.m in Sources */,
 				B4E6BE1818DE008000AC9D84 /* EUCKnapsackViewController.m in Sources */,
 				B4E6BE3018DE44B900AC9D84 /* EUCImportCell.m in Sources */,

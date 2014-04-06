@@ -122,4 +122,22 @@
 
 
 
+#pragma mark - POST
+
++(void) createRecordForResource: (NSString *) resource successBlock: (EUCNetworkPOSTSuccessBlock) successBlock failureBlock: (EUCNetworkPOSTFailureBlock) failureBlock {
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
+
+    
+    [network.sessionManager POST:[NSString stringWithFormat:@"/%@", resource]
+                      parameters:nil
+                         success:^(NSURLSessionDataTask *task, id responseObject) {
+                             NSDictionary * result = (NSDictionary *) responseObject;
+                             NSInteger newId = [result[@"id"] integerValue];
+                             successBlock(task, newId);
+                         } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                             failureBlock(task, error);
+                         }];
+    
+}
+
 @end

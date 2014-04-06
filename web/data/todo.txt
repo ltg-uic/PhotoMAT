@@ -1,0 +1,8 @@
+TODO
+
+Deployment Upload
+Add camera trap number text field
+Deployment Edit
+Add burst count to bursts
+Label
+Analyze

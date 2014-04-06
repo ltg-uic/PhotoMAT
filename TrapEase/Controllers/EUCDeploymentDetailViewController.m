@@ -14,6 +14,8 @@
 #import "EUCImageUtilities.h"
 #import "EUCDeploymentImage.h"
 #import "EUCImageDisplayViewController.h"
+#import "NSString+EUCStringExtensions.h"
+#import "EUCDatabase.h"
 
 CGFloat defaultDeploymentWideness = 96.0/64.0;
 
@@ -95,7 +97,6 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
     
     
     self.addBurstsButton.hidden = self.isEdit;
-    self.doneButton.hidden = !self.isEdit;
     
     self.bursts.dataSource = self;
     self.bursts.delegate = self;
@@ -168,8 +169,44 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
 }
 
 - (IBAction)done:(id)sender {
+    // verify that required fields are present
+    BOOL okToContinue = [self verifyRequiredFields];
+    if (!okToContinue) {
+        return;
+    }
+    
+    if (self.isEdit) {
+        [self updateDeployment];
+    }
+    else {
+        [self uploadDeployment];
+    }
 }
 
+-(BOOL) verifyRequiredFields {
+    if ([NSString isStringEmpty:self.shortName.text]) {
+        [self alertForRequiredField:@"deployment name"];
+        return NO;
+    }
+    if ([NSString isStringEmpty:self.nominal.text]) {
+        [self alertForRequiredField:@"nominal time"];
+        return NO;
+    }
+    if ([NSString isStringEmpty:self.actual.text]) {
+        [self alertForRequiredField:@"nominal time"];
+        return NO;
+    }
+    return YES;
+}
+
+-(void) alertForRequiredField: (NSString *) field {
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                         message:[NSString stringWithFormat:@"Please enter a valid %@", field]
+                                                        delegate:nil
+                                               cancelButtonTitle:nil
+                                               otherButtonTitles:@"OK", nil];
+    [alertView show];
+}
 
 #pragma mark - UICollectionViewDataSource
 
@@ -374,5 +411,18 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
     
 }
 
+#pragma mark - Upload Deployment
+-(void) uploadDeployment {
+    NSDictionary * settings = [[EUCDatabase sharedInstance] settings];
+    NSInteger personId = settings[@"personId"];
+    NSInteger cameraId = 1; // hardcoded for now
+    
+    
+}
+
+
+#pragma mark - Edit Deployment
+-(void) updateDeployment {
+}
 
 @end
