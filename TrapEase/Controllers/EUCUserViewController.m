@@ -119,6 +119,7 @@
     [self.school selectRow:self.schoolRow inComponent:0 animated:YES];
     [self.classRoom selectRow:self.classRow inComponent:0 animated:YES];
     [self.group selectRow:self.groupRow inComponent:0 animated:YES];
+    [self done:nil];
 }
 - (void)didReceiveMemoryWarning
 {

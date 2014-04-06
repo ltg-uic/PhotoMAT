@@ -110,7 +110,13 @@
                             successBlock(result[@"sets"]);
                         }
                         failure:^(NSURLSessionDataTask *task, NSError *error) {
-                            failureBlock([NSString stringWithFormat:@"Error: %@", error]);
+                            NSHTTPURLResponse * response = (NSHTTPURLResponse *) task.response;
+                            if (response.statusCode == 409)  {
+                                failureBlock([NSString stringWithFormat:@"Please select a group first"]);
+                            }
+                            else {
+                                failureBlock([NSString stringWithFormat:@"Error: %@", error]);
+                            }
                         }];
 }
 

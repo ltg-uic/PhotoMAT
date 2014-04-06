@@ -25,8 +25,6 @@
     if (self) {
         // Custom initialization
         self.deployments = [[NSMutableArray alloc] initWithCapacity:64];
-        
-        [self handleRefresh:nil];
     }
     return self;
 }
@@ -75,7 +73,13 @@
         [self.tableView reloadData];
     } failureBlock:^(NSString *reason) {
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        ; // nothing to do if we are wise, and not expecting rainbows from the skies, not right away
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                             message:reason
+                                                            delegate:nil
+                                                   cancelButtonTitle:nil
+                                                   otherButtonTitles:@"OK", nil];
+        
+        [alertView show];
     }];
 }
 
