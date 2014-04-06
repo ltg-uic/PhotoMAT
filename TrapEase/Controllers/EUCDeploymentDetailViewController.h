@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "EUCImportViewController.h"
+#import "EUCDatePickerViewController.h"
 
-@interface EUCDeploymentDetailViewController : UIViewController <EUCImportDoneDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@interface EUCDeploymentDetailViewController : UIViewController <EUCImportDoneDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, EUCDatePickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *editView;
 

@@ -19,6 +19,10 @@
 
 CGFloat defaultDeploymentWideness = 96.0/64.0;
 
+typedef enum : NSUInteger {
+    editingNominal,
+    editingActual
+} EUCDateEditingMode;
 
 @interface EUCDeploymentDetailViewController ()
 
@@ -35,6 +39,14 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
 @property (weak, nonatomic) IBOutlet UIButton *addDeploymentImageButton;
 @property (weak, nonatomic) IBOutlet UIButton *addBurstsButton;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet UITextField *trapNumber;
+@property (weak, nonatomic) IBOutlet UIButton *nominalButton;
+@property (weak, nonatomic) IBOutlet UIButton *actualButton;
+@property (strong, nonatomic) NSDate *nominalDate;
+@property (strong, nonatomic) NSDate *actualDate;
+
+
+
 @property (strong, nonatomic) NSMutableArray *importedBursts;
 @property (strong, nonatomic) NSMutableArray *addedImages;
 @property (strong, nonatomic) NSMutableArray *burstImages;
@@ -46,11 +58,18 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
 @property (strong, nonatomic) UIPopoverController *popover;
 @property (weak, nonatomic) EUCImage * selectedImage;
 @property (weak, nonatomic) NSMutableArray * selectedImageSource;
+@property (assign, nonatomic) EUCDateEditingMode dateEditingMode;
+
+@property (strong, nonatomic) EUCDatePickerViewController *datePickerViewController;
+
+
 
 
 - (IBAction)addImage:(id)sender;
 - (IBAction)addBursts:(id)sender;
 - (IBAction)done:(id)sender;
+- (IBAction)enterNominal:(id)sender;
+- (IBAction)enterActual:(id)sender;
 
 @end
 
@@ -181,6 +200,29 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
     else {
         [self uploadDeployment];
     }
+}
+
+- (IBAction)enterNominal:(id)sender {
+    self.dateEditingMode = editingNominal;
+    self.datePickerViewController = [[EUCDatePickerViewController alloc] initWithNibName:@"EUCDatePickerViewController" bundle:nil date:self.nominalDate];
+    
+    self.popover = [[UIPopoverController alloc] initWithContentViewController:self.datePickerViewController];
+    [self.popover presentPopoverFromRect:self.nominalButton.frame
+                                  inView:self.view
+                permittedArrowDirections:UIPopoverArrowDirectionAny
+                                animated:YES];
+    
+}
+
+- (IBAction)enterActual:(id)sender {
+    self.dateEditingMode = editingActual;
+    self.datePickerViewController = [[EUCDatePickerViewController alloc] initWithNibName:@"EUCDatePickerViewController" bundle:nil date:self.actualDate];
+    
+    self.popover = [[UIPopoverController alloc] initWithContentViewController:self.datePickerViewController];
+    [self.popover presentPopoverFromRect:self.actualButton.frame
+                                  inView:self.view
+                permittedArrowDirections:UIPopoverArrowDirectionAny
+                                animated:YES];
 }
 
 -(BOOL) verifyRequiredFields {
@@ -423,6 +465,17 @@ CGFloat defaultDeploymentWideness = 96.0/64.0;
 
 #pragma mark - Edit Deployment
 -(void) updateDeployment {
+}
+
+
+#pragma mark - EUCDatePickerViewControllerDelegate
+-(void) dateChangedTo:(NSDate *)date {
+    if (self.dateEditingMode == editingNominal) {
+        self.nominalDate = date;
+    }
+    else {
+        self.actualDate = date;
+    }
 }
 
 @end

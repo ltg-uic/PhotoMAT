@@ -17,6 +17,8 @@
 		B43658E818E542480017672E /* EUCImageDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658E618E542480017672E /* EUCImageDisplayViewController.m */; };
 		B43658E918E542480017672E /* EUCImageDisplayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43658E718E542480017672E /* EUCImageDisplayViewController.xib */; };
 		B43658EE18F18BF10017672E /* NSString+EUCStringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658ED18F18BF10017672E /* NSString+EUCStringExtensions.m */; };
+		B43658F218F1A4390017672E /* EUCDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658F018F1A4390017672E /* EUCDatePickerViewController.m */; };
+		B43658F318F1A4390017672E /* EUCDatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43658F118F1A4390017672E /* EUCDatePickerViewController.xib */; };
 		B4D1EC3118BD729300E01EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3018BD729300E01EFE /* Foundation.framework */; };
 		B4D1EC3318BD729300E01EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */; };
 		B4D1EC3518BD729300E01EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3418BD729300E01EFE /* UIKit.framework */; };
@@ -140,6 +142,9 @@
 		B43658E718E542480017672E /* EUCImageDisplayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCImageDisplayViewController.xib; path = TrapEase/Controllers/EUCImageDisplayViewController.xib; sourceTree = "<group>"; };
 		B43658EC18F18BF10017672E /* NSString+EUCStringExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+EUCStringExtensions.h"; path = "Support/NSString+EUCStringExtensions.h"; sourceTree = "<group>"; };
 		B43658ED18F18BF10017672E /* NSString+EUCStringExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+EUCStringExtensions.m"; path = "Support/NSString+EUCStringExtensions.m"; sourceTree = "<group>"; };
+		B43658EF18F1A4390017672E /* EUCDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCDatePickerViewController.h; path = TrapEase/Controllers/EUCDatePickerViewController.h; sourceTree = "<group>"; };
+		B43658F018F1A4390017672E /* EUCDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDatePickerViewController.m; path = TrapEase/Controllers/EUCDatePickerViewController.m; sourceTree = "<group>"; };
+		B43658F118F1A4390017672E /* EUCDatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCDatePickerViewController.xib; path = TrapEase/Controllers/EUCDatePickerViewController.xib; sourceTree = "<group>"; };
 		B4D1EC2D18BD729300E01EFE /* TrapEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrapEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4D1EC3018BD729300E01EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -436,6 +441,9 @@
 				B43658E518E542480017672E /* EUCImageDisplayViewController.h */,
 				B43658E618E542480017672E /* EUCImageDisplayViewController.m */,
 				B43658E718E542480017672E /* EUCImageDisplayViewController.xib */,
+				B43658EF18F1A4390017672E /* EUCDatePickerViewController.h */,
+				B43658F018F1A4390017672E /* EUCDatePickerViewController.m */,
+				B43658F118F1A4390017672E /* EUCDatePickerViewController.xib */,
 			);
 			name = Controllers;
 			path = ..;
@@ -690,6 +698,7 @@
 				B4E6BE1418DE005500AC9D84 /* hiking@2x.png in Resources */,
 				B4E6BE9818E13C5800AC9D84 /* photo@2x.png in Resources */,
 				B4E6BE8518DFDB5B00AC9D84 /* EUCDeploymentMasterCell.xib in Resources */,
+				B43658F318F1A4390017672E /* EUCDatePickerViewController.xib in Resources */,
 				B4E6BD8D18DDC82600AC9D84 /* line-chart.png in Resources */,
 				B4E6BE5118DEA6DE00AC9D84 /* thumbs-up@2x.png in Resources */,
 				B4E6BE2618DE3ED100AC9D84 /* EUCCloudViewController.xib in Resources */,
@@ -764,6 +773,7 @@
 				B4D1EC4118BD729300E01EFE /* EUCAppDelegate.m in Sources */,
 				B4E6BEA418E23D8200AC9D84 /* EUCConnectingViewController.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
+				B43658F218F1A4390017672E /* EUCDatePickerViewController.m in Sources */,
 				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,
 				B4E6BE8218DFD47700AC9D84 /* EUCDeploymentMasterViewController.m in Sources */,
 				B4E6BE0B18DDFD3400AC9D84 /* EUCUploadViewController.m in Sources */,
