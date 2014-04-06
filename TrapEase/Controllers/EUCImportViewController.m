@@ -10,8 +10,6 @@
 #import "EUCImportCell.h"
 #import "EUCImageUtilities.h"
 
-#import <AssetsLibrary/AssetsLibrary.h>
-
 CGFloat defaultWideness = 314.0/226.0;
 
 @interface EUCImportViewController ()

@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EUCLabelViewController : UIViewController
+@class DNDDragAndDropController;
 
+@interface EUCLabelViewController : UIViewController {
+
+}
+
+@property(nonatomic, strong) DNDDragAndDropController *dragAndDropController;
 @end

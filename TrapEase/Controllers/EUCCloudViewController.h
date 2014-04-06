@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class DWTagView;
+
 @interface EUCCloudViewController : UIViewController <UIWebViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
