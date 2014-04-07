@@ -16,6 +16,8 @@ sub getPerson {
 
     my $token = $r->headers_in->{"X-Trap-Token"};
 
+    print STDERR "IN AUTH: Token is $token\n";
+
     if (!defined $token) { 
         return undef;
     }
