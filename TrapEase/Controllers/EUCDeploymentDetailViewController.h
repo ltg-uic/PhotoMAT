@@ -17,7 +17,7 @@
 
 
 @property (assign, nonatomic) BOOL editViewVisible;
-@property (assign, nonatomic) BOOL isEdit;
+@property (assign, nonatomic) BOOL updateMode;
 
 -(void) clearEditView;
 

@@ -123,7 +123,7 @@ typedef enum : NSUInteger {
     self.editView.hidden = !self.editViewVisible;
     
     
-    self.addBurstsButton.hidden = self.isEdit;
+    self.addBurstsButton.hidden = self.updateMode;
     
     self.bursts.dataSource = self;
     self.bursts.delegate = self;
@@ -202,7 +202,7 @@ typedef enum : NSUInteger {
         return;
     }
     
-    if (self.isEdit) {
+    if (self.updateMode) {
         [self updateDeployment];
     }
     else {
@@ -252,6 +252,19 @@ typedef enum : NSUInteger {
         [self alertForRequiredField:@"camera trap number"];
         return NO;
     }
+    if (!self.updateMode) {
+        if ([self.burstImages count] == 0) {
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"No bursts uploaded"
+                                                                 message:@"Please upload at least one burst. You cannot add bursts later."
+                                                                delegate:nil
+                                                       cancelButtonTitle:nil
+                                                       otherButtonTitles:@"OK", nil];
+            
+            [alertView show];
+            return NO;
+        }
+    }
+
     return YES;
 }
 
@@ -485,18 +498,6 @@ typedef enum : NSUInteger {
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-//    EUCNetworkPOSTSuccessBlock postSuccess = ^(NSURLSessionDataTask *postTask, NSInteger newId) {
-//        EUCNetworkPUTSuccessBlock putSuccessBlock= ^(NSURLSessionDataTask *putTask, id putObj) {
-//            DDLogInfo(@"Put succeeded");
-//        };
-//        EUCNetworkPUTSuccessBlock putFailureBlock= ^(NSURLSessionDataTask *putTask, NSError * putError) {
-//            DDLogInfo(@"Put failed");
-//        };
-//    
-//    };
-//    EUCNetworkPOSTFailureBlock postFailure = ^(NSURLSessionDataTask * postTask, NSError * postError) {
-//        DDLogInfo(@"Post failed");
-//    };
     
     [EUCNetwork createIDForResource:@"deployment"
                        successBlock:^(NSURLSessionDataTask *task, NSInteger newId) {

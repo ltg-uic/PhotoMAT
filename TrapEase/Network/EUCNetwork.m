@@ -147,18 +147,12 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
    
     EUCNetwork * network = [EUCNetwork sharedNetwork];
     
-//    NSMutableURLRequest * request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"PUT"
-//                                                                                  URLString:[NSString stringWithFormat:@"%@/%@/%ld", baseUrl, resource, resourceId]
-//                                                                                 parameters:params];
-    
     
     [network.sessionManager PUT:[NSString stringWithFormat:@"/%@/%ld", resource, resourceId]
                      parameters:params
                         success:successBlock
                         failure:failureBlock];
     
-//    AFHTTPRequestOperation * operation = [network.sessionManager 
-
 }
 
 @end
