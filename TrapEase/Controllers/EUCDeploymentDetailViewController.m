@@ -594,14 +594,8 @@ typedef enum : NSUInteger {
              }];
 }
 
--(void) uploadImageFilename: (NSString *) filename forId: (NSInteger) imageId {
-    DDLogInfo(@"filename is %@ for imageId %ld", filename, imageId);
-    [EUCNetwork uploadImage:[NSURL fileURLWithPath: filename] forResource:@"image" withId:imageId];
-}
-
 
 -(void) uploadImageURL: (NSURL *) url forId: (NSInteger) imageId {
-    DDLogInfo(@"url is %@ for imageId %ld", url, imageId);
     [self.assetsLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
         if (asset != nil) {
             // from: http://stackoverflow.com/a/8801656/772526
@@ -614,6 +608,7 @@ typedef enum : NSUInteger {
         }
     }
                        failureBlock:^(NSError *error) {
+                           // TODO: AAA log this
                        }
      ];
 }

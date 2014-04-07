@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrapEase/Controllers/EUCDeploymentDetailViewController.m"
-            timestampString = "418595584.553333"
+            timestampString = "418597479.261547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "607"
-            endingLineNumber = "607"
+            startingLineNumber = "601"
+            endingLineNumber = "601"
             landmarkName = "-uploadImageURL:forId:"
             landmarkType = "5">
          </BreakpointContent>

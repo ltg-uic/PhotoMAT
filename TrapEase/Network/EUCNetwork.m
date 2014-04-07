@@ -177,40 +177,6 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
 
 #pragma mark - upload image
 
-+(void) uploadImage: (NSURL *) url forResource: (NSString *) resource withId: (NSInteger) resourceId {
-    EUCNetwork * network = [EUCNetwork sharedNetwork];
-    
-    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer]
-                                    multipartFormRequestWithMethod:@"POST"
-                                    URLString:[NSString stringWithFormat:@"/file/%@/%ld", resource, resourceId]
-                                    parameters:nil
-                                    constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-//                                        [formData appendPartWithFileURL:url
-//                                                                   name:@"file"
-//                                                               fileName:@"filename.jpg"
-//                                                               mimeType:@"image/jpeg"
-//                                                                  error:nil];
-                                        
-                                    }
-                                    error:nil];
-    
-    NSProgress *progress = nil;
-    NSDictionary * settings = [[EUCDatabase sharedInstance] settings];
-    NSNumber * personId = settings[@"personId"];
-    [request setValue:[NSString stringWithFormat:@"WouldntItBeCool%d", [personId intValue]] forHTTPHeaderField:@"X-Trap-Token"];
-    
-    NSURLSessionUploadTask *uploadTask = [network.sessionManager uploadTaskWithStreamedRequest:request
-                                                                                      progress:&progress
-                                                                             completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-                                                                                 if (error) {
-                                                                                     NSLog(@"Error: %@", error);
-                                                                                 } else {
-                                                                                     NSLog(@"%@ %@", response, responseObject);
-                                                                                 }
-                                                                             }];
-    
-    [uploadTask resume];
-}
 
 +(void) uploadImageData: (NSData *) data forResource: (NSString *) resource withId: (NSInteger) resourceId {
     EUCNetwork * network = [EUCNetwork sharedNetwork];
@@ -238,7 +204,7 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
                                                                                  if (error) {
                                                                                      NSLog(@"Error: %@", error);
                                                                                  } else {
-                                                                                     NSLog(@"%@ %@", response, responseObject);
+//                                                                                     NSLog(@"%@ %@", response, responseObject);
                                                                                  }
                                                                              }];
     
