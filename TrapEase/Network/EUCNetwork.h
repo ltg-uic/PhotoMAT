@@ -26,6 +26,9 @@ typedef EUCGetFailureBlock EUCSchoolFailureBlock;
 typedef void(^EUCNetworkPOSTSuccessBlock)(NSURLSessionDataTask *task, NSInteger newId);
 typedef void(^EUCNetworkPOSTFailureBlock)(NSURLSessionDataTask *task, NSError *error);
 
+typedef void(^EUCNetworkPUTSuccessBlock)(NSURLSessionDataTask *task, id responseObject);
+typedef void(^EUCNetworkPUTFailureBlock)(NSURLSessionDataTask *task, NSError *error);
+
 
 
 typedef void(^EUCDownloadTaskCompletionBlock)(NSURLResponse * response, NSURL * filePath, NSError * error);
@@ -41,7 +44,9 @@ typedef void(^EUCDownloadTaskCompletionBlock)(NSURLResponse * response, NSURL * 
 
 +(void) updatePersonId: (NSNumber *) personId;
 
-+(void) createRecordForResource: (NSString *) resource successBlock: (EUCNetworkPOSTSuccessBlock) successBlock failureBlock: (EUCNetworkPOSTFailureBlock) failureBlock;
++(void) createIDForResource: (NSString *) resource successBlock: (EUCNetworkPOSTSuccessBlock) successBlock failureBlock: (EUCNetworkPOSTFailureBlock) failureBlock;
+
++(void) putResource: (NSString *) resource withId: (NSInteger) resourceId params: (NSDictionary *) params successBlock: (EUCNetworkPUTSuccessBlock) successBlock failureBlock: (EUCNetworkPUTFailureBlock) failureBlock;
 
 
 @end

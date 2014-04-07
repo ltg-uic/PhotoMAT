@@ -105,6 +105,7 @@ CREATE TABLE deployment (
     , camera INT NOT NULL REFERENCES camera(id) ON UPDATE CASCADE
     , nominal_mark_time TIMESTAMP NOT NULL
     , actual_mark_time TIMESTAMP NOT NULL
+    , camera_trap_number INT NOT NULL default 1
 );
 COMMENT ON COLUMN "deployment"."owner" IS 'This column is for internal use only. Do not use this column.';
 

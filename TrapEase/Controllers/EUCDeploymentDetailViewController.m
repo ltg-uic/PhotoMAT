@@ -16,8 +16,12 @@
 #import "EUCImageDisplayViewController.h"
 #import "NSString+EUCStringExtensions.h"
 #import "EUCDatabase.h"
+#import "EUCNetwork.h"
+#import "DDLog.h"
 
 CGFloat defaultDeploymentWideness = 96.0/64.0;
+
+static const int ddLogLevel = LOG_LEVEL_INFO;
 
 typedef enum : NSUInteger {
     editingNominal,
@@ -466,12 +470,50 @@ typedef enum : NSUInteger {
 #pragma mark - Upload Deployment
 -(void) uploadDeployment {
     NSDictionary * settings = [[EUCDatabase sharedInstance] settings];
-    NSInteger personId = settings[@"personId"];
+    NSInteger personId = [settings[@"personId"] integerValue];
     NSInteger cameraId = 1; // hardcoded for now
     NSString * trapNumberString = self.trapNumber.text;
     NSInteger trapNumber = [trapNumberString integerValue];
+    NSDictionary * putData = @{@"person_id": @(personId),
+                                @"deployment_date": [self.format stringFromDate:self.actualDate],
+                                @"camera": @(cameraId),
+                                @"nominal_mark_time": [self.format stringFromDate:self.nominalDate],
+                                @"actual_mark_time": [self.format stringFromDate:self.actualDate],
+                                @"camera_trap_number": @(trapNumber),
+                                @"short_name": self.shortName.text
+                                };
     
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
+//    EUCNetworkPOSTSuccessBlock postSuccess = ^(NSURLSessionDataTask *postTask, NSInteger newId) {
+//        EUCNetworkPUTSuccessBlock putSuccessBlock= ^(NSURLSessionDataTask *putTask, id putObj) {
+//            DDLogInfo(@"Put succeeded");
+//        };
+//        EUCNetworkPUTSuccessBlock putFailureBlock= ^(NSURLSessionDataTask *putTask, NSError * putError) {
+//            DDLogInfo(@"Put failed");
+//        };
+//    
+//    };
+//    EUCNetworkPOSTFailureBlock postFailure = ^(NSURLSessionDataTask * postTask, NSError * postError) {
+//        DDLogInfo(@"Post failed");
+//    };
+    
+    [EUCNetwork createIDForResource:@"deployment"
+                       successBlock:^(NSURLSessionDataTask *task, NSInteger newId) {
+                           [EUCNetwork putResource:@"deployment"
+                                            withId:newId
+                                            params:putData successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+                                                DDLogInfo(@"Put succeeded");
+                                                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                                                [self dismissViewControllerAnimated:YES completion:nil];
+                                            } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
+                                                DDLogInfo(@"Put failed");
+                                            }];
+                       }
+                       failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
+                           DDLogInfo(@"Post failed");
+                       }
+     ];
     
 }
 

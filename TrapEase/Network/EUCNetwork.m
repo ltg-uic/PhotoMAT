@@ -17,6 +17,7 @@
 
 @end
 
+static NSString * baseUrl = @"http://trap.euclidsoftware.com";
 
 @implementation EUCNetwork
 
@@ -34,7 +35,8 @@
 {
     self = [super init];
     if (self) {
-        _sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://trap.euclidsoftware.com"]];
+        _sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:baseUrl]];
+        _sessionManager.requestSerializer = [AFJSONRequestSerializer serializer];
 //        [_sessionManager.requestSerializer setValue:sessionToken forHTTPHeaderField:@"token"];
 
     }
@@ -124,7 +126,7 @@
 
 #pragma mark - POST
 
-+(void) createRecordForResource: (NSString *) resource successBlock: (EUCNetworkPOSTSuccessBlock) successBlock failureBlock: (EUCNetworkPOSTFailureBlock) failureBlock {
++(void) createIDForResource: (NSString *) resource successBlock: (EUCNetworkPOSTSuccessBlock) successBlock failureBlock: (EUCNetworkPOSTFailureBlock) failureBlock {
     EUCNetwork * network = [EUCNetwork sharedNetwork];
 
     
@@ -138,6 +140,25 @@
                              failureBlock(task, error);
                          }];
     
+}
+
+#pragma mark - PUT 
++(void) putResource: (NSString *) resource withId: (NSInteger) resourceId params: (NSDictionary *) params successBlock: (EUCNetworkPUTSuccessBlock) successBlock failureBlock: (EUCNetworkPUTFailureBlock) failureBlock {
+   
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
+    
+//    NSMutableURLRequest * request = [[AFJSONRequestSerializer serializer] requestWithMethod:@"PUT"
+//                                                                                  URLString:[NSString stringWithFormat:@"%@/%@/%ld", baseUrl, resource, resourceId]
+//                                                                                 parameters:params];
+    
+    
+    [network.sessionManager PUT:[NSString stringWithFormat:@"/%@/%ld", resource, resourceId]
+                     parameters:params
+                        success:successBlock
+                        failure:failureBlock];
+    
+//    AFHTTPRequestOperation * operation = [network.sessionManager 
+
 }
 
 @end

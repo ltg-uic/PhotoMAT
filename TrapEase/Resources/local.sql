@@ -79,6 +79,7 @@ CREATE TABLE deployment (
     , person_name TEXT NOT NULL
     , class_name TEXT NOT NULL
     , school_name TEXT NOT NULL
+    , camera_trap_number INT NOT NULL default 1
 );
 create index i_dep_id on deployment(id);
 

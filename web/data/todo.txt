@@ -1,8 +1,12 @@
 TODO
 
-Deployment Upload
 Add camera trap number text field
+
+Deployment Upload
 Deployment Edit
 Add burst count to bursts
 Label
 Analyze
+Image Import
+Screen shot
+Send data to Toronto via server
