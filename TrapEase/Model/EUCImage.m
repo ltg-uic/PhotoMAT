@@ -11,16 +11,6 @@
 @implementation EUCImage
 
 
-- (instancetype)initWithIndex: (NSInteger) index andFilename: (NSString *) filename
-{
-    self = [super init];
-    if (self) {
-        _index = index;
-        _filename = filename;
-    }
-    return self;
-}
-
 - (instancetype)initWithIndex: (NSInteger) index andUrl: (NSURL *) url
 {
     self = [super init];
@@ -30,4 +20,16 @@
     }
     return self;
 }
+
+- (instancetype)initWithIndex: (NSInteger) index andAsset: (ALAsset *) asset {
+    self = [super init];
+    if (self) {
+        _index = index;
+        _url = [asset valueForProperty:ALAssetPropertyAssetURL];
+        _assetDate = [asset valueForProperty:ALAssetPropertyDate];
+        _dimensions = asset.defaultRepresentation.dimensions;
+    }
+    return self;
+}
+
 @end

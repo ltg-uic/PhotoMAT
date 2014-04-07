@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface EUCImage : NSObject
 
 - (instancetype)initWithIndex: (NSInteger) index andUrl: (NSURL *) url;
-- (instancetype)initWithIndex: (NSInteger) index andFilename: (NSString *) filename;
+- (instancetype)initWithIndex: (NSInteger) index andAsset: (ALAsset *) asset;
 
 @property (assign, nonatomic) NSInteger index;
 @property (strong, nonatomic) NSURL * url;

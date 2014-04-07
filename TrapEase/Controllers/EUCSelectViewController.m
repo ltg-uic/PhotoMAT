@@ -56,14 +56,11 @@ extern CGFloat defaultWideness;
                 burstIndex++;
                 burstSubIndex++;
                 EUCBurst * burst = [[EUCBurst alloc] init];
-                EUCImage * image = [[EUCImage alloc] initWithIndex:index andUrl: [asset valueForProperty:ALAssetPropertyAssetURL]];
-                NSDate * thisAssetsDate = [asset valueForProperty:ALAssetPropertyDate];
-                image.assetDate = thisAssetsDate;
-                image.dimensions = asset.defaultRepresentation.dimensions;
+                EUCImage * image = [[EUCImage alloc] initWithIndex:index andAsset:asset];
                 [self.bursts addObject:burst];
                 [burst.images addObject:image];
 
-                lastDate = [asset valueForProperty:ALAssetPropertyDate];
+                lastDate = image.assetDate;
             }
             else {
                 // most of the code happens here
@@ -72,22 +69,18 @@ extern CGFloat defaultWideness;
                 if (abs(delta) < burstDelta) {
                     burstSubIndex++;
                     EUCBurst * burst = self.bursts[burstIndex];
-                    EUCImage * image = [[EUCImage alloc] initWithIndex:index andUrl: [asset valueForProperty:ALAssetPropertyAssetURL]];
-                    image.dimensions = asset.defaultRepresentation.dimensions;
-                    image.assetDate = thisAssetsDate;
+                    EUCImage * image = [[EUCImage alloc] initWithIndex:index andAsset:asset];
                     [burst.images addObject:image];
-                    lastDate = [asset valueForProperty:ALAssetPropertyDate];
+                    lastDate = image.assetDate;
                 }
                 else {
                     burstIndex++;
                     EUCBurst * newBurst = [[EUCBurst alloc] init];
-                    EUCImage * image = [[EUCImage alloc] initWithIndex:index andUrl: [asset valueForProperty:ALAssetPropertyAssetURL]];
-                    image.assetDate = thisAssetsDate;
-                    image.dimensions = asset.defaultRepresentation.dimensions;
+                    EUCImage * image = [[EUCImage alloc] initWithIndex:index andAsset:asset];
                     [self.bursts addObject:newBurst];
                     [newBurst.images addObject:image];
                     burstSubIndex = 0;
-                    lastDate = [asset valueForProperty:ALAssetPropertyDate];
+                    lastDate = image.assetDate;
                 }
             }
         }
