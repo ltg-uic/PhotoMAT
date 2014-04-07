@@ -115,7 +115,7 @@
 {
     NSDictionary * deployment = (NSDictionary *) self.deployments[indexPath.row];
     
-    cell.name.text = deployment[@"person_name"];
+    cell.name.text = [NSString stringWithFormat:@"%@ - %@", deployment[@"person_name"], deployment[@"short_name"]];
     cell.school.text = [NSString stringWithFormat:@"%@, %@", deployment[@"school_name"], deployment[@"class_name"]];
     cell.date.text = deployment[@"date"];
 }

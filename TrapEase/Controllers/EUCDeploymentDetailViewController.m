@@ -75,6 +75,7 @@ typedef enum : NSUInteger {
 - (IBAction)done:(id)sender;
 - (IBAction)enterNominal:(id)sender;
 - (IBAction)enterActual:(id)sender;
+- (IBAction)cancel:(id)sender;
 
 @end
 
@@ -235,6 +236,10 @@ typedef enum : NSUInteger {
                                   inView:self.view
                 permittedArrowDirections:UIPopoverArrowDirectionAny
                                 animated:YES];
+}
+
+- (IBAction)cancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void) resignKbResponders {
