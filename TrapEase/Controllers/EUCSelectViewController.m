@@ -57,6 +57,9 @@ extern CGFloat defaultWideness;
                 burstSubIndex++;
                 EUCBurst * burst = [[EUCBurst alloc] init];
                 EUCImage * image = [[EUCImage alloc] initWithIndex:index andUrl:[asset valueForProperty:ALAssetPropertyAssetURL]];
+                NSDate * thisAssetsDate = [asset valueForProperty:ALAssetPropertyDate];
+                image.assetDate = thisAssetsDate;
+                image.dimensions = asset.defaultRepresentation.dimensions;
                 [self.bursts addObject:burst];
                 [burst.images addObject:image];
 
@@ -70,6 +73,8 @@ extern CGFloat defaultWideness;
                     burstSubIndex++;
                     EUCBurst * burst = self.bursts[burstIndex];
                     EUCImage * image = [[EUCImage alloc] initWithIndex:index andUrl:[asset valueForProperty:ALAssetPropertyAssetURL]];
+                    image.dimensions = asset.defaultRepresentation.dimensions;
+                    image.assetDate = thisAssetsDate;
                     [burst.images addObject:image];
                     lastDate = [asset valueForProperty:ALAssetPropertyDate];
                 }
@@ -77,6 +82,8 @@ extern CGFloat defaultWideness;
                     burstIndex++;
                     EUCBurst * newBurst = [[EUCBurst alloc] init];
                     EUCImage * image = [[EUCImage alloc] initWithIndex:index andUrl:[asset valueForProperty:ALAssetPropertyAssetURL]];
+                    image.assetDate = thisAssetsDate;
+                    image.dimensions = asset.defaultRepresentation.dimensions;
                     [self.bursts addObject:newBurst];
                     [newBurst.images addObject:image];
                     burstSubIndex = 0;

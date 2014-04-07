@@ -14,5 +14,8 @@
 
 @property (assign, nonatomic) NSInteger index;
 @property (strong, nonatomic) NSURL * url;
+@property (strong, nonatomic) NSDate *assetDate;
+@property (assign, nonatomic) CGSize dimensions;
+
 
 @end

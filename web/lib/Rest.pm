@@ -182,7 +182,7 @@ sub post {
 
     my $sequenceName = $table."_id_seq";
 
-    if ($count && $count > 1) { 
+    if ($count) { 
         my $ids = [];
         my $sequence;
         my $value;

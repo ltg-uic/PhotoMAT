@@ -520,6 +520,8 @@ typedef enum : NSUInteger {
                                                 DDLogInfo(@"Put succeeded");
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                 [self dismissViewControllerAnimated:YES completion:nil];
+                                                [self uploadBurstsToDeploymentNumber:newId];
+                                                [self uploadImagesToDeploymentNumber:newId];
                                             } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                                                 DDLogInfo(@"Put failed");
                                             }];
@@ -529,6 +531,74 @@ typedef enum : NSUInteger {
                        }
      ];
     
+}
+
+-(void) uploadBurstsToDeploymentNumber: (NSInteger) deploymentId {
+    // call createids for resuourse
+    
+    NSInteger numBursts = [self.importedBursts count];
+    __block NSInteger burstIndex = 0;
+    [EUCNetwork createIDs: numBursts forResource:@"burst"
+                        successBlock:^(NSURLSessionDataTask *task, NSInteger burstId) {
+                            EUCBurst * thisBurst = self.importedBursts[burstIndex];
+                            burstIndex++;
+                            EUCImage * firstImage = thisBurst.images[0];
+                            
+                            NSDictionary * putData = @{@"burst_date": [self.format stringFromDate:firstImage.assetDate],
+                                                       @"deployment_id": @(deploymentId)};
+                            
+                            [EUCNetwork putResource:@"burst"
+                                             withId:burstId
+                                             params:putData
+                                       successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+                                           // now upload images
+                                           [self uploadImagesForBurst: thisBurst withId: burstId];
+                                       } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
+                                           // TODO: AAA alert here
+                                       }];
+                        } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
+                            // TODO: AAA alert here
+                        }];
+    
+}
+
+-(void) uploadImagesForBurst: (EUCBurst *) burst withId: (NSInteger) burstId {
+    NSInteger numImages = [burst.images count];
+    __block NSInteger imageIndex = 0;
+    
+    [EUCNetwork createIDs:numImages
+              forResource:@"image"
+             successBlock:^(NSURLSessionDataTask *task, NSInteger imageId) {
+                 EUCImage * thisImage = burst.images[imageIndex];
+                 imageIndex++;
+                 NSDictionary * putData = @{@"burst_id": @(burstId),
+                                            @"image_date": [self.format stringFromDate:thisImage.assetDate],
+                                            @"file_name": [NSString stringWithFormat:@"%ld.jpg", imageId],
+                                            @"width": @(thisImage.dimensions.width),
+                                            @"height": @(thisImage.dimensions.height)
+                                            };
+                 
+                 // now put image
+                 // then post to /image/file
+                 [EUCNetwork putResource:@"image"
+                                  withId:imageId
+                                  params:putData
+                            successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+                                // now upload images
+                                [self uploadImageURL:thisImage.url forId:imageId];
+                            } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
+                                // TODO: AAA alert here
+                            }];
+             } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
+                 // TODO: AAA alert here
+             }];
+}
+
+-(void) uploadImageURL: (NSURL *) url forId: (NSInteger) imageId {
+    [EUCNetwork uploadImage:url forResource:@"image" withId:imageId];
+}
+
+-(void) uploadImagesToDeploymentNumber: (NSInteger) deploymentId {
 }
 
 

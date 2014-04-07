@@ -18,12 +18,13 @@ sub handle {
     my $hash = {  };
     my $person = &Auth::getPerson($r, $dbh);
 
-    if (!$person) { 
+    my $method = $parent_hash->{method};
+    
+    if (!$person && $method ne 'GET') { 
         $parent_hash->{http_status} = HTTP_CONFLICT;
         return $hash;
     }
 
-    my $method = $parent_hash->{method};
     my $path = $parent_hash->{path} ;
     my ($table, $id) = split(/\//, $path);
 

@@ -128,7 +128,7 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
 
 +(void) createIDForResource: (NSString *) resource successBlock: (EUCNetworkPOSTSuccessBlock) successBlock failureBlock: (EUCNetworkPOSTFailureBlock) failureBlock {
     EUCNetwork * network = [EUCNetwork sharedNetwork];
-
+    
     
     [network.sessionManager POST:[NSString stringWithFormat:@"/%@", resource]
                       parameters:nil
@@ -142,7 +142,26 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
     
 }
 
-#pragma mark - PUT 
++(void) createIDs: (NSInteger) numIds forResource: resource successBlock: (EUCNetworkPOSTSuccessBlock) successBlock failureBlock: (EUCNetworkPOSTFailureBlock) failureBlock {
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
+    
+    
+    [network.sessionManager POST:[NSString stringWithFormat:@"/%@/%ld", resource, numIds]
+                      parameters:nil
+                         success:^(NSURLSessionDataTask *task, id responseObject) {
+                             NSDictionary * result = (NSDictionary *) responseObject;
+                             NSArray * newIds = result[@"ids"];
+                             for (NSNumber * number in newIds) {
+                                 NSInteger newId = [number integerValue];
+                                 successBlock(task, newId);
+                             }
+                         } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                             failureBlock(task, error);
+                         }];
+    
+}
+
+#pragma mark - PUT
 +(void) putResource: (NSString *) resource withId: (NSInteger) resourceId params: (NSDictionary *) params successBlock: (EUCNetworkPUTSuccessBlock) successBlock failureBlock: (EUCNetworkPUTFailureBlock) failureBlock {
    
     EUCNetwork * network = [EUCNetwork sharedNetwork];
@@ -155,4 +174,36 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
     
 }
 
+#pragma mark - upload image
+
++(void) uploadImage: (NSURL *) url forResource: (NSString *) resource withId: (NSInteger) resourceId {
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer]
+                                    multipartFormRequestWithMethod:@"POST"
+                                    URLString:[NSString stringWithFormat:@"/file/%@/%ld", resource, resourceId]
+                                    parameters:nil
+                                    constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                                        [formData appendPartWithFileURL:url
+                                                                   name:@"file"
+                                                               fileName:@"filename.jpg"
+                                                               mimeType:@"image/jpeg"
+                                                                  error:nil];
+                                    }
+                                    error:nil];
+    
+    NSProgress *progress = nil;
+    
+    NSURLSessionUploadTask *uploadTask = [network.sessionManager uploadTaskWithStreamedRequest:request
+                                                                                      progress:&progress
+                                                                             completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                                                                                 if (error) {
+                                                                                     NSLog(@"Error: %@", error);
+                                                                                 } else {
+                                                                                     NSLog(@"%@ %@", response, responseObject);
+                                                                                 }
+                                                                             }];
+    
+    [uploadTask resume];
+}
 @end
