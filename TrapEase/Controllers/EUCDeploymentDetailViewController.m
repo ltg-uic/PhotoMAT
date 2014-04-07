@@ -211,6 +211,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)enterNominal:(id)sender {
+    [self resignKbResponders];
     self.dateEditingMode = editingNominal;
     self.datePickerViewController = [[EUCDatePickerViewController alloc] initWithNibName:@"EUCDatePickerViewController" bundle:nil date:self.nominalDate];
     self.datePickerViewController.delegate = self;
@@ -224,6 +225,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)enterActual:(id)sender {
+    [self resignKbResponders];
     self.dateEditingMode = editingActual;
     self.datePickerViewController = [[EUCDatePickerViewController alloc] initWithNibName:@"EUCDatePickerViewController" bundle:nil date:self.actualDate];
     self.datePickerViewController.delegate = self;
@@ -233,6 +235,12 @@ typedef enum : NSUInteger {
                                   inView:self.view
                 permittedArrowDirections:UIPopoverArrowDirectionAny
                                 animated:YES];
+}
+
+-(void) resignKbResponders {
+    [self.shortName resignFirstResponder];
+    [self.trapNumber resignFirstResponder];
+    [self.notes resignFirstResponder];
 }
 
 -(BOOL) verifyRequiredFields {

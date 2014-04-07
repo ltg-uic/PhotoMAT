@@ -44,6 +44,7 @@
     if (self.date) {
         self.datePicker.date = self.date;
     }
+    [self.delegate dateChangedTo:self.datePicker.date];
 }
 
 - (void)didReceiveMemoryWarning
