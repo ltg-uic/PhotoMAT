@@ -24,6 +24,7 @@
 #import "EUCConnectingViewController.h"
 #import "EUCNetwork.h"
 #import "OBDragDropManager.h"
+#import "EUCNotesViewController.h"
 
 @implementation EUCAppDelegate
 
@@ -63,6 +64,7 @@
     [EUCNetwork updatePersonId:dbSettings[@"personId"]];
 
     EUCCloudViewController * cloud = [[EUCCloudViewController alloc] initWithNibName:@"EUCCloudViewController" bundle:nil];
+    EUCNotesViewController *notes = [[EUCNotesViewController alloc] initWithNibName:@"EUCNotesViewController" bundle:nil];
     EUCSettingsViewController * settings = [[EUCSettingsViewController alloc] initWithNibName:@"EUCSettingsViewController" bundle:nil];
     EUCDeploymentSplitViewController * dsvc = [[EUCDeploymentSplitViewController alloc] init];
     EUCDeploymentMasterViewController * master = [[EUCDeploymentMasterViewController alloc] initWithNibName:@"EUCDeploymentMasterViewController" bundle:nil];
@@ -76,8 +78,8 @@
     dsvc.viewControllers = @[master, detail];
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
-    self.homeViewController.viewControllers = @[user, dsvc, label, analyze, cloud, settings];
-    
+    self.homeViewController.viewControllers = @[user, dsvc, label, analyze, cloud, notes, settings];
+
     user.visibilityDelegate = master;
     
     // check to see if you have school data

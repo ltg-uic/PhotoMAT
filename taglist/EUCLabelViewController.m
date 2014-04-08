@@ -12,16 +12,18 @@
 #import "UIView+OBDropZone.h"
 #import "TagView.h"
 #import "PopoverTagContentViewController.h"
+#import "PhotoTag.h"
 
 
 @interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource> {
     NSString *lastTagName;
     NSMutableArray *tag_array;
-    NSMutableArray *tag_drops;
+    NSMutableArray *photoTags;
     OBDragDropManager *dragDropManager;
     NSMutableArray *imageViewLabels;
     TagView *selectedTag;
     UIPopoverController *popoverController;
+    NSString *currentImageName;
 }
 
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -29,6 +31,7 @@
 @property(weak, nonatomic) IBOutlet UITextField *addLabelField;
 @property(weak, nonatomic) IBOutlet UITextView *noteTextView;
 @property(weak, nonatomic) IBOutlet UIView *dropOverlayView;
+@property(weak, nonatomic) IBOutlet UIButton *playPauseButton;
 
 @end
 
@@ -46,33 +49,46 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
                                                 selectedImage:nil];
 
         tag_array = [NSMutableArray arrayWithObjects:@"Bird", @"Lion", @"Squirrel", @"Troll", @"Dragon", @"Gorilla", @"Monkey", @"Tiger", @"Bunny", @"Rat", nil];
-        tag_drops = [[NSMutableArray alloc] init];
+        photoTags = [[NSMutableArray alloc] init];
 
     }
     return self;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    dragDropManager = [OBDragDropManager sharedManager];
-    _dropOverlayView.dropZoneHandler = self;
-
+    [self createImageBorder];
+    //setup textviews
     [self textViewLikeTextField:_noteTextView];
     [_addLabelField setDelegate:self];
     [_addLabelField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 
     imageViewLabels = [[NSMutableArray alloc] init];
 
-
+    //setup drag and drop
+    dragDropManager = [OBDragDropManager sharedManager];
+    _dropOverlayView.dropZoneHandler = self;
+    //setup gestures for taglist
     [self addGesturesToTagList];
+    //create the tag list
     [_tagList initTagListWithTagNames:tag_array];
 
-    //[_tagList setTagDelegate:self];
+    //TODO for testing
+    currentImageName = @"sample.jpg";
 
+}
 
-
-
+- (void)createImageBorder {
+    CALayer *layer = _imageView.layer;
+    [layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [layer setBorderWidth:8.0f];
+    [layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [layer setShadowOpacity:0.3f];
+    [layer setShadowOffset:CGSizeMake(1, 3)];
+    [layer setShadowRadius:4.0];
+    [_imageView setClipsToBounds:NO];
 }
 
 //uses a block because they need to be added to tagview as the taglist builds them
@@ -174,12 +190,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     BOOL SUCCESS = [_tagList addTag:newTag];
 
     if (SUCCESS) {
-
-        if (![tag_drops containsObject:newTag]) {
-            [tag_drops addObject:newTag];
-        }
         [textField setText:@""];
-
     }
     [self.view endEditing:YES];
     return YES;
@@ -351,6 +362,69 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     _addLabelField.text = selectedTag.text;
 
     [self showDeletePopoverWithSelectedTag:selectedTag withFlag:DELETE_SELECTED_LABEL withText:[NSString stringWithFormat:@"Delete %@ Label?", selectedTag.text]];
+}
+
+- (IBAction)swipeImagePrevious:(id)sender {
+
+    [self removeAllTagsFromDragOverlay];
+
+    currentImageName = @"sample.jpg";
+    NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
+
+    for (PhotoTag *pt in pts) {
+        [_dropOverlayView addSubview:pt.tagView];
+    }
+
+    _imageView.image = [UIImage imageNamed:currentImageName];
+}
+
+- (IBAction)swipeImageNext:(id)sender {
+
+    [self removeAllTagsFromDragOverlay];
+
+    currentImageName = @"sample2.jpg";
+    NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
+
+    for (PhotoTag *pt in pts) {
+        [_dropOverlayView addSubview:pt.tagView];
+    }
+
+    _imageView.image = [UIImage imageNamed:currentImageName];
+}
+
+- (void)removeAllTagsFromDragOverlay {
+
+
+    //remove all the tags for this image
+    NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
+    for (PhotoTag *pt in pts) {
+        [photoTags removeObject:pt];
+    }
+
+    NSArray *subviews = [_dropOverlayView subviews];
+
+    for (UIView *v in subviews) {
+        //add them again
+        //save it for later
+        PhotoTag *pt = [[PhotoTag alloc] init];
+        //needs to be dynamic, not hardcoded
+        pt.imageName = currentImageName;
+        pt.tagView = v;
+        pt.xPosition = v.frame.origin.x;
+        pt.yPosition = v.frame.origin.y;
+        [photoTags addObject:pt];
+        [v removeFromSuperview];
+    }
+}
+
+- (IBAction)playPauseImageAnimation:(id)sender {
+    UIButton *btn = (UIButton *) sender;
+
+    if (![btn isSelected]) {
+        [btn setSelected:YES];
+    } else {
+        [btn setSelected:NO];
+    }
 }
 
 @end
