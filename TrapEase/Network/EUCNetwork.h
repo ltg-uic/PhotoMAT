@@ -49,7 +49,6 @@ typedef void(^EUCDownloadTaskCompletionBlock)(NSURLResponse * response, NSURL * 
 
 +(void) putResource: (NSString *) resource withId: (NSInteger) resourceId params: (NSDictionary *) params successBlock: (EUCNetworkPUTSuccessBlock) successBlock failureBlock: (EUCNetworkPUTFailureBlock) failureBlock;
 
-+(void) uploadImage: (NSURL *) url forResource: (NSString *) resource withId: (NSInteger) resourceId;
 +(void) uploadImageData: (NSData *) data forResource: (NSString *) resource withId: (NSInteger) resourceId;
 
 @end

@@ -613,7 +613,59 @@ typedef enum : NSUInteger {
      ];
 }
 
+#pragma mark - Deployment Pictures
+
 -(void) uploadImagesToDeploymentNumber: (NSInteger) deploymentId {
+    NSInteger numImages = [self.addedImages count];
+    __block NSInteger imageIndex = 0;
+    NSInteger cameraId = 1; // hardcoded for now
+
+    [EUCNetwork createIDs:numImages
+              forResource:@"deployment_picture"
+             successBlock:^(NSURLSessionDataTask *task, NSInteger imageId) {
+                 EUCImage * thisImage = self.addedImages[imageIndex];
+                 imageIndex++;
+                 NSDictionary * putData = @{@"deployment_id": @(deploymentId),
+                                            @"camera": @(cameraId),
+                                            @"file_name": [NSString stringWithFormat:@"%ld.jpg", imageId],
+                                            @"file_type": @"jpg"
+                                            };
+                 
+                 // now put image
+                 // then post to /image/file
+                 [EUCNetwork putResource:@"deployment_picture"
+                                  withId:imageId
+                                  params:putData
+                            successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+                                // now upload images
+                                [self uploadDeploymentPictureURL:thisImage.url forId:imageId];
+                            } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
+                                // TODO: AAA alert here
+                            }];
+             } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
+                 // TODO: AAA alert here
+             }];
+    
+    
+}
+
+
+-(void) uploadDeploymentPictureURL: (NSURL *) url forId: (NSInteger) imageId {
+    [self.assetsLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
+        if (asset != nil) {
+            // from: http://stackoverflow.com/a/8801656/772526
+            ALAssetRepresentation *rep = [asset defaultRepresentation];
+            Byte *buffer = (Byte*)malloc(rep.size);
+            NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
+            NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+            
+            [EUCNetwork uploadImageData: data forResource:@"deployment_picture" withId:imageId];
+        }
+    }
+                       failureBlock:^(NSError *error) {
+                           // TODO: AAA log this
+                       }
+     ];
 }
 
 

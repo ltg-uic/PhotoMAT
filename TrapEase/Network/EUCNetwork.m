@@ -201,10 +201,11 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
     NSURLSessionUploadTask *uploadTask = [network.sessionManager uploadTaskWithStreamedRequest:request
                                                                                       progress:&progress
                                                                              completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                                                                                 NSLog(@"Resource: %@, resourceId; %ld", resource, resourceId);
                                                                                  if (error) {
                                                                                      NSLog(@"Error: %@", error);
                                                                                  } else {
-//                                                                                     NSLog(@"%@ %@", response, responseObject);
+                                                                                     NSLog(@"%@ %@", response, responseObject);
                                                                                  }
                                                                              }];
     
