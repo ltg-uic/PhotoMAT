@@ -12,6 +12,50 @@
 @implementation EUCImageUtilities
 
 
++(UIImage *)snapshotForView: (UIView *) view
+{
+    
+    // Create the image context
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 1.0);
+    
+    // There he is! The new API method
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    
+    // Get the snapshot
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    
+    // Be nice and clean your mess up
+    UIGraphicsEndImageContext();
+    
+    
+    // return blurredSnapshotImage;
+    return [EUCImageUtilities scaleAndRotateImage:snapshotImage];
+}
+
+
+
++(UIImage *)snapshotForWindow: (UIWindow *) window
+{
+    
+    // Create the image context
+    UIGraphicsBeginImageContextWithOptions(window.bounds.size, NO, window.screen.scale);
+    
+    // There he is! The new API method
+    [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
+    
+    // Get the snapshot
+    UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    
+    // Be nice and clean your mess up
+    UIGraphicsEndImageContext();
+    
+    
+    // return blurredSnapshotImage;
+    return [EUCImageUtilities scaleAndRotateImage:snapshotImage];
+}
+
 
 #pragma mark - Image Size
 

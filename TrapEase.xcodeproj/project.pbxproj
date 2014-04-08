@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		35D4F084544C46C2BE466AC9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB35A88ACFB41A99F3E3EC4 /* libPods.a */; };
+		B4116D9918F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */; };
 		B43658D518E4B95F0017672E /* EUCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658D418E4B95F0017672E /* EUCImage.m */; };
 		B43658D818E4B9A30017672E /* EUCBurst.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658D718E4B9A30017672E /* EUCBurst.m */; };
 		B43658DB18E4E4200017672E /* EUCDeploymentImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658DA18E4E4200017672E /* EUCDeploymentImageCell.m */; };
@@ -125,6 +126,8 @@
 /* Begin PBXFileReference section */
 		1FB35A88ACFB41A99F3E3EC4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CB9A6B881342BDB4DEA63F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		B4116D9718F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCTabBarViewControllerDelegate.h; path = TrapEase/Controllers/EUCTabBarViewControllerDelegate.h; sourceTree = "<group>"; };
+		B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCTabBarViewControllerDelegate.m; path = TrapEase/Controllers/EUCTabBarViewControllerDelegate.m; sourceTree = "<group>"; };
 		B43658D118E3F19C0017672E /* EUCVisibilityChangedDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EUCVisibilityChangedDelegate.h; path = TrapEase/Controllers/EUCVisibilityChangedDelegate.h; sourceTree = "<group>"; };
 		B43658D318E4B95F0017672E /* EUCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCImage.h; path = Model/EUCImage.h; sourceTree = "<group>"; };
 		B43658D418E4B95F0017672E /* EUCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCImage.m; path = Model/EUCImage.m; sourceTree = "<group>"; };
@@ -441,6 +444,8 @@
 				B43658E518E542480017672E /* EUCImageDisplayViewController.h */,
 				B43658E618E542480017672E /* EUCImageDisplayViewController.m */,
 				B43658E718E542480017672E /* EUCImageDisplayViewController.xib */,
+				B4116D9718F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.h */,
+				B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */,
 			);
 			name = Controllers;
 			path = ..;
@@ -780,6 +785,7 @@
 				B43658DB18E4E4200017672E /* EUCDeploymentImageCell.m in Sources */,
 				B4E6BE6118DFB77B00AC9D84 /* EUCNetwork.m in Sources */,
 				B4E6BE7818DFD0DD00AC9D84 /* EUCDeploymentSplitViewController.m in Sources */,
+				B4116D9918F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m in Sources */,
 				B4E6BD7518DDC39300AC9D84 /* EUCAnalyzeViewController.m in Sources */,
 				B43658E818E542480017672E /* EUCImageDisplayViewController.m in Sources */,
 				B4E6BE2518DE3ED100AC9D84 /* EUCCloudViewController.m in Sources */,

@@ -25,6 +25,13 @@
 
 #import "EUCConnectingViewController.h"
 #import "EUCNetwork.h"
+#import "EUCTabBarViewControllerDelegate.h"
+
+@interface EUCAppDelegate () {}
+
+@property (strong, nonatomic) EUCTabBarViewControllerDelegate *tabBarVCDelegate;
+
+@end
 
 @implementation EUCAppDelegate
 
@@ -72,13 +79,22 @@
     EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
     EUCAnalyzeViewController * analyze = [[EUCAnalyzeViewController alloc] initWithNibName:@"EUCAnalyzeViewController" bundle:nil];
     EUCUserViewController * user = [[EUCUserViewController alloc] initWithNibName:@"EUCUserViewController" bundle:nil];
+    EUCKnapsackViewController * snapshot = [[EUCKnapsackViewController alloc] initWithNibName:@"EUCKnapsackViewController" bundle:nil asSnapshot:YES];
+    EUCKnapsackViewController * photos = [[EUCKnapsackViewController alloc] initWithNibName:@"EUCKnapsackViewController" bundle:nil asSnapshot:NO];
     
     master.detailViewController = detail;
     
     dsvc.viewControllers = @[master, detail];
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
-    self.homeViewController.viewControllers = @[user, dsvc, label, analyze, cloud, settings];
+    self.homeViewController.viewControllers = @[user, dsvc, label, analyze, cloud, settings, snapshot, photos];
+    
+    self.tabBarVCDelegate = [[EUCTabBarViewControllerDelegate alloc] init];
+    self.tabBarVCDelegate.snapshot = snapshot;
+    self.tabBarVCDelegate.photos = photos;
+    self.homeViewController.delegate = self.tabBarVCDelegate;
+    self.tabBarVCDelegate.window = self.window;
+    
     
     user.visibilityDelegate = master;
     

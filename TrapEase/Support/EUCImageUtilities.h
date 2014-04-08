@@ -15,6 +15,8 @@
 +(UIImage *)scaleAndRotateImage:(UIImage *)image;
 +(UIImage*)rotateUIImage:(UIImage*)sourceImage;
 
++(UIImage *)snapshotForWindow: (UIWindow *) window;
++(UIImage *)snapshotForView: (UIView *) view;
 
 
 @end
