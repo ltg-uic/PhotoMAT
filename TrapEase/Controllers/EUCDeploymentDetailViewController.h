@@ -19,6 +19,8 @@
 @property (assign, nonatomic) BOOL editViewVisible;
 @property (assign, nonatomic) BOOL updateMode;
 
+
 -(void) clearEditView;
+-(void) loadDeployment: (NSNumber *) deploymentId;
 
 @end

@@ -28,4 +28,6 @@
 
 -(BOOL) hasSchools;
 
+-(NSDictionary *) getDeploymentRecord: (NSNumber *) deploymentId;
+
 @end

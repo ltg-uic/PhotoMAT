@@ -146,8 +146,13 @@ typedef enum : NSUInteger {
 -(void)importDone:(NSMutableArray *)bursts {
     self.importedBursts = bursts;
     
+    BOOL first = YES;
     for (EUCBurst * burst in self.importedBursts) {
         for (EUCImage * image in burst.images) {
+            if (first) {
+                self.nominalDate = image.assetDate;
+                first = NO;
+            }
             [self.burstImages addObject:image];
         }
     }
@@ -165,6 +170,11 @@ typedef enum : NSUInteger {
 -(void) setEditViewVisible:(BOOL)editViewVisible {
     _editViewVisible = editViewVisible;
     self.editView.hidden = !editViewVisible;
+}
+
+-(void) setUpdateMode:(BOOL)updateMode {
+    _updateMode = updateMode;
+    self.addBurstsButton.hidden = updateMode;
 }
 
 - (IBAction)addImage:(id)sender {
@@ -253,12 +263,8 @@ typedef enum : NSUInteger {
         [self alertForRequiredField:@"deployment name"];
         return NO;
     }
-    if (self.nominalDate == nil) {
-        [self alertForRequiredField:@"nominal time"];
-        return NO;
-    }
     if (self.actualDate == nil) {
-        [self alertForRequiredField:@"nominal time"];
+        [self alertForRequiredField:@"mark time"];
         return NO;
     }
     if ([NSString isStringEmpty:self.trapNumber.text]) {
@@ -685,6 +691,20 @@ typedef enum : NSUInteger {
         self.actualDate = date;
         [self.actualButton setTitle:[self.format stringFromDate:date] forState:UIControlStateNormal];
     }
+}
+
+#pragma mark - 
+
+-(void) loadDeployment:(NSNumber *)deploymentId {
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    NSDictionary * record = [db getDeploymentRecord:deploymentId];
+    self.shortName.text = record[@"short_name"];
+    self.notes.text = record[@"notes"];
+    self.trapNumber.text = [NSString stringWithFormat:@"%ld", [record[@"camera_trap_number"] integerValue]];
+    [self.actualButton setTitle:record[@"actual_mark_time"] forState:UIControlStateNormal];
+    
+    // get deployment images and bursts
+    
 }
 
 @end

@@ -242,16 +242,18 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(NSArray *) getDeployments {
     NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:64];
     
-    NSString * sql = @"select person_name, deployment_date, school_name, class_name, short_name from deployment order by deployment_date desc";
+    NSString * sql = @"select person_name, deployment_date, school_name, class_name, short_name, id from deployment order by deployment_date desc";
     
     FMResultSet * rs = [self.db executeQuery:sql];
     
     while ([rs next]) {
+        
         NSDictionary * row = @{@"person_name": [rs stringForColumnIndex:0],
                                @"date": [rs stringForColumnIndex:1],
                                @"school_name": [rs stringForColumnIndex:2],
                                @"class_name": [rs stringForColumnIndex:3],
-                               @"short_name": [rs stringForColumnIndex:4]
+                               @"short_name": [rs stringForColumnIndex:4],
+                               @"id": @([rs intForColumnIndex:5])
                                };
         
         [array addObject:row];
@@ -276,8 +278,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 -(void) saveDeployment: (NSDictionary *) deployment {
-    NSMutableArray * cols = [NSMutableArray arrayWithCapacity:13];
-    NSMutableArray * vals = [NSMutableArray arrayWithCapacity:13];
+    NSMutableArray * cols = [NSMutableArray arrayWithCapacity:16];
+    NSMutableArray * vals = [NSMutableArray arrayWithCapacity:16];
     
     
     [self addColumn: @"id" fromDictionary:deployment toColumns:cols andValues:vals];
@@ -295,7 +297,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self addColumn: @"person_name" fromDictionary:deployment toColumns:cols andValues:vals];
     [self addColumn: @"class_name" fromDictionary:deployment toColumns:cols andValues:vals];
     [self addColumn: @"school_name" fromDictionary:deployment toColumns:cols andValues:vals];
-    
+    [self addColumn: @"camera_trap_number" fromDictionary:deployment toColumns:cols andValues:vals];
     
     [self insertColumns:cols andValues:vals intoTable:@"deployment"];
 }
@@ -305,6 +307,34 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.db executeUpdate:[NSString stringWithFormat:@"delete from %@", tableName]];
 }
 
+
+-(NSDictionary *) getDeploymentRecord:(NSNumber *)deploymentId {
+    NSString * sql = @"select deployment_date, notes, short_name, actual_mark_time, camera_trap_number from deployment where id=?";
+    
+    FMResultSet * rs = [self.db executeQuery:sql, deploymentId];
+    
+    if ([rs next]) {
+        NSString * deployment_date = [rs stringForColumnIndex:0];
+        NSString * notes = [rs stringForColumnIndex:1];
+        NSString * short_name = [rs stringForColumnIndex:2];
+        NSString * actual_mark_time = [rs stringForColumnIndex:3];
+        NSNumber * camera_trap_number = @([rs intForColumnIndex:4]);
+        if (notes == nil) { notes = @""; }
+        
+
+        NSDictionary * row = @{@"deployment_date": deployment_date,
+                               @"notes": notes,
+                               @"short_name": short_name,
+                               @"actual_mark_time": actual_mark_time,
+                               @"camera_trap_number": camera_trap_number
+                               };
+        
+        [rs close];
+        return row;
+    }
+    
+    return nil;
+}
 
 
 #pragma mark - writing helper functions

@@ -124,6 +124,16 @@
     return 88;
 }
 
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary * deployment = (NSDictionary *) self.deployments[indexPath.row];
+    
+    self.detailViewController.editViewVisible = YES;
+    self.detailViewController.updateMode = YES;
+    
+    [self.detailViewController loadDeployment:deployment[@"id"]];
+}
 
 
 @end
