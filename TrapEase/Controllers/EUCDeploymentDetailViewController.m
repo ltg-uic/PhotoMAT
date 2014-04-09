@@ -373,7 +373,6 @@ typedef enum : NSUInteger {
     actionSheet.tag = 1;
     actionSheet.destructiveButtonIndex = 1;
     
-    UICollectionViewCell * sender = [collectionView cellForItemAtIndexPath:indexPath];
     if (collectionView == self.bursts) {
         self.selectedImageSource = self.burstImages;
         self.selectedImage = self.burstImages[indexPath.row];
@@ -387,8 +386,16 @@ typedef enum : NSUInteger {
         self.selectedImage = nil;
     }
     
-    CGRect frame = [self.view convertRect:sender.frame fromView:sender.superview];
-    [actionSheet showFromRect:frame inView:self.view animated:YES];
+    UIImage * image = [EUCImageUtilities blurredSnapshotForWindow:self.view.window];
+    
+    EUCImageDisplayViewController * display =
+    [[EUCImageDisplayViewController alloc] initWithNibName:@"EUCImageDisplayViewController"
+                                                    bundle:nil
+                                           backgroundImage:image
+                                                  assetURL:self.selectedImage.url];
+    
+    [self presentViewController:display animated:NO completion:nil];
+
     
 }
 
