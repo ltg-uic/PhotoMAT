@@ -242,7 +242,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(NSArray *) getDeployments {
     NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:64];
     
-    NSString * sql = @"select person_name, deployment_date, school_name, class_name, short_name, id from deployment order by deployment_date desc";
+    NSString * sql = @"select person_name, deployment_date, school_name, class_name, short_name, id, person_id from deployment order by deployment_date desc";
     
     FMResultSet * rs = [self.db executeQuery:sql];
     
@@ -253,7 +253,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
                                @"school_name": [rs stringForColumnIndex:2],
                                @"class_name": [rs stringForColumnIndex:3],
                                @"short_name": [rs stringForColumnIndex:4],
-                               @"id": @([rs intForColumnIndex:5])
+                               @"id": @([rs intForColumnIndex:5]),
+                               @"person_id": @([rs intForColumnIndex:6])
+
                                };
         
         [array addObject:row];
@@ -298,6 +300,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self addColumn: @"class_name" fromDictionary:deployment toColumns:cols andValues:vals];
     [self addColumn: @"school_name" fromDictionary:deployment toColumns:cols andValues:vals];
     [self addColumn: @"camera_trap_number" fromDictionary:deployment toColumns:cols andValues:vals];
+    [self addColumn: @"person_id" fromDictionary:deployment toColumns:cols andValues:vals];
     
     [self insertColumns:cols andValues:vals intoTable:@"deployment"];
 }

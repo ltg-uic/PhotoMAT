@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrapEase/Data/EUCDatabase.m"
-            timestampString = "418689456.559433"
+            timestampString = "418864951.961723"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "325"
-            endingLineNumber = "325"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
             landmarkName = "-getDeploymentRecord:"
             landmarkType = "5">
          </BreakpointContent>

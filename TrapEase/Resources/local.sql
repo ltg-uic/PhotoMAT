@@ -65,6 +65,7 @@ create table currentPeople (
 
 CREATE TABLE deployment (
       id SERIAL UNIQUE PRIMARY KEY NOT NULL
+    , person_id INT NOT NULL
     , deployment_date TIMESTAMP NOT NULL
     , latitude NUMERIC (9,7) NULL
     , longitude NUMERIC (9,7)  NULL

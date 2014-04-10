@@ -11,6 +11,7 @@
 #import "EUCNetwork.h"
 #import "EUCDatabase.h"
 #import "EUCDeploymentDetailViewController.h"
+#import "EUCSelectedSet.h"
 
 @interface EUCDeploymentMasterViewController ()
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
@@ -131,6 +132,15 @@
     
     self.detailViewController.editViewVisible = YES;
     self.detailViewController.updateMode = YES;
+    
+    EUCSelectedSet * selected = [EUCSelectedSet sharedInstance];
+    selected.schoolName = deployment[@"school_name"];
+    selected.className = deployment[@"class_name"];
+    selected.groupName = deployment[@"group_name"];
+    selected.deploymentName = deployment[@"short_name"];
+    NSNumber * ownerId = deployment[@"person_id"];
+    selected.ownerId = [ownerId integerValue];
+    
     
     [self.detailViewController loadDeployment:deployment[@"id"]];
 }
