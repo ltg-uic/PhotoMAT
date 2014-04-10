@@ -66,6 +66,7 @@ typedef enum : NSUInteger {
 
 @property (strong, nonatomic) EUCDatePickerViewController *datePickerViewController;
 @property (strong, nonatomic) NSDateFormatter *format;
+@property (strong, nonatomic) dispatch_queue_t uploadQueue;
 
 
 
@@ -91,6 +92,8 @@ typedef enum : NSUInteger {
         _burstImages = [[NSMutableArray alloc] init];
         _format = [[NSDateFormatter alloc] init];
         [_format setDateFormat:@"MMM dd, yyyy hh:mm a"];
+        _uploadQueue = dispatch_queue_create("com.euclidsoftware.uploadQueue", NULL);
+
 
     }
     return self;
@@ -313,15 +316,15 @@ typedef enum : NSUInteger {
 -(EUCDeploymentImageCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     EUCDeploymentImageCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"deploymentImageCell" forIndexPath:indexPath];
     
-    EUCImage * burstImage;
+    EUCImage * imageToBeDisplayed;
     if (collectionView == self.bursts) {
-        burstImage = self.burstImages[indexPath.row];
+        imageToBeDisplayed = self.burstImages[indexPath.row];
     }
     else {
-        burstImage = self.addedImages[indexPath.row];
+        imageToBeDisplayed = self.addedImages[indexPath.row];
     }
     
-    [self.assetsLibrary assetForURL:burstImage.url resultBlock:^(ALAsset *asset) {
+    [self.assetsLibrary assetForURL:imageToBeDisplayed.url resultBlock:^(ALAsset *asset) {
         if (asset != nil) {
             UIImage * image = [UIImage imageWithCGImage:[asset aspectRatioThumbnail]];
             CGFloat wideness = 1.0*image.size.width/image.size.height;
@@ -598,6 +601,10 @@ typedef enum : NSUInteger {
                                   params:putData
                             successBlock:^(NSURLSessionDataTask *task, id responseObject) {
                                 // now upload images
+                                dispatch_async(self.uploadQueue, ^(void) {
+                                    [self uploadImageURL:thisImage.url forId:imageId];
+                                });
+
                                 [self uploadImageURL:thisImage.url forId:imageId];
                             } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                                 // TODO: AAA alert here
@@ -651,7 +658,9 @@ typedef enum : NSUInteger {
                                   params:putData
                             successBlock:^(NSURLSessionDataTask *task, id responseObject) {
                                 // now upload images
-                                [self uploadDeploymentPictureURL:thisImage.url forId:imageId];
+                                dispatch_async(self.uploadQueue, ^(void) {
+                                    [self uploadDeploymentPictureURL:thisImage.url forId:imageId];
+                                });
                             } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                                 // TODO: AAA alert here
                             }];

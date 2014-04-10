@@ -19,6 +19,8 @@
 @property (strong, nonatomic) NSDate *assetDate;
 @property (assign, nonatomic) CGSize dimensions;
 @property (strong, nonatomic) NSString *filename;
+@property (strong, nonatomic) NSURL * thumbnailURL;
+@property (assign, nonatomic) BOOL isLocal;
 
 
 

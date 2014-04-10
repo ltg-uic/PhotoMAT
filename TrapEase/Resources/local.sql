@@ -139,7 +139,14 @@ create index i_tag_id on tag(id);
 CREATE index i_tag_iid on tag(image_id);
 CREATE index i_tag_did on tag(deployment_id);
 
-
+CREATE TABLE pendingUploads (
+      "id" SERIAL UNIQUE PRIMARY KEY NOT NULL
+    , url TEXT NOT NULL
+    , resource TEXT NOT NULL
+    , image_id INT NOT NULL
+    , completed BOOLEAN NOT NULL DEFAULT FALSE
+);
+create index i_pending_completed on pendingUploads(completed);
 
 
 
