@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class DNDDragAndDropController;
 
 @interface EUCLabelViewController : UIViewController {
 
+    __weak IBOutlet UILabel *schoolClassGroupLabel;
 }
 
 @end

@@ -13,6 +13,7 @@
 #import "TagView.h"
 #import "PopoverTagContentViewController.h"
 #import "PhotoTag.h"
+#import "PopoverErrorContentViewController.h"
 
 
 @interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource> {
@@ -23,6 +24,7 @@
     NSMutableArray *imageViewLabels;
     TagView *selectedTag;
     UIPopoverController *popoverController;
+    UIPopoverController *errorPopoverController;
     NSString *currentImageName;
 }
 
@@ -38,6 +40,10 @@
 NSString *const DELETE_ALL_LABELS = @"DELETE_ALL_LABELS";
 NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
+#define MAX_TEXT_CHAR_LENGTH 16
+#define MAX_LABELS_ALLOWED 18
+
+
 @implementation EUCLabelViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -48,7 +54,8 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
                                                         image:[UIImage imageNamed:@"tag.png"]
                                                 selectedImage:nil];
 
-        tag_array = [NSMutableArray arrayWithObjects:@"Bird", @"Lion", @"Squirrel", @"Troll", @"Dragon", @"Gorilla", @"Monkey", @"Tiger", @"Bunny", @"Rat", nil];
+        tag_array = [NSMutableArray arrayWithObjects:@"1234567890qwertyu", @"Ugly Lion", @"grey Squirrel 1", @"yellow green Troll", @"red Dragon", @"fox Gorilla", @"eater Monkey", @"RIT Tigers", @"brown Bunny", @"big fat Rat", @"The yellow Bird1", @"The yellow Bird2", @"The yellow Bird3", @"The yellow Birdees3", @"The yellow Bird3", @"The yellow Bird2", @"the big bad bear2", @"the big bad bear", nil];
+        tag_array = [NSMutableArray arrayWithObjects:@"1234567890qwertyu", nil];
         photoTags = [[NSMutableArray alloc] init];
 
     }
@@ -59,6 +66,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    schoolClassGroupLabel.text = @"BZAEDS : Grade 5 : Marty";
     [self createImageBorder];
     //setup textviews
     [self textViewLikeTextField:_noteTextView];
@@ -73,6 +81,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     //setup gestures for taglist
     [self addGesturesToTagList];
     //create the tag list
+    _tagList.maxNumberOfLabels = 18;
     [_tagList initTagListWithTagNames:tag_array];
 
     //TODO for testing
@@ -90,6 +99,241 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     [layer setShadowRadius:4.0];
     [_imageView setClipsToBounds:NO];
 }
+
+//changes the look of the textfield
+- (void)textViewLikeTextField:(UITextView *)textView {
+    [textView.layer setBorderColor:[[UIColor colorWithRed:232.0 / 255.0
+                                                    green:232.0 / 255.0 blue:232.0 / 255.0 alpha:1] CGColor]];
+    [textView.layer setBorderWidth:1.0f];
+    [textView.layer setCornerRadius:7.0f];
+    [textView.layer setMasksToBounds:YES];
+}
+
+#pragma mark - Textfield delegates
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+
+    if (lastTagName == nil ) {
+        NSString *newTag = textField.text;
+        BOOL SUCCESS = [_tagList addTag:newTag];
+
+        if (SUCCESS) {
+            [textField setText:@""];
+            lastTagName = nil;
+        } else {
+            [self showErrorMessageWith:[NSString stringWithFormat:@"Only %d labels are allowed in the list.", MAX_LABELS_ALLOWED] withForView:_addLabelField];
+        }
+
+    }
+    [self.view endEditing:YES];
+    return YES;
+}
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    NSLog(@"text changed: %@", textField.text);
+
+    NSString *newTagName = textField.text;
+
+    if (lastTagName != nil ) {
+        int i = [_tagList indexOfTag:lastTagName];
+        if (i >= 0) {
+
+
+            [self changeTagsFrom:lastTagName to:newTagName];
+            lastTagName = newTagName;
+        }
+    }
+}
+
+- (void)changeTagsFrom:(NSString *)oldLabel to:(NSString *)newLabel {
+    [_tagList changeTagNameFrom:oldLabel to:newLabel];
+
+
+    NSArray *droppedTags = [_dropOverlayView subviews];
+
+    if (droppedTags.count > 0) {
+        for (TagView *tagView in droppedTags) {
+            if ([tagView.text isEqualToString:oldLabel]) {
+                tagView.text = newLabel;
+                [tagView setNeedsDisplay];
+            }
+        }
+    }
+}
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField.text.length >= MAX_TEXT_CHAR_LENGTH && range.length == 0) {
+        return NO; // return NO to not change text
+    } else {
+        return YES;
+    }
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    lastTagName = nil;
+    textField.text = @"";
+    return YES;
+}
+
+
+- (void)showErrorMessageWith:(NSString *)errorMessage withForView:(UIView *)targetView {
+    PopoverErrorContentViewController *content = [[PopoverErrorContentViewController alloc] initWithNibName:@"PopoverErrorContentViewController" bundle:nil];
+
+
+    errorPopoverController = [[UIPopoverController alloc]
+            initWithContentViewController:content];
+
+    content.messageLabel.text = errorMessage;
+
+    [errorPopoverController setPopoverContentSize:CGSizeMake(380, 68) animated:true];
+    [errorPopoverController presentPopoverFromRect:targetView.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+
+
+}
+
+- (void)showDeletePopoverWithSelectedTag:(UIView *)tagView withFlag:(NSString *)flag withText:(NSString *)text {
+
+    PopoverTagContentViewController *content = [[PopoverTagContentViewController alloc] initWithNibName:@"PopoverTagContentViewController" bundle:nil];
+
+    popoverController = [[UIPopoverController alloc]
+            initWithContentViewController:content];
+
+    content.popoverController = popoverController;
+
+    [content.deleteLabel setText:text];
+    popoverController.delegate = self;
+
+
+    void (^deleteTagHandler)(void) = ^{
+
+        if ([flag isEqualToString:DELETE_ALL_LABELS]) {
+            //delete main label
+            TagView *t = tagView;
+            [_tagList removeTag:t.text];
+            lastTagName = nil;
+            //now delete all the ones in the image
+            NSArray *overlayTagViews = [_dropOverlayView subviews];
+            for (TagView *tv in overlayTagViews) {
+                if ([tv.text isEqualToString:t.text]) {
+                    [tv removeFromSuperview];
+
+                }
+            }
+            _addLabelField.text = @"";
+        } else if ([flag isEqualToString:DELETE_SELECTED_LABEL]) {
+            //deletes a tag off of the imageview
+            TagView *t = tagView;
+            [t removeFromSuperview];
+
+        }
+        NSLog(@"Integer is %@", text);
+
+    };
+    content.deleteTagHandler = deleteTagHandler;
+
+    CGRect tagRect = [tagView convertRect:tagView.frame toView:tagView.superview];
+
+    [popoverController setPopoverContentSize:CGSizeMake(424, 99) animated:true];
+    [popoverController presentPopoverFromRect:tagView.frame inView:tagView.superview permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+#pragma mark - OBOvumSource
+
+- (OBOvum *)createOvumFromView:(UIView *)sourceView {
+    NSLog(@"source %@ createOvumFromView", sourceView);
+    OBOvum *ovum = [[OBOvum alloc] init];
+    ovum.dataObject = sourceView.copy;
+    return ovum;
+}
+
+- (void)ovumDragWillBegin:(OBOvum *)ovum {
+    NSLog(@"Ovum<0x%x> %@ ovumDragWillBegin", (int) ovum, ovum.dataObject);
+}
+
+- (void)ovumDragEnded:(OBOvum *)ovum {
+    NSLog(@"Ovum<0x%x> %@ ovumDragEnded", (int) ovum, ovum.dataObject);
+}
+
+- (UIView *)createDragRepresentationOfSourceView:(UIView *)sourceView inWindow:(UIWindow *)window {
+
+    NSLog(@"source %@ createDragRepresentationOfSourceView", sourceView);
+
+    TagView *tagView = (TagView *) sourceView;
+
+    CGRect frame = [sourceView convertRect:sourceView.bounds toView:sourceView.window];
+    frame = [window convertRect:frame fromWindow:sourceView.window];
+
+    TagView *dragView = [[TagView alloc] initWithFrame:frame];
+    dragView.colorHightlighted = tagView.colorHightlighted;
+    dragView.color = tagView.color;
+    dragView.text = tagView.text;
+    dragView.tag = tagView.tag;
+
+    return dragView;
+}
+
+- (void)dragViewWillAppear:(UIView *)dragView inWindow:(UIWindow *)window atLocation:(CGPoint)location {
+    NSLog(@"DragViewWillAppear %@", dragView);
+    if (dragView != nil ) {
+        TagView *tv = dragView;
+        lastTagName = tv.text;
+        _addLabelField.text = tv.text;
+    }
+
+}
+
+
+#pragma mark - OBDropZone
+
+- (OBDropAction)ovumEntered:(OBOvum *)ovum inView:(UIView *)view atLocation:(CGPoint)location {
+    NSLog(@"Ovum<0x%x> %@ Entered", (int) ovum, ovum.dataObject);
+
+    return OBDropActionCopy;
+}
+
+- (void)ovumExited:(OBOvum *)ovum inView:(UIView *)view atLocation:(CGPoint)location {
+}
+
+- (OBDropAction)ovumMoved:(OBOvum *)ovum inView:(UIView *)view atLocation:(CGPoint)location {
+    NSLog(@"Ovum<0x%x> %@ Moved", (int) ovum, ovum.dataObject);
+
+    return OBDropActionCopy;
+}
+
+
+- (void)ovumDropped:(OBOvum *)ovum inView:(UIView *)view atLocation:(CGPoint)location {
+    NSLog(@"Ovum<0x%x> %@ Dropped", (int) ovum, ovum.dataObject);
+
+    TagView *tagView = ovum.dataObject;
+
+    tagView.center = location;
+
+    TagView *copy = tagView.copy;
+
+    [self enableImageViewGesturesOnTagView:copy];
+    [self enableDropColor:copy];
+
+    [_dropOverlayView addSubview:copy];
+    [imageViewLabels addObject:copy];
+}
+
+
+- (void)enableDropColor:(TagView *)tagView {
+    [tagView setColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.6]];
+
+}
+
+- (void)enableImageViewGesturesOnTagView:(TagView *)tagView {
+    UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    [tagView addGestureRecognizer:pgr];
+
+    UITapGestureRecognizer *doubleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTapTagForOnImage:)];
+    doubleFingerTap.numberOfTapsRequired = 2;
+    [tagView addGestureRecognizer:doubleFingerTap];
+}
+
+#pragma mark - Gestures
 
 //uses a block because they need to be added to tagview as the taglist builds them
 - (void)addGesturesToTagList {
@@ -138,201 +382,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     _addLabelField.text = selectedTag.text;
 
     [self showDeletePopoverWithSelectedTag:selectedTag withFlag:DELETE_ALL_LABELS withText:[NSString stringWithFormat:@"Delete all %@ Labels?", selectedTag.text]];
-}
-
-- (void)showDeletePopoverWithSelectedTag:(UIView *)tagView withFlag:(NSString *)flag withText:(NSString *)text {
-
-    PopoverTagContentViewController *content = [[PopoverTagContentViewController alloc] initWithNibName:@"PopoverTagContentViewController" bundle:nil];
-
-    popoverController = [[UIPopoverController alloc]
-            initWithContentViewController:content];
-
-    content.popoverController = popoverController;
-
-    [content.deleteLabel setText:text];
-    popoverController.delegate = self;
-
-
-    void (^deleteTagHandler)(void) = ^{
-
-        if ([flag isEqualToString:DELETE_ALL_LABELS]) {
-            //delete main label
-            TagView *t = tagView;
-            [_tagList removeTag:t.text];
-            //now delete all the ones in the image
-            NSArray *overlayTagViews = [_dropOverlayView subviews];
-            for (TagView *tv in overlayTagViews) {
-                if ([tv.text isEqualToString:t.text]) {
-                    [tv removeFromSuperview];
-                }
-            }
-            _addLabelField.text = @"";
-        } else if ([flag isEqualToString:DELETE_SELECTED_LABEL]) {
-            //deletes a tag off of the imageview
-            TagView *t = tagView;
-            [t removeFromSuperview];
-
-        }
-        NSLog(@"Integer is %@", text);
-
-    };
-    content.deleteTagHandler = deleteTagHandler;
-
-    CGRect tagRect = [tagView convertRect:tagView.frame toView:tagView.superview];
-
-    [popoverController setPopoverContentSize:CGSizeMake(424, 99) animated:true];
-    [popoverController presentPopoverFromRect:tagView.frame inView:tagView.superview permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-
-    NSString *newTag = textField.text;
-    BOOL SUCCESS = [_tagList addTag:newTag];
-
-    if (SUCCESS) {
-        [textField setText:@""];
-    }
-    [self.view endEditing:YES];
-    return YES;
-
-}
-
-- (void)textViewLikeTextField:(UITextView *)textView {
-    [textView.layer setBorderColor:[[UIColor colorWithRed:232.0 / 255.0
-                                                    green:232.0 / 255.0 blue:232.0 / 255.0 alpha:1] CGColor]];
-    [textView.layer setBorderWidth:1.0f];
-    [textView.layer setCornerRadius:7.0f];
-    [textView.layer setMasksToBounds:YES];
-}
-
-#define MAX_LENGTH 9
-
-- (void)textFieldDidChange:(UITextField *)textField {
-    NSLog(@"text changed: %@", textField.text);
-
-    NSString *newTagName = textField.text;
-
-    int i = [_tagList indexOfTag:lastTagName];
-    if( i >= 0 ) {
-
-
-        [self changeTagsFrom:lastTagName to:newTagName];
-        lastTagName = newTagName;
-    }
-}
-
-- (void)changeTagsFrom:(NSString *)oldLabel to:(NSString *)newLabel {
-    [_tagList changeTagNameFrom:oldLabel to:newLabel];
-
-
-    NSArray *droppedTags = [_dropOverlayView subviews];
-
-    if (droppedTags.count > 0) {
-        for (TagView *tagView in droppedTags) {
-            if ([tagView.text isEqualToString:oldLabel]) {
-                tagView.text = newLabel;
-                [tagView setNeedsDisplay];
-            }
-        }
-    }
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (textField.text.length >= MAX_LENGTH && range.length == 0) {
-        return NO; // return NO to not change text
-    } else {
-        return YES;
-    }
-}
-
-#pragma mark - OBOvumSource
-
-- (OBOvum *)createOvumFromView:(UIView *)sourceView {
-    NSLog(@"source %@ createOvumFromView", sourceView);
-    OBOvum *ovum = [[OBOvum alloc] init];
-    ovum.dataObject = sourceView.copy;
-    return ovum;
-}
-
-- (void)ovumDragWillBegin:(OBOvum *)ovum {
-    NSLog(@"Ovum<0x%x> %@ ovumDragWillBegin", (int) ovum, ovum.dataObject);
-}
-
-- (void)ovumDragEnded:(OBOvum *)ovum {
-    NSLog(@"Ovum<0x%x> %@ ovumDragEnded", (int) ovum, ovum.dataObject);
-}
-
-- (UIView *)createDragRepresentationOfSourceView:(UIView *)sourceView inWindow:(UIWindow *)window {
-
-    NSLog(@"source %@ createDragRepresentationOfSourceView", sourceView);
-
-    TagView *tagView = (TagView *) sourceView;
-
-    CGRect frame = [sourceView convertRect:sourceView.bounds toView:sourceView.window];
-    frame = [window convertRect:frame fromWindow:sourceView.window];
-
-    TagView *dragView = [[TagView alloc] initWithFrame:frame];
-    dragView.colorHightlighted = tagView.colorHightlighted;
-    dragView.color = tagView.color;
-    dragView.text = tagView.text;
-    dragView.tag = tagView.tag;
-
-    return dragView;
-}
-
-
-- (void)dragViewWillAppear:(UIView *)dragView inWindow:(UIWindow *)window atLocation:(CGPoint)location {
-    NSLog(@"DragViewWillAppear %@", dragView);
-    if (dragView != nil ) {
-        TagView *tv = dragView;
-        lastTagName = tv.text;
-        _addLabelField.text = tv.text;
-    }
-
-}
-
-#pragma mark - OBDropZone
-
-- (OBDropAction)ovumEntered:(OBOvum *)ovum inView:(UIView *)view atLocation:(CGPoint)location {
-    NSLog(@"Ovum<0x%x> %@ Entered", (int) ovum, ovum.dataObject);
-
-    return OBDropActionCopy;
-}
-
-- (void)ovumExited:(OBOvum *)ovum inView:(UIView *)view atLocation:(CGPoint)location {
-}
-
-
-- (OBDropAction)ovumMoved:(OBOvum *)ovum inView:(UIView *)view atLocation:(CGPoint)location {
-    NSLog(@"Ovum<0x%x> %@ Moved", (int) ovum, ovum.dataObject);
-
-    return OBDropActionCopy;
-}
-
-
-- (void)ovumDropped:(OBOvum *)ovum inView:(UIView *)view atLocation:(CGPoint)location {
-    NSLog(@"Ovum<0x%x> %@ Dropped", (int) ovum, ovum.dataObject);
-
-    TagView *tagView = ovum.dataObject;
-
-    tagView.center = location;
-
-    TagView *copy = tagView.copy;
-
-    [self enableImageViewGesturesOnTagView:copy];
-
-
-    [_dropOverlayView addSubview:copy];
-    [imageViewLabels addObject:copy];
-}
-
-- (void)enableImageViewGesturesOnTagView:(TagView *)tagView {
-    UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [tagView addGestureRecognizer:pgr];
-
-    UITapGestureRecognizer *doubleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTapTagForOnImage:)];
-    doubleFingerTap.numberOfTapsRequired = 2;
-    [tagView addGestureRecognizer:doubleFingerTap];
 }
 
 //Once dropped we are in a different world. Lets just move it around.
