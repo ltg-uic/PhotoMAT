@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>509C1751-EBC8-4DB7-A683-407B3F1D1F4A</string>
+	<string>2664B68A-69CE-4F1E-A6D9-7CF895C93534</string>
 	<key>IDESourceControlProjectName</key>
 	<string>TrapEase</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>CCD956EF-9034-428F-9D3B-3367E345C40E</key>
-		<string>ssh://bitbucket.org/euclidsoftware/trapease.git</string>
+		<key>E4A22E7A-8630-44D2-AF9E-C6D6A116CEFF</key>
+		<string>https://github.com/ltg-uic/PhotoMAT.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>TrapEase.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>CCD956EF-9034-428F-9D3B-3367E345C40E</key>
+		<key>E4A22E7A-8630-44D2-AF9E-C6D6A116CEFF</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://bitbucket.org/euclidsoftware/trapease.git</string>
+	<string>https://github.com/ltg-uic/PhotoMAT.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>CCD956EF-9034-428F-9D3B-3367E345C40E</string>
+	<string>E4A22E7A-8630-44D2-AF9E-C6D6A116CEFF</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>CCD956EF-9034-428F-9D3B-3367E345C40E</string>
+			<string>E4A22E7A-8630-44D2-AF9E-C6D6A116CEFF</string>
 			<key>IDESourceControlWCCName</key>
-			<string>TrapEase</string>
+			<string>PhotoMAT</string>
 		</dict>
 	</array>
 </dict>

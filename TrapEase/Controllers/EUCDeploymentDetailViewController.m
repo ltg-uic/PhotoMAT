@@ -9,10 +9,7 @@
 #import "EUCDeploymentDetailViewController.h"
 #import "EUCDeploymentImageCell.h"
 #import "EUCBurst.h"
-#import "EUCImage.h"
-#import <AssetsLibrary/AssetsLibrary.h>
 #import "EUCImageUtilities.h"
-#import "EUCDeploymentImage.h"
 #import "EUCImageDisplayViewController.h"
 #import "NSString+EUCStringExtensions.h"
 #import "EUCDatabase.h"

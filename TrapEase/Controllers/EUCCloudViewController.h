@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EUCCloudViewController : UIViewController
+@interface EUCCloudViewController : UIViewController <UIWebViewDelegate>
+
+@property(weak, nonatomic) IBOutlet UIToolbar *toolbar;
+@property(weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
+@property(weak, nonatomic) IBOutlet UIBarButtonItem *forwardButton;
+@property(weak, nonatomic) IBOutlet UIBarButtonItem *homeButton;
+@property(weak, nonatomic) IBOutlet UIWebView *webView;
+
+- (IBAction)goBack:(id)sender;
+
+- (IBAction)goForward:(id)sender;
+
+- (IBAction)goHome:(id)sender;
+
+- (void)loadURL:(NSURL *)url;
 
 @end

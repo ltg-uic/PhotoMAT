@@ -493,7 +493,7 @@ NSString *DDExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
  * Imagine pulling up the settings for your application,
  * and being able to configure the logging level on a per file basis.
  * 
- * The implementation can be very straight-forward:
+ * The implementation can be very straight-forwardButton:
  * 
  * + (int)ddLogLevel
  * {

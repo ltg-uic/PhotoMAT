@@ -10,7 +10,6 @@
 #import "EUCHomeViewController.h"
 #import "EUCLabelViewController.h"
 #import "EUCAnalyzeViewController.h"
-#import "EUCKnapsackViewController.h"
 #import "EUCCloudViewController.h"
 #import "EUCSettingsViewController.h"
 #import "EUCDeploymentSplitViewController.h"
@@ -19,13 +18,15 @@
 #import "EUCUserViewController.h"
 
 #import "EUCDatabase.h"
-#import "DDLog.h"
 #import "DDFileLogger.h"
 #import "DDTTYLogger.h"
 
 #import "EUCConnectingViewController.h"
 #import "EUCNetwork.h"
 #import "EUCTabBarViewControllerDelegate.h"
+#import "OBDragDropManager.h"
+#import "EUCNotesViewController.h"
+
 
 @interface EUCAppDelegate () {}
 
@@ -41,7 +42,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-    
+
+
+
     
     /*
      ** ********************************************************************
@@ -67,11 +70,9 @@
     EUCDatabase * db = [EUCDatabase sharedInstance];
     NSDictionary * dbSettings = db.settings;
     [EUCNetwork updatePersonId:dbSettings[@"personId"]];
-    
-    
-    
-//    EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
+
     EUCCloudViewController * cloud = [[EUCCloudViewController alloc] initWithNibName:@"EUCCloudViewController" bundle:nil];
+    EUCNotesViewController *notes = [[EUCNotesViewController alloc] initWithNibName:@"EUCNotesViewController" bundle:nil];
     EUCSettingsViewController * settings = [[EUCSettingsViewController alloc] initWithNibName:@"EUCSettingsViewController" bundle:nil];
     EUCDeploymentSplitViewController * dsvc = [[EUCDeploymentSplitViewController alloc] init];
     EUCDeploymentMasterViewController * master = [[EUCDeploymentMasterViewController alloc] initWithNibName:@"EUCDeploymentMasterViewController" bundle:nil];
@@ -87,7 +88,7 @@
     dsvc.viewControllers = @[master, detail];
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
-    self.homeViewController.viewControllers = @[user, dsvc, label, analyze, cloud, settings, snapshot, photos];
+    self.homeViewController.viewControllers = @[user, dsvc, label, analyze, cloud, notes, settings, snapshot, photos];
     
     self.tabBarVCDelegate = [[EUCTabBarViewControllerDelegate alloc] init];
     self.tabBarVCDelegate.snapshot = snapshot;
@@ -95,7 +96,7 @@
     self.homeViewController.delegate = self.tabBarVCDelegate;
     self.tabBarVCDelegate.window = self.window;
     
-    
+
     user.visibilityDelegate = master;
     
     // check to see if you have school data
@@ -109,6 +110,10 @@
     }
 
     [self.window makeKeyAndVisible];
+
+    OBDragDropManager *manager = [OBDragDropManager sharedManager];
+    [manager prepareOverlayWindowUsingMainWindow:self.window];
+
     return YES;
 }
 

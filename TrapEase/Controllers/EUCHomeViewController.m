@@ -7,7 +7,6 @@
 //
 
 #import "EUCHomeViewController.h"
-#import "EUCConnectingViewController.h"
 
 @interface EUCHomeViewController ()
 

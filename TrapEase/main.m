@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Euclid Software, LLC. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 #import "EUCAppDelegate.h"
 
 int main(int argc, char * argv[])

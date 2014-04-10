@@ -14,6 +14,8 @@
 
 @implementation EUCCloudViewController
 
+#define HOME_URL @"http://ltg.evl.uic.edu:8080/"
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -29,13 +31,47 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    _webView.delegate = self;
+    [self loadURL:[NSURL URLWithString:HOME_URL]];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
+-(void)loadURL:(NSURL *)url {
+   [_webView loadRequest:[NSURLRequest requestWithURL:url]];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+
+    if (_webView.canGoBack) {
+        _backButton.enabled = YES;
+    }
+    else {
+        _backButton.enabled = NO;
+    }
+
+    if (_webView.canGoForward) {
+        _forwardButton.enabled = YES;
+    }
+    else {
+        _forwardButton.enabled = NO;
+    }
+}
+
+- (IBAction)goBack:(id)sender {
+    [_webView goBack];
+}
+
+- (IBAction)goForward:(id)sender {
+    [_webView goForward];
+}
+
+- (IBAction)goHome:(id)sender {
+    [self loadURL:[NSURL URLWithString:HOME_URL]];
+}
+
 
 @end
