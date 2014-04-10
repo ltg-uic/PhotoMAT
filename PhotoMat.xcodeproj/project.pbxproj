@@ -202,20 +202,20 @@
 		B43658F418F1B9000017672E /* EUCDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDatePickerViewController.m; path = Support/EUCDatePickerViewController.m; sourceTree = "<group>"; };
 		B43658F518F1B9000017672E /* EUCDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCDatePickerViewController.h; path = Support/EUCDatePickerViewController.h; sourceTree = "<group>"; };
 		B43658F618F1B9000017672E /* EUCDatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCDatePickerViewController.xib; path = Support/EUCDatePickerViewController.xib; sourceTree = "<group>"; };
-		B4D1EC2D18BD729300E01EFE /* TrapEase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrapEase.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4D1EC2D18BD729300E01EFE /* PhotoMat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4D1EC3018BD729300E01EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B4D1EC3418BD729300E01EFE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		B4D1EC3818BD729300E01EFE /* TrapEase-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrapEase-Info.plist"; sourceTree = "<group>"; };
+		B4D1EC3818BD729300E01EFE /* PhotoMat-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoMat-Info.plist"; sourceTree = "<group>"; };
 		B4D1EC3A18BD729300E01EFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B4D1EC3C18BD729300E01EFE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B4D1EC3E18BD729300E01EFE /* TrapEase-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TrapEase-Prefix.pch"; sourceTree = "<group>"; };
+		B4D1EC3E18BD729300E01EFE /* PhotoMat-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoMat-Prefix.pch"; sourceTree = "<group>"; };
 		B4D1EC3F18BD729300E01EFE /* EUCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EUCAppDelegate.h; sourceTree = "<group>"; };
 		B4D1EC4018BD729300E01EFE /* EUCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EUCAppDelegate.m; sourceTree = "<group>"; };
 		B4D1EC4218BD729300E01EFE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		B4D1EC4818BD729300E01EFE /* TrapEaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrapEaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4D1EC4818BD729300E01EFE /* PhotoMatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhotoMatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4D1EC4918BD729300E01EFE /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		B4D1EC5118BD729300E01EFE /* TrapEaseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TrapEaseTests-Info.plist"; sourceTree = "<group>"; };
+		B4D1EC5118BD729300E01EFE /* PhotoMatTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoMatTests-Info.plist"; sourceTree = "<group>"; };
 		B4D1EC5318BD729300E01EFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B4D1EC5518BD729300E01EFE /* TrapEaseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrapEaseTests.m; sourceTree = "<group>"; };
 		B4E6BD5518DDBB5600AC9D84 /* EUCFileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCFileSystem.h; path = Support/EUCFileSystem.h; sourceTree = "<group>"; };
@@ -401,8 +401,8 @@
 		B4D1EC2E18BD729300E01EFE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B4D1EC2D18BD729300E01EFE /* TrapEase.app */,
-				B4D1EC4818BD729300E01EFE /* TrapEaseTests.xctest */,
+				B4D1EC2D18BD729300E01EFE /* PhotoMat.app */,
+				B4D1EC4818BD729300E01EFE /* PhotoMatTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -446,10 +446,10 @@
 		B4D1EC3718BD729300E01EFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B4D1EC3818BD729300E01EFE /* TrapEase-Info.plist */,
+				B4D1EC3818BD729300E01EFE /* PhotoMat-Info.plist */,
 				B4D1EC3918BD729300E01EFE /* InfoPlist.strings */,
 				B4D1EC3C18BD729300E01EFE /* main.m */,
-				B4D1EC3E18BD729300E01EFE /* TrapEase-Prefix.pch */,
+				B4D1EC3E18BD729300E01EFE /* PhotoMat-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -466,7 +466,7 @@
 		B4D1EC5018BD729300E01EFE /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B4D1EC5118BD729300E01EFE /* TrapEaseTests-Info.plist */,
+				B4D1EC5118BD729300E01EFE /* PhotoMatTests-Info.plist */,
 				B4D1EC5218BD729300E01EFE /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -659,9 +659,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B4D1EC2C18BD729300E01EFE /* TrapEase */ = {
+		B4D1EC2C18BD729300E01EFE /* PhotoMat */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B4D1EC5918BD729300E01EFE /* Build configuration list for PBXNativeTarget "TrapEase" */;
+			buildConfigurationList = B4D1EC5918BD729300E01EFE /* Build configuration list for PBXNativeTarget "PhotoMat" */;
 			buildPhases = (
 				F0FA585A028947C28F010ADB /* Check Pods Manifest.lock */,
 				B4D1EC2918BD729300E01EFE /* Sources */,
@@ -673,14 +673,14 @@
 			);
 			dependencies = (
 			);
-			name = TrapEase;
+			name = PhotoMat;
 			productName = TrapEase;
-			productReference = B4D1EC2D18BD729300E01EFE /* TrapEase.app */;
+			productReference = B4D1EC2D18BD729300E01EFE /* PhotoMat.app */;
 			productType = "com.apple.product-type.application";
 		};
-		B4D1EC4718BD729300E01EFE /* TrapEaseTests */ = {
+		B4D1EC4718BD729300E01EFE /* PhotoMatTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B4D1EC5C18BD729300E01EFE /* Build configuration list for PBXNativeTarget "TrapEaseTests" */;
+			buildConfigurationList = B4D1EC5C18BD729300E01EFE /* Build configuration list for PBXNativeTarget "PhotoMatTests" */;
 			buildPhases = (
 				B4D1EC4418BD729300E01EFE /* Sources */,
 				B4D1EC4518BD729300E01EFE /* Frameworks */,
@@ -691,9 +691,9 @@
 			dependencies = (
 				B4D1EC4E18BD729300E01EFE /* PBXTargetDependency */,
 			);
-			name = TrapEaseTests;
+			name = PhotoMatTests;
 			productName = TrapEaseTests;
-			productReference = B4D1EC4818BD729300E01EFE /* TrapEaseTests.xctest */;
+			productReference = B4D1EC4818BD729300E01EFE /* PhotoMatTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -714,7 +714,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B4D1EC2818BD729300E01EFE /* Build configuration list for PBXProject "TrapEase" */;
+			buildConfigurationList = B4D1EC2818BD729300E01EFE /* Build configuration list for PBXProject "PhotoMat" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -726,8 +726,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B4D1EC2C18BD729300E01EFE /* TrapEase */,
-				B4D1EC4718BD729300E01EFE /* TrapEaseTests */,
+				B4D1EC2C18BD729300E01EFE /* PhotoMat */,
+				B4D1EC4718BD729300E01EFE /* PhotoMatTests */,
 			);
 		};
 /* End PBXProject section */
@@ -915,7 +915,7 @@
 /* Begin PBXTargetDependency section */
 		B4D1EC4E18BD729300E01EFE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B4D1EC2C18BD729300E01EFE /* TrapEase */;
+			target = B4D1EC2C18BD729300E01EFE /* PhotoMat */;
 			targetProxy = B4D1EC4D18BD729300E01EFE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1020,9 +1020,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TrapEase/TrapEase-Prefix.pch";
-				INFOPLIST_FILE = "TrapEase/TrapEase-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "TrapEase/PhotoMat-Prefix.pch";
+				INFOPLIST_FILE = "TrapEase/PhotoMat-Info.plist";
+				PRODUCT_NAME = PhotoMat;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1035,9 +1035,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TrapEase/TrapEase-Prefix.pch";
-				INFOPLIST_FILE = "TrapEase/TrapEase-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "TrapEase/PhotoMat-Prefix.pch";
+				INFOPLIST_FILE = "TrapEase/PhotoMat-Info.plist";
+				PRODUCT_NAME = PhotoMat;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -1057,8 +1057,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "TrapEaseTests/TrapEaseTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "TrapEaseTests/PhotoMatTests-Info.plist";
+				PRODUCT_NAME = PhotoMatTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1075,8 +1075,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrapEase/TrapEase-Prefix.pch";
-				INFOPLIST_FILE = "TrapEaseTests/TrapEaseTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "TrapEaseTests/PhotoMatTests-Info.plist";
+				PRODUCT_NAME = PhotoMatTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1085,7 +1085,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B4D1EC2818BD729300E01EFE /* Build configuration list for PBXProject "TrapEase" */ = {
+		B4D1EC2818BD729300E01EFE /* Build configuration list for PBXProject "PhotoMat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B4D1EC5718BD729300E01EFE /* Debug */,
@@ -1094,7 +1094,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B4D1EC5918BD729300E01EFE /* Build configuration list for PBXNativeTarget "TrapEase" */ = {
+		B4D1EC5918BD729300E01EFE /* Build configuration list for PBXNativeTarget "PhotoMat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B4D1EC5A18BD729300E01EFE /* Debug */,
@@ -1103,7 +1103,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B4D1EC5C18BD729300E01EFE /* Build configuration list for PBXNativeTarget "TrapEaseTests" */ = {
+		B4D1EC5C18BD729300E01EFE /* Build configuration list for PBXNativeTarget "PhotoMatTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B4D1EC5D18BD729300E01EFE /* Debug */,
