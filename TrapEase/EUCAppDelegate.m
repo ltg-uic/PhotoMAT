@@ -111,6 +111,7 @@
     }
 
     OBDragDropManager *manager = [OBDragDropManager sharedManager];
+    [manager prepareOverlayWindowUsingMainWindow:self.window];
     [self.window makeKeyAndVisible];
     return YES;
 }

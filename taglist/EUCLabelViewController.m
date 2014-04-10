@@ -269,15 +269,15 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     return dragView;
 }
 
-//- (void)dragViewWillAppear:(UIView *)dragView inWindow:(UIWindow *)window atLocation:(CGPoint)location {
-//    NSLog(@"DragViewWillAppear %@", dragView);
-//    if (dragView != nil ) {
-//        TagView *tv = dragView;
-//        lastTagName = tv.text;
-//        _addLabelField.text = tv.text;
-//    }
-//
-//}
+- (void)dragViewWillAppear:(UIView *)dragView inWindow:(UIWindow *)window atLocation:(CGPoint)location {
+    NSLog(@"DragViewWillAppear %@", dragView);
+    if (dragView != nil ) {
+        TagView *tv = dragView;
+        lastTagName = tv.text;
+        _addLabelField.text = tv.text;
+    }
+
+}
 
 
 #pragma mark - OBDropZone
