@@ -41,6 +41,7 @@
                                 <action selector="goHome:" destination="-1" id="ua0-Uo-bok"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="XmN-zi-UBY"/>
                     </items>
                 </toolbar>
                 <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="osj-im-MpR">
