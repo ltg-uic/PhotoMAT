@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		35D4F084544C46C2BE466AC9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB35A88ACFB41A99F3E3EC4 /* libPods.a */; };
+		702ACBC218F756760001C9D7 /* EUCCloudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 702ACBC018F756760001C9D7 /* EUCCloudViewController.m */; };
+		702ACBC318F756760001C9D7 /* EUCCloudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 702ACBC118F756760001C9D7 /* EUCCloudViewController.xib */; };
 		7080F7B718F743210087A66F /* EUCLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7AA18F743210087A66F /* EUCLabelViewController.m */; };
 		7080F7B818F743210087A66F /* EUCLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7AB18F743210087A66F /* EUCLabelViewController.xib */; };
 		7080F7B918F743210087A66F /* PhotoTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7AD18F743210087A66F /* PhotoTag.m */; };
@@ -24,8 +26,6 @@
 		7080F7CC18F7439B0087A66F /* webview-back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7C818F7439B0087A66F /* webview-back@2x.png */; };
 		7080F7CD18F7439B0087A66F /* webview-forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7C918F7439B0087A66F /* webview-forward.png */; };
 		7080F7CE18F7439B0087A66F /* webview-forward@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7CA18F7439B0087A66F /* webview-forward@2x.png */; };
-		7080F7D218F743C70087A66F /* EUCCloudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7D018F743C70087A66F /* EUCCloudViewController.m */; };
-		7080F7D318F743C70087A66F /* EUCCloudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7D118F743C70087A66F /* EUCCloudViewController.xib */; };
 		7080F7DA18F746F60087A66F /* PopoverErrorContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7D518F746F60087A66F /* PopoverErrorContentViewController.m */; };
 		7080F7DB18F746F60087A66F /* PopoverErrorContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7D618F746F60087A66F /* PopoverErrorContentViewController.xib */; };
 		7080F7DC18F746F60087A66F /* PopoverTagContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7D818F746F60087A66F /* PopoverTagContentViewController.m */; };
@@ -147,6 +147,9 @@
 /* Begin PBXFileReference section */
 		1FB35A88ACFB41A99F3E3EC4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CB9A6B881342BDB4DEA63F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		702ACBBF18F756760001C9D7 /* EUCCloudViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUCCloudViewController.h; sourceTree = "<group>"; };
+		702ACBC018F756760001C9D7 /* EUCCloudViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUCCloudViewController.m; sourceTree = "<group>"; };
+		702ACBC118F756760001C9D7 /* EUCCloudViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCCloudViewController.xib; sourceTree = "<group>"; };
 		7080F7A918F743210087A66F /* EUCLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUCLabelViewController.h; sourceTree = "<group>"; };
 		7080F7AA18F743210087A66F /* EUCLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUCLabelViewController.m; sourceTree = "<group>"; };
 		7080F7AB18F743210087A66F /* EUCLabelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCLabelViewController.xib; sourceTree = "<group>"; };
@@ -169,9 +172,6 @@
 		7080F7C818F7439B0087A66F /* webview-back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "webview-back@2x.png"; sourceTree = "<group>"; };
 		7080F7C918F7439B0087A66F /* webview-forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "webview-forward.png"; sourceTree = "<group>"; };
 		7080F7CA18F7439B0087A66F /* webview-forward@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "webview-forward@2x.png"; sourceTree = "<group>"; };
-		7080F7CF18F743C70087A66F /* EUCCloudViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUCCloudViewController.h; sourceTree = "<group>"; };
-		7080F7D018F743C70087A66F /* EUCCloudViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUCCloudViewController.m; sourceTree = "<group>"; };
-		7080F7D118F743C70087A66F /* EUCCloudViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCCloudViewController.xib; sourceTree = "<group>"; };
 		7080F7D418F746F60087A66F /* PopoverErrorContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverErrorContentViewController.h; sourceTree = "<group>"; };
 		7080F7D518F746F60087A66F /* PopoverErrorContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverErrorContentViewController.m; sourceTree = "<group>"; };
 		7080F7D618F746F60087A66F /* PopoverErrorContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverErrorContentViewController.xib; sourceTree = "<group>"; };
@@ -495,9 +495,6 @@
 				B4E6BE0818DDFD3400AC9D84 /* EUCUploadViewController.h */,
 				B4E6BE0918DDFD3400AC9D84 /* EUCUploadViewController.m */,
 				B4E6BE0A18DDFD3400AC9D84 /* EUCUploadViewController.xib */,
-				7080F7CF18F743C70087A66F /* EUCCloudViewController.h */,
-				7080F7D018F743C70087A66F /* EUCCloudViewController.m */,
-				7080F7D118F743C70087A66F /* EUCCloudViewController.xib */,
 				B4E6BE1518DE008000AC9D84 /* EUCKnapsackViewController.h */,
 				B4E6BE1618DE008000AC9D84 /* EUCKnapsackViewController.m */,
 				B4E6BE1718DE008000AC9D84 /* EUCKnapsackViewController.xib */,
@@ -527,6 +524,9 @@
 				B43658E718E542480017672E /* EUCImageDisplayViewController.xib */,
 				B4116D9718F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.h */,
 				B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */,
+				702ACBBF18F756760001C9D7 /* EUCCloudViewController.h */,
+				702ACBC018F756760001C9D7 /* EUCCloudViewController.m */,
+				702ACBC118F756760001C9D7 /* EUCCloudViewController.xib */,
 			);
 			name = Controllers;
 			path = ..;
@@ -712,7 +712,7 @@
 				ORGANIZATIONNAME = "Euclid Software, LLC";
 				TargetAttributes = {
 					B4D1EC2C18BD729300E01EFE = {
-						DevelopmentTeam = Y98EGXRXN9;
+						DevelopmentTeam = YD334HZ49B;
 					};
 					B4D1EC4718BD729300E01EFE = {
 						TestTargetID = B4D1EC2C18BD729300E01EFE;
@@ -770,6 +770,7 @@
 				B4E6BE2118DE3EB400AC9D84 /* gear@2x.png in Resources */,
 				B4E6BE4918DEA5E700AC9D84 /* EUCSelectCell.xib in Resources */,
 				B4E6BE9518E13C5800AC9D84 /* camera.png in Resources */,
+				702ACBC318F756760001C9D7 /* EUCCloudViewController.xib in Resources */,
 				B4E6BE1918DE008000AC9D84 /* EUCKnapsackViewController.xib in Resources */,
 				7080F7B818F743210087A66F /* EUCLabelViewController.xib in Resources */,
 				B4E6BE5918DF9F6400AC9D84 /* trap.db in Resources */,
@@ -777,7 +778,6 @@
 				B4D1EC4318BD729300E01EFE /* Images.xcassets in Resources */,
 				B4E6BD6918DDC33C00AC9D84 /* EUCFilterViewController.xib in Resources */,
 				B4E6BD8F18DDC82600AC9D84 /* share.png in Resources */,
-				7080F7D318F743C70087A66F /* EUCCloudViewController.xib in Resources */,
 				B4E6BD9118DDC82600AC9D84 /* tag.png in Resources */,
 				B4E6BD9418DDC82600AC9D84 /* trash@2x.png in Resources */,
 				B4E6BD8918DDC82600AC9D84 /* download.png in Resources */,
@@ -880,7 +880,7 @@
 				B4D1EC4118BD729300E01EFE /* EUCAppDelegate.m in Sources */,
 				7080F7E118F747620087A66F /* EUCNotesViewController.m in Sources */,
 				B4E6BEA418E23D8200AC9D84 /* EUCConnectingViewController.m in Sources */,
-				7080F7D218F743C70087A66F /* EUCCloudViewController.m in Sources */,
+				702ACBC218F756760001C9D7 /* EUCCloudViewController.m in Sources */,
 				7080F7BB18F743210087A66F /* TagView.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
 				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,

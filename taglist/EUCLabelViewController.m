@@ -16,7 +16,7 @@
 #import "PopoverErrorContentViewController.h"
 
 
-@interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource> {
+@interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone> {
     NSString *lastTagName;
     NSMutableArray *tag_array;
     NSMutableArray *photoTags;
@@ -54,7 +54,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
                                                         image:[UIImage imageNamed:@"tag.png"]
                                                 selectedImage:nil];
 
-        tag_array = [NSMutableArray arrayWithObjects:@"1234567890qwertyu", @"Ugly Lion", @"grey Squirrel 1", @"yellow green Troll", @"red Dragon", @"fox Gorilla", @"eater Monkey", @"RIT Tigers", @"brown Bunny", @"big fat Rat", @"The yellow Bird1", @"The yellow Bird2", @"The yellow Bird3", @"The yellow Birdees3", @"The yellow Bird3", @"The yellow Bird2", @"the big bad bear2", @"the big bad bear", nil];
+//        tag_array = [NSMutableArray arrayWithObjects:@"1234567890qwertyu", @"Ugly Lion", @"grey Squirrel 1", @"yellow green Troll", @"red Dragon", @"fox Gorilla", @"eater Monkey", @"RIT Tigers", @"brown Bunny", @"big fat Rat", @"The yellow Bird1", @"The yellow Bird2", @"The yellow Bird3", @"The yellow Birdees3", @"The yellow Bird3", @"The yellow Bird2", @"the big bad bear2", @"the big bad bear", nil];
         tag_array = [NSMutableArray arrayWithObjects:@"1234567890qwertyu", nil];
         photoTags = [[NSMutableArray alloc] init];
 
@@ -202,14 +202,13 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     content.popoverController = popoverController;
 
     [content.deleteLabel setText:text];
-    popoverController.delegate = self;
 
 
     void (^deleteTagHandler)(void) = ^{
 
         if ([flag isEqualToString:DELETE_ALL_LABELS]) {
             //delete main label
-            TagView *t = tagView;
+            TagView *t = (TagView *)tagView;
             [_tagList removeTag:t.text];
             lastTagName = nil;
             //now delete all the ones in the image
@@ -223,7 +222,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
             _addLabelField.text = @"";
         } else if ([flag isEqualToString:DELETE_SELECTED_LABEL]) {
             //deletes a tag off of the imageview
-            TagView *t = tagView;
+            TagView *t = (TagView *)tagView;
             [t removeFromSuperview];
 
         }
@@ -231,9 +230,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     };
     content.deleteTagHandler = deleteTagHandler;
-
-    CGRect tagRect = [tagView convertRect:tagView.frame toView:tagView.superview];
-
     [popoverController setPopoverContentSize:CGSizeMake(424, 99) animated:true];
     [popoverController presentPopoverFromRect:tagView.frame inView:tagView.superview permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }

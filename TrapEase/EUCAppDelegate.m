@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Euclid Software, LLC. All rights reserved.
 //
 
+#import <OBDragDrop/OBDragDropManager.h>
 #import "EUCAppDelegate.h"
 #import "EUCHomeViewController.h"
 #import "EUCLabelViewController.h"
@@ -109,6 +110,8 @@
         self.window.rootViewController = connect;
     }
 
+    OBDragDropManager *manager = [OBDragDropManager sharedManager];
+    [manager prepareOverlayWindowUsingMainWindow:self.window];
     [self.window makeKeyAndVisible];
     return YES;
 }

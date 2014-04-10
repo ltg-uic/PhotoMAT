@@ -59,6 +59,7 @@
     else {
         _forwardButton.enabled = NO;
     }
+
 }
 
 - (IBAction)goBack:(id)sender {
