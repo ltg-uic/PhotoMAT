@@ -1029,6 +1029,7 @@
 				GCC_PREFIX_HEADER = "TrapEase/PhotoMat-Prefix.pch";
 				INFOPLIST_FILE = "TrapEase/PhotoMat-Info.plist";
 				PRODUCT_NAME = PhotoMat;
+				PROVISIONING_PROFILE = "E71CD2D3-270E-4786-8B67-502FD168DA45";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1044,6 +1045,7 @@
 				GCC_PREFIX_HEADER = "TrapEase/PhotoMat-Prefix.pch";
 				INFOPLIST_FILE = "TrapEase/PhotoMat-Info.plist";
 				PRODUCT_NAME = PhotoMat;
+				PROVISIONING_PROFILE = "E71CD2D3-270E-4786-8B67-502FD168DA45";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
