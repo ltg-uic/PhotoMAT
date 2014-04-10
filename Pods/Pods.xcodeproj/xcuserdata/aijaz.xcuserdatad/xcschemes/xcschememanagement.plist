@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-OBDragDrop.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>061EF743CB024C449894C892</key>
+		<key>1359DED7DA434F138D0C99D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0744CE8359444C7299C200A3</key>
+		<key>529C98CA01C64297B11A083D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>357E55F2F47A4D6AA1B4F45C</key>
+		<key>5AC7B9809D38496B83AC5069</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F33A15BCF8E24B1C94AD5855</key>
+		<key>913262723836492191E9E8E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DFCE20DD47024A9A91C979BE</key>
 		<dict>
 			<key>primary</key>
 			<true/>

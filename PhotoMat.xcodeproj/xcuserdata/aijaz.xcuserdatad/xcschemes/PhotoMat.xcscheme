@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B4D1EC2C18BD729300E01EFE"
-               BuildableName = "TrapEase.app"
-               BlueprintName = "TrapEase"
-               ReferencedContainer = "container:TrapEase.xcodeproj">
+               BuildableName = "PhotoMat.app"
+               BlueprintName = "PhotoMat"
+               ReferencedContainer = "container:PhotoMat.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,24 +28,14 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B4D1EC4718BD729300E01EFE"
-               BuildableName = "TrapEaseTests.xctest"
-               BlueprintName = "TrapEaseTests"
-               ReferencedContainer = "container:TrapEase.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B4D1EC2C18BD729300E01EFE"
-            BuildableName = "TrapEase.app"
-            BlueprintName = "TrapEase"
-            ReferencedContainer = "container:TrapEase.xcodeproj">
+            BuildableName = "PhotoMat.app"
+            BlueprintName = "PhotoMat"
+            ReferencedContainer = "container:PhotoMat.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B4D1EC2C18BD729300E01EFE"
-            BuildableName = "TrapEase.app"
-            BlueprintName = "TrapEase"
-            ReferencedContainer = "container:TrapEase.xcodeproj">
+            BuildableName = "PhotoMat.app"
+            BlueprintName = "PhotoMat"
+            ReferencedContainer = "container:PhotoMat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B4D1EC2C18BD729300E01EFE"
-            BuildableName = "TrapEase.app"
-            BlueprintName = "TrapEase"
-            ReferencedContainer = "container:TrapEase.xcodeproj">
+            BuildableName = "PhotoMat.app"
+            BlueprintName = "PhotoMat"
+            ReferencedContainer = "container:PhotoMat.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
