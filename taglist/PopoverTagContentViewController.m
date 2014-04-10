@@ -1,27 +1,28 @@
 //
-//  EUCLabelViewController.m
+//  PopoverTagContentViewController.m
 //  TrapEase
 //
-//  Created by Aijaz Ansari on 3/22/14.
+//  Created by Anthony Perritano on 4/6/14.
 //  Copyright (c) 2014 Euclid Software, LLC. All rights reserved.
 //
 
-#import "EUCLabelViewController.h"
+#import "PopoverTagContentViewController.h"
 
-@interface EUCLabelViewController ()
+@interface PopoverTagContentViewController ()
 
 @end
 
-@implementation EUCLabelViewController
+@implementation PopoverTagContentViewController {
+    UIPopoverController *popoverController;
+
+}
+
+@synthesize popoverController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Labels", "Labels")
-                                                        image:[UIImage imageNamed:@"tag.png"]
-                                                selectedImage:nil];
 
     }
     return self;
@@ -30,8 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     // Do any additional setup after loading the view from its nib.
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -39,4 +42,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)deleteNO:(id)sender {
+    [popoverController dismissPopoverAnimated:true];
+}
+
+
+- (IBAction)deleteYES:(id)sender {
+    _deleteTagHandler();
+    [popoverController dismissPopoverAnimated:true];
+}
 @end
+
+
+

@@ -16,6 +16,7 @@
 #import "EUCDeploymentSplitViewController.h"
 #import "EUCDeploymentMasterViewController.h"
 #import "EUCDeploymentDetailViewController.h"
+#import "EUCNotesViewController.h"
 #import "EUCUserViewController.h"
 
 #import "EUCDatabase.h"
@@ -70,8 +71,8 @@
     
     
     
-//    EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
     EUCCloudViewController * cloud = [[EUCCloudViewController alloc] initWithNibName:@"EUCCloudViewController" bundle:nil];
+    EUCNotesViewController *notes = [[EUCNotesViewController alloc] initWithNibName:@"EUCNotesViewController" bundle:nil];
     EUCSettingsViewController * settings = [[EUCSettingsViewController alloc] initWithNibName:@"EUCSettingsViewController" bundle:nil];
     EUCDeploymentSplitViewController * dsvc = [[EUCDeploymentSplitViewController alloc] init];
     EUCDeploymentMasterViewController * master = [[EUCDeploymentMasterViewController alloc] initWithNibName:@"EUCDeploymentMasterViewController" bundle:nil];
@@ -87,7 +88,7 @@
     dsvc.viewControllers = @[master, detail];
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
-    self.homeViewController.viewControllers = @[user, dsvc, label, analyze, cloud, settings, snapshot, photos];
+    self.homeViewController.viewControllers = @[user, dsvc, label, notes, analyze, cloud, settings, snapshot, photos];
     
     self.tabBarVCDelegate = [[EUCTabBarViewControllerDelegate alloc] init];
     self.tabBarVCDelegate.snapshot = snapshot;

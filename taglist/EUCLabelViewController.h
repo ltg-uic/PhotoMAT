@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EUCLabelViewController : UIViewController
+
+@interface EUCLabelViewController : UIViewController {
+
+    __weak IBOutlet UILabel *schoolClassGroupLabel;
+}
 
 @end

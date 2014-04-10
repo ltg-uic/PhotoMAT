@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EUCCloudViewController">
+            <connections>
+                <outlet property="backButton" destination="cNO-tL-6Gr" id="x0E-yd-E4F"/>
+                <outlet property="forwardButton" destination="wo4-su-l5F" id="qHe-of-bqL"/>
+                <outlet property="homeButton" destination="tG4-UV-xys" id="FAM-uf-LN2"/>
+                <outlet property="toolbar" destination="Fhx-hE-AOn" id="4fD-XQ-oYs"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="webView" destination="osj-im-MpR" id="sdG-83-PwE"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fhx-hE-AOn">
+                    <rect key="frame" x="0.0" y="22" width="1024" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <items>
+                        <barButtonItem image="webview-back.png" id="cNO-tL-6Gr">
+                            <connections>
+                                <action selector="goBack:" destination="-1" id="3p5-s0-Xj6"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem width="26" style="plain" systemItem="fixedSpace" id="YAN-3e-Awo"/>
+                        <barButtonItem image="webview-forward.png" id="wo4-su-l5F">
+                            <connections>
+                                <action selector="goForward:" destination="-1" id="fHm-mF-PWY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem width="26" style="plain" systemItem="fixedSpace" id="gux-wC-K7L"/>
+                        <barButtonItem style="done" systemItem="bookmarks" id="tG4-UV-xys">
+                            <connections>
+                                <action selector="goHome:" destination="-1" id="ua0-Uo-bok"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+                <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="osj-im-MpR">
+                    <rect key="frame" x="0.0" y="66" width="1024" height="702"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                </webView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="webview-back.png" width="12" height="21"/>
+        <image name="webview-forward.png" width="12" height="21"/>
+    </resources>
+</document>
