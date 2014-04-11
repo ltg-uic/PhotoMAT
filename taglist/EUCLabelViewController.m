@@ -15,6 +15,11 @@
 #import "PhotoTag.h"
 #import "PopoverErrorContentViewController.h"
 #import "EUCSelectedSet.h"
+#import "EUCAppDelegate.h"
+#import "EUCDeploymentDetailViewController.h"
+#import "EUCBurst.h"
+#import "EUCImage.h"
+
 
 @interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone> {
     NSString *lastTagName;
@@ -26,6 +31,9 @@
     UIPopoverController *popoverController;
     UIPopoverController *errorPopoverController;
     NSString *currentImageName;
+    EUCAppDelegate *appDelegate;
+    NSArray *bursts;
+    int burstIndex;
 }
 
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -57,6 +65,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 //        tag_array = [NSMutableArray arrayWithObjects:@"1234567890qwertyu", @"Ugly Lion", @"grey Squirrel 1", @"yellow green Troll", @"red Dragon", @"fox Gorilla", @"eater Monkey", @"RIT Tigers", @"brown Bunny", @"big fat Rat", @"The yellow Bird1", @"The yellow Bird2", @"The yellow Bird3", @"The yellow Birdees3", @"The yellow Bird3", @"The yellow Bird2", @"the big bad bear2", @"the big bad bear", nil];
         tag_array = [NSMutableArray arrayWithObjects:@"1234567890qwertyu", nil];
         photoTags = [[NSMutableArray alloc] init];
+        
+        
+        appDelegate =  (EUCAppDelegate *)[[UIApplication sharedApplication] delegate];
 
     }
     return self;
@@ -64,13 +75,21 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
 
+
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     
     EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
+
+    EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
+    bursts = burstDetailController.importedBursts;
     
     schoolClassGroupLabel.text = [NSString stringWithFormat:@"%@ : %@ : %@", selectedSet.schoolName, selectedSet.className, selectedSet.groupName];
-    
+
     [self createImageBorder];
     //setup textviews
     [self textViewLikeTextField:_noteTextView];
@@ -89,7 +108,16 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     [_tagList initTagListWithTagNames:tag_array];
 
     //TODO for testing
-    currentImageName = @"sample.jpg";
+    burstIndex = 0;
+    EUCBurst *burst = bursts[burstIndex];
+    EUCImage *image = burst.images[burstIndex];
+    currentImageName = image.filename;
+    _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
+}
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+
 
 }
 
@@ -415,30 +443,51 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 - (IBAction)swipeImagePrevious:(id)sender {
 
-    [self removeAllTagsFromDragOverlay];
+/*
+    burstIndex--;
 
-    currentImageName = @"sample.jpg";
-    NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
+    //we have another
+    if( burstIndex >= 0 ) {
+        NSLog(@"left swipe %d", burstIndex);
+        EUCBurst *burst = bursts[burstIndex];
+        EUCImage *image = burst.images[0];
+        currentImageName = image.filename;
+        _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
 
-    for (PhotoTag *pt in pts) {
-        [_dropOverlayView addSubview:pt.tagView];
+        NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
+
+        for (PhotoTag *pt in pts) {
+            [_dropOverlayView addSubview:pt.tagView];
+        }
+
+        [self removeAllTagsFromDragOverlay];
     }
 
-    _imageView.image = [UIImage imageNamed:currentImageName];
+
+    [self removeAllTagsFromDragOverlay];
+ */
 }
 
 - (IBAction)swipeImageNext:(id)sender {
 
-    [self removeAllTagsFromDragOverlay];
+    burstIndex++;
 
-    currentImageName = @"sample2.jpg";
-    NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
+    //we have another
+    if( burstIndex < bursts.count ) {
+        NSLog(@"right swipe %d", burstIndex);
+        EUCBurst *burst = bursts[burstIndex];
+        EUCImage *image = burst.images[0];
+        currentImageName = image.filename;
+        _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
 
-    for (PhotoTag *pt in pts) {
-        [_dropOverlayView addSubview:pt.tagView];
+        NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
+
+        for (PhotoTag *pt in pts) {
+            [_dropOverlayView addSubview:pt.tagView];
+        }
+
+        [self removeAllTagsFromDragOverlay];
     }
-
-    _imageView.image = [UIImage imageNamed:currentImageName];
 }
 
 - (void)removeAllTagsFromDragOverlay {
