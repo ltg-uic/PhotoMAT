@@ -14,7 +14,7 @@
 #import "PopoverTagContentViewController.h"
 #import "PhotoTag.h"
 #import "PopoverErrorContentViewController.h"
-
+#import "EUCSelectedSet.h"
 
 @interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone> {
     NSString *lastTagName;
@@ -66,7 +66,11 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    schoolClassGroupLabel.text = @"BZAEDS : Grade 5 : Marty";
+    
+    EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
+    
+    schoolClassGroupLabel.text = [NSString stringWithFormat:@"%@ : %@ : %@", selectedSet.schoolName, selectedSet.className, selectedSet.groupName];
+    
     [self createImageBorder];
     //setup textviews
     [self textViewLikeTextField:_noteTextView];
