@@ -80,7 +80,7 @@
     EUCSettingsViewController * settings = [[EUCSettingsViewController alloc] initWithNibName:@"EUCSettingsViewController" bundle:nil];
     EUCDeploymentSplitViewController * dsvc = [[EUCDeploymentSplitViewController alloc] init];
     EUCDeploymentMasterViewController * master = [[EUCDeploymentMasterViewController alloc] initWithNibName:@"EUCDeploymentMasterViewController" bundle:nil];
-    EUCDeploymentDetailViewController * detail = [[EUCDeploymentDetailViewController alloc] initWithNibName:@"EUCDeploymentDetailViewController" bundle:nil];
+    self.detail = [[EUCDeploymentDetailViewController alloc] initWithNibName:@"EUCDeploymentDetailViewController" bundle:nil];
     EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
     EUCAnalyzeViewController * analyze = [[EUCAnalyzeViewController alloc] initWithNibName:@"EUCAnalyzeViewController" bundle:nil];
     EUCUserViewController * user = [[EUCUserViewController alloc] initWithNibName:@"EUCUserViewController" bundle:nil];
