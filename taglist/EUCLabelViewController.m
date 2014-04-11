@@ -443,7 +443,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 - (IBAction)swipeImagePrevious:(id)sender {
 
-
+/*
     burstIndex--;
 
     //we have another
@@ -465,6 +465,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
     [self removeAllTagsFromDragOverlay];
+ */
 }
 
 - (IBAction)swipeImageNext:(id)sender {
