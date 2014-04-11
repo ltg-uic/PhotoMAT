@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @class EUCHomeViewController;
+@class EUCDeploymentDetailViewController;
 
 @interface EUCAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) EUCHomeViewController *homeViewController;
+@property (strong, nonatomic) EUCDeploymentDetailViewController * detail;
 
 
 @end
