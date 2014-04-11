@@ -16,6 +16,8 @@
 #import "PopoverErrorContentViewController.h"
 #import "EUCSelectedSet.h"
 #import "EUCAppDelegate.h"
+#import "EUCDeploymentDetailViewController.h"
+
 
 @interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone> {
     NSString *lastTagName;
@@ -75,8 +77,13 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    
     EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
 
+    EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
+    NSArray *bursts = burstDetailController.importedBursts;
+    
     schoolClassGroupLabel.text = [NSString stringWithFormat:@"%@ : %@ : %@", selectedSet.schoolName, selectedSet.className, selectedSet.groupName];
 
     [self createImageBorder];
