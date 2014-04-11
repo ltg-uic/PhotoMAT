@@ -17,6 +17,8 @@
 #import "EUCSelectedSet.h"
 #import "EUCAppDelegate.h"
 #import "EUCDeploymentDetailViewController.h"
+#import "EUCBurst.h"
+#import "EUCImage.h"
 
 
 @interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone> {
@@ -30,6 +32,8 @@
     UIPopoverController *errorPopoverController;
     NSString *currentImageName;
     EUCAppDelegate *appDelegate;
+    NSArray *bursts;
+    int burstIndex;
 }
 
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -82,7 +86,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
 
     EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
-    NSArray *bursts = burstDetailController.importedBursts;
+    bursts = burstDetailController.importedBursts;
     
     schoolClassGroupLabel.text = [NSString stringWithFormat:@"%@ : %@ : %@", selectedSet.schoolName, selectedSet.className, selectedSet.groupName];
 
@@ -104,8 +108,11 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     [_tagList initTagListWithTagNames:tag_array];
 
     //TODO for testing
-    currentImageName = @"sample.jpg";
-
+    burstIndex = 0;
+    EUCBurst *burst = bursts[burstIndex];
+    EUCImage *image = burst.images[burstIndex];
+    currentImageName = image.filename;
+    _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -445,7 +452,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         [_dropOverlayView addSubview:pt.tagView];
     }
 
-    _imageView.image = [UIImage imageNamed:currentImageName];
+    EUCBurst *burst = bursts[burstIndex--];
+    EUCImage *image = burst.images[0];
+    _imageView.image = [UIImage imageWithContentsOfFile:image.filename];
 }
 
 - (IBAction)swipeImageNext:(id)sender {
@@ -459,7 +468,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         [_dropOverlayView addSubview:pt.tagView];
     }
 
-    _imageView.image = [UIImage imageNamed:currentImageName];
+    EUCBurst *burst = bursts[burstIndex++];
+    EUCImage *image = burst.images[0];
+    _imageView.image = [UIImage imageWithContentsOfFile:image.filename];
 }
 
 - (void)removeAllTagsFromDragOverlay {
