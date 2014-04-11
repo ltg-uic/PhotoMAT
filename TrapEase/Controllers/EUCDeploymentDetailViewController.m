@@ -96,8 +96,7 @@ typedef enum : NSUInteger {
         [_format setDateFormat:@"MMM dd, yyyy hh:mm a"];
         _uploadQueue = dispatch_queue_create("com.euclidsoftware.uploadQueue", NULL);
         _parser = [[NSDateFormatter alloc] init];
-        [_parser setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-
+        [_parser setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     }
     return self;
 }
@@ -794,9 +793,7 @@ typedef enum : NSUInteger {
         NSArray * imageArray = burstDictionary[@"image"];
         for (NSDictionary * imageDictionary in imageArray) {
             EUCImage * newImage = [[EUCImage alloc] init];
-            NSDate *dateFromString = [[NSDate alloc] init];
-            dateFromString = [self.parser dateFromString:imageDictionary[@"image_date"]];
-            newImage.assetDate = dateFromString;
+            newImage.assetDate = [self.parser dateFromString:imageDictionary[@"image_date"]];;
             newImage.dimensions = CGSizeMake([imageDictionary[@"width"] floatValue], [imageDictionary[@"height"] floatValue]);
             newImage.filename = [EUCFileSystem fileNameForImageWithId:[imageDictionary[@"id"] integerValue]];
             [newBurst.images addObject:newImage];
