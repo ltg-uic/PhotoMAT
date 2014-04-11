@@ -64,13 +64,16 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
 
-    
+
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
-    
+
     schoolClassGroupLabel.text = [NSString stringWithFormat:@"%@ : %@ : %@", selectedSet.schoolName, selectedSet.className, selectedSet.groupName];
-    
+
     [self createImageBorder];
     //setup textviews
     [self textViewLikeTextField:_noteTextView];
@@ -90,6 +93,12 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     //TODO for testing
     currentImageName = @"sample.jpg";
+
+}
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+
 
 }
 
