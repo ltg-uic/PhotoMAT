@@ -533,7 +533,7 @@ typedef enum : NSUInteger {
                            [EUCNetwork putResource:@"deployment"
                                             withId:newId
                                             params:putData successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-                                                DDLogInfo(@"Put succeeded");
+                                                DDLogInfo(@"Put deployment succeeded");
                                                 [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
                                                 [self dismissViewControllerAnimated:YES completion:nil];
                                                 [self uploadBurstsToDeploymentNumber:newId];

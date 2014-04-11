@@ -136,7 +136,7 @@
     EUCSelectedSet * selected = [EUCSelectedSet sharedInstance];
     selected.schoolName = deployment[@"school_name"];
     selected.className = deployment[@"class_name"];
-    selected.groupName = deployment[@"group_name"];
+    selected.groupName = deployment[@"person_name"];
     selected.deploymentName = deployment[@"short_name"];
     NSNumber * ownerId = deployment[@"person_id"];
     selected.ownerId = [ownerId integerValue];
