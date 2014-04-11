@@ -48,7 +48,7 @@ extern CGFloat defaultWideness;
     __block NSInteger burstSubIndex = -1;
     __block NSDate * lastDate;
     
-    NSTimeInterval burstDelta = 60;
+    NSTimeInterval burstDelta = 20;
     
     [self.group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
         if (asset != nil) {
