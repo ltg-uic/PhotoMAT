@@ -87,9 +87,9 @@
     EUCKnapsackViewController * snapshot = [[EUCKnapsackViewController alloc] initWithNibName:@"EUCKnapsackViewController" bundle:nil asSnapshot:YES];
     EUCKnapsackViewController * photos = [[EUCKnapsackViewController alloc] initWithNibName:@"EUCKnapsackViewController" bundle:nil asSnapshot:NO];
     
-    master.detailViewController = detail;
+    master.detailViewController = self.detail;
     
-    dsvc.viewControllers = @[master, detail];
+    dsvc.viewControllers = @[master, self.detail];
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
     self.homeViewController.viewControllers = @[user, dsvc, label, notes, analyze, cloud, settings, snapshot, photos];
