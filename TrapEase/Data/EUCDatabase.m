@@ -8,6 +8,7 @@
 #import "EUCDatabase.h"
 #import "DDLog.h"
 #import "FMDatabase.h"
+#import "EUCNetwork.h"
 
 static EUCDatabase * database;
 static const int ddLogLevel = LOG_LEVEL_INFO;
@@ -19,6 +20,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     NSDictionary * _settings;
 }
 @property (strong, nonatomic) FMDatabase * db;
+@property (strong, nonatomic) dispatch_queue_t pendingQueue;
+@property (assign, nonatomic) BOOL queueBeingConsumed;
+
 @end
 
 @implementation EUCDatabase
@@ -27,12 +31,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     if (database == nil) {
         database = [[EUCDatabase alloc] init];
         [database openDatabase];
+        [database consumePendingQueue];
     }
     return database;
 }
 
 -(EUCDatabase *) init {
     if (self = [super init]) {
+        _pendingQueue = dispatch_queue_create("com.euclidsoftware.pendingQueue", NULL);
     }
     return self;
 }
@@ -383,5 +389,57 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 }
 
+#pragma mark - Pending
+
+-(void)writePendingUploadOf:(NSString *)fileName withType:(NSString *)fileType andId:(NSInteger)imageId {
+    NSString * sql = @"insert into pendingPictures (file_name, image_id, resource, status) values (?, ?, ?, ?)";
+    [self.db executeUpdate:sql, fileName, @(imageId), fileType, @"new"];
+}
+
+-(void)consumePendingQueue {
+    
+    @synchronized(self) {
+        if (self.queueBeingConsumed) {
+            DDLogInfo(@"Already being consumed. Not doing anything");
+            return;
+        }
+        
+        DDLogInfo(@"Gonna consume queue");
+        self.queueBeingConsumed = YES;
+    }
+    
+    NSString * sql = @"select file_name, image_id, resource from pendingPictures where status=?";
+    FMResultSet * rs = [self.db executeQuery:sql, @"new"];
+    
+    if ([rs next]) {
+        NSString * fileName = [rs stringForColumnIndex:0];
+        NSInteger  imageId = [rs intForColumnIndex:1];
+        NSString * resource = [rs stringForColumnIndex:2];
+        DDLogInfo(@"CONSUMING: %@ %@", resource, fileName);
+        NSData * data = [NSData dataWithContentsOfFile:fileName];
+        [EUCNetwork uploadImageData: data forResource:resource withId:imageId];
+
+    }
+    else {
+        @synchronized(self) {
+            DDLogInfo(@"Nothing to consume");
+            self.queueBeingConsumed = NO;
+        }
+    }
+
+}
+
+-(void) onePendingDoneWithType:(NSString *)fileType andId:(NSInteger)imageId {
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            @synchronized(self) {
+                self.queueBeingConsumed = NO;
+                [self.db executeUpdate:@"update pendingPictures set status=? where status=? and resource=? and image_id=?",
+                 @"done", @"new", fileType, @(imageId)];
+            }
+            [self consumePendingQueue];
+
+        });
+
+}
 
 @end

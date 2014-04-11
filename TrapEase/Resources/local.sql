@@ -51,12 +51,12 @@ CREATE TABLE camera (
 
 
 create table pendingPictures (
-      assetURL text not null
-    , pictureId int not null
+      file_name text not null
+    , image_id int not null
     , resource text not null default 'image' -- image or deployment_picture
-    , done int not null default 0
+    , status text not null default 'new' -- new, inProcess, done
 );
-create index pending_done on pendingPictures(done);
+create index pending_done on pendingPictures(status, resource, image_id);
 
 create table currentPeople (
       id int NOT null

@@ -222,6 +222,9 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
                                                                                  } else {
                                                                                      NSLog(@"%@ %@", response, responseObject);
                                                                                  }
+                                                                                 
+                                                                                 [[EUCDatabase sharedInstance] onePendingDoneWithType:resource andId:resourceId];
+
                                                                              }];
     
     [uploadTask resume];

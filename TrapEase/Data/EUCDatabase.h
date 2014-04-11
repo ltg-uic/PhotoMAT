@@ -30,4 +30,10 @@
 
 -(NSDictionary *) getDeploymentRecord: (NSNumber *) deploymentId;
 
+-(void) writePendingUploadOf: (NSString *) fileName withType: (NSString *) fileType andId: (NSInteger) imageId;
+
+-(void) consumePendingQueue;
+
+-(void) onePendingDoneWithType:(NSString *)fileType andId:(NSInteger)imageId;
+
 @end

@@ -562,6 +562,7 @@ typedef enum : NSUInteger {
                                                 [self dismissViewControllerAnimated:YES completion:nil];
                                                 [self uploadBurstsToDeploymentNumber:newId];
                                                 [self uploadImagesToDeploymentNumber:newId];
+                                                [[EUCDatabase sharedInstance] consumePendingQueue];
                                             } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                                                 DDLogInfo(@"Put failed");
                                             }];
@@ -659,7 +660,8 @@ typedef enum : NSUInteger {
             NSString * fileName = [EUCFileSystem fileNameForImageWithId:imageId];
             
             [data writeToFile:fileName atomically:YES];
-            // TODO: AAA write to pending database
+            [[EUCDatabase sharedInstance] writePendingUploadOf:fileName withType:@"image" andId:imageId];
+            
 //            [EUCNetwork uploadImageData: data forResource:@"image" withId:imageId];
         }
     }
@@ -720,6 +722,7 @@ typedef enum : NSUInteger {
             NSString * fileName = [EUCFileSystem fileNameForDeploymentPictureWithId:imageId];
             
             [data writeToFile:fileName atomically:YES];
+            [[EUCDatabase sharedInstance] writePendingUploadOf:fileName withType:@"deployment_picture" andId:imageId];
             // TODO: AAA write to pending database
             
             //[EUCNetwork uploadImageData: data forResource:@"deployment_picture" withId:imageId];
