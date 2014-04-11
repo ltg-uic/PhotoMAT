@@ -217,18 +217,18 @@ sub get {
     }
 
     if ($expand_path) { 
-        $hash->{$table} = &Database::getRow($r, $dbh, qq[select * from $table where $column_name=?], $expand_path);
+        $hash->{$table} = &Database::getRow($r, $dbh, qq[select * from $table where $column_name=? order by id], $expand_path);
     }
     elsif ($path) { 
         if ($membership_table) {
-            $hash->{$table} = &Database::getRows($r, $dbh, qq[select t.* from $table t join $membership_table m ON t.id = m.$column_name where m.$parent_column=?], $path);
+            $hash->{$table} = &Database::getRows($r, $dbh, qq[select t.* from $table t join $membership_table m ON t.id = m.$column_name where m.$parent_column=? order by t.id], $path);
         } else {
-            $hash->{$table} = &Database::getRows($r, $dbh, qq[select * from $table where $column_name=?], $path);
+            $hash->{$table} = &Database::getRows($r, $dbh, qq[select * from $table where $column_name=? order by id], $path);
         }
         
     }
     else { 
-        $hash->{$table} = &Database::getRows($r, $dbh, qq[select * from $table]);
+        $hash->{$table} = &Database::getRows($r, $dbh, qq[select * from $table order by id]);
     }
 
     # now cascade 

@@ -28,6 +28,7 @@
 #import "EUCConnectingViewController.h"
 #import "EUCNetwork.h"
 #import "EUCTabBarViewControllerDelegate.h"
+#import "EUCFileSystem.h"
 
 @interface EUCAppDelegate () {}
 
@@ -64,6 +65,8 @@
      ** LOGGING END
      ** ********************************************************************
      */
+    
+    [EUCFileSystem makeImageDirIfNecessary]; // make image directory
     
     // initialize network with person id
     EUCDatabase * db = [EUCDatabase sharedInstance];

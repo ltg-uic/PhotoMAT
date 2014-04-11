@@ -18,6 +18,7 @@
 #import "EUCDatabase.h"
 #import "EUCNetwork.h"
 #import "DDLog.h"
+#import "EUCFileSystem.h"
 
 CGFloat defaultDeploymentWideness = 96.0/64.0;
 
@@ -29,7 +30,6 @@ typedef enum : NSUInteger {
 } EUCDateEditingMode;
 
 @interface EUCDeploymentDetailViewController ()
-
 
 @property (weak, nonatomic) IBOutlet UITextField *shortName;
 @property (weak, nonatomic) IBOutlet UITextView *notes;
@@ -46,14 +46,9 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UITextField *trapNumber;
 @property (weak, nonatomic) IBOutlet UIButton *nominalButton;
 @property (weak, nonatomic) IBOutlet UIButton *actualButton;
-@property (strong, nonatomic) NSDate *nominalDate;
-@property (strong, nonatomic) NSDate *actualDate;
 
 
 
-@property (strong, nonatomic) NSMutableArray *importedBursts;
-@property (strong, nonatomic) NSMutableArray *addedImages;
-@property (strong, nonatomic) NSMutableArray *burstImages;
 @property (strong, nonatomic) ALAssetsLibrary *assetsLibrary;
 
 @property (assign, nonatomic) BOOL hasLibrary;
@@ -66,9 +61,16 @@ typedef enum : NSUInteger {
 
 @property (strong, nonatomic) EUCDatePickerViewController *datePickerViewController;
 @property (strong, nonatomic) NSDateFormatter *format;
+@property (strong, nonatomic) NSDateFormatter *parser;
+
 @property (strong, nonatomic) dispatch_queue_t uploadQueue;
 
 
+@property (strong, nonatomic) NSDate *nominalDate;
+@property (strong, nonatomic) NSDate *actualDate;
+@property (strong, nonatomic) NSMutableArray *importedBursts;
+@property (strong, nonatomic) NSMutableArray *addedImages;
+@property (strong, nonatomic) NSMutableArray *burstImages;
 
 
 - (IBAction)addImage:(id)sender;
@@ -93,7 +95,8 @@ typedef enum : NSUInteger {
         _format = [[NSDateFormatter alloc] init];
         [_format setDateFormat:@"MMM dd, yyyy hh:mm a"];
         _uploadQueue = dispatch_queue_create("com.euclidsoftware.uploadQueue", NULL);
-
+        _parser = [[NSDateFormatter alloc] init];
+        [_parser setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
 
     }
     return self;
@@ -324,37 +327,59 @@ typedef enum : NSUInteger {
         imageToBeDisplayed = self.addedImages[indexPath.row];
     }
     
-    [self.assetsLibrary assetForURL:imageToBeDisplayed.url resultBlock:^(ALAsset *asset) {
-        if (asset != nil) {
-            UIImage * image = [UIImage imageWithCGImage:[asset aspectRatioThumbnail]];
-            CGFloat wideness = 1.0*image.size.width/image.size.height;
-            CGSize size;
+    if (imageToBeDisplayed.url) {
+        [self.assetsLibrary assetForURL:imageToBeDisplayed.url resultBlock:^(ALAsset *asset) {
+            if (asset != nil) {
+                UIImage * image = [UIImage imageWithCGImage:[asset aspectRatioThumbnail]];
+                CGFloat wideness = 1.0*image.size.width/image.size.height;
+                CGSize size;
+                
+                if (wideness > defaultDeploymentWideness) {
+                    size.width = 96;
+                    // width - height
+                    // 314
+                    size.height = 96/wideness;
+                }
+                else {
+                    size.height = 64;
+                    // width - height
+                    //         226
+                    size.width = 64 * wideness;
+                }
+                UIImage * resizedImage = [EUCImageUtilities imageWithImage:image scaledToSize:size];
+                cell.imageView.image = resizedImage;
+            }
             
-            if (wideness > defaultDeploymentWideness) {
-                size.width = 96;
-                // width - height
-                // 314
-                size.height = 96/wideness;
-            }
-            else {
-                size.height = 64;
-                // width - height
-                //         226
-                size.width = 64 * wideness;
-            }
-            UIImage * resizedImage = [EUCImageUtilities imageWithImage:image scaledToSize:size];
-            cell.imageView.image = resizedImage;
+        } failureBlock:^(NSError *error) {
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Cannot open image"
+                                                                 message:@"The image could not be found"
+                                                                delegate:nil
+                                                       cancelButtonTitle:nil
+                                                       otherButtonTitles:@"OK", nil];
+            
+            [alertView show];
+        }];
+    }
+    else {
+        UIImage * image = [UIImage imageWithContentsOfFile:imageToBeDisplayed.filename];
+        CGFloat wideness = 1.0*image.size.width/image.size.height;
+        CGSize size;
+        
+        if (wideness > defaultDeploymentWideness) {
+            size.width = 96;
+            // width - height
+            // 314
+            size.height = 96/wideness;
         }
-        
-    } failureBlock:^(NSError *error) {
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Cannot open image"
-                                                             message:@"The image could not be found"
-                                                            delegate:nil
-                                                   cancelButtonTitle:nil
-                                                   otherButtonTitles:@"OK", nil];
-        
-        [alertView show];
-    }];
+        else {
+            size.height = 64;
+            // width - height
+            //         226
+            size.width = 64 * wideness;
+        }
+        UIImage * resizedImage = [EUCImageUtilities imageWithImage:image scaledToSize:size];
+        cell.imageView.image = resizedImage;
+    }
     
     
     return cell;
@@ -567,14 +592,21 @@ typedef enum : NSUInteger {
                                              withId:burstId
                                              params:putData
                                        successBlock:^(NSURLSessionDataTask *task, id responseObject) {
+                                           DDLogInfo(@"Put burst succeeded");
                                            // now upload images
                                            [self uploadImagesForBurst: thisBurst withId: burstId];
+//                                           [self saveImagesForBurst:thisBurst withId:burstId];
                                        } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                                            // TODO: AAA alert here
                                        }];
                         } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                             // TODO: AAA alert here
                         }];
+    
+}
+
+
+-(void) saveImagesForBurst: (EUCBurst *) burst withId: (NSInteger) burstId {
     
 }
 
@@ -589,7 +621,7 @@ typedef enum : NSUInteger {
                  imageIndex++;
                  NSDictionary * putData = @{@"burst_id": @(burstId),
                                             @"image_date": [self.format stringFromDate:thisImage.assetDate],
-                                            @"file_name": [NSString stringWithFormat:@"%ld.jpg", imageId],
+                                            @"file_name": [NSString stringWithFormat:@"%ld.jpg", (long)imageId],
                                             @"width": @(thisImage.dimensions.width),
                                             @"height": @(thisImage.dimensions.height)
                                             };
@@ -605,7 +637,7 @@ typedef enum : NSUInteger {
                                     [self uploadImageURL:thisImage.url forId:imageId];
                                 });
 
-                                [self uploadImageURL:thisImage.url forId:imageId];
+//                                [self uploadImageURL:thisImage.url forId:imageId];
                             } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                                 // TODO: AAA alert here
                             }];
@@ -620,11 +652,16 @@ typedef enum : NSUInteger {
         if (asset != nil) {
             // from: http://stackoverflow.com/a/8801656/772526
             ALAssetRepresentation *rep = [asset defaultRepresentation];
-            Byte *buffer = (Byte*)malloc(rep.size);
-            NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
+            Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
+            NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:(unsigned int)rep.size error:nil];
             NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
 
-            [EUCNetwork uploadImageData: data forResource:@"image" withId:imageId];
+
+            NSString * fileName = [EUCFileSystem fileNameForImageWithId:imageId];
+            
+            [data writeToFile:fileName atomically:YES];
+            // TODO: AAA write to pending database
+//            [EUCNetwork uploadImageData: data forResource:@"image" withId:imageId];
         }
     }
                        failureBlock:^(NSError *error) {
@@ -647,7 +684,7 @@ typedef enum : NSUInteger {
                  imageIndex++;
                  NSDictionary * putData = @{@"deployment_id": @(deploymentId),
                                             @"camera": @(cameraId),
-                                            @"file_name": [NSString stringWithFormat:@"%ld.jpg", imageId],
+                                            @"file_name": [NSString stringWithFormat:@"%ld.jpg", (long)imageId],
                                             @"file_type": @"jpg"
                                             };
                  
@@ -677,11 +714,16 @@ typedef enum : NSUInteger {
         if (asset != nil) {
             // from: http://stackoverflow.com/a/8801656/772526
             ALAssetRepresentation *rep = [asset defaultRepresentation];
-            Byte *buffer = (Byte*)malloc(rep.size);
-            NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:rep.size error:nil];
+            Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
+            NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:(unsigned int)rep.size error:nil];
             NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+
+            NSString * fileName = [EUCFileSystem fileNameForDeploymentPictureWithId:imageId];
             
-            [EUCNetwork uploadImageData: data forResource:@"deployment_picture" withId:imageId];
+            [data writeToFile:fileName atomically:YES];
+            // TODO: AAA write to pending database
+            
+            //[EUCNetwork uploadImageData: data forResource:@"deployment_picture" withId:imageId];
         }
     }
                        failureBlock:^(NSError *error) {
@@ -716,11 +758,65 @@ typedef enum : NSUInteger {
     NSDictionary * record = [db getDeploymentRecord:deploymentId];
     self.shortName.text = record[@"short_name"];
     self.notes.text = record[@"notes"];
-    self.trapNumber.text = [NSString stringWithFormat:@"%ld", [record[@"camera_trap_number"] integerValue]];
+    self.trapNumber.text = [NSString stringWithFormat:@"%ld", (long)[record[@"camera_trap_number"] integerValue]];
     [self.actualButton setTitle:record[@"actual_mark_time"] forState:UIControlStateNormal];
     
+    NSString * dateString = record[@"actual_mark_time"];
+    self.actualDate = [self.parser dateFromString:dateString];
+
+
     // get deployment images and bursts
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
+    [EUCNetwork getDeploymentDetail:[deploymentId integerValue]
+                            success:^(NSArray *objects) {
+                                NSDictionary * deploymentDictionary = [objects firstObject];
+                                [self populateFromDictionary: deploymentDictionary];
+                            } failure:^(NSString *reason) {
+                                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Could not get details."
+                                                                                     message:[NSString stringWithFormat:@"Please try again. %@", reason]
+                                                                                    delegate:nil
+                                                                           cancelButtonTitle:nil
+                                                                           otherButtonTitles:@"OK", nil];
+                                
+                                [alertView show];
+                            }];
+    
+}
+
+-(void) populateFromDictionary: (NSDictionary *) dictionary {
+    NSMutableArray * bursts = [NSMutableArray arrayWithCapacity:64];
+    NSArray * burstArray = dictionary[@"burst"];
+    for (NSDictionary * burstDictionary in burstArray) {
+        EUCBurst * newBurst = [[EUCBurst alloc] init];
+        newBurst.burstId = [burstDictionary[@"id"] integerValue];
+        
+        NSArray * imageArray = burstDictionary[@"image"];
+        for (NSDictionary * imageDictionary in imageArray) {
+            EUCImage * newImage = [[EUCImage alloc] init];
+            NSDate *dateFromString = [[NSDate alloc] init];
+            dateFromString = [self.parser dateFromString:imageDictionary[@"image_date"]];
+            newImage.assetDate = dateFromString;
+            newImage.dimensions = CGSizeMake([imageDictionary[@"width"] floatValue], [imageDictionary[@"height"] floatValue]);
+            newImage.filename = [EUCFileSystem fileNameForImageWithId:[imageDictionary[@"id"] integerValue]];
+            [newBurst.images addObject:newImage];
+        }
+        [bursts addObject:newBurst];
+    }
+    [self.burstImages removeAllObjects];
+    [self importDone:bursts];
+    
+    // now deployment images
+    
+    [self.addedImages removeAllObjects];
+    
+    NSArray * pictureArray = dictionary[@"deployment_picture"];
+    for (NSDictionary * pictureDictionary in pictureArray) {
+        EUCImage * image = [[EUCImage alloc] init];
+        image.filename = [EUCFileSystem fileNameForDeploymentPictureWithId:[pictureDictionary[@"id"] integerValue]];
+        [self.addedImages addObject:image];
+    }
+    [self.deploymentImages reloadData];
 }
 
 @end

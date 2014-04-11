@@ -20,7 +20,15 @@
 @property (assign, nonatomic) BOOL updateMode;
 
 
+@property (readonly, nonatomic) NSDate *nominalDate;
+@property (readonly, nonatomic) NSDate *actualDate;
+@property (readonly, nonatomic) NSMutableArray *importedBursts;
+@property (readonly, nonatomic) NSMutableArray *addedImages;
+@property (readonly, nonatomic) NSMutableArray *burstImages;
+
+
 -(void) clearEditView;
 -(void) loadDeployment: (NSNumber *) deploymentId;
+
 
 @end

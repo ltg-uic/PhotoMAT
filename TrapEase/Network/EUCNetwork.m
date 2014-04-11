@@ -124,6 +124,21 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
 }
 
 
++(void) getDeploymentDetail: (NSInteger) deploymentId success: (EUCGetSuccessBlock) successBlock failure: (EUCGetFailureBlock) failureBlock {
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
+    
+    [network.sessionManager GET:[NSString stringWithFormat:@"/deployment/%ld", (long) deploymentId]
+                     parameters:nil
+                        success:^(NSURLSessionDataTask *task, id responseObject) {
+                            NSDictionary * result = (NSDictionary *) responseObject;
+                            successBlock(result[@"deployment"]);
+                        }
+                        failure:^(NSURLSessionDataTask *task, NSError *error) {
+                            failureBlock([NSString stringWithFormat:@"Error: %@", error]);
+                        }];
+}
+
+
 
 #pragma mark - POST
 
@@ -147,7 +162,7 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
     EUCNetwork * network = [EUCNetwork sharedNetwork];
     
     
-    [network.sessionManager POST:[NSString stringWithFormat:@"/%@/%ld", resource, numIds]
+    [network.sessionManager POST:[NSString stringWithFormat:@"/%@/%ld", resource, (long)numIds]
                       parameters:nil
                          success:^(NSURLSessionDataTask *task, id responseObject) {
                              NSDictionary * result = (NSDictionary *) responseObject;
@@ -168,7 +183,7 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
     EUCNetwork * network = [EUCNetwork sharedNetwork];
     
     
-    [network.sessionManager PUT:[NSString stringWithFormat:@"/%@/%ld", resource, resourceId]
+    [network.sessionManager PUT:[NSString stringWithFormat:@"/%@/%ld", resource, (long)resourceId]
                      parameters:params
                         success:successBlock
                         failure:failureBlock];
@@ -183,7 +198,7 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
     
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer]
                                     multipartFormRequestWithMethod:@"POST"
-                                    URLString:[NSString stringWithFormat:@"%@/file/%@/%ld", baseUrl, resource, resourceId]
+                                    URLString:[NSString stringWithFormat:@"%@/file/%@/%ld", baseUrl, resource, (long)resourceId]
                                     parameters:nil
                                     constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                                         [formData appendPartWithFileData:data
@@ -201,7 +216,7 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
     NSURLSessionUploadTask *uploadTask = [network.sessionManager uploadTaskWithStreamedRequest:request
                                                                                       progress:&progress
                                                                              completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-                                                                                 NSLog(@"Resource: %@, resourceId; %ld", resource, resourceId);
+                                                                                 NSLog(@"Resource: %@, resourceId; %ld", resource, (long)resourceId);
                                                                                  if (error) {
                                                                                      NSLog(@"Error: %@", error);
                                                                                  } else {

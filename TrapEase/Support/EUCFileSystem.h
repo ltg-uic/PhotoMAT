@@ -12,4 +12,12 @@
 
 +(uint64_t)getFreeDiskspace;
 
+
+
++(NSString *) documentDir;
++(NSString *) imageDir;
++(NSString *) fileNameForImageWithId: (NSInteger) imageId;
++(NSString *) fileNameForDeploymentPictureWithId: (NSInteger) imageId ;
++(void) makeImageDirIfNecessary;
+
 @end
