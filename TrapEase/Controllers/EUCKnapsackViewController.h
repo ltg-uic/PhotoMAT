@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EUCKnapsackViewController : UIViewController
+@interface EUCKnapsackViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *clearButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;

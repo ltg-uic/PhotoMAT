@@ -84,7 +84,6 @@
     EUCLabelViewController * label = [[EUCLabelViewController alloc] initWithNibName:@"EUCLabelViewController" bundle:nil];
     EUCAnalyzeViewController * analyze = [[EUCAnalyzeViewController alloc] initWithNibName:@"EUCAnalyzeViewController" bundle:nil];
     EUCUserViewController * user = [[EUCUserViewController alloc] initWithNibName:@"EUCUserViewController" bundle:nil];
-    EUCKnapsackViewController * snapshot = [[EUCKnapsackViewController alloc] initWithNibName:@"EUCKnapsackViewController" bundle:nil asSnapshot:YES];
     EUCKnapsackViewController * photos = [[EUCKnapsackViewController alloc] initWithNibName:@"EUCKnapsackViewController" bundle:nil asSnapshot:NO];
     
     master.detailViewController = self.detail;
@@ -92,13 +91,13 @@
     dsvc.viewControllers = @[master, self.detail];
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
-    self.homeViewController.viewControllers = @[user, dsvc, label, notes, analyze, cloud, settings, snapshot, photos];
+    self.homeViewController.viewControllers = @[user, dsvc, label, notes, analyze, cloud, settings, photos];
     
-    self.tabBarVCDelegate = [[EUCTabBarViewControllerDelegate alloc] init];
-    self.tabBarVCDelegate.snapshot = snapshot;
-    self.tabBarVCDelegate.photos = photos;
-    self.homeViewController.delegate = self.tabBarVCDelegate;
-    self.tabBarVCDelegate.window = self.window;
+//    self.tabBarVCDelegate = [[EUCTabBarViewControllerDelegate alloc] init];
+////    self.tabBarVCDelegate.snapshot = snapshot;
+//    self.tabBarVCDelegate.photos = photos;
+//    self.homeViewController.delegate = self.tabBarVCDelegate;
+//    self.tabBarVCDelegate.window = self.window;
     
     
     user.visibilityDelegate = master;

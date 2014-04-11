@@ -800,11 +800,11 @@ typedef enum : NSUInteger {
             newImage.dimensions = CGSizeMake([imageDictionary[@"width"] floatValue], [imageDictionary[@"height"] floatValue]);
             newImage.filename = [EUCFileSystem fileNameForImageWithId:[imageDictionary[@"id"] integerValue]];
             // if the file doesn't exist, download it
-            [EUCNetwork downloadImage:[NSString stringWithFormat:@"/file/image/%ld", (long) [imageDictionary[@"id"] integerValue]]
-                               toFile: newImage.filename
-                           completion:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-                               [self.bursts reloadData];
-                           }];
+//            [EUCNetwork downloadImage:[NSString stringWithFormat:@"/file/image/%ld", (long) [imageDictionary[@"id"] integerValue]]
+//                               toFile: newImage.filename
+//                           completion:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+//                               [self.bursts reloadData];
+//                           }];
             [newBurst.images addObject:newImage];
         }
         [bursts addObject:newBurst];
@@ -821,11 +821,11 @@ typedef enum : NSUInteger {
         for (NSDictionary * pictureDictionary in pictureArray) {
             EUCImage * image = [[EUCImage alloc] init];
             image.filename = [EUCFileSystem fileNameForDeploymentPictureWithId:[pictureDictionary[@"id"] integerValue]];
-            [EUCNetwork downloadImage:[NSString stringWithFormat:@"/file/deployment_picture/%ld", (long) [pictureDictionary[@"id"] integerValue]]
-                               toFile: image.filename
-                           completion:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-                               [self.deploymentImages reloadData];
-                           }];
+//            [EUCNetwork downloadImage:[NSString stringWithFormat:@"/file/deployment_picture/%ld", (long) [pictureDictionary[@"id"] integerValue]]
+//                               toFile: image.filename
+//                           completion:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+//                               [self.deploymentImages reloadData];
+//                           }];
             [self.addedImages addObject:image];
         }
         [self.deploymentImages reloadData];
