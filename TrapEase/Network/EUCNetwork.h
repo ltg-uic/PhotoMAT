@@ -51,4 +51,6 @@ typedef void(^EUCDownloadTaskCompletionBlock)(NSURLResponse * response, NSURL * 
 
 +(void) uploadImageData: (NSData *) data forResource: (NSString *) resource withId: (NSInteger) resourceId;
 
++(void) getDeploymentDetail: (NSInteger) deploymentId success: (EUCGetSuccessBlock) successBlock failure: (EUCGetFailureBlock) failureBlock;
+
 @end

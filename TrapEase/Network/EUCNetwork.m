@@ -124,6 +124,21 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
 }
 
 
++(void) getDeploymentDetail: (NSInteger) deploymentId success: (EUCGetSuccessBlock) successBlock failure: (EUCGetFailureBlock) failureBlock {
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
+    
+    [network.sessionManager GET:[NSString stringWithFormat:@"/deployment/%ld", (long) deploymentId]
+                     parameters:nil
+                        success:^(NSURLSessionDataTask *task, id responseObject) {
+                            NSDictionary * result = (NSDictionary *) responseObject;
+                            successBlock(result[@"deployment"]);
+                        }
+                        failure:^(NSURLSessionDataTask *task, NSError *error) {
+                            failureBlock([NSString stringWithFormat:@"Error: %@", error]);
+                        }];
+}
+
+
 
 #pragma mark - POST
 
