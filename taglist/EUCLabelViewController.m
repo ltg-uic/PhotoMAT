@@ -15,6 +15,7 @@
 #import "PhotoTag.h"
 #import "PopoverErrorContentViewController.h"
 #import "EUCSelectedSet.h"
+#import "EUCAppDelegate.h"
 
 @interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone> {
     NSString *lastTagName;
@@ -26,6 +27,7 @@
     UIPopoverController *popoverController;
     UIPopoverController *errorPopoverController;
     NSString *currentImageName;
+    EUCAppDelegate *appDelegate;
 }
 
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -57,6 +59,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 //        tag_array = [NSMutableArray arrayWithObjects:@"1234567890qwertyu", @"Ugly Lion", @"grey Squirrel 1", @"yellow green Troll", @"red Dragon", @"fox Gorilla", @"eater Monkey", @"RIT Tigers", @"brown Bunny", @"big fat Rat", @"The yellow Bird1", @"The yellow Bird2", @"The yellow Bird3", @"The yellow Birdees3", @"The yellow Bird3", @"The yellow Bird2", @"the big bad bear2", @"the big bad bear", nil];
         tag_array = [NSMutableArray arrayWithObjects:@"1234567890qwertyu", nil];
         photoTags = [[NSMutableArray alloc] init];
+        
+        
+        appDelegate =  (EUCAppDelegate *)[[UIApplication sharedApplication] delegate];
 
     }
     return self;
