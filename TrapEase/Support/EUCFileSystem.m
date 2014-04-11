@@ -33,4 +33,35 @@
 }
 
 
++(NSString *) documentDir {
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+}
+
++(NSString *) imageDir {
+    return [[EUCFileSystem documentDir] stringByAppendingPathComponent:@"images"];
+}
+
++(NSString *) fileNameForImageWithId: (NSInteger) imageId {
+    return [[EUCFileSystem imageDir] stringByAppendingPathComponent:[NSString stringWithFormat:@"i%ld.jpg", (long) imageId]];
+}
+
++(NSString *) fileNameForDeploymentPictureWithId: (NSInteger) imageId {
+    return [[EUCFileSystem imageDir] stringByAppendingPathComponent:[NSString stringWithFormat:@"d%ld.jpg", (long) imageId]];
+}
+
++(void) makeImageDirIfNecessary {
+    NSString * imageDir = [EUCFileSystem imageDir];
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    BOOL isDir;
+    if ([fileManager fileExistsAtPath:imageDir isDirectory:&isDir]) {
+        // do nothing
+    }
+    else {
+        [fileManager createDirectoryAtPath:imageDir
+               withIntermediateDirectories:YES
+                                attributes:nil
+                                     error:nil];
+    }
+}
+
 @end

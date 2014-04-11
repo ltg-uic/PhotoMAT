@@ -268,10 +268,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 -(void) refreshDeployments: (NSArray *) deployments {
     
-    [self clearTable: @"tag"];
-    [self clearTable:@"image"];
-    [self clearTable:@"burst"];
-    [self clearTable:@"deployment_picture"];
+//    [self clearTable: @"tag"];
+//    [self clearTable:@"image"];
+//    [self clearTable:@"burst"];
+//    [self clearTable:@"deployment_picture"];
     [self clearTable:@"deployment"];
     
     for (NSDictionary * deployment in deployments) {
