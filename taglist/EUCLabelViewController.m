@@ -443,34 +443,50 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 - (IBAction)swipeImagePrevious:(id)sender {
 
-    [self removeAllTagsFromDragOverlay];
 
-    currentImageName = @"sample.jpg";
-    NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
+    burstIndex--;
 
-    for (PhotoTag *pt in pts) {
-        [_dropOverlayView addSubview:pt.tagView];
+    //we have another
+    if( burstIndex >= 0 ) {
+        NSLog(@"left swipe %d", burstIndex);
+        EUCBurst *burst = bursts[burstIndex];
+        EUCImage *image = burst.images[0];
+        currentImageName = image.filename;
+        _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
+
+        NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
+
+        for (PhotoTag *pt in pts) {
+            [_dropOverlayView addSubview:pt.tagView];
+        }
+
+        [self removeAllTagsFromDragOverlay];
     }
 
-    EUCBurst *burst = bursts[burstIndex--];
-    EUCImage *image = burst.images[0];
-    _imageView.image = [UIImage imageWithContentsOfFile:image.filename];
+
+    [self removeAllTagsFromDragOverlay];
 }
 
 - (IBAction)swipeImageNext:(id)sender {
 
-    [self removeAllTagsFromDragOverlay];
+    burstIndex++;
 
-    currentImageName = @"sample2.jpg";
-    NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
+    //we have another
+    if( burstIndex < bursts.count ) {
+        NSLog(@"right swipe %d", burstIndex);
+        EUCBurst *burst = bursts[burstIndex];
+        EUCImage *image = burst.images[0];
+        currentImageName = image.filename;
+        _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
 
-    for (PhotoTag *pt in pts) {
-        [_dropOverlayView addSubview:pt.tagView];
+        NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
+
+        for (PhotoTag *pt in pts) {
+            [_dropOverlayView addSubview:pt.tagView];
+        }
+
+        [self removeAllTagsFromDragOverlay];
     }
-
-    EUCBurst *burst = bursts[burstIndex++];
-    EUCImage *image = burst.images[0];
-    _imageView.image = [UIImage imageWithContentsOfFile:image.filename];
 }
 
 - (void)removeAllTagsFromDragOverlay {
