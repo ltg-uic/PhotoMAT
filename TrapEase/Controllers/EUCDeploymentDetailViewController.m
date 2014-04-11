@@ -97,6 +97,7 @@ typedef enum : NSUInteger {
         _uploadQueue = dispatch_queue_create("com.euclidsoftware.uploadQueue", NULL);
         _parser = [[NSDateFormatter alloc] init];
         [_parser setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        
     }
     return self;
 }
@@ -562,7 +563,6 @@ typedef enum : NSUInteger {
                                                 [self dismissViewControllerAnimated:YES completion:nil];
                                                 [self uploadBurstsToDeploymentNumber:newId];
                                                 [self uploadImagesToDeploymentNumber:newId];
-                                                [[EUCDatabase sharedInstance] consumePendingQueue];
                                             } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                                                 DDLogInfo(@"Put failed");
                                             }];
@@ -633,9 +633,7 @@ typedef enum : NSUInteger {
                                   params:putData
                             successBlock:^(NSURLSessionDataTask *task, id responseObject) {
                                 // now upload images
-                                dispatch_async(self.uploadQueue, ^(void) {
                                     [self uploadImageURL:thisImage.url forId:imageId];
-                                });
 
 //                                [self uploadImageURL:thisImage.url forId:imageId];
                             } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
@@ -661,6 +659,7 @@ typedef enum : NSUInteger {
             
             [data writeToFile:fileName atomically:YES];
             [[EUCDatabase sharedInstance] writePendingUploadOf:fileName withType:@"image" andId:imageId];
+            [[EUCDatabase sharedInstance] consumePendingQueue];
             
 //            [EUCNetwork uploadImageData: data forResource:@"image" withId:imageId];
         }
@@ -696,9 +695,7 @@ typedef enum : NSUInteger {
                                   params:putData
                             successBlock:^(NSURLSessionDataTask *task, id responseObject) {
                                 // now upload images
-                                dispatch_async(self.uploadQueue, ^(void) {
                                     [self uploadDeploymentPictureURL:thisImage.url forId:imageId];
-                                });
                             } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                                 // TODO: AAA alert here
                             }];
@@ -723,6 +720,7 @@ typedef enum : NSUInteger {
             
             [data writeToFile:fileName atomically:YES];
             [[EUCDatabase sharedInstance] writePendingUploadOf:fileName withType:@"deployment_picture" andId:imageId];
+            [[EUCDatabase sharedInstance] consumePendingQueue];
             // TODO: AAA write to pending database
             
             //[EUCNetwork uploadImageData: data forResource:@"deployment_picture" withId:imageId];
@@ -799,6 +797,12 @@ typedef enum : NSUInteger {
             newImage.assetDate = [self.parser dateFromString:imageDictionary[@"image_date"]];;
             newImage.dimensions = CGSizeMake([imageDictionary[@"width"] floatValue], [imageDictionary[@"height"] floatValue]);
             newImage.filename = [EUCFileSystem fileNameForImageWithId:[imageDictionary[@"id"] integerValue]];
+            // if the file doesn't exist, download it
+            [EUCNetwork downloadImage:[NSString stringWithFormat:@"/file/image/%ld", (long) [imageDictionary[@"id"] integerValue]]
+                               toFile: newImage.filename
+                           completion:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+                               [self.bursts reloadData];
+                           }];
             [newBurst.images addObject:newImage];
         }
         [bursts addObject:newBurst];
@@ -811,12 +815,19 @@ typedef enum : NSUInteger {
     [self.addedImages removeAllObjects];
     
     NSArray * pictureArray = dictionary[@"deployment_picture"];
-    for (NSDictionary * pictureDictionary in pictureArray) {
-        EUCImage * image = [[EUCImage alloc] init];
-        image.filename = [EUCFileSystem fileNameForDeploymentPictureWithId:[pictureDictionary[@"id"] integerValue]];
-        [self.addedImages addObject:image];
+    if (![pictureArray isEqual:[NSNull null]]) {
+        for (NSDictionary * pictureDictionary in pictureArray) {
+            EUCImage * image = [[EUCImage alloc] init];
+            image.filename = [EUCFileSystem fileNameForDeploymentPictureWithId:[pictureDictionary[@"id"] integerValue]];
+            [EUCNetwork downloadImage:[NSString stringWithFormat:@"/file/deployment_picture/%ld", (long) [pictureDictionary[@"id"] integerValue]]
+                               toFile: image.filename
+                           completion:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+                               [self.deploymentImages reloadData];
+                           }];
+            [self.addedImages addObject:image];
+        }
+        [self.deploymentImages reloadData];
     }
-    [self.deploymentImages reloadData];
 }
 
 @end

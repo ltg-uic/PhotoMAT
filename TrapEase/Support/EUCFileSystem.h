@@ -19,5 +19,6 @@
 +(NSString *) fileNameForImageWithId: (NSInteger) imageId;
 +(NSString *) fileNameForDeploymentPictureWithId: (NSInteger) imageId ;
 +(void) makeImageDirIfNecessary;
++(BOOL) fileExists: (NSString *) fileName;
 
 @end

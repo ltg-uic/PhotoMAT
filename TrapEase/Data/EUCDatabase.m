@@ -8,6 +8,7 @@
 #import "EUCDatabase.h"
 #import "DDLog.h"
 #import "FMDatabase.h"
+#import "FMDatabaseQueue.h"
 #import "EUCNetwork.h"
 
 static EUCDatabase * database;
@@ -22,6 +23,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 @property (strong, nonatomic) FMDatabase * db;
 @property (strong, nonatomic) dispatch_queue_t pendingQueue;
 @property (assign, nonatomic) BOOL queueBeingConsumed;
+@property (strong, nonatomic) FMDatabaseQueue *dbq;
+
 
 @end
 
@@ -108,7 +111,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         }
     }
     
-    
+    //self.dbq = [FMDatabaseQueue databaseQueueWithPath:aPath];
+
 }
 
 #pragma mark - settings
@@ -203,7 +207,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
         [array addObject:row];
     }
-    
+    [rs close];
     return array;
 }
 
@@ -221,7 +225,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
         [array addObject:row];
     }
-    
+    [rs close];
     return array;
 }
 
@@ -239,7 +243,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         
         [array addObject:row];
     }
-    
+    [rs close];
     return array;
 }
 
@@ -418,7 +422,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         DDLogInfo(@"CONSUMING: %@ %@", resource, fileName);
         NSData * data = [NSData dataWithContentsOfFile:fileName];
         [EUCNetwork uploadImageData: data forResource:resource withId:imageId];
-
+        [rs close];
     }
     else {
         @synchronized(self) {

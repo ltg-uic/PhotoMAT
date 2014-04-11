@@ -64,4 +64,9 @@
     }
 }
 
++(BOOL)fileExists:(NSString *)fileName {
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    return [fileManager fileExistsAtPath:fileName];
+}
+
 @end
