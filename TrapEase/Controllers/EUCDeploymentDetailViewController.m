@@ -420,7 +420,8 @@ typedef enum : NSUInteger {
     [[EUCImageDisplayViewController alloc] initWithNibName:@"EUCImageDisplayViewController"
                                                     bundle:nil
                                            backgroundImage:image
-                                                  assetURL:self.selectedImage.url];
+                                                  assetURL:self.selectedImage.url
+     fileName:self.selectedImage.filename];
     
     [self presentViewController:display animated:NO completion:nil];
 
@@ -495,7 +496,8 @@ typedef enum : NSUInteger {
             [[EUCImageDisplayViewController alloc] initWithNibName:@"EUCImageDisplayViewController"
                                                             bundle:nil
                                                    backgroundImage:image
-                                                          assetURL:self.selectedImage.url];
+                                                          assetURL:self.selectedImage.url
+             fileName:self.selectedImage.filename];
             
             [self presentViewController:display animated:NO completion:nil];
 
