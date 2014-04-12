@@ -313,8 +313,10 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 //    [self clearTable:@"deployment_picture"];
     [self clearTable:@"deployment"];
     
-    for (NSDictionary * deployment in deployments) {
-        [self saveDeployment: deployment];
+    if (![deployments isEqual: [NSNull null]]) {
+        for (NSDictionary * deployment in deployments) {
+            [self saveDeployment: deployment];
+        }
     }
 }
 
