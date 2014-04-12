@@ -230,4 +230,72 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
     [uploadTask resume];
 }
 
+#pragma mark - backpacks
+
++(void)uploadImageData:(NSData *)data toRepo:(NSString *)repoURL completion:(EUCImageRepoPostBlock)completion {
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer]
+                                    multipartFormRequestWithMethod:@"POST"
+                                    URLString:repoURL
+                                    parameters:nil
+                                    constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                                        [formData appendPartWithFileData:data
+                                                                    name:@"file"
+                                                                fileName:@"filename.jpg"
+                                                                mimeType:@"image/jpeg"];
+                                    }
+                                    error:nil];
+    
+    NSProgress *progress = nil;
+
+    
+    NSURLSessionUploadTask *uploadTask = [network.sessionManager uploadTaskWithStreamedRequest:request
+                                                                                      progress:&progress
+                                                                             completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+
+                                                                                 if (error) {
+                                                                                     NSLog(@"Error: %@", error);
+                                                                                 } else {
+                                                                                     NSDictionary * obj = (NSDictionary *) responseObject;
+                                                                                     completion(obj[@"url"], obj[@"code"]);
+                                                                                 }
+                                                                                 
+
+                                                                                 
+                                                                             }];
+    
+    [uploadTask resume];
+}
+
+
++(void) getBackpack: (NSString *) backpackURL withSelector: (NSDictionary *) selector withSuccessBlock: (EUCGetSuccessBlock) successBlock failureBlock: (EUCGetFailureBlock) failureBlock {
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
+    
+    [network.sessionManager GET:backpackURL
+                     parameters:selector
+                        success:^(NSURLSessionDataTask *task, id responseObject) {
+                            NSArray * result = (NSArray *) responseObject;
+                            successBlock(result);
+                        }
+                        failure:^(NSURLSessionDataTask *task, NSError *error) {
+                            failureBlock([NSString stringWithFormat:@"Error: %@", error]);
+                        }];
+    
+}
+
+
++(void)putBackpack:(NSDictionary *)backpack toUrl:(NSString *)putURL successBlock: (EUCNetworkPUTSuccessBlock) successBlock failureBlock: (EUCNetworkPUTFailureBlock) failureBlock {
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
+    
+    
+    [network.sessionManager PUT:putURL
+                     parameters:backpack
+                        success:successBlock
+                        failure:failureBlock];
+    
+}
+
+
+
 @end

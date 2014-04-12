@@ -145,6 +145,35 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
 }
 
+-(NSString *)className {
+    NSDictionary * settings = self.settings;
+    NSString * sql = @"Select name from class where id=?";
+    FMResultSet * rs = [self.db executeQuery:sql, settings[@"classId"]];
+    if ([rs next]) {
+        NSString * result = [rs stringForColumnIndex:0];
+        [rs close];
+        return result;
+    }
+    [rs close];
+    return nil;
+}
+
+
+-(NSString *)groupName {
+    NSDictionary * settings = self.settings;
+    NSString * sql = @"Select first_name from person where id=?";
+    FMResultSet * rs = [self.db executeQuery:sql, settings[@"personId"]];
+    if ([rs next]) {
+        NSString * result = [rs stringForColumnIndex:0];
+        [rs close];
+        return result;
+    }
+    [rs close];
+    return nil;
+}
+
+
+
 #pragma mark - schools
 
 -(BOOL)hasSchools {
@@ -195,7 +224,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 -(NSArray *) schools {
     NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:8];
-    NSString * sql = @"select id, name from school order by name";
+    NSString * sql = @"select id, name from school order by id";
     FMResultSet * rs = [self.db executeQuery:sql];
     while ([rs next]) {
         NSInteger schoolId = [rs intForColumnIndex:0];

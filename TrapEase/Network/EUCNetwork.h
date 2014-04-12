@@ -29,9 +29,10 @@ typedef void(^EUCNetworkPOSTFailureBlock)(NSURLSessionDataTask *task, NSError *e
 typedef void(^EUCNetworkPUTSuccessBlock)(NSURLSessionDataTask *task, id responseObject);
 typedef void(^EUCNetworkPUTFailureBlock)(NSURLSessionDataTask *task, NSError *error);
 
-
-
 typedef void(^EUCDownloadTaskCompletionBlock)(NSURLResponse * response, NSURL * filePath, NSError * error);
+
+typedef void(^EUCImageRepoPostBlock)(NSString * url, NSString * errorCode);
+
 
 @interface EUCNetwork : NSObject
 
@@ -52,5 +53,11 @@ typedef void(^EUCDownloadTaskCompletionBlock)(NSURLResponse * response, NSURL * 
 +(void) uploadImageData: (NSData *) data forResource: (NSString *) resource withId: (NSInteger) resourceId;
 
 +(void) getDeploymentDetail: (NSInteger) deploymentId success: (EUCGetSuccessBlock) successBlock failure: (EUCGetFailureBlock) failureBlock;
+
++(void) uploadImageData: (NSData *) data toRepo: (NSString *) repoURL completion: (EUCImageRepoPostBlock) completion;
+
++(void) getBackpack: (NSString *) backpackURL withSelector: (NSDictionary *) selector withSuccessBlock: (EUCGetSuccessBlock) successBlock failureBlock: (EUCGetFailureBlock) failureBlock;
+
++(void) putBackpack: (NSDictionary *) backpack toUrl: (NSString *) putURL successBlock: (EUCNetworkPUTSuccessBlock) successBlock failureBlock: (EUCNetworkPUTFailureBlock) failureBlock ;
 
 @end

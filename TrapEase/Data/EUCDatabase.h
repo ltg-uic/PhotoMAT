@@ -14,7 +14,8 @@
 
 @property (readonly, nonatomic) FMDatabase * db;
 @property (strong, nonatomic) NSDictionary *settings;
-
+@property (readonly, nonatomic) NSString * className;
+@property (readonly, nonatomic) NSString * groupName;
 
 +(EUCDatabase *) sharedInstance;
 
@@ -35,5 +36,7 @@
 -(void) consumePendingQueue;
 
 -(void) onePendingDoneWithType:(NSString *)fileType andId:(NSInteger)imageId;
+
+
 
 @end
