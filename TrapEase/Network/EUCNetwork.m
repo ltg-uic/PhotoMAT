@@ -296,6 +296,16 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
     
 }
 
++(void)postBackpack:(NSDictionary *)backpack toUrl:(NSString *)postURL successBlock:(EUCNetworkSuccessBlock)successBlock failureBlock:(EUCNetworkFailureBlock)failureBlock {
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
 
+    [network.sessionManager POST:postURL
+                      parameters:backpack
+                         success:^(NSURLSessionDataTask *task, id responseObject) {
+                             successBlock(nil, responseObject);
+                         } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                             failureBlock(nil, error);
+                         }];
+}
 
 @end

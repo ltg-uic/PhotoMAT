@@ -10,6 +10,8 @@
                 <outlet property="imageView" destination="kaI-jI-WF8" id="NdE-D4-6ZA"/>
                 <outlet property="importButton" destination="yn1-9G-LK7" id="zgx-AK-wmU"/>
                 <outlet property="saveButton" destination="Ywf-X2-teu" id="4LU-go-CB3"/>
+                <outlet property="status" destination="8Ie-Ox-5Iq" id="FzO-G8-KaH"/>
+                <outlet property="toastView" destination="2Mv-Ac-wJs" id="vv0-kJ-nNp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -55,6 +57,18 @@
                         <action selector="clear:" destination="-1" eventType="touchUpInside" id="zD8-O2-rrh"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" id="2Mv-Ac-wJs">
+                    <rect key="frame" x="364" y="513" width="296" height="71"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8Ie-Ox-5Iq">
+                    <rect key="frame" x="253" y="603" width="519" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

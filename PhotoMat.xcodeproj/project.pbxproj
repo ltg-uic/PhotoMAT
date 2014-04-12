@@ -44,6 +44,7 @@
 		B43658EE18F18BF10017672E /* NSString+EUCStringExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658ED18F18BF10017672E /* NSString+EUCStringExtensions.m */; };
 		B43658F718F1B9000017672E /* EUCDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658F418F1B9000017672E /* EUCDatePickerViewController.m */; };
 		B43658F818F1B9000017672E /* EUCDatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43658F618F1B9000017672E /* EUCDatePickerViewController.xib */; };
+		B4521C4718F9BE67001F42AF /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4521C4618F9BE67001F42AF /* Toast+UIView.m */; };
 		B4D1EC3118BD729300E01EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3018BD729300E01EFE /* Foundation.framework */; };
 		B4D1EC3318BD729300E01EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */; };
 		B4D1EC3518BD729300E01EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3418BD729300E01EFE /* UIKit.framework */; };
@@ -204,6 +205,8 @@
 		B43658F418F1B9000017672E /* EUCDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCDatePickerViewController.m; path = Support/EUCDatePickerViewController.m; sourceTree = "<group>"; };
 		B43658F518F1B9000017672E /* EUCDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCDatePickerViewController.h; path = Support/EUCDatePickerViewController.h; sourceTree = "<group>"; };
 		B43658F618F1B9000017672E /* EUCDatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCDatePickerViewController.xib; path = Support/EUCDatePickerViewController.xib; sourceTree = "<group>"; };
+		B4521C4518F9BE67001F42AF /* Toast+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Toast+UIView.h"; sourceTree = "<group>"; };
+		B4521C4618F9BE67001F42AF /* Toast+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Toast+UIView.m"; sourceTree = "<group>"; };
 		B4D1EC2D18BD729300E01EFE /* PhotoMat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4D1EC3018BD729300E01EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -394,9 +397,27 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		B4521C4318F9BE67001F42AF /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				B4521C4418F9BE67001F42AF /* Toast */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		B4521C4418F9BE67001F42AF /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				B4521C4518F9BE67001F42AF /* Toast+UIView.h */,
+				B4521C4618F9BE67001F42AF /* Toast+UIView.m */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
 		B4D1EC2418BD729300E01EFE = {
 			isa = PBXGroup;
 			children = (
+				B4521C4318F9BE67001F42AF /* Vendor */,
 				B4D1EC3618BD729300E01EFE /* TrapEase */,
 				B4D1EC4F18BD729300E01EFE /* TrapEaseTests */,
 				B4D1EC2F18BD729300E01EFE /* Frameworks */,
@@ -884,6 +905,7 @@
 				B4E6BEA418E23D8200AC9D84 /* EUCConnectingViewController.m in Sources */,
 				702ACBC218F756760001C9D7 /* EUCCloudViewController.m in Sources */,
 				7080F7BB18F743210087A66F /* TagView.m in Sources */,
+				B4521C4718F9BE67001F42AF /* Toast+UIView.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
 				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,
 				7080F7BC18F743210087A66F /* TimelineItemSubView.m in Sources */,

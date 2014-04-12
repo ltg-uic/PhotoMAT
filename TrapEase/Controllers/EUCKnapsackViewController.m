@@ -10,6 +10,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "EUCDatabase.h"
 #import "EUCNetwork.h"
+#import "Toast+UIView.h"
 
 static BOOL DEV = YES;
 
@@ -22,6 +23,8 @@ static BOOL DEV = YES;
 @property (strong, nonatomic) UIPopoverController *popover;
 @property (strong, nonatomic) ALAssetsLibrary *assetsLibrary;
 @property (strong, nonatomic) NSURL *assetURL;
+@property (weak, nonatomic) IBOutlet UIView *toastView;
+@property (weak, nonatomic) IBOutlet UILabel *status;
 
 
 @end
@@ -77,6 +80,8 @@ static BOOL DEV = YES;
         self.clearButton.hidden = YES;
     }
     
+    self.clearButton.hidden = YES;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -101,20 +106,20 @@ static BOOL DEV = YES;
 - (IBAction)save:(id)sender {
     // get the backpack
     
+    self.saveButton.enabled = NO;
+    [self.toastView makeToastActivity];
+    
     EUCDatabase * db = [EUCDatabase sharedInstance];
     NSString * className = [db className];
     NSString * groupName = [db groupName];
     
     NSString * backpackURL;
-    NSString * putURLPrefix;
     NSDictionary * selector = @{@"selector": [NSString stringWithFormat:@"{\"owner\": \"%@\"}", groupName]};
     if (DEV) {
-        backpackURL = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/dev-safari-%@/backpacks?selector=%%7B\"owner\"%%3A\"%@\"%%7D", className, groupName];
-        putURLPrefix = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/dev-safari-%@/backpacks", className];
+        backpackURL = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/dev-safari-%@/backpacks", className];
     }
     else {
-        backpackURL = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/safari-%@/backpacks?selector=%%7B\"owner\"%%3A:\"%@\"%%7D", className, groupName];
-        putURLPrefix = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/safari-%@/backpacks", className];
+        backpackURL = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/safari-%@/backpacks", className];
     }
     
     NSString * repoURL = @"http://pikachu.badger.encorelab.org/";
@@ -130,15 +135,11 @@ static BOOL DEV = YES;
                                 NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:(unsigned int)rep.size error:nil];
                                 data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
 
+                                self.status.text = @"Uploading image...";
                                 [EUCNetwork uploadImageData:data toRepo:repoURL completion:^(NSString *payloadURL, NSString *errorCode) {
                                     if (errorCode) {
-                                        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                             message:errorCode
-                                                                                            delegate:nil
-                                                                                   cancelButtonTitle:@"OK"
-                                                                                   otherButtonTitles: nil];
-                                        
-                                        [alertView show];
+                                        [self alertWithTitle:@"Error" message:errorCode];
+                                        [self activityStopped];
                                     }
                                     else {
                                         NSLog(@"URL Is %@", payloadURL);
@@ -149,7 +150,8 @@ static BOOL DEV = YES;
                                         // else
                                         //    add to content
                                         // PUT to backpack url
-                                        [EUCNetwork getBackpack:putURLPrefix
+                                        self.status.text = @"Fetching backpack...";
+                                        [EUCNetwork getBackpack:backpackURL
                                                    withSelector: selector
                                                withSuccessBlock:^(NSArray *objects) {
                                                    if ([objects count]) {
@@ -167,40 +169,47 @@ static BOOL DEV = YES;
                                                        backpack[@"content"] = contents;
                                                        
                                                        [contents addObject:[self backpackEntryForUrl:payloadURL]];
-                                                       NSString * putURL = [NSString stringWithFormat:@"%@/%@", putURLPrefix, oid];
+                                                       NSString * putURL = [NSString stringWithFormat:@"%@/%@", backpackURL, oid];
                                                        
+                                                       self.status.text = @"Adding image to backpack...";
                                                        [EUCNetwork putBackpack:backpack
                                                                          toUrl:putURL
                                                                   successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-                                                                      UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Success"
-                                                                                                                           message:@"The picture has been added to your backpack"
-                                                                                                                          delegate:nil
-                                                                                                                 cancelButtonTitle:@"OK"
-                                                                                                                 otherButtonTitles: nil];
-                                                                      
-                                                                      [alertView show];
+                                                                      [self alertWithTitle:@"Success" message:@"The picture has been added to your backpack"];
+                                                                      [self activityStopped];
+                                                                      self.saveButton.hidden = YES;
                                                                   } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
-                                                                      UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                                                           message:[error localizedDescription]
-                                                                                                                          delegate:nil
-                                                                                                                 cancelButtonTitle:@"OK"
-                                                                                                                 otherButtonTitles: nil];
-                                                                      
-                                                                      [alertView show];
+                                                                      [self alertWithTitle:@"Error" message:[error localizedDescription]];
+                                                                      [self activityStopped];
                                                                   }];
                                                    }
                                                    else {
                                                        // create backpack dictionary
+                                                       NSMutableDictionary * backpack = [[NSMutableDictionary alloc] init];
+                                                       backpack[@"owner"] = groupName;
+                                                       backpack[@"owner"] = @"aijaztest3";
+                                                       NSMutableArray * contents = [NSMutableArray arrayWithCapacity:1];
+                                                       [contents addObject:[self backpackEntryForUrl:payloadURL]];
+                                                       backpack[@"content"] = contents;
+                                                       
+                                                       self.status.text = @"Uploading new backpack...";
+                                                       [EUCNetwork postBackpack:backpack
+                                                                          toUrl:backpackURL
+                                                                   successBlock:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                                       NSLog(@"Got %@", responseObject);
+                                                                       [self alertWithTitle:@"Success" message:@"The picture has been added to your backpack"];
+                                                                       [self activityStopped];
+                                                                       self.saveButton.hidden = YES;
+                                                                   } failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                       [self alertWithTitle:@"Error" message:[error localizedDescription]];
+                                                                       [self activityStopped];
+                                                                   }];
+                                                       
                                                    }
                                                }
                                                    failureBlock:^(NSString *reason) {
-                                                       UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                                                                            message:reason
-                                                                                                           delegate:nil
-                                                                                                  cancelButtonTitle:@"OK"
-                                                                                                  otherButtonTitles: nil];
-                                                       
-                                                       [alertView show];
+                                                       [self alertWithTitle:@"Error" message:reason];
+                                                       [self activityStopped];
 
                                                    }];
                                     }
@@ -208,18 +217,43 @@ static BOOL DEV = YES;
                             }
                         }
                        failureBlock:^(NSError *error) {
-                           NSLog(@"ERRor: %@", error);
+                           NSLog(@"Error: %@", [error localizedDescription]);
                        }
      ];
 
 
 }
 
+-(void) activityStopped {
+    self.saveButton.enabled = YES;
+    [self.toastView hideToastActivity];
+    self.status.text = @"";
+}
+
+-(void) alertWithTitle: (NSString *) title message: (NSString *) message {
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:title
+                                                         message:message
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles: nil];
+    
+    [alertView show];
+}
+
 -(NSDictionary *) backpackEntryForUrl: (NSString *) url {
+    NSDate* datetime = [NSDate date];
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:SS.SSS'Z'"];
+    NSString* dateTimeInIsoFormatForZuluTimeZone = [dateFormatter stringFromDate:datetime];
+
     return @{@"item_type": @"photomat_image",
-             @"image_url": [NSString stringWithFormat:@"http://pikachu.badger.encorelab.org/%@", url]
+             @"image_url": [NSString stringWithFormat:@"http://pikachu.badger.encorelab.org/%@", url],
+             @"created_at": dateTimeInIsoFormatForZuluTimeZone
              };
 }
+
+
 
 - (IBAction)import:(id)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Select Source", @"selectSource")
@@ -311,7 +345,7 @@ static BOOL DEV = YES;
     }
     
     self.saveButton.hidden = NO;
-    self.clearButton.hidden = NO;
+//    self.clearButton.hidden = NO;
     self.imageView.image = selectedImage;
     
     if (self.picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
