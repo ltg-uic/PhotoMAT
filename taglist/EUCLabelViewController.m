@@ -19,9 +19,10 @@
 #import "EUCDeploymentDetailViewController.h"
 #import "EUCBurst.h"
 #import "EUCImage.h"
+#import "UIUpdateDelegate.h"
 
 
-@interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone> {
+@interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone, UIUpdateDelegate> {
     NSString *lastTagName;
     NSMutableArray *tag_array;
     NSMutableArray *photoTags;
@@ -443,7 +444,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 - (IBAction)swipeImagePrevious:(id)sender {
 
-/*
+
     burstIndex--;
 
     //we have another
@@ -465,7 +466,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
     [self removeAllTagsFromDragOverlay];
- */
+
 }
 
 - (IBAction)swipeImageNext:(id)sender {
@@ -524,5 +525,11 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         [btn setSelected:NO];
     }
 }
+
+- (void)shouldUpdateUIWithBursts:(NSMutableArray *) updatedBursts {
+
+    NSLog(@"this shit should update");
+}
+
 
 @end

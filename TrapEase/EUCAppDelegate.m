@@ -91,8 +91,10 @@
     dsvc.viewControllers = @[master, self.detail];
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
-    self.homeViewController.viewControllers = @[user, dsvc, label, notes, analyze, cloud, settings, photos];
-    
+    self.homeViewController.viewControllers = @[user, dsvc, label, analyze, notes, cloud, settings, photos];
+
+    [[[[self.homeViewController.tabBarController tabBar]items]objectAtIndex:2]setEnabled:NO];
+    [[[[self.homeViewController.tabBarController tabBar]items]objectAtIndex:3]setEnabled:NO];
 //    self.tabBarVCDelegate = [[EUCTabBarViewControllerDelegate alloc] init];
 ////    self.tabBarVCDelegate.snapshot = snapshot;
 //    self.tabBarVCDelegate.photos = photos;
