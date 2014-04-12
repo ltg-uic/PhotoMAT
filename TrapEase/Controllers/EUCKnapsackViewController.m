@@ -70,15 +70,6 @@
         self.saveButton.hidden = YES;
         self.clearButton.hidden = YES;
     }
-    UIColor * greyColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
-
-    self.imageView.layer.borderColor = [greyColor CGColor];
-    self.imageView.layer.cornerRadius = 8;
-    self.imageView.layer.borderWidth = 1;
-    
-    self.textView.layer.borderColor = [greyColor CGColor];
-    self.textView.layer.cornerRadius = 8;
-    self.textView.layer.borderWidth = 1;
     
 }
 
@@ -89,6 +80,16 @@
 }
 
 - (IBAction)clear:(id)sender {
+
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are You Sure?", @"Are You Sure?")
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Never mind"
+                                               destructiveButtonTitle:@"Yes. Clear the image"
+                                                    otherButtonTitles:
+                                  nil];
+    actionSheet.tag = 1;
+    [actionSheet showFromRect:[(UIButton *)sender frame] inView:self.view animated:YES];
+
 }
 
 - (IBAction)save:(id)sender {
@@ -163,6 +164,13 @@
                                         animated:YES];
         }
     }
+    else if (actionSheet.tag == 1) {
+        if (buttonIndex == 0) {
+            self.imageView.image = nil;
+            self.clearButton.hidden = YES;
+            self.saveButton.hidden = YES;
+        }
+    }
 }
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -175,6 +183,10 @@
     if (!selectedImage) {
         return;
     }
+    
+    self.saveButton.hidden = NO;
+    self.clearButton.hidden = NO;
+    self.imageView.image = selectedImage;
     
 //    if (self.picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
 //        // from http://stackoverflow.com/questions/10166575/photo-taken-with-camera-does-not-contain-any-alasset-metadata≥

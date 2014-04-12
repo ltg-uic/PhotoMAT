@@ -10,7 +10,6 @@
                 <outlet property="imageView" destination="kaI-jI-WF8" id="NdE-D4-6ZA"/>
                 <outlet property="importButton" destination="yn1-9G-LK7" id="zgx-AK-wmU"/>
                 <outlet property="saveButton" destination="Ywf-X2-teu" id="4LU-go-CB3"/>
-                <outlet property="textView" destination="3qR-TP-0s7" id="Ljp-hA-KgP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,13 +22,6 @@
                     <rect key="frame" x="129" y="41" width="766" height="464"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 </imageView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="3qR-TP-0s7">
-                    <rect key="frame" x="129" y="518" width="766" height="92"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="15"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yn1-9G-LK7">
                     <rect key="frame" x="796" y="632" width="99" height="36"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
