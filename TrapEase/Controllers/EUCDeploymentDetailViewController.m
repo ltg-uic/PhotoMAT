@@ -30,7 +30,9 @@ typedef enum : NSUInteger {
     editingActual
 } EUCDateEditingMode;
 
-@interface EUCDeploymentDetailViewController ()
+@interface EUCDeploymentDetailViewController () {
+    UIPopoverController *imagePopoverController;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *shortName;
 @property (weak, nonatomic) IBOutlet UITextView *notes;
@@ -396,7 +398,10 @@ typedef enum : NSUInteger {
 #pragma mark - UICollectionViewDelegate
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+
+    EUCDeploymentImageCell *imageDeployCell = [self collectionView:collectionView cellForItemAtIndexPath:indexPath];
+
+
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Image", @"image")
                                                              delegate:self
                                                     cancelButtonTitle:nil
@@ -427,8 +432,13 @@ typedef enum : NSUInteger {
                                            backgroundImage:image
                                                   assetURL:self.selectedImage.url
      fileName:self.selectedImage.filename];
-    
-    [self presentViewController:display animated:NO completion:nil];
+
+    imagePopoverController = [[UIPopoverController alloc]
+            initWithContentViewController:display];
+
+    [imagePopoverController setPopoverContentSize:self.selectedImage.dimensions animated:true];
+
+    [imagePopoverController presentPopoverFromRect:imageDeployCell.frame inView:_bursts  permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 
     
 }
@@ -504,7 +514,8 @@ typedef enum : NSUInteger {
                                                           assetURL:self.selectedImage.url
              fileName:self.selectedImage.filename];
             
-            [self presentViewController:display animated:NO completion:nil];
+            
+
 
         }
     }
