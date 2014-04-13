@@ -10,6 +10,7 @@
                 <outlet property="addBurstsButton" destination="wrP-6a-MYn" id="p1C-JW-yKY"/>
                 <outlet property="addDeploymentImageButton" destination="XQd-94-aWf" id="dvP-jn-ok6"/>
                 <outlet property="bursts" destination="oy6-PS-gjP" id="wax-X7-LhL"/>
+                <outlet property="cancelButton" destination="Zfc-Vj-PoV" id="BZW-XI-mAs"/>
                 <outlet property="deploymentIdLabel" destination="ljs-HU-nhh" id="SHL-h2-baI"/>
                 <outlet property="deploymentImages" destination="CpW-sc-Ja7" id="vMY-0e-LKD"/>
                 <outlet property="doneButton" destination="cf3-iW-F94" id="MO0-BR-OeP"/>

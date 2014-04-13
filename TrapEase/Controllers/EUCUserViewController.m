@@ -23,6 +23,11 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *visibility;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (weak, nonatomic) IBOutlet UILabel *heading;
+@property (weak, nonatomic) IBOutlet UILabel *schoolLabel;
+@property (weak, nonatomic) IBOutlet UILabel *classLabel;
+@property (weak, nonatomic) IBOutlet UILabel *groupLabel;
+@property (weak, nonatomic) IBOutlet UIButton *refreshButton;
 
 - (IBAction)refresh:(id)sender;
 - (IBAction)done:(id)sender;
@@ -59,12 +64,7 @@
     self.classRoom.delegate = self;
     self.group.dataSource = self;
     self.group.delegate = self;
-    if ([self loggedIn]) {
-        [self.loginButton setTitle:@"Log out" forState:UIControlStateNormal];
-    }
-    else {
-        [self.loginButton setTitle:@"Log in" forState:UIControlStateNormal];
-    }
+    [self refreshViewForLoggedIn:[self loggedIn]];
 
     [self.visibility addTarget:self
                          action:@selector(done:)
@@ -273,6 +273,7 @@
         [self.loginButton setTitle:@"Log out" forState:UIControlStateNormal];
 
     }
+    [self refreshViewForLoggedIn:[self loggedIn]];
 }
 
 -(BOOL) loggedIn {
@@ -284,5 +285,32 @@
     return YES;
 }
 
+-(void) refreshViewForLoggedIn: (BOOL) loggedIn {
+    if (loggedIn) {
+        [self.loginButton setTitle:@"Log out" forState:UIControlStateNormal];
+        self.school.hidden = YES;
+        self.classRoom.hidden = YES;
+        self.group.hidden = YES;
+        self.schoolLabel.hidden = YES;
+        self.classLabel.hidden = YES;
+        self.groupLabel.hidden = YES;
+        self.refreshButton.hidden = YES;
+        EUCDatabase * db = [EUCDatabase sharedInstance];
+        NSString * groupName = db.groupName;
+        NSString * className = db.className;
+        self.heading.text = [NSString stringWithFormat:@"Currently logged in as %@ from %@", groupName, className];
+    }
+    else {
+        [self.loginButton setTitle:@"Log in" forState:UIControlStateNormal];
+        self.school.hidden = NO;
+        self.classRoom.hidden = NO;
+        self.group.hidden = NO;
+        self.schoolLabel.hidden = NO;
+        self.classLabel.hidden = NO;
+        self.groupLabel.hidden = NO;
+        self.refreshButton.hidden = NO;
+        self.heading.text = @"Select Your Group";
+    }
+}
 
 @end

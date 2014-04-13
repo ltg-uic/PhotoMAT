@@ -32,6 +32,13 @@
     if ([settings[@"personId"] isEqualToNumber:@0]) {
         return NO;
     }
+    
+    if (viewController == self.snapshot) {
+        UIImage * image = [EUCImageUtilities snapshotForWindow:self.window];
+        EUCKnapsackViewController * snapshot = (EUCKnapsackViewController *) self.snapshot;
+        snapshot.imageView.image = image;
+    }
+
     return YES;
 }
 
