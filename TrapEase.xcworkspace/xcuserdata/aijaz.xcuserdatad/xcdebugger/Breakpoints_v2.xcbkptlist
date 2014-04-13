@@ -90,12 +90,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrapEase/Controllers/EUCKnapsackViewController.m"
-            timestampString = "419025260.496154"
+            timestampString = "419059971.237575"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "-save:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TrapEase/Controllers/EUCDeploymentDetailViewController.m"
+            timestampString = "419061965.34947"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "887"
+            endingLineNumber = "887"
+            landmarkName = "-download:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

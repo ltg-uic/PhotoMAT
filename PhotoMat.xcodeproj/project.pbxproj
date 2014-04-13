@@ -45,6 +45,7 @@
 		B43658F718F1B9000017672E /* EUCDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658F418F1B9000017672E /* EUCDatePickerViewController.m */; };
 		B43658F818F1B9000017672E /* EUCDatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B43658F618F1B9000017672E /* EUCDatePickerViewController.xib */; };
 		B4521C4718F9BE67001F42AF /* Toast+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = B4521C4618F9BE67001F42AF /* Toast+UIView.m */; };
+		B4521C4A18FA54B1001F42AF /* EUCTimeUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B4521C4918FA54B1001F42AF /* EUCTimeUtilities.m */; };
 		B4D1EC3118BD729300E01EFE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3018BD729300E01EFE /* Foundation.framework */; };
 		B4D1EC3318BD729300E01EFE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */; };
 		B4D1EC3518BD729300E01EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3418BD729300E01EFE /* UIKit.framework */; };
@@ -207,6 +208,8 @@
 		B43658F618F1B9000017672E /* EUCDatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCDatePickerViewController.xib; path = Support/EUCDatePickerViewController.xib; sourceTree = "<group>"; };
 		B4521C4518F9BE67001F42AF /* Toast+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Toast+UIView.h"; sourceTree = "<group>"; };
 		B4521C4618F9BE67001F42AF /* Toast+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Toast+UIView.m"; sourceTree = "<group>"; };
+		B4521C4818FA54B1001F42AF /* EUCTimeUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCTimeUtilities.h; path = Support/EUCTimeUtilities.h; sourceTree = "<group>"; };
+		B4521C4918FA54B1001F42AF /* EUCTimeUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCTimeUtilities.m; path = Support/EUCTimeUtilities.m; sourceTree = "<group>"; };
 		B4D1EC2D18BD729300E01EFE /* PhotoMat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4D1EC3018BD729300E01EFE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B4D1EC3218BD729300E01EFE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -567,6 +570,8 @@
 				B43658DF18E5213F0017672E /* EUCImageUtilities.m */,
 				B43658EC18F18BF10017672E /* NSString+EUCStringExtensions.h */,
 				B43658ED18F18BF10017672E /* NSString+EUCStringExtensions.m */,
+				B4521C4818FA54B1001F42AF /* EUCTimeUtilities.h */,
+				B4521C4918FA54B1001F42AF /* EUCTimeUtilities.m */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -915,6 +920,7 @@
 				B43658E418E5356B0017672E /* EUCDeploymentImage.m in Sources */,
 				B43658DB18E4E4200017672E /* EUCDeploymentImageCell.m in Sources */,
 				B4E6BE6118DFB77B00AC9D84 /* EUCNetwork.m in Sources */,
+				B4521C4A18FA54B1001F42AF /* EUCTimeUtilities.m in Sources */,
 				B4E6BE7818DFD0DD00AC9D84 /* EUCDeploymentSplitViewController.m in Sources */,
 				7080F7B718F743210087A66F /* EUCLabelViewController.m in Sources */,
 				B4116D9918F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m in Sources */,
