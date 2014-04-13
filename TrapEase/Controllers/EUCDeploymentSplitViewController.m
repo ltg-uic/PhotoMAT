@@ -22,7 +22,6 @@
         self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Sets", "Sets")
                                                         image:[UIImage imageNamed:@"deployments.png"]
                                                 selectedImage:nil];
-        self.delegate = self;
     }
     return self;
 }
@@ -31,6 +30,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.delegate = self;
+
 }
 
 - (void)didReceiveMemoryWarning
