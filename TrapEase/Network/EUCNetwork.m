@@ -308,4 +308,15 @@ static NSString * baseUrl = @"http://trap.euclidsoftware.com";
                          }];
 }
 
++(void)sendSafari:(NSDictionary *)body toUrl:(NSString *)url successBlock:(EUCNetworkSuccessBlock)successBlock failureBlock:(EUCNetworkFailureBlock)failureBlock {
+    EUCNetwork * network = [EUCNetwork sharedNetwork];
+    
+    [network.sessionManager POST:url
+                      parameters:body
+                         success:^(NSURLSessionDataTask *task, id responseObject) {
+                             successBlock(nil, responseObject);
+                         } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                             failureBlock(nil, error);
+                         }];
+}
 @end

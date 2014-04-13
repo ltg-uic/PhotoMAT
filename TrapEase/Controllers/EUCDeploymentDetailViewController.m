@@ -19,6 +19,7 @@
 #import "EUCNetwork.h"
 #import "DDLog.h"
 #import "EUCFileSystem.h"
+#import "EUCTimeUtilities.h"
 
 CGFloat defaultDeploymentWideness = 96.0/64.0;
 
@@ -531,6 +532,45 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark - Upload Deployment
+-(void) sendSafari: (NSInteger) deploymentId {
+    // http://drowsy.badger.encorelab.org/safari-ben/safari
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    NSString * className = [db className];
+    NSString * groupName = [db groupName];
+    
+    BOOL DEV = YES;
+    
+    NSString * safariURL;
+    if (DEV) {
+        safariURL = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/dev-safari-%@/safari", className];
+    }
+    else {
+        safariURL = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/safari-%@/safari", className];
+    }
+    
+    NSDictionary * body = @{@"_id": @(deploymentId),
+                            @"created_at": [EUCTimeUtilities currentTimeInZulu],
+                            @"name": [NSString stringWithFormat:@"%ld-%@", deploymentId, self.shortName.text],
+                            @"camera_trap_number": @([self.trapNumber.text integerValue]),
+                            @"group": groupName
+                            };
+    
+    [EUCNetwork sendSafari:body
+                     toUrl:safariURL
+              successBlock:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  // do nothing
+              } failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                       message:[NSString stringWithFormat:@"Could not post safari: %@", [error localizedDescription]]
+                                                                      delegate:nil
+                                                             cancelButtonTitle:@"OK"
+                                                             otherButtonTitles: nil];
+                  
+                  [alertView show];
+              }];
+
+}
+
 -(void) uploadDeployment {
     NSDictionary * settings = [[EUCDatabase sharedInstance] settings];
     NSInteger personId = [settings[@"personId"] integerValue];
@@ -559,6 +599,7 @@ typedef enum : NSUInteger {
                                                 [self dismissViewControllerAnimated:YES completion:nil];
                                                 [self uploadBurstsToDeploymentNumber:newId];
                                                 [self uploadImagesToDeploymentNumber:newId];
+                                                [self sendSafari: newId];
                                             } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                                                 DDLogInfo(@"Put failed");
                                             }];
