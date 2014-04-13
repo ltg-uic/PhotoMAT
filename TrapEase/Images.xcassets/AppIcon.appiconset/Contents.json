@@ -21,6 +21,18 @@
       "scale" : "2x"
     },
     {
+      "size" : "72x72",
+      "idiom" : "ipad",
+      "filename" : "app_Icon.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "72x72",
+      "idiom" : "ipad",
+      "filename" : "app_Icon@2x.png",
+      "scale" : "2x"
+    },
+    {
       "idiom" : "ipad",
       "size" : "76x76",
       "scale" : "1x"

@@ -730,9 +730,9 @@
 		B4D1EC2518BD729300E01EFE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = EUC;
+				CLASSPREFIX = "";
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = "Euclid Software, LLC";
+				ORGANIZATIONNAME = "Learning Technologies Group";
 				TargetAttributes = {
 					B4D1EC2C18BD729300E01EFE = {
 						DevelopmentTeam = F554V774C5;
@@ -1048,13 +1048,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ayesha Ansari (GSN6YH3F5B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ayesha Ansari (GSN6YH3F5B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrapEase/PhotoMat-Prefix.pch";
 				INFOPLIST_FILE = "TrapEase/PhotoMat-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = PhotoMat;
-				PROVISIONING_PROFILE = "E71CD2D3-270E-4786-8B67-502FD168DA45";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1066,13 +1067,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ayesha Ansari (GSN6YH3F5B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ayesha Ansari (GSN6YH3F5B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrapEase/PhotoMat-Prefix.pch";
 				INFOPLIST_FILE = "TrapEase/PhotoMat-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = PhotoMat;
-				PROVISIONING_PROFILE = "E71CD2D3-270E-4786-8B67-502FD168DA45";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
