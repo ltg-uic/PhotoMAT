@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrapEase/Controllers/EUCDeploymentDetailViewController.m"
-            timestampString = "419063392.149016"
+            timestampString = "419101175.442481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "928"
-            endingLineNumber = "928"
+            startingLineNumber = "938"
+            endingLineNumber = "938"
             landmarkName = "-download:"
             landmarkType = "5">
          </BreakpointContent>

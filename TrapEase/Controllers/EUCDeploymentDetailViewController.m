@@ -52,6 +52,7 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *downloadActivityIndicator;
 @property (weak, nonatomic) IBOutlet UIProgressView *downloadProgressView;
 @property (weak, nonatomic) IBOutlet UILabel *downloadStatus;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 
 
@@ -192,6 +193,15 @@ typedef enum : NSUInteger {
 -(void) setUpdateMode:(BOOL)updateMode {
     _updateMode = updateMode;
     self.addBurstsButton.hidden = updateMode;
+    
+    self.doneButton.hidden = updateMode;
+    self.cancelButton.hidden = updateMode;
+    self.addDeploymentImageButton.hidden = updateMode;
+    self.shortName.enabled = !updateMode;
+    self.notes.editable = !updateMode;
+    self.trapNumber.enabled = !updateMode;
+    self.actualButton.enabled = !updateMode;
+
 }
 
 - (IBAction)addImage:(id)sender {
