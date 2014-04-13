@@ -436,9 +436,9 @@ typedef enum : NSUInteger {
     imagePopoverController = [[UIPopoverController alloc]
             initWithContentViewController:display];
 
-    [imagePopoverController setPopoverContentSize:self.selectedImage.dimensions animated:true];
+    [imagePopoverController setPopoverContentSize:display.view.frame.size animated:true];
 
-    [imagePopoverController presentPopoverFromRect:imageDeployCell.frame inView:_bursts  permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [imagePopoverController presentPopoverFromRect:imageDeployCell.frame inView:_bursts  permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 
     
 }

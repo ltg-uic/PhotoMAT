@@ -7,6 +7,7 @@
 //
 
 #import "EUCNotesViewController.h"
+#import "EUCDatabase.h"
 
 @interface EUCNotesViewController ()
 
@@ -32,7 +33,19 @@
 {
     [super viewDidLoad];
     _webView.delegate = self;
-    [self loadURL:[NSURL URLWithString:HOME_URL]];
+
+
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    NSString * groupName = db.groupName;
+    NSString * className = db.className;
+
+
+    NSString *fullURL = [NSString stringWithFormat:@"http://safari.encorelab.org/mobile/mobile.html?runId=%@&username=%@", @"test", @"yeah"];
+
+    NSURL *url = [NSURL URLWithString:fullURL];
+
+
+    [self loadURL:url];
 }
 
 - (void)didReceiveMemoryWarning
