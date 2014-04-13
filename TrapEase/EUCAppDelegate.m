@@ -95,11 +95,11 @@
 
     [[[[self.homeViewController.tabBarController tabBar]items]objectAtIndex:2]setEnabled:NO];
     [[[[self.homeViewController.tabBarController tabBar]items]objectAtIndex:3]setEnabled:NO];
-//    self.tabBarVCDelegate = [[EUCTabBarViewControllerDelegate alloc] init];
-////    self.tabBarVCDelegate.snapshot = snapshot;
-//    self.tabBarVCDelegate.photos = photos;
-//    self.homeViewController.delegate = self.tabBarVCDelegate;
-//    self.tabBarVCDelegate.window = self.window;
+    self.tabBarVCDelegate = [[EUCTabBarViewControllerDelegate alloc] init];
+//    self.tabBarVCDelegate.snapshot = snapshot;
+    self.tabBarVCDelegate.photos = photos;
+    self.homeViewController.delegate = self.tabBarVCDelegate;
+    self.tabBarVCDelegate.window = self.window;
     
     
     user.visibilityDelegate = master;
