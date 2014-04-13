@@ -19,6 +19,7 @@
 #import "EUCNetwork.h"
 #import "DDLog.h"
 #import "EUCFileSystem.h"
+#import "EUCTimeUtilities.h"
 
 CGFloat defaultDeploymentWideness = 96.0/64.0;
 
@@ -46,6 +47,12 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UITextField *trapNumber;
 @property (weak, nonatomic) IBOutlet UIButton *nominalButton;
 @property (weak, nonatomic) IBOutlet UIButton *actualButton;
+@property (weak, nonatomic) IBOutlet UILabel *deploymentIdLabel;
+@property (weak, nonatomic) IBOutlet UIButton *downloadButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *downloadActivityIndicator;
+@property (weak, nonatomic) IBOutlet UIProgressView *downloadProgressView;
+@property (weak, nonatomic) IBOutlet UILabel *downloadStatus;
+
 
 
 
@@ -72,6 +79,9 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSMutableArray *addedImages;
 @property (strong, nonatomic) NSMutableArray *burstImages;
 
+@property (assign, nonatomic) NSInteger numberToDownload;
+@property (assign, nonatomic) NSInteger numberDownloaded;
+
 
 - (IBAction)addImage:(id)sender;
 - (IBAction)addBursts:(id)sender;
@@ -79,6 +89,7 @@ typedef enum : NSUInteger {
 - (IBAction)enterNominal:(id)sender;
 - (IBAction)enterActual:(id)sender;
 - (IBAction)cancel:(id)sender;
+- (IBAction)download:(id)sender;
 
 @end
 
@@ -361,24 +372,8 @@ typedef enum : NSUInteger {
         }];
     }
     else {
-        UIImage * image = [UIImage imageWithContentsOfFile:imageToBeDisplayed.filename];
-        CGFloat wideness = 1.0*image.size.width/image.size.height;
-        CGSize size;
-        
-        if (wideness > defaultDeploymentWideness) {
-            size.width = 96;
-            // width - height
-            // 314
-            size.height = 96/wideness;
-        }
-        else {
-            size.height = 64;
-            // width - height
-            //         226
-            size.width = 64 * wideness;
-        }
-        UIImage * resizedImage = [EUCImageUtilities imageWithImage:image scaledToSize:size];
-        cell.imageView.image = resizedImage;
+        UIImage * image = [UIImage imageWithContentsOfFile:[self thumbnailFileNameForFile: imageToBeDisplayed.filename]];
+        cell.imageView.image = image;
     }
     
     
@@ -537,6 +532,45 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark - Upload Deployment
+-(void) sendSafari: (NSInteger) deploymentId {
+    // http://drowsy.badger.encorelab.org/safari-ben/safari
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    NSString * className = [db className];
+    NSString * groupName = [db groupName];
+    
+    BOOL DEV = YES;
+    
+    NSString * safariURL;
+    if (DEV) {
+        safariURL = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/dev-safari-%@/safari", className];
+    }
+    else {
+        safariURL = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/safari-%@/safari", className];
+    }
+    
+    NSDictionary * body = @{@"_id": @(deploymentId),
+                            @"created_at": [EUCTimeUtilities currentTimeInZulu],
+                            @"name": [NSString stringWithFormat:@"%ld-%@", deploymentId, self.shortName.text],
+                            @"camera_trap_number": @([self.trapNumber.text integerValue]),
+                            @"group": groupName
+                            };
+    
+    [EUCNetwork sendSafari:body
+                     toUrl:safariURL
+              successBlock:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  // do nothing
+              } failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                       message:[NSString stringWithFormat:@"Could not post safari: %@", [error localizedDescription]]
+                                                                      delegate:nil
+                                                             cancelButtonTitle:@"OK"
+                                                             otherButtonTitles: nil];
+                  
+                  [alertView show];
+              }];
+
+}
+
 -(void) uploadDeployment {
     NSDictionary * settings = [[EUCDatabase sharedInstance] settings];
     NSInteger personId = [settings[@"personId"] integerValue];
@@ -565,6 +599,7 @@ typedef enum : NSUInteger {
                                                 [self dismissViewControllerAnimated:YES completion:nil];
                                                 [self uploadBurstsToDeploymentNumber:newId];
                                                 [self uploadImagesToDeploymentNumber:newId];
+                                                [self sendSafari: newId];
                                             } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                                                 DDLogInfo(@"Put failed");
                                             }];
@@ -646,6 +681,25 @@ typedef enum : NSUInteger {
              }];
 }
 
+-(void) resizeFileNamed:(NSString *) fileName fromSize: (CGSize) origSize {
+    CGFloat wideness = 1.0*origSize.width/origSize.height;
+    CGSize newSize;
+    if (wideness > defaultDeploymentWideness) {
+        newSize.width = 96;
+        newSize.height = 96/wideness;
+    }
+    else {
+        newSize.height = 64;
+        newSize.width = 64 * wideness;
+    }
+    [EUCImageUtilities resizeImageAtFile:fileName toSize:newSize toFile:[self thumbnailFileNameForFile:fileName]];
+}
+
+-(NSString *) thumbnailFileNameForFile: (NSString *) fileName {
+    NSInteger length = [fileName length];
+    NSString * newFileName = [NSString stringWithFormat:@"%@t.jpg", [fileName substringToIndex:length - 4]];
+    return newFileName;
+}
 
 -(void) uploadImageURL: (NSURL *) url forId: (NSInteger) imageId {
     [self.assetsLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
@@ -660,6 +714,9 @@ typedef enum : NSUInteger {
             NSString * fileName = [EUCFileSystem fileNameForImageWithId:imageId];
             
             [data writeToFile:fileName atomically:YES];
+            [self resizeFileNamed:fileName fromSize:rep.dimensions];
+
+            
             [[EUCDatabase sharedInstance] writePendingUploadOf:fileName withType:@"image" andId:imageId];
             [[EUCDatabase sharedInstance] consumePendingQueue];
             
@@ -721,6 +778,9 @@ typedef enum : NSUInteger {
             NSString * fileName = [EUCFileSystem fileNameForDeploymentPictureWithId:imageId];
             
             [data writeToFile:fileName atomically:YES];
+            [self resizeFileNamed:fileName fromSize:rep.dimensions];
+            
+            
             [[EUCDatabase sharedInstance] writePendingUploadOf:fileName withType:@"deployment_picture" andId:imageId];
             [[EUCDatabase sharedInstance] consumePendingQueue];
             // TODO: AAA write to pending database
@@ -787,8 +847,16 @@ typedef enum : NSUInteger {
 }
 
 -(void) populateFromDictionary: (NSDictionary *) dictionary {
+    self.deploymentIdLabel.text = [NSString stringWithFormat:@"%ld", (long)[dictionary[@"id"] integerValue]];
     NSMutableArray * bursts = [NSMutableArray arrayWithCapacity:64];
     NSArray * burstArray = dictionary[@"burst"];
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    self.numberDownloaded = 0;
+    self.numberToDownload = 0;
+    self.downloadActivityIndicator.hidden = YES;
+    self.downloadProgressView.hidden = YES;
+    self.downloadButton.hidden = YES;
+
     for (NSDictionary * burstDictionary in burstArray) {
         EUCBurst * newBurst = [[EUCBurst alloc] init];
         newBurst.burstId = [burstDictionary[@"id"] integerValue];
@@ -799,13 +867,12 @@ typedef enum : NSUInteger {
             newImage.assetDate = [self.parser dateFromString:imageDictionary[@"image_date"]];;
             newImage.dimensions = CGSizeMake([imageDictionary[@"width"] floatValue], [imageDictionary[@"height"] floatValue]);
             newImage.filename = [EUCFileSystem fileNameForImageWithId:[imageDictionary[@"id"] integerValue]];
-            // if the file doesn't exist, download it
-//            [EUCNetwork downloadImage:[NSString stringWithFormat:@"/file/image/%ld", (long) [imageDictionary[@"id"] integerValue]]
-//                               toFile: newImage.filename
-//                           completion:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-//                               [self.bursts reloadData];
-//                           }];
             [newBurst.images addObject:newImage];
+            self.numberToDownload++;
+            if ([fileManager fileExistsAtPath:newImage.filename]) {
+                self.numberDownloaded++;
+                newImage.isLocal = YES;
+            }
         }
         [bursts addObject:newBurst];
     }
@@ -821,15 +888,87 @@ typedef enum : NSUInteger {
         for (NSDictionary * pictureDictionary in pictureArray) {
             EUCImage * image = [[EUCImage alloc] init];
             image.filename = [EUCFileSystem fileNameForDeploymentPictureWithId:[pictureDictionary[@"id"] integerValue]];
-//            [EUCNetwork downloadImage:[NSString stringWithFormat:@"/file/deployment_picture/%ld", (long) [pictureDictionary[@"id"] integerValue]]
-//                               toFile: image.filename
-//                           completion:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
-//                               [self.deploymentImages reloadData];
-//                           }];
             [self.addedImages addObject:image];
+            self.numberToDownload++;
+            if ([fileManager fileExistsAtPath:image.filename]) {
+                self.numberDownloaded++;
+                image.isLocal = YES;
+            }
+
         }
-        [self.deploymentImages reloadData];
+    }
+    [self.deploymentImages reloadData];
+
+    self.downloadStatus.text = [NSString stringWithFormat:@"%ld/%ld images downloaded", self.numberDownloaded, self.numberToDownload];
+    if (self.numberDownloaded < self.numberToDownload) {
+        self.downloadButton.hidden = NO;
     }
 }
+
+#pragma mark - download
+
+- (IBAction)download:(id)sender {
+    // find next image to download
+    if (self.numberToDownload == self.numberDownloaded) {
+        self.downloadProgressView.hidden = YES;
+        [self.downloadActivityIndicator stopAnimating];
+        self.downloadButton.hidden = YES;
+        [self refreshProgress];
+        [self.deploymentImages reloadData];
+        [self.bursts reloadData];
+        return;
+    }
+    self.downloadProgressView.hidden = NO;
+    self.downloadActivityIndicator.hidden = NO;
+    [self.downloadActivityIndicator startAnimating];
+    [self refreshProgress];
+    
+    // if the full-sized image is present, the thumbnail must be present
+    
+    for (EUCImage * image in self.burstImages) {
+        if (!image.isLocal) {
+            NSString * baseName = [image.filename lastPathComponent];
+            NSInteger length = [baseName length];
+            [EUCNetwork downloadImage:[NSString stringWithFormat:@"/file/image/%@", [[baseName substringToIndex:length - 4] substringFromIndex:1]]
+                               toFile: image.filename
+                           completion:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+                               if (error == nil) {
+                                   self.numberDownloaded++;
+                                   [self refreshProgress];
+                                   image.isLocal = YES;
+                                   [EUCImageUtilities resizeImageAtFile:image.filename toFitWithinSize:CGSizeMake(96, 64) toFile:[self thumbnailFileNameForFile:image.filename]];
+                                   [self download:nil];
+                               }
+                           }];
+            return;
+        }
+    }
+  
+    for (EUCImage * image in self.addedImages) {
+        if (!image.isLocal) {
+            NSString * baseName = [image.filename lastPathComponent];
+            NSInteger length = [baseName length];
+            [EUCNetwork downloadImage:[NSString stringWithFormat:@"/file/deployment_picture/%@", [[baseName substringToIndex:length - 4] substringFromIndex:1]]
+                               toFile: image.filename
+                           completion:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+                               if (error == nil) {
+                                   self.numberDownloaded++;
+                                   [self refreshProgress];
+                                   image.isLocal = YES;
+                                   [EUCImageUtilities resizeImageAtFile:image.filename toFitWithinSize:CGSizeMake(96, 64) toFile:[self thumbnailFileNameForFile:image.filename]];
+                                   [self download:nil];
+                               }
+                           }];
+            return;
+        }
+    }
+    
+}
+
+-(void) refreshProgress {
+    self.downloadProgressView.progress = self.numberDownloaded*1.0/self.numberToDownload;
+    self.downloadStatus.text = [NSString stringWithFormat:@"%ld/%ld images downloaded", self.numberDownloaded, self.numberToDownload];
+}
+
 
 @end

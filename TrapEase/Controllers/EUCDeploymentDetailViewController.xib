@@ -10,8 +10,13 @@
                 <outlet property="addBurstsButton" destination="wrP-6a-MYn" id="p1C-JW-yKY"/>
                 <outlet property="addDeploymentImageButton" destination="XQd-94-aWf" id="dvP-jn-ok6"/>
                 <outlet property="bursts" destination="oy6-PS-gjP" id="wax-X7-LhL"/>
+                <outlet property="deploymentIdLabel" destination="ljs-HU-nhh" id="SHL-h2-baI"/>
                 <outlet property="deploymentImages" destination="CpW-sc-Ja7" id="vMY-0e-LKD"/>
                 <outlet property="doneButton" destination="cf3-iW-F94" id="MO0-BR-OeP"/>
+                <outlet property="downloadActivityIndicator" destination="OS0-pd-5iV" id="yPl-ce-Hpc"/>
+                <outlet property="downloadButton" destination="fQK-Gl-alc" id="mcf-Lx-xAF"/>
+                <outlet property="downloadProgressView" destination="VDx-LU-iHk" id="i8y-8A-rot"/>
+                <outlet property="downloadStatus" destination="SUQ-la-fG5" id="TEZ-s5-VSc"/>
                 <outlet property="editView" destination="WmK-qE-Jwf" id="VMx-Vk-1Cv"/>
                 <outlet property="notes" destination="5bj-Qu-PeV" id="Kn3-rs-7xl"/>
                 <outlet property="shortName" destination="LRj-mf-HpL" id="qyI-Jt-iUd"/>
@@ -53,10 +58,22 @@
                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deployment Images" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mVu-9o-JUO">
-                            <rect key="frame" x="20" y="407" width="215" height="22"/>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ljs-HU-nhh">
+                            <rect key="frame" x="135" y="44" width="100" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deployment Images" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mVu-9o-JUO">
+                            <rect key="frame" x="20" y="345" width="215" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SUQ-la-fG5">
+                            <rect key="frame" x="243" y="574" width="196" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="14"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VUQ-Jb-iPT">
@@ -72,13 +89,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mark Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TVC-qV-eyW">
-                            <rect key="frame" x="20" y="322" width="215" height="22"/>
+                            <rect key="frame" x="20" y="294" width="215" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="CpW-sc-Ja7">
-                            <rect key="frame" x="243" y="407" width="400" height="88"/>
+                            <rect key="frame" x="243" y="345" width="400" height="88"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="w3a-zF-Jxu">
@@ -90,7 +107,7 @@
                             <cells/>
                         </collectionView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XQd-94-aWf">
-                            <rect key="frame" x="61" y="437" width="174" height="40"/>
+                            <rect key="frame" x="61" y="375" width="174" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
                             <state key="normal" title="Add Deployment Image">
@@ -101,13 +118,13 @@
                             </connections>
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bursts" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5UU-df-jLo">
-                            <rect key="frame" x="20" y="520" width="215" height="22"/>
+                            <rect key="frame" x="20" y="458" width="215" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="none" id="oy6-PS-gjP">
-                            <rect key="frame" x="243" y="520" width="400" height="88"/>
+                            <rect key="frame" x="243" y="458" width="400" height="88"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Idz-WV-XUf">
@@ -119,7 +136,7 @@
                             <cells/>
                         </collectionView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wrP-6a-MYn">
-                            <rect key="frame" x="153" y="550" width="82" height="40"/>
+                            <rect key="frame" x="153" y="488" width="82" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
                             <state key="normal" title="Add Bursts">
@@ -130,7 +147,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="agx-Z2-Cg7">
-                            <rect key="frame" x="243" y="314" width="190" height="40"/>
+                            <rect key="frame" x="243" y="285" width="190" height="40"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
                             <state key="normal" title="Enter Time">
@@ -151,6 +168,17 @@
                                 <action selector="done:" destination="-1" eventType="touchUpInside" id="pnU-4R-b4Y"/>
                             </connections>
                         </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fQK-Gl-alc">
+                            <rect key="frame" x="502" y="569" width="141" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="15"/>
+                            <state key="normal" title="Download all Images">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="download:" destination="-1" eventType="touchUpInside" id="E1d-Ne-V8n"/>
+                            </connections>
+                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Zfc-Vj-PoV">
                             <rect key="frame" x="243" y="635" width="76" height="33"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -162,6 +190,14 @@
                                 <action selector="cancel:" destination="-1" eventType="touchUpInside" id="sLl-F5-vVc"/>
                             </connections>
                         </button>
+                        <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" id="VDx-LU-iHk">
+                            <rect key="frame" x="243" y="616" width="400" height="2"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </progressView>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="OS0-pd-5iV">
+                            <rect key="frame" x="461" y="576" width="20" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>

@@ -61,4 +61,7 @@ typedef void(^EUCImageRepoPostBlock)(NSString * url, NSString * errorCode);
 +(void) putBackpack: (NSDictionary *) backpack toUrl: (NSString *) putURL successBlock: (EUCNetworkPUTSuccessBlock) successBlock failureBlock: (EUCNetworkPUTFailureBlock) failureBlock ;
 
 +(void) postBackpack: (NSDictionary *) backpack toUrl: (NSString *) postURL successBlock: (EUCNetworkSuccessBlock) successBlock failureBlock: (EUCNetworkFailureBlock) failureBlock;
+
++(void) sendSafari: (NSDictionary *) body toUrl: (NSString *) url successBlock: (EUCNetworkSuccessBlock) successBlock failureBlock: (EUCNetworkFailureBlock) failureBlock;
+
 @end

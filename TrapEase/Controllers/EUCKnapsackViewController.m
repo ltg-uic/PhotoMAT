@@ -11,6 +11,7 @@
 #import "EUCDatabase.h"
 #import "EUCNetwork.h"
 #import "Toast+UIView.h"
+#import "EUCTimeUtilities.h"
 
 static BOOL DEV = YES;
 
@@ -187,7 +188,6 @@ static BOOL DEV = YES;
                                                        // create backpack dictionary
                                                        NSMutableDictionary * backpack = [[NSMutableDictionary alloc] init];
                                                        backpack[@"owner"] = groupName;
-                                                       backpack[@"owner"] = @"aijaztest3";
                                                        NSMutableArray * contents = [NSMutableArray arrayWithCapacity:1];
                                                        [contents addObject:[self backpackEntryForUrl:payloadURL]];
                                                        backpack[@"content"] = contents;
@@ -241,15 +241,9 @@ static BOOL DEV = YES;
 }
 
 -(NSDictionary *) backpackEntryForUrl: (NSString *) url {
-    NSDate* datetime = [NSDate date];
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:SS.SSS'Z'"];
-    NSString* dateTimeInIsoFormatForZuluTimeZone = [dateFormatter stringFromDate:datetime];
-
     return @{@"item_type": @"photomat_image",
              @"image_url": [NSString stringWithFormat:@"http://pikachu.badger.encorelab.org/%@", url],
-             @"created_at": dateTimeInIsoFormatForZuluTimeZone
+             @"created_at": [EUCTimeUtilities currentTimeInZulu]
              };
 }
 

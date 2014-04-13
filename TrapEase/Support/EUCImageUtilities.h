@@ -17,6 +17,7 @@
 
 +(UIImage *)snapshotForWindow: (UIWindow *) window;
 +(UIImage *)snapshotForView: (UIView *) view;
-
++(void) resizeImageAtFile: (NSString *) source toSize: (CGSize) newSize toFile: (NSString *) destination;
++(void) resizeImageAtFile: (NSString *) source toFitWithinSize: (CGSize) newSize toFile: (NSString *) destination;
 
 @end

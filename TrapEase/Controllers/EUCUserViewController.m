@@ -22,9 +22,13 @@
 @property (assign, nonatomic) NSInteger groupRow;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *visibility;
+@property (weak, nonatomic) IBOutlet UIButton *loginButton;
 
 - (IBAction)refresh:(id)sender;
 - (IBAction)done:(id)sender;
+
+- (IBAction)login:(id)sender;
+
 @end
 
 @implementation EUCUserViewController
@@ -55,6 +59,12 @@
     self.classRoom.delegate = self;
     self.group.dataSource = self;
     self.group.delegate = self;
+    if ([self loggedIn]) {
+        [self.loginButton setTitle:@"Log out" forState:UIControlStateNormal];
+    }
+    else {
+        [self.loginButton setTitle:@"Log in" forState:UIControlStateNormal];
+    }
 
     [self.visibility addTarget:self
                          action:@selector(done:)
@@ -119,7 +129,7 @@
     [self.school selectRow:self.schoolRow inComponent:0 animated:YES];
     [self.classRoom selectRow:self.classRow inComponent:0 animated:YES];
     [self.group selectRow:self.groupRow inComponent:0 animated:YES];
-    [self done:nil];
+//    [self done:nil];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -187,7 +197,7 @@
     else {
         self.groupRow = [self.group selectedRowInComponent:0];
     }
-    [self done:nil];
+//    [self done:nil];
 }
 
 
@@ -241,5 +251,38 @@
     [self.visibilityDelegate visibilityChanged];
 }
 
-        
+- (IBAction)login:(id)sender {
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+
+    if ([self loggedIn]) {
+        // log out
+
+        NSDictionary * settings = @{
+                                    @"schoolId": @0,
+                                    @"classId": @0,
+                                    @"personId": @0,
+                                    @"visibility": @"school"
+                                    };
+        db.settings = settings;
+        [EUCNetwork updatePersonId:settings[@"personId"]];
+        [self.loginButton setTitle:@"Log in" forState:UIControlStateNormal];
+
+    }
+    else {
+        [self done:nil];
+        [self.loginButton setTitle:@"Log out" forState:UIControlStateNormal];
+
+    }
+}
+
+-(BOOL) loggedIn {
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    NSDictionary * settings = db.settings;
+    if ([settings[@"personId"] isEqualToNumber:@0]) {
+        return NO;
+    }
+    return YES;
+}
+
+
 @end

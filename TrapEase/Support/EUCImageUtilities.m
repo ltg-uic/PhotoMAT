@@ -68,6 +68,36 @@
     return newImage;
 }
 
++(void)resizeImageAtFile:(NSString *)source toSize:(CGSize)newSize toFile:(NSString *)destination {
+    UIImage * sourceImage = [UIImage imageWithContentsOfFile:source];
+    UIImage * destImage = [EUCImageUtilities imageWithImage:sourceImage scaledToSize:newSize];
+    NSData * destData = UIImageJPEGRepresentation(destImage, 1.0);
+    [destData writeToFile:destination atomically:YES];
+}
+
++(void) resizeImageAtFile: (NSString *) source toFitWithinSize: (CGSize) maxSize toFile: (NSString *) destination {
+    UIImage * sourceImage = [UIImage imageWithContentsOfFile:source];
+    CGSize origSize = sourceImage.size;
+    CGFloat defaultWideness = maxSize.width*1.0/maxSize.height;
+    
+    CGFloat wideness = 1.0*origSize.width/origSize.height;
+    CGSize newSize;
+    if (wideness > defaultWideness) {
+        newSize.width = maxSize.width;
+        newSize.height = maxSize.width/wideness;
+    }
+    else {
+        newSize.height = maxSize.height;
+        newSize.width = maxSize.height * wideness;
+    }
+    
+    
+    UIImage * destImage = [EUCImageUtilities imageWithImage:sourceImage scaledToSize:newSize];
+    NSData * destData = UIImageJPEGRepresentation(destImage, 1.0);
+    [destData writeToFile:destination atomically:YES];
+}
+
+
 #pragma mark - blurring
 
 // from http://damir.me/ios7-blurring-techniques
