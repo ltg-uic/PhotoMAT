@@ -22,7 +22,7 @@
         self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Sets", "Sets")
                                                         image:[UIImage imageNamed:@"deployments.png"]
                                                 selectedImage:nil];
-
+        self.delegate = self;
     }
     return self;
 }
@@ -39,4 +39,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UISplitViewcontrollerDelegate
+
+-(UIInterfaceOrientation)splitViewControllerPreferredInterfaceOrientationForPresentation:(UISplitViewController *)splitViewController {
+    return UIInterfaceOrientationLandscapeLeft;
+}
+
+-(BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation {
+    return NO;
+}
 @end
