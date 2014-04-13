@@ -7,10 +7,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EUCUserViewController">
             <connections>
                 <outlet property="activityIndicator" destination="R6y-dR-1I7" id="X8Y-ef-PUb"/>
+                <outlet property="classLabel" destination="TgC-fz-5Jg" id="uXp-VW-WFS"/>
                 <outlet property="classRoom" destination="NVC-gC-zlH" id="NoA-sT-rEh"/>
                 <outlet property="group" destination="sg7-rw-DI4" id="SMA-cv-YNj"/>
+                <outlet property="groupLabel" destination="mYr-bK-Syv" id="BJr-a3-4fh"/>
+                <outlet property="heading" destination="77j-N6-aXa" id="5nU-YM-KtU"/>
                 <outlet property="loginButton" destination="72J-iR-5zv" id="flL-bQ-8I8"/>
+                <outlet property="refreshButton" destination="D1f-Yp-KJH" id="FwD-GW-i0o"/>
                 <outlet property="school" destination="xfb-RJ-PfK" id="l3N-yU-zGW"/>
+                <outlet property="schoolLabel" destination="FPp-jq-SbQ" id="IeX-CF-rXr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="visibility" destination="Olr-Zx-F5I" id="38r-oM-1oV"/>
             </connections>
@@ -21,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select Your Group" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="77j-N6-aXa">
-                    <rect key="frame" x="302" y="33" width="420" height="28"/>
+                    <rect key="frame" x="176" y="33" width="672" height="28"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
                     <nil key="highlightedColor"/>
