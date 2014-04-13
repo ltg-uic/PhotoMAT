@@ -187,7 +187,6 @@ static BOOL DEV = YES;
                                                        // create backpack dictionary
                                                        NSMutableDictionary * backpack = [[NSMutableDictionary alloc] init];
                                                        backpack[@"owner"] = groupName;
-                                                       backpack[@"owner"] = @"aijaztest3";
                                                        NSMutableArray * contents = [NSMutableArray arrayWithCapacity:1];
                                                        [contents addObject:[self backpackEntryForUrl:payloadURL]];
                                                        backpack[@"content"] = contents;

@@ -10,6 +10,7 @@
                 <outlet property="addBurstsButton" destination="wrP-6a-MYn" id="p1C-JW-yKY"/>
                 <outlet property="addDeploymentImageButton" destination="XQd-94-aWf" id="dvP-jn-ok6"/>
                 <outlet property="bursts" destination="oy6-PS-gjP" id="wax-X7-LhL"/>
+                <outlet property="deploymentIdLabel" destination="ljs-HU-nhh" id="SHL-h2-baI"/>
                 <outlet property="deploymentImages" destination="CpW-sc-Ja7" id="vMY-0e-LKD"/>
                 <outlet property="doneButton" destination="cf3-iW-F94" id="MO0-BR-OeP"/>
                 <outlet property="editView" destination="WmK-qE-Jwf" id="VMx-Vk-1Cv"/>
@@ -49,6 +50,12 @@
                         </textView>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name of Deployment" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WDu-Rj-mch">
                             <rect key="frame" x="20" y="25" width="215" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ljs-HU-nhh">
+                            <rect key="frame" x="135" y="44" width="100" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="16"/>
                             <nil key="highlightedColor"/>

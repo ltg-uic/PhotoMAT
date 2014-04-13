@@ -46,6 +46,7 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UITextField *trapNumber;
 @property (weak, nonatomic) IBOutlet UIButton *nominalButton;
 @property (weak, nonatomic) IBOutlet UIButton *actualButton;
+@property (weak, nonatomic) IBOutlet UILabel *deploymentIdLabel;
 
 
 
@@ -787,6 +788,7 @@ typedef enum : NSUInteger {
 }
 
 -(void) populateFromDictionary: (NSDictionary *) dictionary {
+    self.deploymentIdLabel.text = [NSString stringWithFormat:@"%ld", (long)[dictionary[@"id"] integerValue]];
     NSMutableArray * bursts = [NSMutableArray arrayWithCapacity:64];
     NSArray * burstArray = dictionary[@"burst"];
     for (NSDictionary * burstDictionary in burstArray) {
