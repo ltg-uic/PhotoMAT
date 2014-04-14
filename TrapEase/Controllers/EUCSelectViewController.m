@@ -56,6 +56,7 @@ extern CGFloat defaultWideness;
                 burstIndex++;
                 burstSubIndex++;
                 EUCBurst * burst = [[EUCBurst alloc] init];
+                burst.selected = NO;
                 EUCImage * image = [[EUCImage alloc] initWithIndex:index andAsset:asset];
                 [self.bursts addObject:burst];
                 [burst.images addObject:image];
@@ -69,6 +70,7 @@ extern CGFloat defaultWideness;
                 if (abs(delta) < burstDelta) {
                     burstSubIndex++;
                     EUCBurst * burst = self.bursts[burstIndex];
+                    burst.selected = NO;
                     EUCImage * image = [[EUCImage alloc] initWithIndex:index andAsset:asset];
                     [burst.images addObject:image];
                     lastDate = image.assetDate;
@@ -76,6 +78,7 @@ extern CGFloat defaultWideness;
                 else {
                     burstIndex++;
                     EUCBurst * newBurst = [[EUCBurst alloc] init];
+                    newBurst.selected = NO;
                     EUCImage * image = [[EUCImage alloc] initWithIndex:index andAsset:asset];
                     [self.bursts addObject:newBurst];
                     [newBurst.images addObject:image];

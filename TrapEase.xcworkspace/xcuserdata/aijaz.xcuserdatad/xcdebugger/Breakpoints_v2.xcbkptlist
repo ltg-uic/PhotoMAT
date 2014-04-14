@@ -129,6 +129,36 @@
             endingLineNumber = "721"
             landmarkName = "-uploadImagesForBurst:withId:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__65-[EUCDeploymentDetailViewController uploadImagesForBurst:withId:]_block_invoke_2"
+                  moduleName = "PhotoMat"
+                  urlString = "file:///Users/aijaz/CocoaApps/TrapEase/TrapEase/Controllers/EUCDeploymentDetailViewController.m"
+                  timestampString = "419131861.95118"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "723"
+                  endingLineNumber = "723"
+                  offsetFromSymbolStart = "164">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__65-[EUCDeploymentDetailViewController uploadImagesForBurst:withId:]_block_invoke489"
+                  moduleName = "PhotoMat"
+                  urlString = "file:///Users/aijaz/CocoaApps/TrapEase/TrapEase/Controllers/EUCDeploymentDetailViewController.m"
+                  timestampString = "419131861.951382"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "723"
+                  endingLineNumber = "723"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
