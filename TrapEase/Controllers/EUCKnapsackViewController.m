@@ -83,6 +83,11 @@ static BOOL DEV = NO;
     
     self.clearButton.hidden = YES;
     
+    if (self.savedImage) {
+        self.imageView.image = self.savedImage;
+        self.savedImage = nil;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning

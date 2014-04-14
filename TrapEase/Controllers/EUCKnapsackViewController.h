@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIButton *importButton;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
+@property (strong, nonatomic) UIImage *savedImage;
+
 
 - (IBAction)clear:(id)sender;
 - (IBAction)save:(id)sender;
