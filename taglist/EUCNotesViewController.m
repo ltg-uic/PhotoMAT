@@ -35,12 +35,26 @@
     _webView.delegate = self;
 
 
+//    EUCDatabase * db = [EUCDatabase sharedInstance];
+//    NSString * groupName = db.groupName;
+//    NSString * className = db.className;
+//
+//
+//    NSString *fullURL = [NSString stringWithFormat:@"http://safari.encorelab.org/mobile/mobile.html?runId=%@&username=%@", className, groupName];
+//
+//    NSURL *url = [NSURL URLWithString:fullURL];
+//
+//
+//    [self loadURL:url];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+
     EUCDatabase * db = [EUCDatabase sharedInstance];
     NSString * groupName = db.groupName;
     NSString * className = db.className;
 
-
-    NSString *fullURL = [NSString stringWithFormat:@"http://safari.encorelab.org/mobile/mobile.html?runId=%@&username=%@", @"test", @"yeah"];
+    NSString *fullURL = [NSString stringWithFormat:@"http://safari.encorelab.org/mobile/mobile.html?runId=%@&username=%@", className, groupName];
 
     NSURL *url = [NSURL URLWithString:fullURL];
 
