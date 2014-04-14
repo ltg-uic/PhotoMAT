@@ -208,8 +208,10 @@ static BOOL DEV = NO;
     };
     
     if (self.assetURL == nil) {
-        data = UIImageJPEGRepresentation(self.imageView.image, 1.0);
-        restBlock();
+        if (self.imageView.image) {
+            data = UIImageJPEGRepresentation(self.imageView.image, 1.0);
+            restBlock();
+        }
     }
     else {
         [self.assetsLibrary assetForURL:self.assetURL
