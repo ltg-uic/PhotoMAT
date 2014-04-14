@@ -438,9 +438,12 @@ typedef enum : NSUInteger {
 
     [imagePopoverController setPopoverContentSize:display.view.frame.size animated:true];
 
-    [imagePopoverController presentPopoverFromRect:imageDeployCell.frame inView:_bursts  permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+    if([collectionView isEqual:_bursts]) {
+        [imagePopoverController presentPopoverFromRect:imageDeployCell.frame inView:_bursts  permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+    } else {
+        [imagePopoverController presentPopoverFromRect:imageDeployCell.frame inView:_deploymentImages  permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+    }
 
-    
 }
 
 
