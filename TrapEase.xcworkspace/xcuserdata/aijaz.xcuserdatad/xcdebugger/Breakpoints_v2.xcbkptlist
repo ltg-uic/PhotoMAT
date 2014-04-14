@@ -127,7 +127,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "721"
             endingLineNumber = "721"
-            landmarkName = "-resizeFileNamed:fromSize:"
+            landmarkName = "-uploadImagesForBurst:withId:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
