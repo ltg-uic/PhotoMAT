@@ -632,7 +632,8 @@ typedef enum : NSUInteger {
                                 @"nominal_mark_time": [self.format stringFromDate:self.nominalDate],
                                 @"actual_mark_time": [self.format stringFromDate:self.actualDate],
                                 @"camera_trap_number": @(trapNumber),
-                                @"short_name": self.shortName.text
+                                @"short_name": self.shortName.text,
+                                @"notes":self.notes.text
                                 };
     
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
