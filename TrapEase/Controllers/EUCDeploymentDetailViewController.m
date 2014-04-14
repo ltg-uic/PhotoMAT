@@ -479,11 +479,13 @@ typedef enum : NSUInteger {
                                         animated:YES];
         }
         else if (useCamera) {
-            self.picker = [[UIImagePickerController alloc] init];
-            self.picker.delegate = self;
-            self.picker.allowsEditing = NO;
-            self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            self.popover = [[UIPopoverController alloc] initWithContentViewController:self.picker];
+//            self.picker = [[UIImagePickerController alloc] init];
+//            self.picker.delegate = self;
+//            self.picker.allowsEditing = NO;
+//            self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            GPUCameraViewController * cameraVC = [[GPUCameraViewController alloc] init];
+            cameraVC.delegate = self;
+            self.popover = [[UIPopoverController alloc] initWithContentViewController:cameraVC];
             [self.popover presentPopoverFromRect:self.addDeploymentImageButton.bounds
                                           inView:self.addDeploymentImageButton
                         permittedArrowDirections:UIPopoverArrowDirectionAny
@@ -552,6 +554,29 @@ typedef enum : NSUInteger {
     
 }
 
+-(void)pictureTaken {
+    // Picking Image from Camera/ Library
+    [self.popover dismissPopoverAnimated:YES];
+
+   
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString * destination = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat:@"_d%ld.jpg", time(NULL)]];
+    
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    [fileManager copyItemAtPath:[documentsDirectory stringByAppendingPathComponent:@"FilteredPhoto.jpg"]
+                         toPath:destination
+                          error:nil];
+    UIImage * timage = [UIImage imageWithContentsOfFile:destination];
+    [self resizeFileNamed:destination fromSize:timage.size];
+    
+    EUCImage * image = [[EUCImage alloc] initWithIndex:0 andUrl:nil];
+    image.filename = destination;
+    [self.addedImages addObject:image];
+    [self.deploymentImages reloadData];
+    
+}
+
 #pragma mark - Upload Deployment
 -(void) sendSafari: (NSInteger) deploymentId {
     // http://drowsy.badger.encorelab.org/safari-ben/safari
@@ -560,6 +585,7 @@ typedef enum : NSUInteger {
     NSString * groupName = [db groupName];
     
     BOOL DEV = NO;
+    
     
     NSString * safariURL;
     if (DEV) {
@@ -775,7 +801,8 @@ typedef enum : NSUInteger {
                                   params:putData
                             successBlock:^(NSURLSessionDataTask *task, id responseObject) {
                                 // now upload images
-                                    [self uploadDeploymentPictureURL:thisImage.url forId:imageId];
+//                                [self uploadDeploymentPictureURL:thisImage.url forId:imageId];
+                                [self uploadDeploymentPictureFile:thisImage.filename forId:imageId];
                             } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
                                 // TODO: AAA alert here
                             }];
@@ -786,8 +813,24 @@ typedef enum : NSUInteger {
     
 }
 
+-(void) uploadDeploymentPictureFile: (NSString *) file forId: (NSInteger) imageId {
+    UIImage * image = [UIImage imageWithContentsOfFile:file];
+    
+    NSData * data = [NSData dataWithContentsOfFile:file];
+    NSString * fileName = [EUCFileSystem fileNameForDeploymentPictureWithId:imageId];
+    
+    [data writeToFile:fileName atomically:YES];
+    CGSize dimensions = [image size];
+    [self resizeFileNamed:fileName fromSize:dimensions];
+    
+    
+    [[EUCDatabase sharedInstance] writePendingUploadOf:fileName withType:@"deployment_picture" andId:imageId];
+    [[EUCDatabase sharedInstance] consumePendingQueue];
+    
+}
 
 -(void) uploadDeploymentPictureURL: (NSURL *) url forId: (NSInteger) imageId {
+
     [self.assetsLibrary assetForURL:url resultBlock:^(ALAsset *asset) {
         if (asset != nil) {
             // from: http://stackoverflow.com/a/8801656/772526
