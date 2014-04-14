@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrapEase/Controllers/EUCDeploymentDetailViewController.m"
-            timestampString = "419127688.836909"
+            timestampString = "419133590.550742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "721"
-            endingLineNumber = "721"
+            startingLineNumber = "720"
+            endingLineNumber = "720"
             landmarkName = "-uploadImagesForBurst:withId:"
             landmarkType = "5">
             <Locations>
@@ -137,11 +137,11 @@
                   symbolName = "__65-[EUCDeploymentDetailViewController uploadImagesForBurst:withId:]_block_invoke_2"
                   moduleName = "PhotoMat"
                   urlString = "file:///Users/aijaz/CocoaApps/TrapEase/TrapEase/Controllers/EUCDeploymentDetailViewController.m"
-                  timestampString = "419131861.95118"
+                  timestampString = "419135353.698673"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "723"
-                  endingLineNumber = "723"
+                  startingLineNumber = "722"
+                  endingLineNumber = "722"
                   offsetFromSymbolStart = "164">
                </Location>
                <Location
@@ -151,11 +151,11 @@
                   symbolName = "__65-[EUCDeploymentDetailViewController uploadImagesForBurst:withId:]_block_invoke489"
                   moduleName = "PhotoMat"
                   urlString = "file:///Users/aijaz/CocoaApps/TrapEase/TrapEase/Controllers/EUCDeploymentDetailViewController.m"
-                  timestampString = "419131861.951382"
+                  timestampString = "419135353.698891"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "723"
-                  endingLineNumber = "723"
+                  startingLineNumber = "722"
+                  endingLineNumber = "722"
                   offsetFromSymbolStart = "76">
                </Location>
             </Locations>
