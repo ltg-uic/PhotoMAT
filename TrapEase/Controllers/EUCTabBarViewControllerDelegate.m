@@ -33,7 +33,10 @@
         return NO;
     }
     
-    if (viewController == self.snapshot) {
+    if (viewController == self.snapshot
+        &&
+        (tabBarController.selectedViewController != self.snapshot)
+        ) {
         UIImage * image = [EUCImageUtilities snapshotForWindow:self.window];
         EUCKnapsackViewController * snapshot = (EUCKnapsackViewController *) self.snapshot;
         snapshot.imageView.image = image;
