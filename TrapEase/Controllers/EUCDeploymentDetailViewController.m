@@ -595,7 +595,7 @@ typedef enum : NSUInteger {
         safariURL = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/safari-%@/safaris", className];
     }
     
-    NSDictionary * body = @{@"_id": @(deploymentId),
+    NSDictionary * body = @{@"id": @(deploymentId),
                             @"created_at": [EUCTimeUtilities currentTimeInZulu],
                             @"name": [NSString stringWithFormat:@"%ld-%@", deploymentId, self.shortName.text],
                             @"group": groupName
