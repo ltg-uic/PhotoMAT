@@ -296,10 +296,10 @@ typedef enum : NSUInteger {
         [self alertForRequiredField:@"mark time"];
         return NO;
     }
-    if ([NSString isStringEmpty:self.trapNumber.text]) {
-        [self alertForRequiredField:@"camera trap number"];
-        return NO;
-    }
+//    if ([NSString isStringEmpty:self.trapNumber.text]) {
+//        [self alertForRequiredField:@"camera trap number"];
+//        return NO;
+//    }
     if (!self.updateMode) {
         if ([self.burstImages count] == 0) {
             UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"No bursts uploaded"
