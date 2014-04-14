@@ -19,6 +19,7 @@ CGFloat defaultWideness = 314.0/226.0;
 @property (nonatomic, strong) ALAssetsLibrary *assetsLibrary;
 @property (strong, nonatomic) NSMutableArray * groups;
 @property (strong, nonatomic) dispatch_queue_t backgroundQueue;
+- (IBAction)cancel:(id)sender;
 @end
 
 @implementation EUCImportViewController
@@ -188,4 +189,7 @@ CGFloat defaultWideness = 314.0/226.0;
 
 
 
+- (IBAction)cancel:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end
