@@ -107,8 +107,6 @@ static BOOL DEV = NO;
 - (IBAction)save:(id)sender {
     // get the backpack
     
-    self.saveButton.enabled = NO;
-    [self.toastView makeToastActivity];
     
     EUCDatabase * db = [EUCDatabase sharedInstance];
     NSString * className = [db className];
@@ -209,11 +207,15 @@ static BOOL DEV = NO;
     
     if (self.assetURL == nil) {
         if (self.imageView.image) {
+            self.saveButton.enabled = NO;
+            [self.toastView makeToastActivity];
             data = UIImageJPEGRepresentation(self.imageView.image, 1.0);
             restBlock();
         }
     }
     else {
+        self.saveButton.enabled = NO;
+        [self.toastView makeToastActivity];
         [self.assetsLibrary assetForURL:self.assetURL
                             resultBlock:^(ALAsset *asset) {
                                 NSLog(@"Asset is %@", asset);
@@ -374,6 +376,8 @@ static BOOL DEV = NO;
     [self.popover dismissPopoverAnimated:YES];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
+
+    self.saveButton.hidden = NO;
 
     self.imageView.image = [UIImage imageWithContentsOfFile:[documentsDirectory stringByAppendingPathComponent:@"FilteredPhoto.jpg"]];
     self.assetURL = nil;
