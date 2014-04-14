@@ -13,7 +13,7 @@
 #import "Toast+UIView.h"
 #import "EUCTimeUtilities.h"
 
-static BOOL DEV = YES;
+static BOOL DEV = NO;
 
 @interface EUCKnapsackViewController () {}
 

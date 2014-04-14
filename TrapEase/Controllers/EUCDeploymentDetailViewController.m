@@ -559,7 +559,7 @@ typedef enum : NSUInteger {
     NSString * className = [db className];
     NSString * groupName = [db groupName];
     
-    BOOL DEV = YES;
+    BOOL DEV = NO;
     
     NSString * safariURL;
     if (DEV) {

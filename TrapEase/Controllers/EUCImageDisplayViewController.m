@@ -11,7 +11,7 @@
 #import "EUCDatabase.h"
 #import "EUCNetwork.h"
 #import "EUCTimeUtilities.h"
-
+#import "Toast+UIView.h"
 
 @interface EUCImageDisplayViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
@@ -27,12 +27,13 @@
 @property (strong, nonatomic) ALAssetsLibrary *assetsLibrary;
 
 
+
 - (IBAction)done:(id)sender;
 @end
 
 @implementation EUCImageDisplayViewController
 
-static BOOL DEV = YES;
+static BOOL DEV = NO;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil backgroundImage: (UIImage *) backgroundImage assetURL: (NSURL *) assetURL fileName: (NSString *) fileName
 {
@@ -72,11 +73,10 @@ static BOOL DEV = YES;
     __block NSData * data;
     
     void (^restBlock)() = ^{
-        //self.status.text = @"Uploading image...";
         [EUCNetwork uploadImageData:data toRepo:repoURL completion:^(NSString *payloadURL, NSString *errorCode) {
             if (errorCode) {
-//                [self alertWithTitle:@"Error" message:errorCode];
-//                [self activityStopped];
+                [self alertWithTitle:@"Error" message:errorCode];
+                //[self activityStopped];
             }
             else {
                 NSLog(@"URL Is %@", payloadURL);
@@ -112,12 +112,11 @@ static BOOL DEV = YES;
                                [EUCNetwork putBackpack:backpack
                                                  toUrl:putURL
                                           successBlock:^(NSURLSessionDataTask *task, id responseObject) {
-//                                              [self alertWithTitle:@"Success" message:@"The picture has been added to your backpack"];
-//                                              [self activityStopped];
-//                                              self.saveButton.hidden = YES;
+                                               [self alertWithTitle:@"Success" message:@"The picture has been added to your backpack"];
+                                               //[self activityStopped];
                                           } failureBlock:^(NSURLSessionDataTask *task, NSError *error) {
-//                                              [self alertWithTitle:@"Error" message:[error localizedDescription]];
-//                                              [self activityStopped];
+                                               [self alertWithTitle:@"Error" message:[error localizedDescription]];
+                                               //[self activityStopped];
                                           }];
                            }
                            else {
@@ -133,19 +132,18 @@ static BOOL DEV = YES;
                                                   toUrl:backpackURL
                                            successBlock:^(AFHTTPRequestOperation *operation, id responseObject) {
                                                NSLog(@"Got %@", responseObject);
-//                                               [self alertWithTitle:@"Success" message:@"The picture has been added to your backpack"];
-//                                               [self activityStopped];
-//                                               self.saveButton.hidden = YES;
+                                               [self alertWithTitle:@"Success" message:@"The picture has been added to your backpack"];
+                                               //[self activityStopped];
                                            } failureBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                                               [self alertWithTitle:@"Error" message:[error localizedDescription]];
-//                                               [self activityStopped];
+                                                [self alertWithTitle:@"Error" message:[error localizedDescription]];
+                                                //[self activityStopped];
                                            }];
                                
                            }
                        }
                            failureBlock:^(NSString *reason) {
-//                               [self alertWithTitle:@"Error" message:reason];
-//                               [self activityStopped];
+                                [self alertWithTitle:@"Error" message:reason];
+                                //[self activityStopped];
                                
                            }];
             }
@@ -171,11 +169,26 @@ static BOOL DEV = YES;
                                 }
                             }
                            failureBlock:^(NSError *error) {
+                               [self alertWithTitle:@"Error" message:[error localizedDescription]];
                                NSLog(@"Error: %@", [error localizedDescription]);
                            }
          ];
     }
 
+}
+
+-(void) activityStopped {
+    //[self.toastView hideToastActivity];
+}
+
+-(void) alertWithTitle: (NSString *) title message: (NSString *) message {
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:title
+                                                         message:message
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles: nil];
+
+    [alertView show];
 }
 
 - (void)viewDidLoad
