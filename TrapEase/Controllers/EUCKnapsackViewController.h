@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GPUCameraViewController.h"
 
-@interface EUCKnapsackViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
+@interface EUCKnapsackViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, GPUImageCameraDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIButton *clearButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;

@@ -12,8 +12,9 @@
 #import "EUCNetwork.h"
 #import "Toast+UIView.h"
 #import "EUCTimeUtilities.h"
+#import "GPUCameraViewController.h"
 
-static BOOL DEV = YES;
+static BOOL DEV = NO;
 
 @interface EUCKnapsackViewController () {}
 
@@ -26,7 +27,6 @@ static BOOL DEV = YES;
 @property (strong, nonatomic) NSURL *assetURL;
 @property (weak, nonatomic) IBOutlet UIView *toastView;
 @property (weak, nonatomic) IBOutlet UILabel *status;
-
 
 @end
 
@@ -319,11 +319,9 @@ static BOOL DEV = YES;
                                         animated:YES];
         }
         else if (useCamera) {
-            self.picker = [[UIImagePickerController alloc] init];
-            self.picker.delegate = self;
-            self.picker.allowsEditing = NO;
-            self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            self.popover = [[UIPopoverController alloc] initWithContentViewController:self.picker];
+            GPUCameraViewController * cameraVC = [[GPUCameraViewController alloc] init];
+            cameraVC.delegate = self;
+            self.popover = [[UIPopoverController alloc] initWithContentViewController:cameraVC];
             [self.popover presentPopoverFromRect:self.importButton.bounds
                                           inView:self.importButton
                         permittedArrowDirections:UIPopoverArrowDirectionAny
@@ -368,6 +366,15 @@ static BOOL DEV = YES;
 
     }
     
+}
+
+-(void) pictureTaken {
+    [self.popover dismissPopoverAnimated:YES];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+
+    self.imageView.image = [UIImage imageWithContentsOfFile:[documentsDirectory stringByAppendingPathComponent:@"FilteredPhoto.jpg"]];
+    self.assetURL = nil;
 }
 
 

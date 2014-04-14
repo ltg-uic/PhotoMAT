@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol GPUImageCameraDelegate <NSObject>
+
+-(void) pictureTaken;
+
+@end
 @interface GPUCameraViewController : UIViewController
+@property (weak, nonatomic) id<GPUImageCameraDelegate> delegate;
 
 @end

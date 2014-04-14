@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GPUCameraViewController">
             <connections>
+                <outlet property="filterView" destination="sXI-cv-isa" id="8u0-kX-gNF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,8 +21,11 @@
                     <state key="normal" title="Take Picture">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="shutter:" destination="-1" eventType="touchUpInside" id="cD2-K6-Vbm"/>
+                    </connections>
                 </button>
-                <view contentMode="scaleToFill" id="sXI-cv-isa">
+                <view contentMode="scaleToFill" id="sXI-cv-isa" customClass="GPUImageView">
                     <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

@@ -12,7 +12,11 @@
 
 @interface GPUCameraViewController () {}
 @property (strong, nonatomic) GPUImageStillCamera *stillCamera;
+@property (weak, nonatomic) IBOutlet UIView *filterView;
+@property (strong, nonatomic) GPUImageGammaFilter * filter;
 
+
+- (IBAction)shutter:(id)sender;
 
 @end
 
@@ -31,7 +35,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    self.preferredContentSize = CGSizeMake(640, 548);
     
 }
 
@@ -39,12 +43,12 @@
     [super viewDidAppear:animated];
     
     self.stillCamera = [[GPUImageStillCamera alloc] init];
-    self.stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
+    self.stillCamera.outputImageOrientation = UIInterfaceOrientationLandscapeRight;
     
-    GPUImageGammaFilter * filter = [[GPUImageGammaFilter alloc] init];
-    [self.stillCamera addTarget:filter];
-    GPUImageView *filterView = (GPUImageView *)self.view;
-    [filter addTarget:filterView];
+    self.filter = [[GPUImageGammaFilter alloc] init];
+    [self.stillCamera addTarget:self.filter];
+    GPUImageView *filterView = (GPUImageView *)self.filterView;
+    [self.filter addTarget:filterView];
     
     [self.stillCamera startCameraCapture];
 }
@@ -55,4 +59,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
+- (IBAction)shutter:(id)sender {
+
+    [self.stillCamera capturePhotoAsImageProcessedUpToFilter:self.filter
+                                             withOrientation:UIImageOrientationUp
+                                       withCompletionHandler:^(UIImage *processedImage, NSError *error) {
+                                           NSData *dataForJPGFile = UIImageJPEGRepresentation(processedImage, 0.8);
+                                           
+                                           NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                                           NSString *documentsDirectory = [paths objectAtIndex:0];
+                                           
+                                           NSError *error2 = nil;
+                                           if (![dataForJPGFile writeToFile:[documentsDirectory stringByAppendingPathComponent:@"FilteredPhoto.jpg"] options:NSAtomicWrite error:&error2])
+                                           {
+                                               return;
+                                           }
+                                           [self.delegate pictureTaken];
+    }];
+    
+}
 @end
