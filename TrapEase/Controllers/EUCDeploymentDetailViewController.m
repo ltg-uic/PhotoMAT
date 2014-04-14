@@ -589,16 +589,15 @@ typedef enum : NSUInteger {
     
     NSString * safariURL;
     if (DEV) {
-        safariURL = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/dev-safari-%@/safari", className];
+        safariURL = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/dev-safari-%@/safaris", className];
     }
     else {
-        safariURL = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/safari-%@/safari", className];
+        safariURL = [NSString stringWithFormat:@"http://drowsy.badger.encorelab.org/safari-%@/safaris", className];
     }
     
     NSDictionary * body = @{@"_id": @(deploymentId),
                             @"created_at": [EUCTimeUtilities currentTimeInZulu],
                             @"name": [NSString stringWithFormat:@"%ld-%@", deploymentId, self.shortName.text],
-                            @"camera_trap_number": @([self.trapNumber.text integerValue]),
                             @"group": groupName
                             };
     
