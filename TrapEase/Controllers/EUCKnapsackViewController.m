@@ -90,6 +90,13 @@ static BOOL DEV = NO;
     
 }
 
+-(void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    if (self.asSnapshot) {
+        self.saveButton.hidden = NO;
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
