@@ -122,12 +122,14 @@ typedef enum : NSUInteger {
     // Do any additional setup after loading the view from its nib.
     CGRect frame = self.shortName.frame;
     frame.size.height = 48;
-    self.shortName.frame = frame;
+   // self.shortName.frame = frame;
+    
+    [self textViewLikeTextField:_notes];
 
     UIColor * greyColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
-    self.notes.layer.borderColor = [greyColor CGColor];
-    self.notes.layer.cornerRadius = 8;
-    self.notes.layer.borderWidth = 1;
+//    self.notes.layer.borderColor = [greyColor CGColor];
+//    self.notes.layer.cornerRadius = 8;
+//    self.notes.layer.borderWidth = 1;
     
     self.deploymentImages.layer.borderColor = [greyColor CGColor];
     self.deploymentImages.layer.cornerRadius = 8;
@@ -160,6 +162,15 @@ typedef enum : NSUInteger {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+//changes the look of the textfield
+- (void)textViewLikeTextField:(UITextView *)textView {
+    [textView.layer setBorderColor:[[UIColor colorWithRed:232.0 / 255.0
+                                                    green:232.0 / 255.0 blue:232.0 / 255.0 alpha:1] CGColor]];
+    [textView.layer setBorderWidth:1.0f];
+    [textView.layer setCornerRadius:7.0f];
+    [textView.layer setMasksToBounds:YES];
 }
 
 #pragma mark - ImportDoneDelegate
