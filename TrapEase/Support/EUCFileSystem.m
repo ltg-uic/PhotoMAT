@@ -49,6 +49,14 @@
     return [[EUCFileSystem imageDir] stringByAppendingPathComponent:[NSString stringWithFormat:@"d%ld.jpg", (long) imageId]];
 }
 
++(NSString *) tfileNameForImageWithId: (NSInteger) imageId {
+    return [[EUCFileSystem imageDir] stringByAppendingPathComponent:[NSString stringWithFormat:@"i%ldt.jpg", (long) imageId]];
+}
+
++(NSString *) tfileNameForDeploymentPictureWithId: (NSInteger) imageId {
+    return [[EUCFileSystem imageDir] stringByAppendingPathComponent:[NSString stringWithFormat:@"d%ldt.jpg", (long) imageId]];
+}
+
 +(void) makeImageDirIfNecessary {
     NSString * imageDir = [EUCFileSystem imageDir];
     NSFileManager * fileManager = [NSFileManager defaultManager];
@@ -67,6 +75,17 @@
 +(BOOL)fileExists:(NSString *)fileName {
     NSFileManager * fileManager = [NSFileManager defaultManager];
     return [fileManager fileExistsAtPath:fileName];
+}
+
++(void)moveFile:(NSString *)source toFile:(NSString *)dest {
+    NSFileManager * fileManager = [NSFileManager defaultManager];
+    [fileManager moveItemAtPath:source toPath:dest error:nil];
+}
+
++(NSString *) thumbnailForFile:(NSString *)fileName {
+    NSInteger length = [fileName length];
+    NSString * newFileName = [NSString stringWithFormat:@"%@t.jpg", [fileName substringToIndex:length - 4]];
+    return newFileName;
 }
 
 @end

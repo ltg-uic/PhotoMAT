@@ -64,24 +64,29 @@
 }
 
 - (IBAction)handleRefresh:(id)sender {
-    EUCDatabase * db = [EUCDatabase sharedInstance];
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    NSString * visibility = db.settings[@"visibility"];
-    [EUCNetwork getDeploymentsWithVisibility:visibility andSuccessBlock:^(NSArray *deployments) {
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        [[EUCDatabase sharedInstance] refreshDeployments:deployments];
-        self.deployments = [[EUCDatabase sharedInstance] getDeployments];
-        [self.tableView reloadData];
-    } failureBlock:^(NSString *reason) {
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                             message:reason
-                                                            delegate:nil
-                                                   cancelButtonTitle:nil
-                                                   otherButtonTitles:@"OK", nil];
-        
-        [alertView show];
-    }];
+    self.deployments = [[EUCDatabase sharedInstance] getDeployments];
+    [self.tableView reloadData];
+    
+    
+    /* network refresh not being handled for now */
+//    EUCDatabase * db = [EUCDatabase sharedInstance];
+//    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+//    NSString * visibility = db.settings[@"visibility"];
+//    [EUCNetwork getDeploymentsWithVisibility:visibility andSuccessBlock:^(NSArray *deployments) {
+//        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+//        [[EUCDatabase sharedInstance] refreshDeployments:deployments];
+//        self.deployments = [[EUCDatabase sharedInstance] getDeployments];
+//        [self.tableView reloadData];
+//    } failureBlock:^(NSString *reason) {
+//        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+//        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+//                                                             message:reason
+//                                                            delegate:nil
+//                                                   cancelButtonTitle:nil
+//                                                   otherButtonTitles:@"OK", nil];
+//        
+//        [alertView show];
+//    }];
 }
 
 
