@@ -386,44 +386,6 @@ typedef enum : NSUInteger {
     
     UIImage * image = [UIImage imageWithContentsOfFile:[self thumbnailFileNameForFile: imageToBeDisplayed.filename]];
     cell.imageView.image = image;
-//    if (imageToBeDisplayed.url) {
-//        [self.assetsLibrary assetForURL:imageToBeDisplayed.url resultBlock:^(ALAsset *asset) {
-//            if (asset != nil) {
-//                UIImage * image = [UIImage imageWithCGImage:[asset aspectRatioThumbnail]];
-//                CGFloat wideness = 1.0*image.size.width/image.size.height;
-//                CGSize size;
-//                
-//                if (wideness > defaultDeploymentWideness) {
-//                    size.width = 96;
-//                    // width - height
-//                    // 314
-//                    size.height = 96/wideness;
-//                }
-//                else {
-//                    size.height = 64;
-//                    // width - height
-//                    //         226
-//                    size.width = 64 * wideness;
-//                }
-//                UIImage * resizedImage = [EUCImageUtilities imageWithImage:image scaledToSize:size];
-//                cell.imageView.image = resizedImage;
-//            }
-//            
-//        } failureBlock:^(NSError *error) {
-//            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Cannot open image"
-//                                                                 message:@"The image could not be found"
-//                                                                delegate:nil
-//                                                       cancelButtonTitle:nil
-//                                                       otherButtonTitles:@"OK", nil];
-//            
-//            [alertView show];
-//        }];
-//    }
-//    else {
-//        UIImage * image = [UIImage imageWithContentsOfFile:[self thumbnailFileNameForFile: imageToBeDisplayed.filename]];
-//        cell.imageView.image = image;
-//    }
-    
     
     return cell;
     
@@ -518,10 +480,6 @@ typedef enum : NSUInteger {
                                         animated:YES];
         }
         else if (useCamera) {
-//            self.picker = [[UIImagePickerController alloc] init];
-//            self.picker.delegate = self;
-//            self.picker.allowsEditing = NO;
-//            self.picker.sourceType = UIImagePickerControllerSourceTypeCamera;
             GPUCameraViewController * cameraVC = [[GPUCameraViewController alloc] init];
             cameraVC.delegate = self;
             self.popover = [[UIPopoverController alloc] initWithContentViewController:cameraVC];
@@ -702,17 +660,11 @@ typedef enum : NSUInteger {
     for (EUCImage * deployment_picture in self.addedImages) {
         NSInteger deploymentPictureId = [db getMinIdForTable:@"deployment_picture"];
 
-//        UIImage * image = [UIImage imageWithContentsOfFile:deployment_picture.filename];
-//        NSData * data = [NSData dataWithContentsOfFile:deployment_picture.filename];
-        
         NSString * fileName = [EUCFileSystem fileNameForDeploymentPictureWithId:deploymentPictureId];
         [EUCFileSystem moveFile:[self thumbnailFileNameForFile:deployment_picture.filename] toFile:[self thumbnailFileNameForFile:fileName]]; // move thumbnail
         [EUCFileSystem moveFile:deployment_picture.filename toFile:fileName];
         deployment_picture.filename = fileName;
         
-//        [data writeToFile:fileName atomically:YES];
-//        CGSize dimensions = [image size];
-//        [self resizeFileNamed:fileName fromSize:dimensions];
         [db saveLocalDeploymentPictureWithId: deploymentPictureId
                                        owner: personId
                                deployment_id: deploymentId
@@ -730,17 +682,10 @@ typedef enum : NSUInteger {
             [self.assetsLibrary assetForURL:image.url resultBlock:^(ALAsset *asset) {
                 if (asset != nil) {
                     NSInteger imageId = [db getMinIdForTable:@"image"];
-                    // from: http://stackoverflow.com/a/8801656/772526
-//                    ALAssetRepresentation *rep = [asset defaultRepresentation];
-//                    Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
-//                    NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:(unsigned int)rep.size error:nil];
-//                    NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
                     NSString * fileName = [EUCFileSystem fileNameForImageWithId:imageId];
                     [EUCFileSystem moveFile:[self thumbnailFileNameForFile:image.filename] toFile:[self thumbnailFileNameForFile:fileName]]; // move thumbnail
                     [EUCFileSystem moveFile:image.filename toFile:fileName];
                     image.filename = fileName;
-//                    [data writeToFile:fileName atomically:YES];
-//                    [self resizeFileNamed:fileName fromSize:rep.dimensions];
                     
                     [db saveLocalBurstImageWithId:imageId owner:personId imageDate:[self.format stringFromDate:image.assetDate] burstId:burstId fileName:fileName width:image.dimensions.width height:image.dimensions.height];
                 }
@@ -1049,23 +994,6 @@ typedef enum : NSUInteger {
     [self.bursts reloadData];
     [self.deploymentImages reloadData];
     
-// not getting network deployments yet
-//    // get deployment images and bursts
-//    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-//    
-//    [EUCNetwork getDeploymentDetail:[deploymentId integerValue]
-//                            success:^(NSArray *objects) {
-//                                NSDictionary * deploymentDictionary = [objects firstObject];
-//                                [self populateFromDictionary: deploymentDictionary];
-//                            } failure:^(NSString *reason) {
-//                                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Could not get details."
-//                                                                                     message:[NSString stringWithFormat:@"Please try again. %@", reason]
-//                                                                                    delegate:nil
-//                                                                           cancelButtonTitle:nil
-//                                                                           otherButtonTitles:@"OK", nil];
-//                                
-//                                [alertView show];
-//                            }];
     
 }
 
