@@ -20,6 +20,7 @@
 #import "DDLog.h"
 #import "EUCFileSystem.h"
 #import "EUCTimeUtilities.h"
+#import "Toast+UIView.h"
 
 CGFloat defaultDeploymentWideness = 96.0/64.0;
 
@@ -166,6 +167,8 @@ typedef enum : NSUInteger {
 -(void)importDone:(NSMutableArray *)bursts {
     self.importedBursts = bursts;
     
+    [self.view makeToastActivity];
+    
     BOOL first = YES;
     __block NSInteger imageNumber = 0;
     NSInteger numImages = 0;
@@ -195,6 +198,7 @@ typedef enum : NSUInteger {
                     image.filename = fileName;
                     imageNumber++;
                     if (imageNumber >= numImages) {
+                        [self.view hideToastActivity];
                         [self.bursts reloadData];
                     }
 
@@ -1036,6 +1040,7 @@ typedef enum : NSUInteger {
     
     self.addedImages = [db getDeploymentImagesForDeploymentWithId:deploymentIdInteger];
     self.importedBursts = [db getBurstForDeploymentWithId:deploymentIdInteger withParser: self.parser];
+    [self.burstImages removeAllObjects];
     for (EUCBurst * burst in self.importedBursts) {
         for (EUCImage * image in burst.images) {
             [self.burstImages addObject:image];
