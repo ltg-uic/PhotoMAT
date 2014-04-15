@@ -10,6 +10,7 @@
 #import "EUCUserViewController.h"
 #import "EUCDatabase.h"
 #import "EUCNetwork.h"
+#import "EUCFileSystem.h"
 
 @interface EUCUserViewController ()
 @property (weak, nonatomic) IBOutlet UIPickerView *school;
@@ -34,6 +35,7 @@
 
 - (IBAction)login:(id)sender;
 
+- (IBAction)copySamples:(id)sender;
 @end
 
 @implementation EUCUserViewController
@@ -274,6 +276,43 @@
 
     }
     [self refreshViewForLoggedIn:[self loggedIn]];
+}
+
+- (IBAction)copySamples:(id)sender {
+	NSFileManager *filemgr = [NSFileManager defaultManager];
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString * documentsDirectory = [paths objectAtIndex:0];
+    NSString * imagesDir = [documentsDirectory stringByAppendingPathComponent:@"images"];
+    
+
+    NSString * file = [[NSBundle mainBundle] pathForResource:@"d1" ofType:@"jpg"];
+    NSString * dest = [imagesDir stringByAppendingPathComponent:@"d1.jpg"];
+
+    
+    [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    
+    file = [[NSBundle mainBundle] pathForResource:@"d1t" ofType:@"jpg"];
+    dest = [imagesDir stringByAppendingPathComponent:@"d1t.jpg"];
+    [filemgr copyItemAtPath: file toPath: dest error: NULL];
+
+
+    file = [[NSBundle mainBundle] pathForResource:@"i1" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i1.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    file = [[NSBundle mainBundle] pathForResource:@"i2" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i2.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    file = [[NSBundle mainBundle] pathForResource:@"i3" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i3.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    file = [[NSBundle mainBundle] pathForResource:@"i4" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i4.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    file = [[NSBundle mainBundle] pathForResource:@"i5" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i5.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    file = [[NSBundle mainBundle] pathForResource:@"i6" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i6.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    file = [[NSBundle mainBundle] pathForResource:@"i7" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i7.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    file = [[NSBundle mainBundle] pathForResource:@"i1t" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i1t.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    file = [[NSBundle mainBundle] pathForResource:@"i2t" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i2t.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    file = [[NSBundle mainBundle] pathForResource:@"i3t" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i3t.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    file = [[NSBundle mainBundle] pathForResource:@"i4t" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i4t.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    file = [[NSBundle mainBundle] pathForResource:@"i5t" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i5t.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    file = [[NSBundle mainBundle] pathForResource:@"i6t" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i6t.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+    file = [[NSBundle mainBundle] pathForResource:@"i7t" ofType:@"jpg"];   dest = [imagesDir stringByAppendingPathComponent:@"i7t.jpg"]; [filemgr copyItemAtPath: file toPath: dest error: NULL];
+
+    [[EUCDatabase sharedInstance] fixImages];
+    
 }
 
 -(BOOL) loggedIn {

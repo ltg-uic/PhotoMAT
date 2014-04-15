@@ -12,6 +12,7 @@
 #import "EUCNetwork.h"
 #import "EUCImage.h"
 #import "EUCBurst.h"
+#import "EUCFileSystem.h"
 
 static EUCDatabase * database;
 static const int ddLogLevel = LOG_LEVEL_INFO;
@@ -596,5 +597,20 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return bursts;
 }
 
+
+-(void) fixImages {
+    NSString * documentDir = [EUCFileSystem documentDir];
+    NSString * imageDir = [documentDir stringByAppendingPathComponent:@"images"];
+    
+    [self.db executeUpdate:@"Update deployment_picture set file_name=? where id=1", [imageDir stringByAppendingPathComponent:@"d1.jpg"]];
+    [self.db executeUpdate:@"Update image set file_name=? where id=1", [imageDir stringByAppendingPathComponent:@"i1.jpg"]];
+    [self.db executeUpdate:@"Update image set file_name=? where id=2", [imageDir stringByAppendingPathComponent:@"i2.jpg"]];
+    [self.db executeUpdate:@"Update image set file_name=? where id=3", [imageDir stringByAppendingPathComponent:@"i3.jpg"]];
+    [self.db executeUpdate:@"Update image set file_name=? where id=4", [imageDir stringByAppendingPathComponent:@"i4.jpg"]];
+    [self.db executeUpdate:@"Update image set file_name=? where id=5", [imageDir stringByAppendingPathComponent:@"i5.jpg"]];
+    [self.db executeUpdate:@"Update image set file_name=? where id=6", [imageDir stringByAppendingPathComponent:@"i6.jpg"]];
+    [self.db executeUpdate:@"Update image set file_name=? where id=7", [imageDir stringByAppendingPathComponent:@"i7.jpg"]];
+    
+}
 
 @end

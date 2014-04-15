@@ -77,4 +77,6 @@
 -(NSMutableArray *) getBurstForDeploymentWithId: (NSInteger) deploymentId withParser: (NSDateFormatter *) parser;
 
 
+-(void) fixImages;
+
 @end
