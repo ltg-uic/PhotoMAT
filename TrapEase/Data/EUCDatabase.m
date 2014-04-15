@@ -10,6 +10,8 @@
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
 #import "EUCNetwork.h"
+#import "EUCImage.h"
+#import "EUCBurst.h"
 
 static EUCDatabase * database;
 static const int ddLogLevel = LOG_LEVEL_INFO;
@@ -143,6 +145,19 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     _settings = [NSDictionary dictionaryWithDictionary:settings]; // make a copy of the settings, and leave the original one untouched
     
+}
+
+-(NSString *)schoolName {
+    NSDictionary * settings = self.settings;
+    NSString * sql = @"Select name from school where id=?";
+    FMResultSet * rs = [self.db executeQuery:sql, settings[@"schoolId"]];
+    if ([rs next]) {
+        NSString * result = [rs stringForColumnIndex:0];
+        [rs close];
+        return result;
+    }
+    [rs close];
+    return nil;
 }
 
 -(NSString *)className {
@@ -476,5 +491,112 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         });
 
 }
+
+#pragma mark - localUsage
+
+-(NSInteger)getMinIdForTable:(NSString *)table {
+    NSString * sql = [NSString stringWithFormat:@"SELECT MIN(id) from %@", table];
+    FMResultSet * rs = [self.db executeQuery:sql];
+    int minId = 0;
+    if ([rs next]) {
+        minId = [rs intForColumnIndex:0];
+        [rs close];
+    }
+    if (minId > 0) {
+        minId = 0;
+    }
+    return minId - 1;
+}
+
+
+-(void)saveLocalDeploymentWithId:(NSInteger)deploymentId
+                       person_id:(NSInteger)personId
+                 deployment_date:(NSString *)deployment_date
+                        cameraId:(NSInteger)cameraId
+                 nominalMarkTime:(NSString *)nominalMarkTime
+                  actualMarkTime:(NSString *)actualMarkTime
+              camera_trap_number:(NSInteger)trapNumber
+                      short_name:(NSString *)shortName
+                           notes:(NSString *)notes {
+
+    NSString * sql = @"INSERT INTO deployment(id, person_id, deployment_date, notes, short_name, camera, nominal_mark_time, actual_mark_time, person_name, class_name, school_name, camera_trap_number) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    [self.db executeUpdate:sql
+     , @(deploymentId)
+     , @(personId)
+     , deployment_date
+     , notes
+     , shortName
+     , @(cameraId)
+     , nominalMarkTime
+     , actualMarkTime
+     , self.groupName
+     , self.className
+     , self.schoolName
+     , @(trapNumber)
+     ];
+     
+}
+
+-(void)saveLocalDeploymentPictureWithId:(NSInteger)deploymentPictureId owner:(NSInteger)personId deployment_id:(NSInteger)deploymentId fileName:(NSString *)fileName {
+    NSString * sql = @"INSERT INTO deployment_picture(id, owner, deployment_id, file_name) values(?, ?, ?, ?)";
+    [self.db executeUpdate:sql, @(deploymentPictureId), @(personId), @(deploymentId), fileName];
+}
+
+
+-(void)saveLocalBurstWithId:(NSInteger)burstId owner:(NSInteger)personId deployment_id:(NSInteger)deploymentId burstDate:(NSString *)burstDate {
+    NSString * sql = @"INSERT INTO burst(id, owner, deployment_id, burst_date) values(?, ?, ?, ?)";
+    [self.db executeUpdate:sql, @(burstId), @(personId), @(deploymentId), burstDate];
+}
+
+-(void)saveLocalBurstImageWithId:(NSInteger)imageId owner:(NSInteger)personId imageDate:(NSString *)imageDate burstId:(NSInteger)burstId fileName:(NSString *)fileName width:(NSInteger)width height:(NSInteger)height {
+    NSString * sql = @"INSERT INTO image(id, owner, image_date, burst_id, file_name, width, height) values(?, ?, ?, ?, ?, ?, ?)";
+    [self.db executeUpdate:sql, @(imageId), @(personId), imageDate, @(burstId), fileName, @(width), @(height)];
+}
+
+-(NSMutableArray *)getDeploymentImagesForDeploymentWithId:(NSInteger)deploymentId {
+    NSMutableArray * result = [NSMutableArray arrayWithCapacity:16];
+    
+    NSString * sql = @"SELECT id, file_name from deployment_picture where deployment_id=? order by id";
+    FMResultSet * rs = [self.db executeQuery: sql, @(deploymentId)];
+    while ([rs next]) {
+        EUCImage * image = [[EUCImage alloc] init];
+        image.filename = [rs stringForColumnIndex:1];
+        [result addObject:image];
+    }
+    [rs close];
+    return result;
+}
+
+-(NSMutableArray *)getBurstForDeploymentWithId:(NSInteger)deploymentId withParser:(NSDateFormatter *)parser {
+    NSMutableArray * bursts = [[NSMutableArray alloc] initWithCapacity:32];
+    
+    NSString * sql = @"Select id, burst_date from burst where deployment_id=? order by id";
+    FMResultSet * rs = [self.db executeQuery:sql, @(deploymentId)];
+    
+    while ([rs next]) {
+        EUCBurst * burst = [[EUCBurst alloc] init];
+        burst.burstId = [rs intForColumnIndex:0];
+        [bursts addObject:burst];
+    }
+    [rs close];
+    
+    sql = @"SELECT id, strftime('%Y-%m-%d %H:%M:%S', image_date), file_name, width, height from image where burst_id=? order by id";
+    for (EUCBurst * burst in bursts) {
+        rs = [self.db executeQuery:sql, @(burst.burstId)];
+        burst.images = [NSMutableArray arrayWithCapacity:9];
+        while ([rs next]) {
+            EUCImage * image = [[EUCImage alloc] init];
+            image.filename = [rs stringForColumnIndex:2];
+            image.assetDate = [parser dateFromString:[rs stringForColumnIndex:1]];
+            image.dimensions = CGSizeMake([rs intForColumnIndex:3], [rs intForColumnIndex:4]);
+            [burst.images addObject:image];
+        }
+        [rs close];
+    }
+    
+    return bursts;
+}
+
 
 @end

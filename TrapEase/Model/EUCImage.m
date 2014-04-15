@@ -17,6 +17,8 @@
     if (self) {
         _index = index;
         _url = url;
+        
+        
     }
     return self;
 }

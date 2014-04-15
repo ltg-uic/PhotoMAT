@@ -350,43 +350,45 @@ typedef enum : NSUInteger {
         imageToBeDisplayed = self.addedImages[indexPath.row];
     }
     
-    if (imageToBeDisplayed.url) {
-        [self.assetsLibrary assetForURL:imageToBeDisplayed.url resultBlock:^(ALAsset *asset) {
-            if (asset != nil) {
-                UIImage * image = [UIImage imageWithCGImage:[asset aspectRatioThumbnail]];
-                CGFloat wideness = 1.0*image.size.width/image.size.height;
-                CGSize size;
-                
-                if (wideness > defaultDeploymentWideness) {
-                    size.width = 96;
-                    // width - height
-                    // 314
-                    size.height = 96/wideness;
-                }
-                else {
-                    size.height = 64;
-                    // width - height
-                    //         226
-                    size.width = 64 * wideness;
-                }
-                UIImage * resizedImage = [EUCImageUtilities imageWithImage:image scaledToSize:size];
-                cell.imageView.image = resizedImage;
-            }
-            
-        } failureBlock:^(NSError *error) {
-            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Cannot open image"
-                                                                 message:@"The image could not be found"
-                                                                delegate:nil
-                                                       cancelButtonTitle:nil
-                                                       otherButtonTitles:@"OK", nil];
-            
-            [alertView show];
-        }];
-    }
-    else {
-        UIImage * image = [UIImage imageWithContentsOfFile:[self thumbnailFileNameForFile: imageToBeDisplayed.filename]];
-        cell.imageView.image = image;
-    }
+    UIImage * image = [UIImage imageWithContentsOfFile:[self thumbnailFileNameForFile: imageToBeDisplayed.filename]];
+    cell.imageView.image = image;
+//    if (imageToBeDisplayed.url) {
+//        [self.assetsLibrary assetForURL:imageToBeDisplayed.url resultBlock:^(ALAsset *asset) {
+//            if (asset != nil) {
+//                UIImage * image = [UIImage imageWithCGImage:[asset aspectRatioThumbnail]];
+//                CGFloat wideness = 1.0*image.size.width/image.size.height;
+//                CGSize size;
+//                
+//                if (wideness > defaultDeploymentWideness) {
+//                    size.width = 96;
+//                    // width - height
+//                    // 314
+//                    size.height = 96/wideness;
+//                }
+//                else {
+//                    size.height = 64;
+//                    // width - height
+//                    //         226
+//                    size.width = 64 * wideness;
+//                }
+//                UIImage * resizedImage = [EUCImageUtilities imageWithImage:image scaledToSize:size];
+//                cell.imageView.image = resizedImage;
+//            }
+//            
+//        } failureBlock:^(NSError *error) {
+//            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Cannot open image"
+//                                                                 message:@"The image could not be found"
+//                                                                delegate:nil
+//                                                       cancelButtonTitle:nil
+//                                                       otherButtonTitles:@"OK", nil];
+//            
+//            [alertView show];
+//        }];
+//    }
+//    else {
+//        UIImage * image = [UIImage imageWithContentsOfFile:[self thumbnailFileNameForFile: imageToBeDisplayed.filename]];
+//        cell.imageView.image = image;
+//    }
     
     
     return cell;
@@ -551,8 +553,29 @@ typedef enum : NSUInteger {
     else {
         NSURL * assetURL = [info valueForKey:UIImagePickerControllerReferenceURL];
         EUCImage * image = [[EUCImage alloc] initWithIndex:0 andUrl:assetURL];
-        [self.addedImages addObject:image];
-        [self.deploymentImages reloadData];
+        
+        [self.assetsLibrary assetForURL:image.url resultBlock:^(ALAsset *asset) {
+            if (asset != nil) {
+                // from: http://stackoverflow.com/a/8801656/772526
+                ALAssetRepresentation *rep = [asset defaultRepresentation];
+                Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
+                NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:(unsigned int)rep.size error:nil];
+                NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+                NSString *documentsDirectory = [EUCFileSystem documentDir];
+                NSString *imagesDirectory = [documentsDirectory stringByAppendingPathComponent:@"images"];
+                NSString * fileName = [imagesDirectory stringByAppendingPathComponent: [NSString stringWithFormat:@"_d%ld.jpg", time(NULL)]];
+                [data writeToFile:fileName atomically:YES];
+                [self resizeFileNamed:fileName fromSize:rep.dimensions];
+                image.filename = fileName;
+                [self.addedImages addObject:image];
+                [self.deploymentImages reloadData];
+            }
+        }
+                           failureBlock:^(NSError *error) {
+                               // TODO: AAA log this
+                           }
+         ];
+        
     }
     
 }
@@ -564,7 +587,8 @@ typedef enum : NSUInteger {
    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString * destination = [documentsDirectory stringByAppendingPathComponent: [NSString stringWithFormat:@"_d%ld.jpg", time(NULL)]];
+    NSString *imagesDirectory = [documentsDirectory stringByAppendingPathComponent:@"images"];
+    NSString * destination = [imagesDirectory stringByAppendingPathComponent: [NSString stringWithFormat:@"_d%ld.jpg", time(NULL)]];
     
     NSFileManager * fileManager = [NSFileManager defaultManager];
     [fileManager copyItemAtPath:[documentsDirectory stringByAppendingPathComponent:@"FilteredPhoto.jpg"]
@@ -621,6 +645,74 @@ typedef enum : NSUInteger {
 }
 
 -(void) uploadDeployment {
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    NSDictionary * settings = [db settings];
+    NSInteger personId = [settings[@"personId"] integerValue];
+    // NSString * trapNumberString = self.trapNumber.text;
+    NSInteger trapNumber = -1; // [trapNumberString integerValue];
+    NSInteger cameraId = 1;
+    
+    NSInteger deploymentId = [db getMinIdForTable:@"deployment"];
+    [db saveLocalDeploymentWithId: deploymentId
+                        person_id: personId
+                  deployment_date: [self.format stringFromDate:self.actualDate]
+                         cameraId: cameraId
+                  nominalMarkTime: [self.format stringFromDate:self.nominalDate]
+                   actualMarkTime: [self.format stringFromDate:self.actualDate]
+               camera_trap_number: trapNumber
+                       short_name: self.shortName.text
+                            notes: self.notes.text
+     ];
+    
+    // save deployment_pictures
+    for (EUCImage * deployment_picture in self.addedImages) {
+        NSInteger deploymentPictureId = [db getMinIdForTable:@"deployment_picture"];
+        UIImage * image = [UIImage imageWithContentsOfFile:deployment_picture.filename];
+        NSData * data = [NSData dataWithContentsOfFile:deployment_picture.filename];
+        NSString * fileName = [EUCFileSystem fileNameForDeploymentPictureWithId:deploymentPictureId];
+        [data writeToFile:fileName atomically:YES];
+        CGSize dimensions = [image size];
+        [self resizeFileNamed:fileName fromSize:dimensions];
+        [db saveLocalDeploymentPictureWithId: deploymentPictureId
+                                       owner: personId
+                               deployment_id: deploymentId
+                                    fileName: fileName
+         ];
+    }
+    
+    // save burst
+    for (EUCBurst * burst in self.importedBursts) {
+        NSInteger burstId = [db getMinIdForTable:@"burst"];
+        EUCImage * firstImage = burst.images[0];
+        [db saveLocalBurstWithId:burstId owner:personId deployment_id:deploymentId burstDate:[self.format stringFromDate:firstImage.assetDate]];
+        
+        for (EUCImage * image in burst.images) {
+            NSInteger imageId = [db getMinIdForTable:@"image"];
+            [self.assetsLibrary assetForURL:image.url resultBlock:^(ALAsset *asset) {
+                if (asset != nil) {
+                    // from: http://stackoverflow.com/a/8801656/772526
+                    ALAssetRepresentation *rep = [asset defaultRepresentation];
+                    Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
+                    NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:(unsigned int)rep.size error:nil];
+                    NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+                    NSString * fileName = [EUCFileSystem fileNameForImageWithId:imageId];
+                    [data writeToFile:fileName atomically:YES];
+                    [self resizeFileNamed:fileName fromSize:rep.dimensions];
+                    
+                    [db saveLocalBurstImageWithId:imageId owner:personId imageDate:[self.format stringFromDate:image.assetDate] burstId:burstId fileName:fileName width:image.dimensions.width height:image.dimensions.height];
+                }
+            }
+                               failureBlock:^(NSError *error) {
+                                   // TODO: AAA log this
+                               }
+             ];
+        }
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+
+}
+
+-(void) old_uploadDeployment {
     NSDictionary * settings = [[EUCDatabase sharedInstance] settings];
     NSInteger personId = [settings[@"personId"] integerValue];
     NSInteger cameraId = 1; // hardcoded for now
@@ -893,23 +985,38 @@ typedef enum : NSUInteger {
     NSString * dateString = record[@"actual_mark_time"];
     self.actualDate = [self.parser dateFromString:dateString];
 
-
-    // get deployment images and bursts
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    [EUCNetwork getDeploymentDetail:[deploymentId integerValue]
-                            success:^(NSArray *objects) {
-                                NSDictionary * deploymentDictionary = [objects firstObject];
-                                [self populateFromDictionary: deploymentDictionary];
-                            } failure:^(NSString *reason) {
-                                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Could not get details."
-                                                                                     message:[NSString stringWithFormat:@"Please try again. %@", reason]
-                                                                                    delegate:nil
-                                                                           cancelButtonTitle:nil
-                                                                           otherButtonTitles:@"OK", nil];
-                                
-                                [alertView show];
-                            }];
+    // local get
+    NSInteger deploymentIdInteger = [deploymentId integerValue];
+    self.deploymentIdLabel.text = [NSString stringWithFormat:@"%ld", (long)[record[@"id"] integerValue]];
+    self.numberDownloaded = 0;
+    self.numberToDownload = 0;
+    self.downloadActivityIndicator.hidden = YES;
+    self.downloadProgressView.hidden = YES;
+    self.downloadButton.hidden = YES;
+    
+    self.addedImages = [db getDeploymentImagesForDeploymentWithId:deploymentIdInteger];
+    self.importedBursts = [db getBurstForDeploymentWithId:deploymentIdInteger withParser: self.parser];
+    [self.bursts reloadData];
+    [self.deploymentImages reloadData];
+    
+// not getting network deployments yet
+//    // get deployment images and bursts
+//    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+//    
+//    [EUCNetwork getDeploymentDetail:[deploymentId integerValue]
+//                            success:^(NSArray *objects) {
+//                                NSDictionary * deploymentDictionary = [objects firstObject];
+//                                [self populateFromDictionary: deploymentDictionary];
+//                            } failure:^(NSString *reason) {
+//                                UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Could not get details."
+//                                                                                     message:[NSString stringWithFormat:@"Please try again. %@", reason]
+//                                                                                    delegate:nil
+//                                                                           cancelButtonTitle:nil
+//                                                                           otherButtonTitles:@"OK", nil];
+//                                
+//                                [alertView show];
+//                            }];
     
 }
 
