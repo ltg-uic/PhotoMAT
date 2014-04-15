@@ -18,7 +18,10 @@
 +(NSString *) imageDir;
 +(NSString *) fileNameForImageWithId: (NSInteger) imageId;
 +(NSString *) fileNameForDeploymentPictureWithId: (NSInteger) imageId ;
++(NSString *) tfileNameForImageWithId: (NSInteger) imageId;
++(NSString *) tfileNameForDeploymentPictureWithId: (NSInteger) imageId ;
 +(void) makeImageDirIfNecessary;
 +(BOOL) fileExists: (NSString *) fileName;
-
++(void) moveFile: (NSString *) source toFile:(NSString *) dest;
++(NSString *) thumbnailForFile: (NSString *) fileName;
 @end

@@ -167,6 +167,12 @@ typedef enum : NSUInteger {
     self.importedBursts = bursts;
     
     BOOL first = YES;
+    __block NSInteger imageNumber = 0;
+    NSInteger numImages = 0;
+    for (EUCBurst * burst in self.importedBursts) {
+        numImages += [burst.images count];
+    }
+    
     for (EUCBurst * burst in self.importedBursts) {
         for (EUCImage * image in burst.images) {
             if (first) {
@@ -174,10 +180,34 @@ typedef enum : NSUInteger {
                 first = NO;
             }
             [self.burstImages addObject:image];
+            [self.assetsLibrary assetForURL:image.url resultBlock:^(ALAsset *asset) {
+                if (asset != nil) {
+                    // from: http://stackoverflow.com/a/8801656/772526
+                    ALAssetRepresentation *rep = [asset defaultRepresentation];
+                    Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
+                    NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:(unsigned int)rep.size error:nil];
+                    NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+                    NSString *documentsDirectory = [EUCFileSystem documentDir];
+                    NSString *imagesDirectory = [documentsDirectory stringByAppendingPathComponent:@"images"];
+                    NSString * fileName = [imagesDirectory stringByAppendingPathComponent: [NSString stringWithFormat:@"_d%ld.jpg", imageNumber]];
+                    [data writeToFile:fileName atomically:YES];
+                    [self resizeFileNamed:fileName fromSize:rep.dimensions];
+                    image.filename = fileName;
+                    imageNumber++;
+                    if (imageNumber >= numImages) {
+                        [self.bursts reloadData];
+                    }
+
+                }
+            }
+                               failureBlock:^(NSError *error) {
+                                   // TODO: AAA log this
+                               }
+             ];
+            
         }
     }
     
-    [self.bursts reloadData];
 }
 
 #pragma mark - edit view
@@ -667,12 +697,18 @@ typedef enum : NSUInteger {
     // save deployment_pictures
     for (EUCImage * deployment_picture in self.addedImages) {
         NSInteger deploymentPictureId = [db getMinIdForTable:@"deployment_picture"];
-        UIImage * image = [UIImage imageWithContentsOfFile:deployment_picture.filename];
-        NSData * data = [NSData dataWithContentsOfFile:deployment_picture.filename];
+
+//        UIImage * image = [UIImage imageWithContentsOfFile:deployment_picture.filename];
+//        NSData * data = [NSData dataWithContentsOfFile:deployment_picture.filename];
+        
         NSString * fileName = [EUCFileSystem fileNameForDeploymentPictureWithId:deploymentPictureId];
-        [data writeToFile:fileName atomically:YES];
-        CGSize dimensions = [image size];
-        [self resizeFileNamed:fileName fromSize:dimensions];
+        [EUCFileSystem moveFile:[self thumbnailFileNameForFile:deployment_picture.filename] toFile:[self thumbnailFileNameForFile:fileName]]; // move thumbnail
+        [EUCFileSystem moveFile:deployment_picture.filename toFile:fileName];
+        deployment_picture.filename = fileName;
+        
+//        [data writeToFile:fileName atomically:YES];
+//        CGSize dimensions = [image size];
+//        [self resizeFileNamed:fileName fromSize:dimensions];
         [db saveLocalDeploymentPictureWithId: deploymentPictureId
                                        owner: personId
                                deployment_id: deploymentId
@@ -687,17 +723,20 @@ typedef enum : NSUInteger {
         [db saveLocalBurstWithId:burstId owner:personId deployment_id:deploymentId burstDate:[self.format stringFromDate:firstImage.assetDate]];
         
         for (EUCImage * image in burst.images) {
-            NSInteger imageId = [db getMinIdForTable:@"image"];
             [self.assetsLibrary assetForURL:image.url resultBlock:^(ALAsset *asset) {
                 if (asset != nil) {
+                    NSInteger imageId = [db getMinIdForTable:@"image"];
                     // from: http://stackoverflow.com/a/8801656/772526
-                    ALAssetRepresentation *rep = [asset defaultRepresentation];
-                    Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
-                    NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:(unsigned int)rep.size error:nil];
-                    NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
+//                    ALAssetRepresentation *rep = [asset defaultRepresentation];
+//                    Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
+//                    NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:(unsigned int)rep.size error:nil];
+//                    NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
                     NSString * fileName = [EUCFileSystem fileNameForImageWithId:imageId];
-                    [data writeToFile:fileName atomically:YES];
-                    [self resizeFileNamed:fileName fromSize:rep.dimensions];
+                    [EUCFileSystem moveFile:[self thumbnailFileNameForFile:image.filename] toFile:[self thumbnailFileNameForFile:fileName]]; // move thumbnail
+                    [EUCFileSystem moveFile:image.filename toFile:fileName];
+                    image.filename = fileName;
+//                    [data writeToFile:fileName atomically:YES];
+//                    [self resizeFileNamed:fileName fromSize:rep.dimensions];
                     
                     [db saveLocalBurstImageWithId:imageId owner:personId imageDate:[self.format stringFromDate:image.assetDate] burstId:burstId fileName:fileName width:image.dimensions.width height:image.dimensions.height];
                 }
@@ -997,6 +1036,11 @@ typedef enum : NSUInteger {
     
     self.addedImages = [db getDeploymentImagesForDeploymentWithId:deploymentIdInteger];
     self.importedBursts = [db getBurstForDeploymentWithId:deploymentIdInteger withParser: self.parser];
+    for (EUCBurst * burst in self.importedBursts) {
+        for (EUCImage * image in burst.images) {
+            [self.burstImages addObject:image];
+        }
+    }
     [self.bursts reloadData];
     [self.deploymentImages reloadData];
     

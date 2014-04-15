@@ -495,17 +495,15 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 #pragma mark - localUsage
 
 -(NSInteger)getMinIdForTable:(NSString *)table {
-    NSString * sql = [NSString stringWithFormat:@"SELECT MIN(id) from %@", table];
+    NSString * sql = [NSString stringWithFormat:@"SELECT MAX(id) from %@", table];
     FMResultSet * rs = [self.db executeQuery:sql];
-    int minId = 0;
+    int maxId = 0;
     if ([rs next]) {
-        minId = [rs intForColumnIndex:0];
+        maxId = [rs intForColumnIndex:0];
         [rs close];
     }
-    if (minId > 0) {
-        minId = 0;
-    }
-    return minId - 1;
+
+    return maxId + 1;
 }
 
 
