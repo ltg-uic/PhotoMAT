@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class FMDatabase;
+@class EUCLabel;
 
 @interface EUCDatabase : NSObject
 
@@ -79,4 +80,41 @@
 
 -(void) fixImages;
 
+#pragma mark - labels
+
+-(NSInteger) addLabel: (NSString *) labelName toBurst: (NSInteger) burstId atLocation: (CGPoint) labelLocation;  // returns label ID
+-(void) deleteLabel: (NSInteger) labelId;
+-(void) updateLabel: (EUCLabel *) label;
+
+//
+//-(NSArray *) labelsForBurst: (NSInteger) burstId; // returns an array of EUCLabel objects
+//-(NSArray *) labelsForBurst: (NSInteger) burstId named: (NSString *) labelName;
+//-(NSArray *) labelsForDeployment: (NSInteger) deploymentId;
+//
+//-(void) deleteAllLabelsNamed:(NSString *) labelName onBurst:(NSInteger) burstId;
+//-(void) deleteAllLabelsNamed:(NSString *) labelName;
+//
+//-(void) renameLabelsNamed: (NSString *) oldLabelName toName: (NSString *) newLabelName forBurst: (NSInteger) burstId;
+//-(void) renameLabelsNamed: (NSString *) oldLabelName toName: (NSString *) newLabelName forDeployment: (NSInteger) deploymentId;
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

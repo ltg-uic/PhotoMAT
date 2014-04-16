@@ -27,7 +27,6 @@
     NSMutableArray *tag_array;
     NSMutableArray *photoTags;
     OBDragDropManager *dragDropManager;
-    NSMutableArray *imageViewLabels;
     TagView *selectedTag;
     UIPopoverController *popoverController;
     UIPopoverController *errorPopoverController;
@@ -64,11 +63,10 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
                                                 selectedImage:nil];
 
 //        tag_array = [NSMutableArray arrayWithObjects:@"1234567890qwertyu", @"Ugly Lion", @"grey Squirrel 1", @"yellow green Troll", @"red Dragon", @"fox Gorilla", @"eater Monkey", @"RIT Tigers", @"brown Bunny", @"big fat Rat", @"The yellow Bird1", @"The yellow Bird2", @"The yellow Bird3", @"The yellow Birdees3", @"The yellow Bird3", @"The yellow Bird2", @"the big bad bear2", @"the big bad bear", nil];
-        tag_array = [NSMutableArray arrayWithObjects:@"1234567890qwertyu", nil];
-        photoTags = [[NSMutableArray alloc] init];
-        
-        
-        appDelegate =  (EUCAppDelegate *)[[UIApplication sharedApplication] delegate];
+
+
+
+        appDelegate = (EUCAppDelegate *) [[UIApplication sharedApplication] delegate];
 
     }
     return self;
@@ -87,8 +85,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     [_addLabelField setDelegate:self];
     [_addLabelField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 
-    imageViewLabels = [[NSMutableArray alloc] init];
-
     //setup drag and drop
     dragDropManager = [OBDragDropManager sharedManager];
     _dropOverlayView.dropZoneHandler = self;
@@ -102,21 +98,30 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 }
 
--(void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
--(void)viewWillAppear:(BOOL)animated {
+
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
     [self refreshLocalBurstCache];
 }
 
--(void)refreshGroupLabel {
+- (void)refreshGroupLabel {
+
+
+
+
+    tag_array = [NSMutableArray arrayWithObjects:@"squirrel", nil];
+    photoTags = [[NSMutableArray alloc] init];
+
     EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
     schoolClassGroupLabel.text = [NSString stringWithFormat:@"%@ : %@ : %@", selectedSet.schoolName, selectedSet.className, selectedSet.groupName];
 }
 
--(void)refreshLocalBurstCache {
+- (void)refreshLocalBurstCache {
+
 
     EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
     bursts = burstDetailController.importedBursts;
@@ -249,7 +254,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
         if ([flag isEqualToString:DELETE_ALL_LABELS]) {
             //delete main label
-            TagView *t = (TagView *)tagView;
+            TagView *t = (TagView *) tagView;
             [_tagList removeTag:t.text];
             lastTagName = nil;
             //now delete all the ones in the image
@@ -263,7 +268,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
             _addLabelField.text = @"";
         } else if ([flag isEqualToString:DELETE_SELECTED_LABEL]) {
             //deletes a tag off of the imageview
-            TagView *t = (TagView *)tagView;
+            TagView *t = (TagView *) tagView;
             [t removeFromSuperview];
 
         }
@@ -351,8 +356,14 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     [self enableImageViewGesturesOnTagView:copy];
     [self enableDropColor:copy];
 
+    EUCBurst *burst = bursts[burstIndex];
+    copy.labelId = [burst addLabelNamed:copy.text atLocation:location];
     [_dropOverlayView addSubview:copy];
-    [imageViewLabels addObject:copy];
+
+
+
+
+
 }
 
 
@@ -452,15 +463,19 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 - (IBAction)swipeImagePrevious:(id)sender {
 
-    if( burstIndex >= bursts.count ) {
-        burstIndex = bursts.count-1;
+    if (_imageView.isAnimating) {
+        [_playPauseButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    }
+
+    if (burstIndex >= bursts.count) {
+        burstIndex = bursts.count - 1;
     } else {
         burstIndex--;
     }
 
 
     //we have another
-    if( burstIndex >= 0 ) {
+    if (burstIndex >= 0) {
 
         [self removeAllTagsFromDragOverlay];
 
@@ -471,33 +486,30 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
 
 
-
         NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
 
-        if( pts.count > 0 ) {
+        if (pts.count > 0) {
             for (PhotoTag *pt in pts) {
                 [_dropOverlayView addSubview:pt.tagView];
             }
         }
-
-
-
-
     }
-
-
-
-
 }
 
 - (IBAction)swipeImageNext:(id)sender {
 
-    burstIndex++;
+
+    if (_imageView.isAnimating) {
+        [_playPauseButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+    }
+
+        burstIndex++;
+
 
     //we have another
-    if( burstIndex < bursts.count ) {
+    if (burstIndex < bursts.count) {
 
-       [self removeAllTagsFromDragOverlay];
+        [self removeAllTagsFromDragOverlay];
 
         NSLog(@"right swipe %d", burstIndex);
         EUCBurst *burst = bursts[burstIndex];
@@ -508,8 +520,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
 
 
-
-        if( pts.count > 0 ) {
+        if (pts.count > 0) {
 
             for (PhotoTag *pt in pts) {
                 [_dropOverlayView addSubview:pt.tagView];
@@ -517,6 +528,8 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         }
 
     }
+
+
 }
 
 - (void)removeAllTagsFromDragOverlay {
@@ -551,13 +564,13 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         //[btn setSelected:YES];
         //play
 
-        [_playPauseButton setTitle: @"Pause" forState: UIControlStateNormal];
+        [_playPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
 
         EUCBurst *burst = bursts[burstIndex];
 
         NSMutableArray *ani = [[NSMutableArray alloc] init];
-        for(EUCImage *image in burst.images) {
-            [ani addObject: [UIImage imageWithContentsOfFile:image.filename]];
+        for (EUCImage *image in burst.images) {
+            [ani addObject:[UIImage imageWithContentsOfFile:image.filename]];
         }
 
         _imageView.animationImages = ani;
@@ -567,15 +580,19 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
     } else {
-        [_playPauseButton setTitle: @"Play" forState: UIControlStateNormal];
+        [_playPauseButton setTitle:@"Play" forState:UIControlStateNormal];
 
-        if( _imageView.isAnimating ) {
+        if (_imageView.isAnimating) {
             [_imageView stopAnimating];
+
+            _imageView.animationImages = nil;
+            _imageView.animationDuration = 0;
+            _imageView.animationRepeatCount = 0;
         }
     }
 }
 
-- (void)shouldUpdateUIWithBursts:(NSMutableArray *) updatedBursts {
+- (void)shouldUpdateUIWithBursts:(NSMutableArray *)updatedBursts {
 
     NSLog(@"this shit should update");
 }

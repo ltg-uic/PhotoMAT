@@ -13,6 +13,7 @@
 #import "EUCImage.h"
 #import "EUCBurst.h"
 #import "EUCFileSystem.h"
+#import "EUCLabel.h"
 
 static EUCDatabase * database;
 static const int ddLogLevel = LOG_LEVEL_INFO;
@@ -115,6 +116,36 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     
     //self.dbq = [FMDatabaseQueue databaseQueueWithPath:aPath];
+    
+    // create the label table if it's not already there
+    [self createLabelTableIfNecessary];
+}
+
+-(void) createLabelTableIfNecessary {
+    NSString * sql = @"pragma table_info(label)";
+    FMResultSet * rs = [self.db executeQuery:sql];
+    if ([rs next]) {
+        [rs close];
+        // it's already there
+        NSLog(@"Table label already exists");
+        return;
+    }
+    
+    sql = @"CREATE TABLE label ("
+    "id SERIAL UNIQUE PRIMARY KEY NOT NULL"
+    ", owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE"
+    ", name VARCHAR(256) NOT NULL"
+    ", burst_id INT NOT NULL REFERENCES burst(id) ON DELETE CASCADE ON UPDATE CASCADE"
+    ", x INT NOT NULL"
+    ", y INT NOT NULL"
+    ")";
+    [self.db executeUpdate:sql];
+    
+    [self.db executeUpdate:@"create index i_label_id on label(id)"];
+    [self.db executeUpdate:@"CREATE index i_label_bid on label(burst_id)"];
+    [self.db executeUpdate:@"CREATE index i_label_name on label(name)"];
+    
+    NSLog(@"created table label");
 
 }
 
@@ -612,5 +643,58 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.db executeUpdate:@"Update image set file_name=? where id=7", [imageDir stringByAppendingPathComponent:@"i7.jpg"]];
     
 }
+
+
+#pragma mark - labels
+
+-(NSInteger) addLabel: (NSString *) labelName toBurst: (NSInteger) burstId atLocation: (CGPoint) labelLocation {
+    NSDictionary * settings = self.settings;
+    
+    NSString * sql = @"select deployment_id from burst where id=?";
+    FMResultSet * rs = [self.db executeQuery:sql, @(burstId)];
+    NSInteger deploymentId = 0;
+    if ([rs next]) {
+        deploymentId = [rs intForColumnIndex:0];
+        [rs close];
+    }
+    else {
+        return 0;
+    }
+    
+    sql = @"select max(id) from label";
+    rs = [self.db executeQuery:sql];
+    if ([rs next]) {
+        NSInteger labelId = [rs intForColumnIndex:0];
+        labelId++;
+        [rs close];
+        [self.db executeUpdate:@"insert into label(id, owner, label_name, burst_id, x, y, deployment_id) values(?, ?, ?, ?, ?, ?, ?)",
+         @(labelId), settings[@"personId"], labelName, @(burstId), @(labelLocation.x), @(labelLocation.y), @(deploymentId)];
+        return labelId;
+    }
+    return 0;
+    
+}
+
+-(void) deleteLabel: (NSInteger) labelId {
+    [self.db executeUpdate:@"delete from label where id=?", @(labelId)];
+}
+
+-(void) updateLabel: (EUCLabel *) label {
+    [self.db executeUpdate:@"Update label set label_name=?, x=?, y=? where id=?",
+     label.name, @(label.location.x), @(label.location.y), @(label.labelId)];
+}
+
+
+
+//-(NSArray *) labelsForBurst: (NSInteger) burstId; // returns an array of EUCLabel objects
+//-(NSArray *) labelsForBurst: (NSInteger) burstId named: (NSString *) labelName;
+//-(NSArray *) labelsForDeployment: (NSInteger) deploymentId;
+//
+//-(void) deleteAllLabelsNamed:(NSString *) labelName onBurst:(NSInteger) burstId;
+//-(void) deleteAllLabelsNamed:(NSString *) labelName;
+//
+//-(void) renameLabelsNamed: (NSString *) oldLabelName toName: (NSString *) newLabelName forBurst: (NSInteger) burstId;
+//-(void) renameLabelsNamed: (NSString *) oldLabelName toName: (NSString *) newLabelName forDeployment: (NSInteger) deploymentId;
+//
 
 @end
