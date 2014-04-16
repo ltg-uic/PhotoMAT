@@ -88,6 +88,7 @@
     EUCKnapsackViewController * photos =   [[EUCKnapsackViewController alloc] initWithNibName:@"EUCKnapsackViewController" bundle:nil asSnapshot:NO];
     
     master.detailViewController = self.detail;
+    master.setChangedDelegate = label;
     
     dsvc.viewControllers = @[master, self.detail];
     

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EUCDeploymentMasterViewController.h"
 
-
-@interface EUCLabelViewController : UIViewController {
+@interface EUCLabelViewController : UIViewController  <SetChangedDelegate> {
 
     __weak IBOutlet UILabel *schoolClassGroupLabel;
 }
