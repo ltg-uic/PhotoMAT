@@ -635,16 +635,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(NSInteger) addLabel: (NSString *) labelName toBurst: (NSInteger) burstId atLocation: (CGPoint) labelLocation {
     NSDictionary * settings = self.settings;
     
-    NSString * sql = @"select deployment_id from burst where id=?";
-    FMResultSet * rs = [self.db executeQuery:sql, @(burstId)];
-    NSInteger deploymentId = 0;
-    if ([rs next]) {
-        deploymentId = [rs intForColumnIndex:0];
-        [rs close];
-    }
-    else {
-        return 0;
-    }
+    NSString * sql ;
+    FMResultSet * rs;
     
     sql = @"select max(id) from label";
     rs = [self.db executeQuery:sql];
@@ -652,8 +644,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         NSInteger labelId = [rs intForColumnIndex:0];
         labelId++;
         [rs close];
-        [self.db executeUpdate:@"insert into label(id, owner, name, burst_id, x, y, deployment_id) values(?, ?, ?, ?, ?, ?, ?)",
-         @(labelId), settings[@"personId"], labelName, @(burstId), @(labelLocation.x), @(labelLocation.y), @(deploymentId)];
+        [self.db executeUpdate:@"insert into label(id, owner, name, burst_id, x, y) values(?, ?, ?, ?, ?, ?, ?)",
+         @(labelId), settings[@"personId"], labelName, @(burstId), @(labelLocation.x), @(labelLocation.y)];
         return labelId;
     }
     return 0;
