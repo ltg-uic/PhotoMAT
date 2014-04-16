@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "EUCVisibilityChangedDelegate.h"
 
+@protocol SetChangedDelegate <NSObject>
+
+-(void) currentDeploymentIdSetTo: (NSInteger) deploymentId;
+
+@end
+
 @class EUCDeploymentDetailViewController;
 
 @interface EUCDeploymentMasterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, EUCVisibilityChangedDelegate>
@@ -18,6 +24,7 @@
 
 
 @property (strong, nonatomic) EUCDeploymentDetailViewController  *detailViewController;
+@property (weak, nonatomic) id<SetChangedDelegate> setChangedDelegate;
 
 - (IBAction)handleAdd:(id)sender;
 - (IBAction)handleRefresh:(id)sender;

@@ -78,8 +78,6 @@
 -(NSMutableArray *) getBurstForDeploymentWithId: (NSInteger) deploymentId withParser: (NSDateFormatter *) parser;
 
 
--(void) fixImages;
-
 #pragma mark - labels
 
 -(NSInteger) addLabel: (NSString *) labelName toBurst: (NSInteger) burstId atLocation: (CGPoint) labelLocation;  // returns label ID
