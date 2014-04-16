@@ -684,7 +684,16 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
      label.name, @(label.location.x), @(label.location.y), @(label.labelId)];
 }
 
-
+-(NSMutableArray *)labelsForDeployment:(NSInteger)deploymentId {
+    NSMutableArray * result = [NSMutableArray arrayWithCapacity:64];
+    NSString * sql = @"select distinct(l.label_name) from label l join burst b on l.burst_id = b.id where b.deployment_id = ?";
+    FMResultSet * rs = [self.db executeQuery:sql, @(deploymentId)];
+    while ([rs next]) {
+        [result addObject:[rs stringForColumnIndex:0]];
+    }
+    [rs close];
+    return result;
+}
 
 //-(NSArray *) labelsForBurst: (NSInteger) burstId; // returns an array of EUCLabel objects
 //-(NSArray *) labelsForBurst: (NSInteger) burstId named: (NSString *) labelName;
