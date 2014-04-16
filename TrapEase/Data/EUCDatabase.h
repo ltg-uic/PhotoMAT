@@ -86,6 +86,8 @@
 -(void) deleteLabel: (NSInteger) labelId;
 -(void) updateLabel: (EUCLabel *) label;
 
+-(NSMutableArray *) labelsForDeployment: (NSInteger) deploymentId;
+
 //
 //-(NSArray *) labelsForBurst: (NSInteger) burstId; // returns an array of EUCLabel objects
 //-(NSArray *) labelsForBurst: (NSInteger) burstId named: (NSString *) labelName;
