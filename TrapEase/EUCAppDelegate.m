@@ -94,7 +94,7 @@
     
     self.homeViewController = [[EUCHomeViewController alloc] init];
     self.homeViewController.viewControllers = @[user, dsvc, label, notes, snapshot, photos];
-    //label, analyze, settings, 
+    //label, analyze, settings,
 
     [[[[self.homeViewController.tabBarController tabBar]items]objectAtIndex:2]setEnabled:NO];
     [[[[self.homeViewController.tabBarController tabBar]items]objectAtIndex:3]setEnabled:NO];

@@ -33,22 +33,6 @@
 		7080F7E118F747620087A66F /* EUCNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7DF18F747620087A66F /* EUCNotesViewController.m */; };
 		7080F7E218F747620087A66F /* EUCNotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7E018F747620087A66F /* EUCNotesViewController.xib */; };
 		B4116D9918F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */; };
-		B41BB21518FDD1C900388779 /* d1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB20518FDD1C900388779 /* d1.jpg */; };
-		B41BB21618FDD1C900388779 /* d1t.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB20618FDD1C900388779 /* d1t.jpg */; };
-		B41BB21718FDD1C900388779 /* i1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB20718FDD1C900388779 /* i1.jpg */; };
-		B41BB21818FDD1C900388779 /* i1t.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB20818FDD1C900388779 /* i1t.jpg */; };
-		B41BB21918FDD1C900388779 /* i2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB20918FDD1C900388779 /* i2.jpg */; };
-		B41BB21A18FDD1C900388779 /* i2t.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB20A18FDD1C900388779 /* i2t.jpg */; };
-		B41BB21B18FDD1C900388779 /* i3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB20B18FDD1C900388779 /* i3.jpg */; };
-		B41BB21C18FDD1C900388779 /* i3t.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB20C18FDD1C900388779 /* i3t.jpg */; };
-		B41BB21D18FDD1C900388779 /* i4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB20D18FDD1C900388779 /* i4.jpg */; };
-		B41BB21E18FDD1C900388779 /* i4t.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB20E18FDD1C900388779 /* i4t.jpg */; };
-		B41BB21F18FDD1C900388779 /* i5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB20F18FDD1C900388779 /* i5.jpg */; };
-		B41BB22018FDD1C900388779 /* i5t.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB21018FDD1C900388779 /* i5t.jpg */; };
-		B41BB22118FDD1C900388779 /* i6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB21118FDD1C900388779 /* i6.jpg */; };
-		B41BB22218FDD1C900388779 /* i6t.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB21218FDD1C900388779 /* i6t.jpg */; };
-		B41BB22318FDD1C900388779 /* i7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB21318FDD1C900388779 /* i7.jpg */; };
-		B41BB22418FDD1C900388779 /* i7t.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB21418FDD1C900388779 /* i7t.jpg */; };
 		B41BB22F18FDF28700388779 /* EUCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B41BB22E18FDF28700388779 /* EUCLabel.m */; };
 		B43658D518E4B95F0017672E /* EUCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658D418E4B95F0017672E /* EUCImage.m */; };
 		B43658D818E4B9A30017672E /* EUCBurst.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658D718E4B9A30017672E /* EUCBurst.m */; };
@@ -920,16 +904,13 @@
 				B4E6BEA018E23BA500AC9D84 /* EUCUserViewController.xib in Resources */,
 				B4E6BD9218DDC82600AC9D84 /* tag@2x.png in Resources */,
 				B4E6BE1F18DE3EB400AC9D84 /* cloud@2x.png in Resources */,
-				B41BB21F18FDD1C900388779 /* i5.jpg in Resources */,
 				B4D1EC3B18BD729300E01EFE /* InfoPlist.strings in Resources */,
 				B4E6BE2018DE3EB400AC9D84 /* gear.png in Resources */,
-				B41BB22018FDD1C900388779 /* i5t.jpg in Resources */,
 				B4E6BE6A18DFBE5300AC9D84 /* deployments@2x.png in Resources */,
 				B4E6BE9918E13C5800AC9D84 /* users.png in Resources */,
 				B4E6BD9318DDC82600AC9D84 /* trash.png in Resources */,
 				B4E6BD8818DDC82600AC9D84 /* bar-chart@2x.png in Resources */,
 				B4E6BE0C18DDFD3400AC9D84 /* EUCUploadViewController.xib in Resources */,
-				B41BB21518FDD1C900388779 /* d1.jpg in Resources */,
 				B4E6BE6918DFBE5300AC9D84 /* deployments.png in Resources */,
 				B4E6BE4E18DEA6DE00AC9D84 /* thumbs-down.png in Resources */,
 				B4E6BE1318DE005500AC9D84 /* hiking.png in Resources */,
@@ -939,48 +920,38 @@
 				B4E6BE9418E13C5800AC9D84 /* thumbs-up-selected@2x.png in Resources */,
 				B4E6BD8C18DDC82600AC9D84 /* filter@2x.png in Resources */,
 				B4E6BE2118DE3EB400AC9D84 /* gear@2x.png in Resources */,
-				B41BB21918FDD1C900388779 /* i2.jpg in Resources */,
 				B4E6BE4918DEA5E700AC9D84 /* EUCSelectCell.xib in Resources */,
 				B4E6BE9518E13C5800AC9D84 /* camera.png in Resources */,
 				702ACBC318F756760001C9D7 /* EUCCloudViewController.xib in Resources */,
 				B4E6BE1918DE008000AC9D84 /* EUCKnapsackViewController.xib in Resources */,
 				7080F7B818F743210087A66F /* EUCLabelViewController.xib in Resources */,
 				B4E6BE5918DF9F6400AC9D84 /* trap.db in Resources */,
-				B41BB21C18FDD1C900388779 /* i3t.jpg in Resources */,
 				B43658DD18E4E43B0017672E /* EUCDeploymentImageCell.xib in Resources */,
 				B4D1EC4318BD729300E01EFE /* Images.xcassets in Resources */,
 				B4E6BD6918DDC33C00AC9D84 /* EUCFilterViewController.xib in Resources */,
 				B4E6BD8F18DDC82600AC9D84 /* share.png in Resources */,
-				B41BB21B18FDD1C900388779 /* i3.jpg in Resources */,
 				B4E6BD9118DDC82600AC9D84 /* tag.png in Resources */,
 				B4E6BD9418DDC82600AC9D84 /* trash@2x.png in Resources */,
-				B41BB21618FDD1C900388779 /* d1t.jpg in Resources */,
 				B4E6BD8918DDC82600AC9D84 /* download.png in Resources */,
 				7080F7C518F7438C0087A66F /* note.png in Resources */,
 				B4E6BD6418DDC30C00AC9D84 /* EUCImportViewController.xib in Resources */,
 				B4E6BD7618DDC39300AC9D84 /* EUCAnalyzeViewController.xib in Resources */,
 				B4E6BEA518E23D8200AC9D84 /* EUCConnectingViewController.xib in Resources */,
 				B4E6BD8718DDC82600AC9D84 /* bar-chart.png in Resources */,
-				B41BB21D18FDD1C900388779 /* i4.jpg in Resources */,
-				B41BB21A18FDD1C900388779 /* i2t.jpg in Resources */,
-				B41BB22418FDD1C900388779 /* i7t.jpg in Resources */,
 				B4E6BE4F18DEA6DE00AC9D84 /* thumbs-down@2x.png in Resources */,
 				B4E6BE1018DDFF2F00AC9D84 /* upload@2x.png in Resources */,
 				7080F7E218F747620087A66F /* EUCNotesViewController.xib in Resources */,
 				B4E6BD9018DDC82600AC9D84 /* share@2x.png in Resources */,
 				B4E6BD8B18DDC82600AC9D84 /* filter.png in Resources */,
 				B4E6BE2B18DE3EE200AC9D84 /* EUCSettingsViewController.xib in Resources */,
-				B41BB22118FDD1C900388779 /* i6.jpg in Resources */,
 				7080F7CC18F7439B0087A66F /* webview-back@2x.png in Resources */,
 				B4E6BE8A18E0729900AC9D84 /* EUCDeploymentDetailViewController.xib in Resources */,
-				B41BB22318FDD1C900388779 /* i7.jpg in Resources */,
 				B4E6BE4418DEA37C00AC9D84 /* EUCSelectViewController.xib in Resources */,
 				B4E6BE9718E13C5800AC9D84 /* photo.png in Resources */,
 				B4E6BE1418DE005500AC9D84 /* hiking@2x.png in Resources */,
 				7080F7DB18F746F60087A66F /* PopoverErrorContentViewController.xib in Resources */,
 				7080F7BD18F743210087A66F /* TimelineItemView.xib in Resources */,
 				B4E6BE9818E13C5800AC9D84 /* photo@2x.png in Resources */,
-				B41BB21E18FDD1C900388779 /* i4t.jpg in Resources */,
 				B4E6BE8518DFDB5B00AC9D84 /* EUCDeploymentMasterCell.xib in Resources */,
 				7080F7C218F743560087A66F /* sample2.jpg in Resources */,
 				7080F7C618F7438C0087A66F /* note@2x.png in Resources */,
@@ -988,12 +959,9 @@
 				B4E6BE5118DEA6DE00AC9D84 /* thumbs-up@2x.png in Resources */,
 				7080F7CB18F7439B0087A66F /* webview-back.png in Resources */,
 				7080F7CE18F7439B0087A66F /* webview-forward@2x.png in Resources */,
-				B41BB22218FDD1C900388779 /* i6t.jpg in Resources */,
 				7080F7CD18F7439B0087A66F /* webview-forward.png in Resources */,
-				B41BB21718FDD1C900388779 /* i1.jpg in Resources */,
 				B4E6BE3218DE44D900AC9D84 /* EUCImportCell.xib in Resources */,
 				B4E6BE9A18E13C5800AC9D84 /* users@2x.png in Resources */,
-				B41BB21818FDD1C900388779 /* i1t.jpg in Resources */,
 				B4E6BD8E18DDC82600AC9D84 /* line-chart@2x.png in Resources */,
 				B43658E918E542480017672E /* EUCImageDisplayViewController.xib in Resources */,
 			);
@@ -1235,7 +1203,7 @@
 				INFOPLIST_FILE = "TrapEase/PhotoMat-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = PhotoMat;
-				PROVISIONING_PROFILE = "E71CD2D3-270E-4786-8B67-502FD168DA45";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1248,8 +1216,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ayesha Ansari (GSN6YH3F5B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ayesha Ansari (GSN6YH3F5B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrapEase/PhotoMat-Prefix.pch";
@@ -1265,7 +1233,7 @@
 				INFOPLIST_FILE = "TrapEase/PhotoMat-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = PhotoMat;
-				PROVISIONING_PROFILE = "E71CD2D3-270E-4786-8B67-502FD168DA45";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};

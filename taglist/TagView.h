@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, TagViewState)
 @property(nonatomic, strong) UIColor *colorHightlighted;
 @property(nonatomic, strong) UIColor *fontColor;
 @property(nonatomic, strong) NSString *text;
+@property(nonatomic) NSInteger *labelId;
 
 - (void)enablePanGesture;
 

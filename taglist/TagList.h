@@ -27,6 +27,8 @@
 
 - (void)setPosX:(CGFloat)x andY:(CGFloat)y;
 
+- (void)clearList;
+
 - (BOOL)addTag:(NSString *)tagName;
 
 - (int)indexOfTag:(NSString *)tagName;

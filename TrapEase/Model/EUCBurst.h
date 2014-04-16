@@ -21,8 +21,8 @@
 
 #pragma mark - labels
 
--(void) addLabel: (EUCLabel *) label;
--(void) addLabelNamed: (NSString *) labelName atLocation: (CGPoint) location;
+-(NSInteger) addLabel: (EUCLabel *) label;
+-(NSInteger) addLabelNamed: (NSString *) labelName atLocation: (CGPoint) location;
 -(void) addLabels: (NSArray *) labelArray;
 
 -(void) deleteLabel: (EUCLabel *) label;

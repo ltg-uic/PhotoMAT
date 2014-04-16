@@ -121,6 +121,7 @@ static const CGFloat TagViewCornerHeight = 5.0;
     copyOfView.fontColor = self.fontColor.copy;
     copyOfView.colorHightlighted = self.colorHightlighted.copy;
     copyOfView.tag = self.tag;
+    copyOfView.labelId = self.labelId;
 
 
     return copyOfView;

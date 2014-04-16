@@ -38,6 +38,7 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
 
     posX = self.frame.origin.x;
     posY = self.frame.origin.y;
+
 }
 
 - (id)init {
@@ -69,12 +70,34 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
         _maxNumberOfLabels = 2;
     }
 
-    tagNames = tagTexts;
     tagViews = [[NSMutableArray alloc] init];
+
+    if( tagTexts != nil ) {
+        tagNames = tagTexts;
+
+    } else {
+        tagNames = [[NSMutableArray alloc] init];
+    }
+
     [self refreshUI];
+
+}
+
+-(void) clearList {
+    [tagNames removeAllObjects];
+
+    for (TagView *tv in tagViews) {
+        [tv removeFromSuperview];
+    }
+    [tagViews removeAllObjects];
 }
 
 - (BOOL)addTag:(NSString *)tagName {
+
+    if( tagNames == nil ) {
+        tagNames = [[NSMutableArray alloc] init];
+    }
+
     if ([tagNames containsObject:tagName] == NO ) {
 
         if (tagViews.count < _maxNumberOfLabels) {
@@ -85,6 +108,17 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
         return NO;
     }
     return NO;
+}
+
+-(TagView*)getTagViewCopy: (NSString *)tagName {
+
+    NSArray *tag = [tagViews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"text == %@", tagName]];
+
+    if( tag.count > 0 ) {
+        return tag[0];
+    }
+
+    return nil;
 }
 
 - (int)indexOfTag:(NSString *)tagName {

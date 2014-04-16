@@ -23,17 +23,18 @@
 }
 
 #pragma mark - labels
--(void) addLabel: (EUCLabel *) label {
+-(NSInteger) addLabel: (EUCLabel *) label {
     [self.labels addObject:label];
     NSInteger labelId = [[EUCDatabase sharedInstance] addLabel:label.name toBurst:self.burstId atLocation:label.location];
     label.labelId = labelId;
+    return label.labelId;
 }
 
--(void) addLabelNamed: (NSString *) labelName atLocation: (CGPoint) location {
+-(NSInteger) addLabelNamed: (NSString *) labelName atLocation: (CGPoint) location {
     EUCLabel * label = [[EUCLabel alloc] init];
     label.name = labelName;
     label.location = location;
-    [self addLabel:label];
+    return [self addLabel:label];
 }
 
 
