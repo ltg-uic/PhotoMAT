@@ -10,7 +10,7 @@
                 <outlet property="dropOverlayView" destination="Zld-3c-CHl" id="c8N-nv-F31"/>
                 <outlet property="imageView" destination="CQh-Pk-2XZ" id="VVw-a6-sLG"/>
                 <outlet property="noteTextView" destination="KSW-OA-Awf" id="HLX-tw-dqD"/>
-                <outlet property="playPauseButton" destination="Fyh-7e-ZUY" id="9Sr-vc-iYv"/>
+                <outlet property="playPauseButton" destination="Lwh-oq-aQe" id="PDB-G4-JoT"/>
                 <outlet property="schoolClassGroupLabel" destination="xoa-Jp-LzM" id="Idg-Dt-yWa"/>
                 <outlet property="tagList" destination="P8m-Bp-jBY" id="q9w-Vx-Yev"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,14 +29,14 @@
                     <rect key="frame" x="6" y="553" width="700" height="40"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fyh-7e-ZUY">
-                            <rect key="frame" x="310" y="0.0" width="80" height="40"/>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lwh-oq-aQe">
+                            <rect key="frame" x="317" y="5" width="66" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <state key="normal" image="playing-play.png"/>
-                            <state key="selected" image="playing-pause.png"/>
+                            <state key="normal" title="Play">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
                             <connections>
-                                <action selector="playPauseImageAnimation:" destination="-1" eventType="touchUpInside" id="fgt-KD-QZt"/>
+                                <action selector="playPauseImageAnimation:" destination="-1" eventType="touchUpInside" id="j5C-pA-0B6"/>
                             </connections>
                         </button>
                     </subviews>
@@ -90,7 +90,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q9u-rr-fPe" customClass="TimelineView">
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q9u-rr-fPe" customClass="TimelineView">
                     <rect key="frame" x="20" y="609" width="447" height="99"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -100,20 +100,18 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
         </view>
-        <swipeGestureRecognizer direction="right" id="Is4-XX-09p">
+        <swipeGestureRecognizer direction="left" id="Is4-XX-09p">
             <connections>
                 <action selector="swipeImageNext:" destination="-1" id="v3g-Co-KfY"/>
             </connections>
         </swipeGestureRecognizer>
-        <swipeGestureRecognizer direction="left" id="zIq-yJ-ftb">
+        <swipeGestureRecognizer direction="right" id="zIq-yJ-ftb">
             <connections>
                 <action selector="swipeImagePrevious:" destination="-1" id="JHd-81-BUK"/>
             </connections>
         </swipeGestureRecognizer>
     </objects>
     <resources>
-        <image name="playing-pause.png" width="18" height="22"/>
-        <image name="playing-play.png" width="21" height="22"/>
         <image name="sample.jpg" width="1280" height="1024"/>
     </resources>
 </document>

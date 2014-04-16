@@ -78,20 +78,10 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 - (void)viewDidLoad {
 
 
-}
-
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    
-    EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
-
-    EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
-    bursts = burstDetailController.importedBursts;
-    
-    schoolClassGroupLabel.text = [NSString stringWithFormat:@"%@ : %@ : %@", selectedSet.schoolName, selectedSet.className, selectedSet.groupName];
+    [self refreshGroupLabel];
 
     [self createImageBorder];
+
     //setup textviews
     [self textViewLikeTextField:_noteTextView];
     [_addLabelField setDelegate:self];
@@ -108,6 +98,29 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     _tagList.maxNumberOfLabels = 18;
     [_tagList initTagListWithTagNames:tag_array];
 
+    [self refreshLocalBurstCache];
+
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    [self refreshLocalBurstCache];
+}
+
+-(void)refreshGroupLabel {
+    EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
+    schoolClassGroupLabel.text = [NSString stringWithFormat:@"%@ : %@ : %@", selectedSet.schoolName, selectedSet.className, selectedSet.groupName];
+}
+
+-(void)refreshLocalBurstCache {
+
+    EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
+    bursts = burstDetailController.importedBursts;
+
     //TODO for testing
     burstIndex = 0;
     EUCBurst *burst = bursts[burstIndex];
@@ -115,12 +128,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     currentImageName = image.filename;
     _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
 }
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
 
-
-
-}
 
 - (void)createImageBorder {
     CALayer *layer = _imageView.layer;
@@ -444,28 +452,41 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 - (IBAction)swipeImagePrevious:(id)sender {
 
+    if( burstIndex >= bursts.count ) {
+        burstIndex = bursts.count-1;
+    } else {
+        burstIndex--;
+    }
 
-    burstIndex--;
 
     //we have another
     if( burstIndex >= 0 ) {
+
+        [self removeAllTagsFromDragOverlay];
+
         NSLog(@"left swipe %d", burstIndex);
         EUCBurst *burst = bursts[burstIndex];
         EUCImage *image = burst.images[0];
         currentImageName = image.filename;
         _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
 
+
+
         NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
 
-        for (PhotoTag *pt in pts) {
-            [_dropOverlayView addSubview:pt.tagView];
+        if( pts.count > 0 ) {
+            for (PhotoTag *pt in pts) {
+                [_dropOverlayView addSubview:pt.tagView];
+            }
         }
 
-        [self removeAllTagsFromDragOverlay];
+
+
+
     }
 
 
-    [self removeAllTagsFromDragOverlay];
+
 
 }
 
@@ -475,6 +496,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     //we have another
     if( burstIndex < bursts.count ) {
+
+       [self removeAllTagsFromDragOverlay];
+
         NSLog(@"right swipe %d", burstIndex);
         EUCBurst *burst = bursts[burstIndex];
         EUCImage *image = burst.images[0];
@@ -483,11 +507,15 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
         NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
 
-        for (PhotoTag *pt in pts) {
-            [_dropOverlayView addSubview:pt.tagView];
+
+
+        if( pts.count > 0 ) {
+
+            for (PhotoTag *pt in pts) {
+                [_dropOverlayView addSubview:pt.tagView];
+            }
         }
 
-        [self removeAllTagsFromDragOverlay];
     }
 }
 
@@ -519,10 +547,31 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 - (IBAction)playPauseImageAnimation:(id)sender {
     UIButton *btn = (UIButton *) sender;
 
-    if (![btn isSelected]) {
-        [btn setSelected:YES];
+    if ([_playPauseButton.titleLabel.text isEqualToString:@"Play"]) {
+        //[btn setSelected:YES];
+        //play
+
+        [_playPauseButton setTitle: @"Pause" forState: UIControlStateNormal];
+
+        EUCBurst *burst = bursts[burstIndex];
+
+        NSMutableArray *ani = [[NSMutableArray alloc] init];
+        for(EUCImage *image in burst.images) {
+            [ani addObject: [UIImage imageWithContentsOfFile:image.filename]];
+        }
+
+        _imageView.animationImages = ani;
+        _imageView.animationDuration = 1.0;
+        _imageView.animationRepeatCount = 0;
+        [_imageView startAnimating];
+
+
     } else {
-        [btn setSelected:NO];
+        [_playPauseButton setTitle: @"Play" forState: UIControlStateNormal];
+
+        if( _imageView.isAnimating ) {
+            [_imageView stopAnimating];
+        }
     }
 }
 
