@@ -23,7 +23,7 @@
 #import "EUCDatabase.h"
 
 
-@interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone, UIUpdateDelegate> {
+@interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone> {
     NSString *lastTagName;
     NSMutableArray *tag_array;
     NSMutableArray *photoTags;
@@ -90,7 +90,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     //create the tag list
     _tagList.maxNumberOfLabels = 18;
     [self refreshLocalBurstCache];
-    [_tagList initTagListWithTagNames:tag_array];
 
 
 
@@ -125,9 +124,10 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     if( labels.count > 0 ) {
         [tag_array addObjectsFromArray:labels];
     } else {
-        tag_array = [NSMutableArray arrayWithObjects:@"", nil];
+        tag_array = nil;
     }
 
+    [_tagList initTagListWithTagNames:tag_array];
 
 
     photoTags = [[NSMutableArray alloc] init];
@@ -367,10 +367,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     copy.labelId = [burst addLabelNamed:copy.text atLocation:location];
     [_dropOverlayView addSubview:copy];
 
-
-
-
-
 }
 
 
@@ -455,6 +451,11 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
                 originalFrame.size.height);
 
         gesture.view.frame = newFrame;
+
+        TagView *tv = (TagView *)gesture.view;
+        EUCBurst *eucBurst = bursts[burstIndex];
+      //  [eucBurst updateLabelID:<#(EUCLabel *)label#> location:<#(CGPoint)location#>];
+
     }
 }
 
@@ -599,9 +600,13 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     }
 }
 
-- (void)shouldUpdateUIWithBursts:(NSMutableArray *)updatedBursts {
+- (void)currentDeploymentIdSetTo:(NSInteger)deploymentId {
 
-    NSLog(@"this shit should update");
+    [_tagList clearList];
+
+    [self refreshGroupLabel];
+
+    [self refreshLocalBurstCache];
 }
 
 
