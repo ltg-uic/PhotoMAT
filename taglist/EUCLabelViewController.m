@@ -63,9 +63,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
                                                         image:[UIImage imageNamed:@"tag.png"]
                                                 selectedImage:nil];
 
-//        tag_array = [NSMutableArray arrayWithObjects:@"1234567890qwertyu", @"Ugly Lion", @"grey Squirrel 1", @"yellow green Troll", @"red Dragon", @"fox Gorilla", @"eater Monkey", @"RIT Tigers", @"brown Bunny", @"big fat Rat", @"The yellow Bird1", @"The yellow Bird2", @"The yellow Bird3", @"The yellow Birdees3", @"The yellow Bird3", @"The yellow Bird2", @"the big bad bear2", @"the big bad bear", nil];
-
-
 
         appDelegate = (EUCAppDelegate *) [[UIApplication sharedApplication] delegate];
 
@@ -105,10 +102,10 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
-    [self refreshGroupLabel];
-
-    [self refreshLocalBurstCache];
+//
+//    [self refreshGroupLabel];
+//
+//    [self refreshLocalBurstCache];
 }
 
 - (void)refreshGroupLabel {
