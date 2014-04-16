@@ -20,6 +20,7 @@
 #import "EUCBurst.h"
 #import "EUCImage.h"
 #import "UIUpdateDelegate.h"
+#import "EUCDatabase.h"
 
 
 @interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone, UIUpdateDelegate> {
@@ -122,7 +123,16 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
     bursts = burstDetailController.importedBursts;
 
-    tag_array = [NSMutableArray arrayWithObjects:@"squirrel", nil];
+    NSArray *labels = [[EUCDatabase sharedInstance] labelsForDeployment: burstDetailController.deploymentId];
+
+    if( labels.count > 0 ) {
+        [tag_array addObjectsFromArray:labels];
+    } else {
+        tag_array = [NSMutableArray arrayWithObjects:@"", nil];
+    }
+
+
+
     photoTags = [[NSMutableArray alloc] init];
 
 
