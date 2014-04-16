@@ -652,7 +652,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         NSInteger labelId = [rs intForColumnIndex:0];
         labelId++;
         [rs close];
-        [self.db executeUpdate:@"insert into label(id, owner, label_name, burst_id, x, y, deployment_id) values(?, ?, ?, ?, ?, ?, ?)",
+        [self.db executeUpdate:@"insert into label(id, owner, name, burst_id, x, y, deployment_id) values(?, ?, ?, ?, ?, ?, ?)",
          @(labelId), settings[@"personId"], labelName, @(burstId), @(labelLocation.x), @(labelLocation.y), @(deploymentId)];
         return labelId;
     }
@@ -665,13 +665,13 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 -(void) updateLabel: (EUCLabel *) label {
-    [self.db executeUpdate:@"Update label set label_name=?, x=?, y=? where id=?",
+    [self.db executeUpdate:@"Update label set name=?, x=?, y=? where id=?",
      label.name, @(label.location.x), @(label.location.y), @(label.labelId)];
 }
 
 -(NSMutableArray *)labelsForDeployment:(NSInteger)deploymentId {
     NSMutableArray * result = [NSMutableArray arrayWithCapacity:64];
-    NSString * sql = @"select distinct(l.label_name) from label l join burst b on l.burst_id = b.id where b.deployment_id = ?";
+    NSString * sql = @"select distinct(l.name) from label l join burst b on l.burst_id = b.id where b.deployment_id = ?";
     FMResultSet * rs = [self.db executeQuery:sql, @(deploymentId)];
     while ([rs next]) {
         [result addObject:[rs stringForColumnIndex:0]];
