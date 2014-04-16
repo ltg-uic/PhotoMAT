@@ -49,6 +49,7 @@
 		B41BB22218FDD1C900388779 /* i6t.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB21218FDD1C900388779 /* i6t.jpg */; };
 		B41BB22318FDD1C900388779 /* i7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB21318FDD1C900388779 /* i7.jpg */; };
 		B41BB22418FDD1C900388779 /* i7t.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B41BB21418FDD1C900388779 /* i7t.jpg */; };
+		B41BB22F18FDF28700388779 /* EUCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B41BB22E18FDF28700388779 /* EUCLabel.m */; };
 		B43658D518E4B95F0017672E /* EUCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658D418E4B95F0017672E /* EUCImage.m */; };
 		B43658D818E4B9A30017672E /* EUCBurst.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658D718E4B9A30017672E /* EUCBurst.m */; };
 		B43658DB18E4E4200017672E /* EUCDeploymentImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658DA18E4E4200017672E /* EUCDeploymentImageCell.m */; };
@@ -245,6 +246,8 @@
 		B41BB21218FDD1C900388779 /* i6t.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i6t.jpg; sourceTree = "<group>"; };
 		B41BB21318FDD1C900388779 /* i7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i7.jpg; sourceTree = "<group>"; };
 		B41BB21418FDD1C900388779 /* i7t.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i7t.jpg; sourceTree = "<group>"; };
+		B41BB22D18FDF28700388779 /* EUCLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCLabel.h; path = Model/EUCLabel.h; sourceTree = "<group>"; };
+		B41BB22E18FDF28700388779 /* EUCLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCLabel.m; path = Model/EUCLabel.m; sourceTree = "<group>"; };
 		B43658D118E3F19C0017672E /* EUCVisibilityChangedDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EUCVisibilityChangedDelegate.h; path = TrapEase/Controllers/EUCVisibilityChangedDelegate.h; sourceTree = "<group>"; };
 		B43658D318E4B95F0017672E /* EUCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCImage.h; path = Model/EUCImage.h; sourceTree = "<group>"; };
 		B43658D418E4B95F0017672E /* EUCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCImage.m; path = Model/EUCImage.m; sourceTree = "<group>"; };
@@ -489,6 +492,8 @@
 				B43658E318E5356B0017672E /* EUCDeploymentImage.m */,
 				B4F6930D18F75872000C7AD0 /* EUCSelectedSet.h */,
 				B4F6930E18F75872000C7AD0 /* EUCSelectedSet.m */,
+				B41BB22D18FDF28700388779 /* EUCLabel.h */,
+				B41BB22E18FDF28700388779 /* EUCLabel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1072,6 +1077,7 @@
 				B43658E418E5356B0017672E /* EUCDeploymentImage.m in Sources */,
 				B43658DB18E4E4200017672E /* EUCDeploymentImageCell.m in Sources */,
 				B4E6BE6118DFB77B00AC9D84 /* EUCNetwork.m in Sources */,
+				B41BB22F18FDF28700388779 /* EUCLabel.m in Sources */,
 				B4521C4A18FA54B1001F42AF /* EUCTimeUtilities.m in Sources */,
 				B4E6BE7818DFD0DD00AC9D84 /* EUCDeploymentSplitViewController.m in Sources */,
 				7080F7B718F743210087A66F /* EUCLabelViewController.m in Sources */,

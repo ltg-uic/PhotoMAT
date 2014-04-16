@@ -140,6 +140,19 @@ create index i_tag_id on tag(id);
 CREATE index i_tag_iid on tag(image_id);
 CREATE index i_tag_did on tag(deployment_id);
 
+CREATE TABLE label ( 
+      id SERIAL UNIQUE PRIMARY KEY NOT NULL
+    , owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE
+    , label_name VARCHAR(256) NOT NULL
+    , burst_id INT NOT NULL REFERENCES burst(id) ON DELETE CASCADE ON UPDATE CASCADE
+    , x INT NOT NULL 
+    , y INT NOT NULL
+    , deployment_id INT NOT NULL REFERENCES deployment (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+create index i_label_id on label(id);
+CREATE index i_label_iid on label(image_id);
+CREATE index i_label_did on label(deployment_id);
+
 CREATE TABLE pendingUploads (
       "id" SERIAL UNIQUE PRIMARY KEY NOT NULL
     , url TEXT NOT NULL
