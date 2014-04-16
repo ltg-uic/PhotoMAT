@@ -25,7 +25,7 @@
 @property (readonly, nonatomic) NSMutableArray *importedBursts;
 @property (readonly, nonatomic) NSMutableArray *addedImages;
 @property (readonly, nonatomic) NSMutableArray *burstImages;
-
+@property (assign, nonatomic) NSInteger deploymentId;
 
 -(void) clearEditView;
 -(void) loadDeployment: (NSNumber *) deploymentId;

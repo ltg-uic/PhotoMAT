@@ -987,6 +987,7 @@ typedef enum : NSUInteger {
     
     // local get
     NSInteger deploymentIdInteger = [deploymentId integerValue];
+    self.deploymentId = deploymentIdInteger;
     self.deploymentIdLabel.text = [NSString stringWithFormat:@"%ld", (long)[record[@"id"] integerValue]];
     self.numberDownloaded = 0;
     self.numberToDownload = 0;
