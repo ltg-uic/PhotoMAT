@@ -680,6 +680,17 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return result;
 }
 
+-(NSMutableArray *)uniqueLabels {
+    NSMutableArray * result = [NSMutableArray arrayWithCapacity:64];
+    NSString * sql = @"select distinct(l.name) from label l ";
+    FMResultSet * rs = [self.db executeQuery:sql];
+    while ([rs next]) {
+        [result addObject:[rs stringForColumnIndex:0]];
+    }
+    [rs close];
+    return result;
+}
+
 //-(NSArray *) labelsForBurst: (NSInteger) burstId; // returns an array of EUCLabel objects
 //-(NSArray *) labelsForBurst: (NSInteger) burstId named: (NSString *) labelName;
 //-(NSArray *) labelsForDeployment: (NSInteger) deploymentId;

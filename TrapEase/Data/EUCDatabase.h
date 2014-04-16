@@ -86,6 +86,8 @@
 
 -(NSMutableArray *) labelsForDeployment: (NSInteger) deploymentId;
 
+-(NSMutableArray *) uniqueLabels;
+
 //
 //-(NSArray *) labelsForBurst: (NSInteger) burstId; // returns an array of EUCLabel objects
 //-(NSArray *) labelsForBurst: (NSInteger) burstId named: (NSString *) labelName;
