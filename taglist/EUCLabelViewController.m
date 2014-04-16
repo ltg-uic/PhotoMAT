@@ -77,7 +77,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
     [self refreshGroupLabel];
-
     [self createImageBorder];
 
     //setup textviews
@@ -92,9 +91,10 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     [self addGesturesToTagList];
     //create the tag list
     _tagList.maxNumberOfLabels = 18;
+    [self refreshLocalBurstCache];
     [_tagList initTagListWithTagNames:tag_array];
 
-    [self refreshLocalBurstCache];
+
 
 }
 
@@ -105,16 +105,13 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
+    [self refreshGroupLabel];
+
     [self refreshLocalBurstCache];
 }
 
 - (void)refreshGroupLabel {
 
-
-
-
-    tag_array = [NSMutableArray arrayWithObjects:@"squirrel", nil];
-    photoTags = [[NSMutableArray alloc] init];
 
     EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
     schoolClassGroupLabel.text = [NSString stringWithFormat:@"%@ : %@ : %@", selectedSet.schoolName, selectedSet.className, selectedSet.groupName];
@@ -122,9 +119,12 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 - (void)refreshLocalBurstCache {
 
-
     EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
     bursts = burstDetailController.importedBursts;
+
+    tag_array = [NSMutableArray arrayWithObjects:@"squirrel", nil];
+    photoTags = [[NSMutableArray alloc] init];
+
 
     //TODO for testing
     burstIndex = 0;

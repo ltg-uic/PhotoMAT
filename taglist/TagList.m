@@ -87,6 +87,17 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
     return NO;
 }
 
+-(TagView*)getTagViewCopy: (NSString *)tagName {
+
+    NSArray *tag = [tagViews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"text == %@", tagName]];
+
+    if( tag.count > 0 ) {
+        return tag[0];
+    }
+
+    return nil;
+}
+
 - (int)indexOfTag:(NSString *)tagName {
     if (tagNames != nil && [tagNames containsObject:tagName]) {
         return [tagNames indexOfObject:tagName];
