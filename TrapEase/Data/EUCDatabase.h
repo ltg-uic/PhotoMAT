@@ -80,24 +80,83 @@
 
 #pragma mark - labels
 
--(NSInteger) addLabel: (NSString *) labelName toBurst: (NSInteger) burstId atLocation: (CGPoint) labelLocation;  // returns label ID
+/**
+ *  Adds a master label to a deployment
+ *
+ *  @param labelName    the name of the master label
+ *  @param deploymentId the deploymentId
+ *
+ *  @return an the id of the newly-created master label
+ */
+-(NSInteger) addMasterLabel: (NSString *) labelName toDeployment: (NSInteger) deploymentId;
+
+/**
+ *  Returns an NSMutableArray of NSDictionarys of all masterLabels associated with a deployment
+ *
+ *  @param deploymentId the deploymentId
+ *
+ *  @return an NSMutableArray of NSDictionarys of all masterLabels
+ */
+-(NSMutableArray *) masterLabelsForDeployment: (NSInteger) deploymentId;
+
+/**
+ *  Removes the master label specified by the passed-in id
+ *
+ *  @param masterLabelId the id of the master label
+ */
+-(void) removeMasterLabel: (NSInteger) masterLabelId;
+
+/**
+ *  Renames the master label specified by the passed-in id
+ *
+ *  @param masterLabelId the id of the master label
+ *  @param newName       the new name of the master label
+ */
+-(void) renameMasterLabel: (NSInteger) masterLabelId toName: (NSString *) newName;
+
+/**
+ *  Add a label to a burst
+ *
+ *  @param masterLabelId the id of the corresponding master label
+ *  @param burstId       the id of the burst to which the label should be added
+ *  @param labelLocation a CGPoint representing the x and y location of the label
+ *
+ *  @return the id of the newly-created label
+ */
+-(NSInteger) addLabel: (NSInteger) masterLabelId toBurst: (NSInteger) burstId atLocation: (CGPoint) labelLocation;  // returns label ID
+
+/**
+ *  Delete the label specified by the passed-in ID
+ *
+ *  @param labelId the label ID
+ */
 -(void) deleteLabel: (NSInteger) labelId;
+
+/**
+ *  Updates the label identified by the id of the passed in EUCLabel. The x and y location are set based on what the EUCLabel contains
+ *
+ *  @param label the EUCLabel that contains the id of the label as well as the new x and y locations
+ */
 -(void) updateLabel: (EUCLabel *) label;
 
--(NSMutableArray *) labelsForDeployment: (NSInteger) deploymentId;
+/**
+ *  Updates the label identified by the id. The x and y are set based on the passed-in location
+ *
+ *  @param labelId  the id of the label
+ *  @param location the location that needs to be set
+ */
+-(void) updateLabelWithId:(NSInteger) labelId toLocation: (CGPoint) location;
 
--(NSMutableArray *) uniqueLabels;
+/**
+ *  Returns a list of all labels associated with a burst
+ *
+ *  @param burstId the burst id
+ *
+ *  @return An NSMutableArray of NSDictionarys of all labels for that burst
+ */
+-(NSMutableArray *) labelsForBurst: (NSInteger) burstId;
 
-//
-//-(NSArray *) labelsForBurst: (NSInteger) burstId; // returns an array of EUCLabel objects
-//-(NSArray *) labelsForBurst: (NSInteger) burstId named: (NSString *) labelName;
-//-(NSArray *) labelsForDeployment: (NSInteger) deploymentId;
-//
-//-(void) deleteAllLabelsNamed:(NSString *) labelName onBurst:(NSInteger) burstId;
-//-(void) deleteAllLabelsNamed:(NSString *) labelName;
-//
-//-(void) renameLabelsNamed: (NSString *) oldLabelName toName: (NSString *) newLabelName forBurst: (NSInteger) burstId;
-//-(void) renameLabelsNamed: (NSString *) oldLabelName toName: (NSString *) newLabelName forDeployment: (NSInteger) deploymentId;
+
 
 @end
 

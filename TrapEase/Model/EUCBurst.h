@@ -17,7 +17,7 @@
 @property (assign, nonatomic) BOOL selected;
 
 @property (strong, nonatomic) NSMutableArray *labels;
-
+@property (readonly, nonatomic) NSDate * date;
 
 #pragma mark - labels
 

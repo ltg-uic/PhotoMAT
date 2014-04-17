@@ -9,6 +9,7 @@
 #import "EUCBurst.h"
 #import "EUCLabel.h"
 #import "EUCDatabase.h"
+#import "EUCImage.h"
 
 @implementation EUCBurst
 
@@ -20,6 +21,22 @@
         _selected = YES;
     }
     return self;
+}
+
+#pragma mark - date
+-(NSDate *)date {
+    if (self.images) {
+        if ([self.images count]) {
+            EUCImage * image = self.images[0];
+            return image.assetDate;
+        }
+        else {
+            return nil;
+        }
+    }
+    else {
+        return nil;
+    }
 }
 
 #pragma mark - labels
