@@ -214,22 +214,6 @@
 		708FDBCB18F8584500EA5B88 /* UIUpdateDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIUpdateDelegate.h; sourceTree = "<group>"; };
 		B4116D9718F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCTabBarViewControllerDelegate.h; path = TrapEase/Controllers/EUCTabBarViewControllerDelegate.h; sourceTree = "<group>"; };
 		B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCTabBarViewControllerDelegate.m; path = TrapEase/Controllers/EUCTabBarViewControllerDelegate.m; sourceTree = "<group>"; };
-		B41BB20518FDD1C900388779 /* d1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = d1.jpg; sourceTree = "<group>"; };
-		B41BB20618FDD1C900388779 /* d1t.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = d1t.jpg; sourceTree = "<group>"; };
-		B41BB20718FDD1C900388779 /* i1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i1.jpg; sourceTree = "<group>"; };
-		B41BB20818FDD1C900388779 /* i1t.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i1t.jpg; sourceTree = "<group>"; };
-		B41BB20918FDD1C900388779 /* i2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i2.jpg; sourceTree = "<group>"; };
-		B41BB20A18FDD1C900388779 /* i2t.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i2t.jpg; sourceTree = "<group>"; };
-		B41BB20B18FDD1C900388779 /* i3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i3.jpg; sourceTree = "<group>"; };
-		B41BB20C18FDD1C900388779 /* i3t.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i3t.jpg; sourceTree = "<group>"; };
-		B41BB20D18FDD1C900388779 /* i4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i4.jpg; sourceTree = "<group>"; };
-		B41BB20E18FDD1C900388779 /* i4t.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i4t.jpg; sourceTree = "<group>"; };
-		B41BB20F18FDD1C900388779 /* i5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i5.jpg; sourceTree = "<group>"; };
-		B41BB21018FDD1C900388779 /* i5t.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i5t.jpg; sourceTree = "<group>"; };
-		B41BB21118FDD1C900388779 /* i6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i6.jpg; sourceTree = "<group>"; };
-		B41BB21218FDD1C900388779 /* i6t.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i6t.jpg; sourceTree = "<group>"; };
-		B41BB21318FDD1C900388779 /* i7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i7.jpg; sourceTree = "<group>"; };
-		B41BB21418FDD1C900388779 /* i7t.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = i7t.jpg; sourceTree = "<group>"; };
 		B41BB22D18FDF28700388779 /* EUCLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCLabel.h; path = Model/EUCLabel.h; sourceTree = "<group>"; };
 		B41BB22E18FDF28700388779 /* EUCLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCLabel.m; path = Model/EUCLabel.m; sourceTree = "<group>"; };
 		B43658D118E3F19C0017672E /* EUCVisibilityChangedDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EUCVisibilityChangedDelegate.h; path = TrapEase/Controllers/EUCVisibilityChangedDelegate.h; sourceTree = "<group>"; };
@@ -445,22 +429,6 @@
 		B41BB20418FDD1C900388779 /* SAMPLES */ = {
 			isa = PBXGroup;
 			children = (
-				B41BB20518FDD1C900388779 /* d1.jpg */,
-				B41BB20618FDD1C900388779 /* d1t.jpg */,
-				B41BB20718FDD1C900388779 /* i1.jpg */,
-				B41BB20818FDD1C900388779 /* i1t.jpg */,
-				B41BB20918FDD1C900388779 /* i2.jpg */,
-				B41BB20A18FDD1C900388779 /* i2t.jpg */,
-				B41BB20B18FDD1C900388779 /* i3.jpg */,
-				B41BB20C18FDD1C900388779 /* i3t.jpg */,
-				B41BB20D18FDD1C900388779 /* i4.jpg */,
-				B41BB20E18FDD1C900388779 /* i4t.jpg */,
-				B41BB20F18FDD1C900388779 /* i5.jpg */,
-				B41BB21018FDD1C900388779 /* i5t.jpg */,
-				B41BB21118FDD1C900388779 /* i6.jpg */,
-				B41BB21218FDD1C900388779 /* i6t.jpg */,
-				B41BB21318FDD1C900388779 /* i7.jpg */,
-				B41BB21418FDD1C900388779 /* i7t.jpg */,
 			);
 			path = SAMPLES;
 			sourceTree = "<group>";
