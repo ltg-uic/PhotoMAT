@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class EUCBurst;
 @interface EUCLabel : NSObject
 
 @property (assign, nonatomic) NSInteger labelId;
-@property (strong, nonatomic) NSString *name;
 @property (assign, nonatomic) CGPoint location;
+@property (assign, nonatomic) NSInteger masterLabelId;
+@property (assign, nonatomic) NSInteger burstId;
+@property (strong, nonatomic) NSString *name;
 
 
 

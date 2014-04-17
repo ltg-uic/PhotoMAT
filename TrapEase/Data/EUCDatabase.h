@@ -95,7 +95,7 @@
  *
  *  @param deploymentId the deploymentId
  *
- *  @return an NSMutableArray of NSDictionarys of all masterLabels
+ *  @return an NSMutableArray of masterLabels
  */
 -(NSMutableArray *) masterLabelsForDeployment: (NSInteger) deploymentId;
 
@@ -152,7 +152,7 @@
  *
  *  @param burstId the burst id
  *
- *  @return An NSMutableArray of NSDictionarys of all labels for that burst
+ *  @return An NSMutableArray of labels for that burst
  */
 -(NSMutableArray *) labelsForBurst: (NSInteger) burstId;
 

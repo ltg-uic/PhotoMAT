@@ -14,6 +14,7 @@
 #import "EUCBurst.h"
 #import "EUCFileSystem.h"
 #import "EUCLabel.h"
+#import "EUCMasterLabel.h"
 
 static EUCDatabase * database;
 static const int ddLogLevel = LOG_LEVEL_INFO;
@@ -410,7 +411,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 
 -(NSDictionary *) getDeploymentRecord:(NSNumber *)deploymentId {
-    NSString * sql = @"select deployment_date, notes, short_name, actual_mark_time, camera_trap_number from deployment where id=?";
+    NSString * sql = @"select deployment_date, notes, short_name, strftime('%Y-%m-%dT%H:%M:%S.000Z', actual_mark_time), camera_trap_number from deployment where id=?";
     
     FMResultSet * rs = [self.db executeQuery:sql, deploymentId];
     
@@ -621,7 +622,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     }
     [rs close];
     
-    sql = @"SELECT id, strftime('%Y-%m-%d %H:%M:%S', image_date), file_name, width, height from image where burst_id=? order by id";
+    sql = @"SELECT id, strftime('%Y-%m-%dT%H:%M:%S.000Z', image_date), file_name, width, height from image where burst_id=? order by id";
     for (EUCBurst * burst in bursts) {
         rs = [self.db executeQuery:sql, @(burst.burstId)];
         burst.images = [NSMutableArray arrayWithCapacity:9];
@@ -668,11 +669,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 
 /**
- *  Returns an NSArray of NSDictionarys of all masterLabels associated with a deployment
+ *  Returns an NSArray of all masterLabels associated with a deployment
  *
  *  @param deploymentId the deploymentId
  *
- *  @return an NSArray of NSDictionarys of all masterLabels
+ *  @return an NSArray of all masterLabels
  */
 -(NSMutableArray *) masterLabelsForDeployment: (NSInteger) deploymentId {
     NSMutableArray * result = [NSMutableArray arrayWithCapacity:32];
@@ -680,9 +681,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     while ([rs next]) {
         NSInteger mlId = [rs intForColumnIndex:0];
         NSString * mlName = [rs stringForColumnIndex:1];
-        [result addObject:@{@"id": @(mlId),
-                            @"name": mlName,
-                            @"deploymentId": @(deploymentId)}];
+        EUCMasterLabel * masterLabel = [[EUCMasterLabel alloc] init];
+        masterLabel.masterLabelID = mlId;
+        masterLabel.deploymentID = deploymentId;
+        masterLabel.name = mlName;
+        [result addObject: masterLabel];
     }
     [rs close];
     
@@ -791,13 +794,14 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         NSInteger y = [rs intForColumnIndex:3];
         NSInteger masterLabelId = [rs intForColumnIndex:4];
         NSString * name = [rs stringForColumnIndex:5];
+        EUCLabel * label = [[EUCLabel alloc] init];
+        label.labelId = labelId;
+        label.masterLabelId = masterLabelId;
+        label.burstId = burstId;
+        label.location = CGPointMake(x, y);
+        label.name = name;
         
-        [result addObject: @{@"id": @(labelId),
-                             @"burstId": @(burstId),
-                             @"x": @(x),
-                             @"y": @(y),
-                             @"masterLabelId": @(masterLabelId),
-                             @"name": name}];
+        [result addObject: label];
     }
     [rs close];
     return result;
