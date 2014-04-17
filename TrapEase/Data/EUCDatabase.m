@@ -677,7 +677,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(NSMutableArray *) masterLabelsForDeployment: (NSInteger) deploymentId {
     NSMutableArray * result = [NSMutableArray arrayWithCapacity:32];
     FMResultSet * rs = [self.db executeQuery:@"SELECT id, name from master_label where deployment_id=?", @(deploymentId)];
-    if ([rs next]) {
+    while ([rs next]) {
         NSInteger mlId = [rs intForColumnIndex:0];
         NSString * mlName = [rs stringForColumnIndex:1];
         [result addObject:@{@"id": @(mlId),
