@@ -54,7 +54,7 @@
     NSString * groupName = db.groupName;
     NSString * className = db.className;
 
-    NSString *fullURL = [NSString stringWithFormat:@"http://safari.encorelab.org/mobile/mobile.html?runId=%@&username=%@", className, groupName];
+    NSString *fullURL = [NSString stringWithFormat:@"http://safari.encorelab.org/mobile/mobile.html?runId=%@&username=%@&showLogout=false", className, groupName];
 
     NSURL *url = [NSURL URLWithString:fullURL];
 
