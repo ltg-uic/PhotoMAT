@@ -108,10 +108,11 @@ typedef enum : NSUInteger {
         _addedImages = [[NSMutableArray alloc] init];
         _burstImages = [[NSMutableArray alloc] init];
         _format = [[NSDateFormatter alloc] init];
-        [_format setDateFormat:@"MMM dd, yyyy hh:mm a"];
+        [_format setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z"];
+        [_format setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
         _uploadQueue = dispatch_queue_create("com.euclidsoftware.uploadQueue", NULL);
         _parser = [[NSDateFormatter alloc] init];
-        [_parser setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        [_parser setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
         
     }
     return self;
@@ -963,11 +964,11 @@ typedef enum : NSUInteger {
     
     if (self.dateEditingMode == editingNominal) {
         self.nominalDate = date;
-        [self.nominalButton setTitle:[self.format stringFromDate:date] forState:UIControlStateNormal];
+        [self.nominalButton setTitle:[self.parser stringFromDate:date] forState:UIControlStateNormal];
     }
     else {
         self.actualDate = date;
-        [self.actualButton setTitle:[self.format stringFromDate:date] forState:UIControlStateNormal];
+        [self.actualButton setTitle:[self.parser stringFromDate:date] forState:UIControlStateNormal];
     }
 }
 
@@ -979,10 +980,10 @@ typedef enum : NSUInteger {
     self.shortName.text = record[@"short_name"];
     self.notes.text = record[@"notes"];
     self.trapNumber.text = [NSString stringWithFormat:@"%ld", (long)[record[@"camera_trap_number"] integerValue]];
-    [self.actualButton setTitle:record[@"actual_mark_time"] forState:UIControlStateNormal];
     
     NSString * dateString = record[@"actual_mark_time"];
-    self.actualDate = [self.parser dateFromString:dateString];
+    self.actualDate = [self.format dateFromString:dateString];
+    [self.actualButton setTitle:[self.parser stringFromDate:self.actualDate] forState:UIControlStateNormal];
 
     
     // local get
@@ -996,7 +997,7 @@ typedef enum : NSUInteger {
     self.downloadButton.hidden = YES;
     
     self.addedImages = [db getDeploymentImagesForDeploymentWithId:deploymentIdInteger];
-    self.importedBursts = [db getBurstForDeploymentWithId:deploymentIdInteger withParser: self.parser];
+    self.importedBursts = [db getBurstForDeploymentWithId:deploymentIdInteger withParser: self.format];
     [self.burstImages removeAllObjects];
     for (EUCBurst * burst in self.importedBursts) {
         for (EUCImage * image in burst.images) {
