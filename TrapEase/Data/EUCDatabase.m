@@ -138,6 +138,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     ")";
     [self.db executeUpdate:sql];
     
+    [self.db executeUpdate:@"drop table label"];
+
     sql = @"CREATE TABLE label ("
     "      id SERIAL UNIQUE PRIMARY KEY NOT NULL"
     "    , owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE"
