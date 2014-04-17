@@ -131,6 +131,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         return;
     }
     
+    [self.db executeUpdate:@"drop table label"];
+    [self.db executeUpdate:@"drop table master_label"];
+
     sql = @"CREATE TABLE master_label ("
     "id SERIAL UNIQUE PRIMARY KEY NOT NULL"
     ", name VARCHAR(256) NOT NULL"
@@ -138,7 +141,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     ")";
     [self.db executeUpdate:sql];
     
-    [self.db executeUpdate:@"drop table label"];
 
     sql = @"CREATE TABLE label ("
     "      id SERIAL UNIQUE PRIMARY KEY NOT NULL"
@@ -148,6 +150,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     "    , y INT NOT NULL"
     "    , master_label_id INT NOT NULL REFERENCES master_label (id) ON DELETE CASCADE ON UPDATE CASCADE"
     ")";
+    [self.db executeUpdate:sql];
     
     [self.db executeUpdate:@"create index i_label_id on label(id)"];
     [self.db executeUpdate:@"CREATE index i_label_bid on label(burst_id)"];
