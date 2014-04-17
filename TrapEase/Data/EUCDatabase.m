@@ -122,28 +122,33 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 }
 
 -(void) createLabelTableIfNecessary {
-    NSString * sql = @"pragma table_info(label)";
+    NSString * sql = @"pragma table_info(master_label)";
     FMResultSet * rs = [self.db executeQuery:sql];
     if ([rs next]) {
         [rs close];
         // it's already there
-        NSLog(@"Table label already exists");
+        NSLog(@"Table master_label already exists");
         return;
     }
     
-    sql = @"CREATE TABLE label ("
+    sql = @"CREATE TABLE master_label ("
     "id SERIAL UNIQUE PRIMARY KEY NOT NULL"
-    ", owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE"
     ", name VARCHAR(256) NOT NULL"
-    ", burst_id INT NOT NULL REFERENCES burst(id) ON DELETE CASCADE ON UPDATE CASCADE"
-    ", x INT NOT NULL"
-    ", y INT NOT NULL"
+    ", deployment_id INT NOT NULL REFERENCES deployment (id) ON DELETE CASCADE ON UPDATE CASCADE"
     ")";
     [self.db executeUpdate:sql];
     
+    sql = @"CREATE TABLE label ("
+    "      id SERIAL UNIQUE PRIMARY KEY NOT NULL"
+    "    , owner INT NOT NULL REFERENCES person(id) ON UPDATE CASCADE"
+    "    , burst_id INT NOT NULL REFERENCES burst(id) ON DELETE CASCADE ON UPDATE CASCADE"
+    "    , x INT NOT NULL "
+    "    , y INT NOT NULL"
+    "    , master_label_id INT NOT NULL REFERENCES master_label (id) ON DELETE CASCADE ON UPDATE CASCADE"
+    ")";
+    
     [self.db executeUpdate:@"create index i_label_id on label(id)"];
     [self.db executeUpdate:@"CREATE index i_label_bid on label(burst_id)"];
-    [self.db executeUpdate:@"CREATE index i_label_name on label(name)"];
     
     NSLog(@"created table label");
 
@@ -632,7 +637,86 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 #pragma mark - labels
 
--(NSInteger) addLabel: (NSString *) labelName toBurst: (NSInteger) burstId atLocation: (CGPoint) labelLocation {
+/**
+ *  Adds a master label to a deployment
+ *
+ *  @param labelName    the name of the master label
+ *  @param deploymentId the deploymentId
+ *
+ *  @return an the id of the newly-created master label
+ */
+-(NSInteger)addMasterLabel:(NSString *)labelName toDeployment:(NSInteger)deploymentId {
+    NSString * sql ;
+    FMResultSet * rs;
+    
+    sql = @"select max(id) from master_label";
+    rs = [self.db executeQuery:sql];
+    if ([rs next]) {
+        NSInteger masterLabelId = [rs intForColumnIndex:0];
+        masterLabelId++;
+        [rs close];
+        [self.db executeUpdate:@"insert into master_label (id, name, deployment_id) values(?, ?, ?)", @(masterLabelId), labelName, @(deploymentId)];
+        return masterLabelId;
+    }
+    return 0;
+}
+
+
+/**
+ *  Returns an NSArray of NSDictionarys of all masterLabels associated with a deployment
+ *
+ *  @param deploymentId the deploymentId
+ *
+ *  @return an NSArray of NSDictionarys of all masterLabels
+ */
+-(NSMutableArray *) masterLabelsForDeployment: (NSInteger) deploymentId {
+    NSMutableArray * result = [NSMutableArray arrayWithCapacity:32];
+    FMResultSet * rs = [self.db executeQuery:@"SELECT id, name from master_label where deployment_id=?", @(deploymentId)];
+    if ([rs next]) {
+        NSInteger mlId = [rs intForColumnIndex:0];
+        NSString * mlName = [rs stringForColumnIndex:1];
+        [result addObject:@{@"id": @(mlId),
+                            @"name": mlName,
+                            @"deploymentId": @(deploymentId)}];
+    }
+    [rs close];
+    
+    return result;
+
+}
+
+
+
+/**
+ *  Removes the master label specified by the passed-in id
+ *
+ *  @param masterLabelId the id of the master label
+ */
+-(void) removeMasterLabel: (NSInteger) masterLabelId {
+    [self.db executeUpdate:@"delete from master_label where id=?", @(masterLabelId)];
+}
+
+/**
+ *  Renames the master label specified by the passed-in id
+ *
+ *  @param masterLabelId the id of the master label
+ *  @param newName       the new name of the master label
+ */
+-(void) renameMasterLabel: (NSInteger) masterLabelId toName: (NSString *) newName {
+    [self.db executeUpdate:@"update master_label set name=? where id=?", newName, @(masterLabelId)];
+}
+
+
+/**
+ *  Add a label to a burst
+ *
+ *  @param masterLabelId the id of the corresponding master label
+ *  @param burstId       the id of the burst to which the label should be added
+ *  @param labelLocation a CGPoint representing the x and y location of the label
+ *
+ *  @return the id of the newly-created label
+ */
+-(NSInteger) addLabel:(NSInteger)masterLabelId toBurst:(NSInteger)burstId atLocation:(CGPoint)labelLocation {
     NSDictionary * settings = self.settings;
     
     NSString * sql ;
@@ -644,44 +728,86 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         NSInteger labelId = [rs intForColumnIndex:0];
         labelId++;
         [rs close];
-        [self.db executeUpdate:@"insert into label(id, owner, name, burst_id, x, y) values(?, ?, ?, ?, ?, ?, ?)",
-         @(labelId), settings[@"personId"], labelName, @(burstId), @(labelLocation.x), @(labelLocation.y)];
+        [self.db executeUpdate:@"insert into label(id, owner, master_label_id, burst_id, x, y) values(?, ?, ?, ?, ?, ?)",
+         @(labelId), settings[@"personId"], @(masterLabelId), @(burstId), @(labelLocation.x), @(labelLocation.y)];
         return labelId;
     }
     return 0;
     
 }
 
+/**
+ *  Delete the label specified by the passed-in ID
+ *
+ *  @param labelId the label ID
+ */
 -(void) deleteLabel: (NSInteger) labelId {
     [self.db executeUpdate:@"delete from label where id=?", @(labelId)];
 }
 
+
+/**
+ *  Updates the label identified by the id of the passed in EUCLabel. The x and y location are set based on what the EUCLabel contains
+ *
+ *  @param label the EUCLabel that contains the id of the label as well as the new x and y locations
+ */
 -(void) updateLabel: (EUCLabel *) label {
-    [self.db executeUpdate:@"Update label set name=?, x=?, y=? where id=?",
-     label.name, @(label.location.x), @(label.location.y), @(label.labelId)];
+    [self.db executeUpdate:@"Update label set x=?, y=? where id=?",
+      @(label.location.x), @(label.location.y), @(label.labelId)];
 }
 
--(NSMutableArray *)labelsForDeployment:(NSInteger)deploymentId {
+/**
+ *  Updates the label identified by the id. The x and y are set based on the passed-in location
+ *
+ *  @param labelId  the id of the label
+ *  @param location the location that needs to be set
+ */
+-(void) updateLabelWithId:(NSInteger) labelId toLocation: (CGPoint) location {
+    [self.db executeUpdate:@"Update label set x=?, y=? where id=?",
+     @(location.x), @(location.y), @(labelId)];
+}
+
+
+/**
+ *  Returns a list of all labels associated with a burst
+ *
+ *  @param burstId the burst id
+ *
+ *  @return An NSMutableArray of NSDictionarys of all labels for that burst
+ */
+-(NSMutableArray *)labelsForBurst:(NSInteger)burstId {
     NSMutableArray * result = [NSMutableArray arrayWithCapacity:64];
-    NSString * sql = @"select distinct(l.name) from label l join burst b on l.burst_id = b.id where b.deployment_id = ?";
-    FMResultSet * rs = [self.db executeQuery:sql, @(deploymentId)];
+    NSString * sql = @"select l.id, burst_id, x, y, master_label_id, name from label l join master_label m on l.master_label_id = m.id where burst_id = ?";
+    FMResultSet * rs = [self.db executeQuery:sql, @(burstId)];
     while ([rs next]) {
-        [result addObject:[rs stringForColumnIndex:0]];
+        NSInteger labelId = [rs intForColumnIndex:0];
+        NSInteger burstId = [rs intForColumnIndex:1];
+        NSInteger x = [rs intForColumnIndex:2];
+        NSInteger y = [rs intForColumnIndex:3];
+        NSInteger masterLabelId = [rs intForColumnIndex:4];
+        NSString * name = [rs stringForColumnIndex:5];
+        
+        [result addObject: @{@"id": @(labelId),
+                             @"burstId": @(burstId),
+                             @"x": @(x),
+                             @"y": @(y),
+                             @"masterLabelId": @(masterLabelId),
+                             @"name": name}];
     }
     [rs close];
     return result;
 }
 
--(NSMutableArray *)uniqueLabels {
-    NSMutableArray * result = [NSMutableArray arrayWithCapacity:64];
-    NSString * sql = @"select distinct(l.name) from label l ";
-    FMResultSet * rs = [self.db executeQuery:sql];
-    while ([rs next]) {
-        [result addObject:[rs stringForColumnIndex:0]];
-    }
-    [rs close];
-    return result;
-}
+//-(NSMutableArray *)uniqueLabels {
+//    NSMutableArray * result = [NSMutableArray arrayWithCapacity:64];
+//    NSString * sql = @"select distinct(l.name) from label l ";
+//    FMResultSet * rs = [self.db executeQuery:sql];
+//    while ([rs next]) {
+//        [result addObject:[rs stringForColumnIndex:0]];
+//    }
+//    [rs close];
+//    return result;
+//}
 
 //-(NSArray *) labelsForBurst: (NSInteger) burstId; // returns an array of EUCLabel objects
 //-(NSArray *) labelsForBurst: (NSInteger) burstId named: (NSString *) labelName;
