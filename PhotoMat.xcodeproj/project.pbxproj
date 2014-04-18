@@ -65,6 +65,7 @@
 		B4D1EC4C18BD729300E01EFE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1EC3418BD729300E01EFE /* UIKit.framework */; };
 		B4D1EC5418BD729300E01EFE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B4D1EC5218BD729300E01EFE /* InfoPlist.strings */; };
 		B4D1EC5618BD729300E01EFE /* TrapEaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B4D1EC5518BD729300E01EFE /* TrapEaseTests.m */; };
+		B4E554721900BBFF000F2136 /* EUCMasterLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E554711900BBFF000F2136 /* EUCMasterLabel.m */; };
 		B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BD5618DDBB5600AC9D84 /* EUCFileSystem.m */; };
 		B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BD5918DDC26000AC9D84 /* EUCHomeViewController.m */; };
 		B4E6BD6318DDC30C00AC9D84 /* EUCImportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BD6118DDC30C00AC9D84 /* EUCImportViewController.m */; };
@@ -263,6 +264,8 @@
 		B4D1EC5118BD729300E01EFE /* PhotoMatTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoMatTests-Info.plist"; sourceTree = "<group>"; };
 		B4D1EC5318BD729300E01EFE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B4D1EC5518BD729300E01EFE /* TrapEaseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrapEaseTests.m; sourceTree = "<group>"; };
+		B4E554701900BBFF000F2136 /* EUCMasterLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCMasterLabel.h; path = Model/EUCMasterLabel.h; sourceTree = "<group>"; };
+		B4E554711900BBFF000F2136 /* EUCMasterLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCMasterLabel.m; path = Model/EUCMasterLabel.m; sourceTree = "<group>"; };
 		B4E6BD5518DDBB5600AC9D84 /* EUCFileSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCFileSystem.h; path = Support/EUCFileSystem.h; sourceTree = "<group>"; };
 		B4E6BD5618DDBB5600AC9D84 /* EUCFileSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCFileSystem.m; path = Support/EUCFileSystem.m; sourceTree = "<group>"; };
 		B4E6BD5818DDC26000AC9D84 /* EUCHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCHomeViewController.h; path = TrapEase/Controllers/EUCHomeViewController.h; sourceTree = "<group>"; };
@@ -436,6 +439,8 @@
 		B43658D218E4B9490017672E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B4E554701900BBFF000F2136 /* EUCMasterLabel.h */,
+				B4E554711900BBFF000F2136 /* EUCMasterLabel.m */,
 				B43658D318E4B95F0017672E /* EUCImage.h */,
 				B43658D418E4B95F0017672E /* EUCImage.m */,
 				B43658D618E4B9A30017672E /* EUCBurst.h */,
@@ -1020,6 +1025,7 @@
 				B4116D9918F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m in Sources */,
 				B4F6930F18F75872000C7AD0 /* EUCSelectedSet.m in Sources */,
 				7080F7DA18F746F60087A66F /* PopoverErrorContentViewController.m in Sources */,
+				B4E554721900BBFF000F2136 /* EUCMasterLabel.m in Sources */,
 				7080F7B918F743210087A66F /* PhotoTag.m in Sources */,
 				7080F7BA18F743210087A66F /* TagList.m in Sources */,
 				B4E6BD7518DDC39300AC9D84 /* EUCAnalyzeViewController.m in Sources */,
