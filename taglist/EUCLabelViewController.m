@@ -21,6 +21,8 @@
 #import "EUCImage.h"
 #import "UIUpdateDelegate.h"
 #import "EUCDatabase.h"
+#import "EUCLabel.h"
+#import "EUCMasterLabel.h"
 
 
 @interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone> {
@@ -127,8 +129,8 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     tag_array = [[NSMutableArray alloc] init];
     if( labels.count > 0 ) {
-        for(NSDictionary *dict in labels) {
-            [_tagList addTag:[dict objectForKey:@"name"] withLabelId:[dict objectForKey:@"id"]];
+        for(EUCMasterLabel *label in labels) {
+            [_tagList addTag:label.name withLabelId:label.masterLabelID];
         }
     } else {
         tag_array = nil;
