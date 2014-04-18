@@ -179,13 +179,16 @@ typedef enum : NSUInteger {
 -(void)importDone:(NSMutableArray *)bursts {
     self.importedBursts = bursts;
     
-    [self.view makeToastActivity];
     
     BOOL first = YES;
     __block NSInteger imageNumber = 0;
     NSInteger numImages = 0;
     for (EUCBurst * burst in self.importedBursts) {
         numImages += [burst.images count];
+    }
+    
+    if (numImages) {
+        [self.view makeToastActivity];
     }
     
     for (EUCBurst * burst in self.importedBursts) {
