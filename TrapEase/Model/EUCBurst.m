@@ -51,9 +51,6 @@
     EUCLabel * label = [[EUCLabel alloc] init];
     label.labelId = labelId;
     label.location = location;
-
-    //find the masterLabelID with the name labelName
-
     return [self addLabel:label];
 }
 
