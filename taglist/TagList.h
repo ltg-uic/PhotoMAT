@@ -29,7 +29,7 @@
 
 - (void)clearList;
 
-- (BOOL)addTag:(NSString *)tagName;
+- (BOOL)addTag:(NSString *)tagName withLabelId:(NSInteger)labelId;
 
 - (int)indexOfTag:(NSString *)tagName;
 

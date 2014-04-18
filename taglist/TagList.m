@@ -2,13 +2,12 @@
 #import "TagView.h"
 
 
+
 static const CGFloat TagListElementWidth = 151;
 static const CGFloat TagListElementHeight = 30;
 static const CGFloat TagListElementSpacingX = 2;
 static const CGFloat TagListElementSpacingY = 2;
-
 static const NSInteger TagListMaxTagsInRow = 2;
-
 static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
 
 @interface TagList () {
@@ -16,6 +15,9 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
     NSMutableArray *tagViews;
     CGFloat posX;
     CGFloat posY;
+    NSMutableDictionary *tagNamesToLabelIds;
+
+
 }
 
 @end
@@ -38,6 +40,8 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
 
     posX = self.frame.origin.x;
     posY = self.frame.origin.y;
+
+    [self initTagData];
 
 }
 
@@ -83,6 +87,21 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
 
 }
 
+- (void)initTagData {
+    if (_maxNumberOfLabels <= 0) {
+        _maxNumberOfLabels = 2;
+    }
+
+    tagViews = [[NSMutableArray alloc] init];
+
+
+    tagNames = [[NSMutableArray alloc] init];
+
+
+
+}
+
+
 -(void) clearList {
     [tagNames removeAllObjects];
 
@@ -92,16 +111,45 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
     [tagViews removeAllObjects];
 }
 
-- (BOOL)addTag:(NSString *)tagName {
+-(BOOL)isDuplicateTag:(NSString *)tagName {
+    if( [tagNames containsObject:tagName] ) {
+         return YES;
+    }
+    return NO;
+}
+
+
+- (BOOL)addTag:(NSString *)tagName withLabelId:(NSInteger)labelId {
 
     if( tagNames == nil ) {
         tagNames = [[NSMutableArray alloc] init];
     }
 
-    if ([tagNames containsObject:tagName] == NO ) {
+    if ([self isDuplicateTag:tagName] == NO ) {
 
         if (tagViews.count < _maxNumberOfLabels) {
             [tagNames addObject:tagName];
+
+            TagView *tagView = [[TagView alloc] initWithFrame:CGRectMake(0, 0, TagListElementWidth, TagListElementHeight)];
+
+            NSInteger randomNumber = arc4random() % 100;
+            tagView.labelId = labelId;
+            tagView.tag = randomNumber;
+
+            [tagView setText:tagName];
+
+            //add gestures to it!
+            _gestureAddHandler(tagView);
+
+            [tagView setColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0]];
+
+            [tagViews addObject:tagView];
+
+
+
+
+
+
             [self refreshUI];
             return YES;
         }
@@ -110,7 +158,7 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
     return NO;
 }
 
--(TagView*)getTagViewCopy: (NSString *)tagName {
+-(TagView *)getTagViewCopy: (NSString *)tagName {
 
     NSArray *tag = [tagViews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"text == %@", tagName]];
 
@@ -156,9 +204,9 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
     for (TagView *tv in tagViews) {
         [tv removeFromSuperview];
     }
-    if (tagViews.count > 0) {
-        [tagViews removeAllObjects];
-    }
+//    if (tagViews.count > 0) {
+//        [tagViews removeAllObjects];
+//    }
 
 
     NSInteger rowCount = ceil(tagNames.count / (float) TagListMaxTagsInRow);
@@ -173,22 +221,12 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
     NSInteger index = 0;
     NSInteger rowIndex = 0;
 
-    for (NSString *str in tagNames) {
-        TagView *tagView = [[TagView alloc] initWithFrame:CGRectMake(x, y, TagListElementWidth, TagListElementHeight)];
-
-        NSInteger randomNumber = arc4random() % 100;
-        tagView.tag = randomNumber;
-
-        [tagView setText:str];
-
-        //add gestures to it!
-        _gestureAddHandler(tagView);
-
-        [self addSubview:tagView];
-        [tagViews addObject:tagView];
+    for (TagView *tv in tagViews) {
+        tv.frame = CGRectMake(x, y, TagListElementWidth, TagListElementHeight);
 
 
-        [tagView setColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0]];
+
+        [self addSubview:tv];
 
 
         ++index;

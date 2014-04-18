@@ -35,6 +35,7 @@
     EUCAppDelegate *appDelegate;
     NSArray *bursts;
     int burstIndex;
+    NSInteger deploymentId;
 }
 
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -48,6 +49,7 @@
 
 NSString *const DELETE_ALL_LABELS = @"DELETE_ALL_LABELS";
 NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
+
 
 #define MAX_TEXT_CHAR_LENGTH 16
 #define MAX_LABELS_ALLOWED 18
@@ -102,9 +104,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 //
-//    [self refreshGroupLabel];
+    [self refreshGroupLabel];
 //
-//    [self refreshLocalBurstCache];
+    [self refreshLocalBurstCache];
 }
 
 - (void)refreshGroupLabel {
@@ -119,15 +121,18 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
     bursts = burstDetailController.importedBursts;
 
-    NSArray *labels = [[EUCDatabase sharedInstance] labelsForDeployment: burstDetailController.deploymentId];
+    deploymentId = burstDetailController.deploymentId;
 
+    NSArray *labels = [[EUCDatabase sharedInstance] masterLabelsForDeployment: burstDetailController.deploymentId ];
+
+    tag_array = [[NSMutableArray alloc] init];
     if( labels.count > 0 ) {
-        [tag_array addObjectsFromArray:labels];
+        for(NSDictionary *dict in labels) {
+            [_tagList addTag:[dict objectForKey:@"name"] withLabelId:[dict objectForKey:@"id"]];
+        }
     } else {
         tag_array = nil;
     }
-
-    [_tagList initTagListWithTagNames:tag_array];
 
 
     photoTags = [[NSMutableArray alloc] init];
@@ -139,6 +144,8 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     EUCImage *image = burst.images[burstIndex];
     currentImageName = image.filename;
     _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
+
+    [self playPauseImageAnimation:nil];
 }
 
 
@@ -168,9 +175,17 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     if (lastTagName == nil ) {
         NSString *newTag = textField.text;
-        BOOL SUCCESS = [_tagList addTag:newTag];
+
+
+
+
+        BOOL SUCCESS = [_tagList addTag:newTag withLabelId:0];
 
         if (SUCCESS) {
+
+            //add it to the database
+            NSInteger labelId = [[EUCDatabase sharedInstance] addMasterLabel:newTag toDeployment:deploymentId];
+            [_tagList addTag:newTag withLabelId:labelId];
             [textField setText:@""];
             lastTagName = nil;
         } else {
@@ -501,6 +516,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
                 [_dropOverlayView addSubview:pt.tagView];
             }
         }
+        [self playAnimation];
     }
 }
 
@@ -534,6 +550,8 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
                 [_dropOverlayView addSubview:pt.tagView];
             }
         }
+
+        [self playAnimation];
 
     }
 
@@ -574,29 +592,38 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
         [_playPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
 
-        EUCBurst *burst = bursts[burstIndex];
-
-        NSMutableArray *ani = [[NSMutableArray alloc] init];
-        for (EUCImage *image in burst.images) {
-            [ani addObject:[UIImage imageWithContentsOfFile:image.filename]];
-        }
-
-        _imageView.animationImages = ani;
-        _imageView.animationDuration = 1.0;
-        _imageView.animationRepeatCount = 0;
-        [_imageView startAnimating];
-
-
+        [self playAnimation];
     } else {
         [_playPauseButton setTitle:@"Play" forState:UIControlStateNormal];
 
-        if (_imageView.isAnimating) {
-            [_imageView stopAnimating];
+        [self pauseAnimation];
+    }
+}
 
-            _imageView.animationImages = nil;
-            _imageView.animationDuration = 0;
-            _imageView.animationRepeatCount = 0;
-        }
+-(void)playAnimation {
+
+    if( burstIndex > 0 && burstIndex < bursts.count ) {
+    EUCBurst *burst = bursts[burstIndex];
+
+    NSMutableArray *ani = [[NSMutableArray alloc] init];
+    for (EUCImage *image in burst.images) {
+        [ani addObject:[UIImage imageWithContentsOfFile:image.filename]];
+    }
+
+    _imageView.animationImages = ani;
+    _imageView.animationDuration = .3;
+    _imageView.animationRepeatCount = 0;
+    [_imageView startAnimating];
+    }
+}
+
+-(void)pauseAnimation {
+    if (_imageView.isAnimating) {
+        [_imageView stopAnimating];
+
+        _imageView.animationImages = nil;
+        _imageView.animationDuration = 0;
+        _imageView.animationRepeatCount = 0;
     }
 }
 

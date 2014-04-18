@@ -47,7 +47,7 @@
     return label.labelId;
 }
 
--(NSInteger) addLabelNamed: (NSString *) labelName atLocation: (CGPoint) location {
+-(NSInteger)    addLabelNamed: (NSString *) labelName atLocation: (CGPoint) location {
     EUCLabel * label = [[EUCLabel alloc] init];
     label.name = labelName;
     label.location = location;
