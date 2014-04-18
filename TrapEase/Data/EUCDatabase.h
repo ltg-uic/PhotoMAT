@@ -91,7 +91,7 @@
 -(NSInteger) addMasterLabel: (NSString *) labelName toDeployment: (NSInteger) deploymentId;
 
 /**
- *  Returns an NSMutableArray of NSDictionarys of all masterLabels associated with a deployment
+ *  Returns an NSMutableArray of all masterLabels associated with a deployment
  *
  *  @param deploymentId the deploymentId
  *
