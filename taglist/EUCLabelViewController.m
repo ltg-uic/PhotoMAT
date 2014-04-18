@@ -209,14 +209,19 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         if (i >= 0) {
 
 
-            [self changeTagsFrom:lastTagName to:newTagName];
-            lastTagName = newTagName;
+            NSInteger labelId = [self changeTagsFrom:lastTagName to:newTagName];
+
+            if( labelId != -1 ) {
+                [[EUCDatabase sharedInstance] renameMasterLabel:labelId toName:newTagName];
+                lastTagName = newTagName;
+            }
+
         }
     }
 }
 
-- (void)changeTagsFrom:(NSString *)oldLabel to:(NSString *)newLabel {
-    [_tagList changeTagNameFrom:oldLabel to:newLabel];
+- (NSInteger)changeTagsFrom:(NSString *)oldLabel to:(NSString *)newLabel {
+    NSInteger labelId = [_tagList changeTagNameFrom:oldLabel to:newLabel];
 
 
     NSArray *droppedTags = [_dropOverlayView subviews];
@@ -226,9 +231,11 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
             if ([tagView.text isEqualToString:oldLabel]) {
                 tagView.text = newLabel;
                 [tagView setNeedsDisplay];
+                return tagView.labelId;
             }
         }
     }
+    return -1;
 }
 
 
@@ -381,7 +388,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     [self enableDropColor:copy];
 
     EUCBurst *burst = bursts[burstIndex];
-    copy.labelId = [burst addLabelNamed:copy.text atLocation:location];
+    copy.labelId = [burst addLabelId:copy.labelId atLocation:location];
     [_dropOverlayView addSubview:copy];
 
 }

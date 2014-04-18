@@ -36,5 +36,5 @@
 - (BOOL)removeTag:(NSString *)tagName;
 
 
-- (void)changeTagNameFrom:(NSString *)oldLabel to:(NSString *)newLabel;
+- (NSInteger)changeTagNameFrom:(NSString *)oldLabel to:(NSString *)newLabel;
 @end

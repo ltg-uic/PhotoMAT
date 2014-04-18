@@ -185,7 +185,7 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
     return NO;
 }
 
-- (void)changeTagNameFrom:(NSString *)oldLabel to:(NSString *)newLabel {
+- (NSInteger)changeTagNameFrom:(NSString *)oldLabel to:(NSString *)newLabel {
     int index = [tagNames indexOfObject:oldLabel];
     if (index >= 0) {
         [tagNames replaceObjectAtIndex:index withObject:newLabel];
@@ -193,9 +193,11 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
             if ([tv.text isEqualToString:oldLabel]) {
                 tv.text = newLabel;
                 [tv setNeedsDisplay];
+                return tv.labelId;
             }
         }
     }
+    return -1;
 }
 
 - (void)refreshUI {

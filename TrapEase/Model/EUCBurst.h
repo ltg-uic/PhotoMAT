@@ -22,7 +22,7 @@
 #pragma mark - labels
 
 -(NSInteger) addLabel: (EUCLabel *) label;
--(NSInteger) addLabelNamed: (NSString *) labelName atLocation: (CGPoint) location;
+-(NSInteger)addLabelId:(NSInteger)labelId atLocation: (CGPoint) location;
 -(void) addLabels: (NSArray *) labelArray;
 
 -(void) deleteLabel: (EUCLabel *) label;
