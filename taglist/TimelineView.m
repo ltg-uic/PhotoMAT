@@ -4,9 +4,13 @@
 //
 
 #import "TimelineView.h"
+#import "EUCBurst.h"
 
+
+int textWidth = 52;
 
 @implementation TimelineView {
+
 
 }
 
@@ -37,32 +41,101 @@
 
 }
 
-
 - (void)drawRect:(CGRect)rect {
 
-    //draw the line
+    if (_bursts != nil ) {
 
-    //set in the middle of the views height
-    CGFloat ypos = self.frame.size.height / 2.0;
+        NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
+        [dateformat setDateFormat:@"hh:mm:ss M/d/Y"];
 
-    //the starting point
-    CGFloat xposStart = 10.0;
-    //the ending point
-    CGFloat xposEnd = self.frame.size.width - xposStart;
+        //init
 
-    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    [bezierPath moveToPoint:CGPointMake(xposStart, ypos)];
-    [bezierPath addLineToPoint:CGPointMake(xposEnd, ypos)];
-    bezierPath.lineCapStyle = kCGLineCapRound;
+        //set in the middle of the views height
+        CGFloat ypos = self.frame.size.height / 2.0;
 
+        //the starting point
+        CGFloat xposStart = textWidth / 2;
+        //the ending point
+        CGFloat xposEnd = self.frame.size.width - xposStart;
+
+        //create end point labels
+        EUCBurst *firstBurst = _bursts[0];
+
+        NSString *firstTextLabel = [dateformat stringFromDate:firstBurst.date];
+
+
+        EUCBurst *lastBurst = _bursts[_bursts.count - 1];
+        NSString *lastTextLabel = [dateformat stringFromDate:lastBurst.date];
+
+        //get the total time
+        NSTimeInterval totalTime = [firstBurst.date timeIntervalSinceDate:lastBurst.date];
+        CGFloat lineLength = xposEnd - xposStart;
+
+        UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+        [bezierPath moveToPoint:CGPointMake(xposStart, ypos)];
+        [bezierPath addLineToPoint:CGPointMake(xposEnd, ypos)];
+        bezierPath.lineCapStyle = kCGLineCapRound;
+
+        [[UIColor blackColor] setStroke];
+        bezierPath.lineWidth = 1;
+        [bezierPath stroke];
+
+        for(EUCBurst *burst in _bursts) {
+
+
+        }
+
+
+        //CGFloat circleRadius = 25;
+        //[self drawRectOpenCircle:CGRectMake(33.5, ypos-5-circleRadius, circleRadius, circleRadius)];
+        //[self drawPolaroidAtPoint:CGPointMake(60.0, ypos-5)];
+        [self drawEndPointTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos)];
+        [self drawEndPointTickMarkAtPoint:lastTextLabel atPoint:CGPointMake(xposEnd, ypos)];
+
+    }
+}
+
+
+- (void)drawRectOpenCircle:(CGRect)rect {
+    UIBezierPath *ovalPath = [UIBezierPath bezierPathWithOvalInRect:rect];
     [[UIColor blackColor] setStroke];
-    bezierPath.lineWidth = 1;
+    ovalPath.lineWidth = 3;
+    [ovalPath stroke];
+}
+
+- (void)drawTickMark:(CGPoint)point {
+
+    int offset = 10;
+    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+    [bezierPath moveToPoint:CGPointMake(point.x, point.y - offset)];
+    [bezierPath addLineToPoint:CGPointMake(point.x, point.y + offset)];
+    [[UIColor blackColor] setStroke];
+    bezierPath.lineWidth = 2;
     [bezierPath stroke];
 
-    //CGFloat circleRadius = 25;
-    //[self drawRectOpenCircle:CGRectMake(33.5, ypos-5-circleRadius, circleRadius, circleRadius)];
-    //[self drawPolaroidAtPoint:CGPointMake(60.0, ypos-5)];
+}
 
+- (void)drawEndPointTickMarkAtPoint:(NSString *)text atPoint:(CGPoint)point {
+
+    int offset = 10;
+    [self drawTickMark:point];
+    [self drawTickLabel:text atPoint:CGPointMake(point.x, point.y + offset)];
+
+}
+
+- (void)drawTickLabel:(NSString *)text atPoint:(CGPoint)point {
+
+    int textHeight = 26;
+    CGRect textRect = CGRectMake(point.x - (textWidth / 2), point.y, textWidth, textHeight);
+
+    NSMutableParagraphStyle *textStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
+    [textStyle setAlignment:NSTextAlignmentCenter];
+
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:10];
+    NSDictionary *textFontAttributes = @{NSFontAttributeName : font, NSForegroundColorAttributeName : [UIColor blackColor], NSParagraphStyleAttributeName : textStyle};
+
+
+    [text drawInRect:textRect withAttributes:textFontAttributes];
 
 }
 
@@ -86,16 +159,7 @@
     [[UIColor lightGrayColor] setFill];
     [innerRectangle fill];
     [[UIColor blackColor] setStroke];
-    innerRectangle.lineWidth = 1;
+    innerRectangle.lineWidth = 2;
     [innerRectangle stroke];
-}
-
-- (void)drawRectOpenCircle:(CGRect)rect {
-    UIBezierPath *ovalPath = [UIBezierPath bezierPathWithOvalInRect:rect];
-    [[UIColor blackColor] setStroke];
-    ovalPath.lineWidth = 3;
-    [ovalPath stroke];
-
-
 }
 @end

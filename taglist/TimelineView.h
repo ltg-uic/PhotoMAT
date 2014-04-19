@@ -6,5 +6,12 @@
 #import <Foundation/Foundation.h>
 
 
-@interface TimelineView : UIView
+@interface TimelineView : UIView {
+
+}
+
+
+@property (nonatomic) NSMutableArray *bursts;
+
+
 @end

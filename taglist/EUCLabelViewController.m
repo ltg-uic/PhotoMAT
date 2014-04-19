@@ -23,6 +23,7 @@
 #import "EUCDatabase.h"
 #import "EUCLabel.h"
 #import "EUCMasterLabel.h"
+#import "TimelineView.h"
 
 
 @interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone> {
@@ -46,6 +47,7 @@
 @property(weak, nonatomic) IBOutlet UITextView *noteTextView;
 @property(weak, nonatomic) IBOutlet UIView *dropOverlayView;
 @property(weak, nonatomic) IBOutlet UIButton *playPauseButton;
+@property (weak, nonatomic) IBOutlet TimelineView *timelineView;
 
 @end
 
@@ -126,6 +128,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     lastTagName = nil;
     EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
     bursts = burstDetailController.importedBursts;
+
+    _timelineView.bursts = bursts;
+    [_timelineView setNeedsDisplay];
 
     deploymentId = burstDetailController.deploymentId;
 

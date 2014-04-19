@@ -13,6 +13,7 @@
                 <outlet property="playPauseButton" destination="Lwh-oq-aQe" id="PDB-G4-JoT"/>
                 <outlet property="schoolClassGroupLabel" destination="xoa-Jp-LzM" id="Idg-Dt-yWa"/>
                 <outlet property="tagList" destination="P8m-Bp-jBY" id="q9w-Vx-Yev"/>
+                <outlet property="timelineView" destination="Q9u-rr-fPe" id="Sgw-Qq-81D"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -90,8 +91,8 @@
                     <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q9u-rr-fPe" customClass="TimelineView">
-                    <rect key="frame" x="20" y="609" width="447" height="99"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q9u-rr-fPe" customClass="TimelineView">
+                    <rect key="frame" x="6" y="601" width="1012" height="99"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </view>
