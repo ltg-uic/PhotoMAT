@@ -829,4 +829,39 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 //-(void) renameLabelsNamed: (NSString *) oldLabelName toName: (NSString *) newLabelName forDeployment: (NSInteger) deploymentId;
 //
 
+#pragma mark - Labels - notes
+
+
+/**
+ *  Adds a note to a burst
+ *
+ *  @param burstId the id of the burst we are trying to add a note to
+ *  @param note    the note we need to add
+ */
+-(void) addNote: (NSString *) note toBurst: (NSInteger) burstId {
+    [self.db executeUpdate:@"update burst set label_note=? where id=?", note, @(burstId)];
+}
+
+
+/**
+ *  Update a note in a burst
+ *
+ *  @param burstId the id of the burst whose note we are trying to edit
+ *  @param note    the note we need to add
+ */
+-(void) updateNote: (NSString *) note inBurst: (NSInteger) burstId {
+    [self.db executeUpdate:@"update burst set label_note=? where id=?", note, @(burstId)];
+}
+
+
+/**
+ *  Delete a note from a burst
+ *
+ *  @param burstId the id of the burst we are trying to add a note to
+ */
+-(void) deleteNoteFromBurst: (NSInteger) burstId {
+    [self.db executeUpdate:@"update burst set label_note=null where id=?", @(burstId)];
+}
+
+
 @end
