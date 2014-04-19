@@ -82,6 +82,8 @@ int textWidth = 52;
 
         [self drawEndPointTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos)];
 
+        
+        
         for (int j = 1; j < _bursts.count; j++) {
             EUCBurst *b = _bursts[j];
             CGFloat tickOffset = xposStart + ([firstBurst.date timeIntervalSinceDate:b.date]/(totalTime*lineLength));
