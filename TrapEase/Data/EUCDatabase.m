@@ -833,6 +833,21 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 
 /**
+ *  Gets a note associated to a burst
+ *
+ *  @param burstId the id of the burst we are trying to add a note to
+ *  @return the note associated with the current burst
+ */
+-(NSString *) getNoteForBurst: (NSInteger) burstId {
+    NSString * sql = @"select label_note from burst where id=?";
+    FMResultSet * rs = [self.db executeQuery:sql, @(burstId)];
+    if ([rs next]) {
+        return [rs stringForColumnIndex:0];
+    }
+    return NULL;
+}
+
+/**
  *  Adds a note to a burst
  *
  *  @param burstId the id of the burst we are trying to add a note to
@@ -841,7 +856,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(void) addNote: (NSString *) note toBurst: (NSInteger) burstId {
     [self.db executeUpdate:@"update burst set label_note=? where id=?", note, @(burstId)];
 }
-
 
 /**
  *  Update a note in a burst
@@ -852,7 +866,6 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 -(void) updateNote: (NSString *) note inBurst: (NSInteger) burstId {
     [self.db executeUpdate:@"update burst set label_note=? where id=?", note, @(burstId)];
 }
-
 
 /**
  *  Delete a note from a burst

@@ -157,6 +157,42 @@
 -(NSMutableArray *) labelsForBurst: (NSInteger) burstId;
 
 
+#pragma mark - Labels - notes
+
+
+/**
+ *  Gets a note associated to a burst
+ *
+ *  @param burstId the id of the burst we are trying to add a note to
+ *  @return the note associated with the current burst
+ */
+-(NSString *) getNoteForBurst: (NSInteger) burstId;
+
+/**
+ *  Adds a note to a burst
+ *
+ *  @param burstId the id of the burst we are trying to add a note to
+ *  @param note    the note we need to add
+ */
+-(void) addNote: (NSString *) note toBurst: (NSInteger) burstId;
+
+/**
+ *  Update a note in a burst
+ *
+ *  @param burstId the id of the burst whose note we are trying to edit
+ *  @param note    the note we need to add
+ */
+-(void) updateNote: (NSString *) note inBurst: (NSInteger) burstId;
+
+/**
+ *  Delete a note from a burst
+ *
+ *  @param burstId the id of the burst we are trying to add a note to
+ */
+-(void) deleteNoteFromBurst: (NSInteger) burstId;
+
+
+
 
 @end
 
