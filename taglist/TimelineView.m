@@ -45,7 +45,7 @@ int textWidth = 52;
 
 }
 
-- (void)drawRect:(CGRect)rect {
+- (void)drawRect:(CGRect)rect highlight:(id)highlight {
 
     if (_bursts != nil ) {
 
@@ -92,7 +92,7 @@ int textWidth = 52;
             EUCBurst *b = _bursts[j];
             CGFloat tickOffset = xposStart + ([firstBurst.date timeIntervalSinceDate:b.date]/(totalTime))*lineLength;
             NSString *formatedLabel = [dateformat stringFromDate:b.date];
-            [self drawCircleTickMarkAtPoint:formatedLabel atPoint:CGPointMake(tickOffset, ypos)];
+           // [self drawCircleTickMarkAtPoint:formatedLabel atPoint:CGPointMake(tickOffset, ypos) isHighlighed:(BOOL)highlight];
 
 
         }
@@ -133,15 +133,15 @@ int textWidth = 52;
     CGFloat circleRadius = 20;
 
     UIBezierPath *ovalPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(point.x-(circleRadius/2), point.y-(circleRadius/2), circleRadius, circleRadius)];
-    [[UIColor blackColor] setStroke];
+    [[UIColor lightGrayColor] setStroke];
     [[UIColor greenColor] setFill];
-    ovalPath.lineWidth = 3;
+    ovalPath.lineWidth = 1;
     [ovalPath stroke];
+    [ovalPath fill];
 
 
 
-
-    [self drawTickMark:point];
+    //[self drawTickMark:point];
     [self drawTickLabel:text atPoint:CGPointMake(point.x, point.y + offset)];
 
 }

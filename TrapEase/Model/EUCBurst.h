@@ -15,9 +15,10 @@
 @property (assign, nonatomic) NSInteger burstId;
 @property (strong, nonatomic) NSMutableArray *images;
 @property (assign, nonatomic) BOOL selected;
+@property (assign, nonatomic) BOOL highlighted;
 
 @property (strong, nonatomic) NSMutableArray *labels;
-@property (readonly, nonatomic) NSDate * date;
+@property (strong, nonatomic) NSDate * date;
 
 #pragma mark - labels
 

@@ -153,7 +153,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     EUCBurst *burst = bursts[burstIndex];
 
     //visited
-    burst.selected = YES;
+    burst.highlighted = YES;
 
     bursts[burstIndex] = burst;
 
@@ -668,9 +668,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     [_tagList clearList];
 
-    [self refreshGroupLabel];
-
-    [self refreshLocalBurstCache];
+//    [self refreshGroupLabel];
+//
+//    [self refreshLocalBurstCache];
 }
 
 
