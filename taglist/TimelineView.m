@@ -81,7 +81,7 @@ int textWidth = 52;
         [bezierPath stroke];
 
         for(EUCBurst *burst in _bursts) {
-              CGFloat tickOffset = xposStart
+            CGFloat tickOffset = xposStart;
 
         }
 
