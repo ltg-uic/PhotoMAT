@@ -307,7 +307,10 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
             _addLabelField.text = @"";
         } else if ([flag isEqualToString:DELETE_SELECTED_LABEL]) {
             //deletes a tag off of the imageview
+
             TagView *t = (TagView *) tagView;
+
+            [[EUCDatabase sharedInstance] deleteLabel:t.labelId];
             [t removeFromSuperview];
 
         }
