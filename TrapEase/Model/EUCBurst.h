@@ -16,6 +16,8 @@
 @property (strong, nonatomic) NSMutableArray *images;
 @property (assign, nonatomic) BOOL selected;
 @property (assign, nonatomic) BOOL highlighted;
+@property (assign, nonatomic) BOOL hasBeenVisited;
+
 
 @property (strong, nonatomic) NSMutableArray *labels;
 @property (strong, nonatomic) NSDate * date;

@@ -156,11 +156,11 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     //visited
     burst.highlighted = YES;
-
+    burst.hasBeenVisited = YES;
     bursts[burstIndex] = burst;
 
-    _timelineView.bursts = bursts;
-    [_timelineView setNeedsDisplay];
+    [self updateTimelineWithBurstHighlightingBursts:bursts];
+
 
     NSString *note = [[EUCDatabase sharedInstance] getNoteForBurst:burst.burstId];
 
@@ -555,7 +555,28 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         [self removeAllTagsFromDragOverlay];
 
         NSLog(@"right swipe %d", burstIndex);
+
+
+        //previous burst
+        BOOL hasNext = burstIndex+1 < bursts.count ? YES : NO;
+
+        if(hasNext) {
+            EUCBurst *burst = bursts[burstIndex+1];
+            burst.hasBeenVisited = YES;
+            burst.highlighted = NO;
+            bursts[burstIndex+1] = burst;
+        }
+
+        //current burst
         EUCBurst *burst = bursts[burstIndex];
+        burst.hasBeenVisited = YES;
+        burst.highlighted = YES;
+        bursts[burstIndex] = burst;
+        [self updateTimelineWithBurstHighlightingBursts:bursts];
+
+
+
+
 
         [self addLabelsToDropOverlay:burst];
 
@@ -582,7 +603,24 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         [self removeAllTagsFromDragOverlay];
 
         NSLog(@"right swipe %d", burstIndex);
+
+
+        //previous burst
+        BOOL hasPrevious = burstIndex-1 > -1  ? YES : NO;
+
+        if(hasPrevious) {
+            EUCBurst *burst = bursts[burstIndex-1];
+            burst.hasBeenVisited = YES;
+            burst.highlighted = NO;
+            bursts[burstIndex-1] = burst;
+        }
+
+        //current burst
         EUCBurst *burst = bursts[burstIndex];
+        burst.hasBeenVisited = YES;
+        burst.highlighted = YES;
+        bursts[burstIndex] = burst;
+        [self updateTimelineWithBurstHighlightingBursts:bursts];
 
         [self addLabelsToDropOverlay:burst];
 
@@ -590,6 +628,11 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     }
 
+}
+
+- (void)updateTimelineWithBurstHighlightingBursts:(NSMutableArray *)array {
+    _timelineView.bursts = bursts;
+    [_timelineView setNeedsDisplay];
 }
 
 -(void)addLabelsToDropOverlay:(EUCBurst *)burst {

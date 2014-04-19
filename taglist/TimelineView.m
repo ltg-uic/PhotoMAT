@@ -45,7 +45,7 @@ int textWidth = 52;
 
 }
 
-- (void)drawRect:(CGRect)rect highlight:(id)highlight {
+- (void)drawRect:(CGRect)rect {
 
     if (_bursts != nil ) {
 
@@ -84,7 +84,7 @@ int textWidth = 52;
         bezierPath.lineWidth = 1;
         [bezierPath stroke];
 
-        [self drawCircleTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos)];
+        [self drawCircleTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos) isHighlighted:firstBurst.highlighted hasBeenVisited:firstBurst.hasBeenVisited showLabel:YES];
 
         
         
@@ -92,17 +92,15 @@ int textWidth = 52;
             EUCBurst *b = _bursts[j];
             CGFloat tickOffset = xposStart + ([firstBurst.date timeIntervalSinceDate:b.date]/(totalTime))*lineLength;
             NSString *formatedLabel = [dateformat stringFromDate:b.date];
-           // [self drawCircleTickMarkAtPoint:formatedLabel atPoint:CGPointMake(tickOffset, ypos) isHighlighed:(BOOL)highlight];
+
+            BOOL showLabel = NO;
+            if( j == _bursts.count-1 ){
+                showLabel = YES;
+            }
+            [self drawCircleTickMarkAtPoint:formatedLabel atPoint:CGPointMake(tickOffset, ypos) isHighlighted:b.highlighted hasBeenVisited:b.hasBeenVisited showLabel:showLabel];
 
 
         }
-
-
-        //CGFloat circleRadius = 25;
-        //[self drawRectOpenCircle:CGRectMake(33.5, ypos-5-circleRadius, circleRadius, circleRadius)];
-        //[self drawPolaroidAtPoint:CGPointMake(60.0, ypos-5)];
-        //[self drawEndPointTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos)];
-        //[self drawEndPointTickMarkAtPoint:lastTextLabel atPoint:CGPointMake(xposEnd, ypos)];
 
     }
 }
@@ -127,14 +125,26 @@ int textWidth = 52;
 
 }
 
-- (void)drawCircleTickMarkAtPoint:(NSString *)text atPoint:(CGPoint)point {
+- (void)drawCircleTickMarkAtPoint:(NSString *)text atPoint:(CGPoint)point isHighlighted:(BOOL)isHighlighted hasBeenVisited:(BOOL)hasBeenVisited showLabel:(BOOL)hasLabel {
 
     int offset = 10;
     CGFloat circleRadius = 20;
 
     UIBezierPath *ovalPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(point.x-(circleRadius/2), point.y-(circleRadius/2), circleRadius, circleRadius)];
     [[UIColor lightGrayColor] setStroke];
-    [[UIColor greenColor] setFill];
+
+    if( isHighlighted ) {
+        [[UIColor blueColor] setFill];
+    } else {
+        if(  hasBeenVisited ) {
+            [[UIColor blackColor] setFill];
+
+        } else {
+            [[UIColor whiteColor] setFill];
+        }
+    }
+
+
     ovalPath.lineWidth = 1;
     [ovalPath stroke];
     [ovalPath fill];
@@ -142,7 +152,8 @@ int textWidth = 52;
 
 
     //[self drawTickMark:point];
-    [self drawTickLabel:text atPoint:CGPointMake(point.x, point.y + offset)];
+    if( hasLabel )
+        [self drawTickLabel:text atPoint:CGPointMake(point.x, point.y + offset)];
 
 }
 
