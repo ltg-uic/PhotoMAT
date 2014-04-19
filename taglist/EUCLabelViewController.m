@@ -150,6 +150,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     burstIndex = 0;
     EUCBurst *burst = bursts[burstIndex];
 
+    //[[EUCDatabase sharedInstance] bur ];
+
+
     [self addLabelsToDropOverlay:burst];
 
     [self playPauseImageAnimation:nil];

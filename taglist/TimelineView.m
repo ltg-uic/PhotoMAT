@@ -80,8 +80,14 @@ int textWidth = 52;
         bezierPath.lineWidth = 1;
         [bezierPath stroke];
 
-        for(EUCBurst *burst in _bursts) {
-            CGFloat tickOffset = xposStart;
+        [self drawEndPointTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos)];
+
+        for (int j = 1; j < _bursts.count; j++) {
+            EUCBurst *b = _bursts[j];
+            CGFloat tickOffset = xposStart + ([firstBurst.date timeIntervalSinceDate:b.date]/(totalTime*lineLength));
+            NSString *formatedLabel = [dateformat stringFromDate:b.date];
+            [self drawEndPointTickMarkAtPoint:formatedLabel atPoint:CGPointMake(tickOffset, ypos)];
+
 
         }
 
@@ -90,7 +96,7 @@ int textWidth = 52;
         //[self drawRectOpenCircle:CGRectMake(33.5, ypos-5-circleRadius, circleRadius, circleRadius)];
         //[self drawPolaroidAtPoint:CGPointMake(60.0, ypos-5)];
         [self drawEndPointTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos)];
-        [self drawEndPointTickMarkAtPoint:lastTextLabel atPoint:CGPointMake(xposEnd, ypos)];
+        //[self drawEndPointTickMarkAtPoint:lastTextLabel atPoint:CGPointMake(xposEnd, ypos)];
 
     }
 }
