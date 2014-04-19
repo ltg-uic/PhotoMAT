@@ -31,6 +31,9 @@
 -(void) deleteAllLabels;
 
 -(void) saveLabelLocation: (EUCLabel *) label;
+
+- (void)updateLabelWithId:(NSInteger)labelId toLocation:(CGPoint)location;
+
 -(void) updateLabel: (EUCLabel *) label location: (CGPoint) location;
 -(void) updateLabelNamed: (NSString *) labelName location: (CGPoint) location;
 

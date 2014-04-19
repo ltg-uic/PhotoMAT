@@ -120,6 +120,10 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 - (void)refreshLocalBurstCache {
 
+    [self removeAllTagsFromDragOverlay];
+
+    _addLabelField.text = @"";
+    lastTagName = nil;
     EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
     bursts = burstDetailController.importedBursts;
 
@@ -137,15 +141,11 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     }
 
 
-    photoTags = [[NSMutableArray alloc] init];
-
-
     //TODO for testing
     burstIndex = 0;
     EUCBurst *burst = bursts[burstIndex];
-    EUCImage *image = burst.images[burstIndex];
-    currentImageName = image.filename;
-    _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
+
+    [self addLabelsToDropOverlay:burst];
 
     [self playPauseImageAnimation:nil];
 }
@@ -179,20 +179,26 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         NSString *newTag = textField.text;
 
 
+        BOOL DUP = [_tagList isDuplicateTag:newTag];
 
-
-        BOOL SUCCESS = [_tagList addTag:newTag withLabelId:0];
-
-        if (SUCCESS) {
-
-            //add it to the database
-            NSInteger labelId = [[EUCDatabase sharedInstance] addMasterLabel:newTag toDeployment:deploymentId];
-            [_tagList addTag:newTag withLabelId:labelId];
-            [textField setText:@""];
-            lastTagName = nil;
+        if( DUP ) {
+            return YES;
         } else {
-            [self showErrorMessageWith:[NSString stringWithFormat:@"Only %d labels are allowed in the list.", MAX_LABELS_ALLOWED] withForView:_addLabelField];
+            NSInteger labelId = [[EUCDatabase sharedInstance] addMasterLabel:newTag toDeployment:deploymentId];
+            BOOL SUCCESS = [_tagList addTag:newTag withLabelId:labelId];
+
+            if (SUCCESS) {
+                [textField setText:@""];
+                lastTagName = nil;
+            } else {
+                [self showErrorMessageWith:[NSString stringWithFormat:@"Only %d labels are allowed in the list.", MAX_LABELS_ALLOWED] withForView:_addLabelField];
+            }
+
+
         }
+
+
+
 
     }
     [self.view endEditing:YES];
@@ -208,7 +214,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         int i = [_tagList indexOfTag:lastTagName];
         if (i >= 0) {
 
-
             NSInteger labelId = [self changeTagsFrom:lastTagName to:newTagName];
 
             if( labelId != -1 ) {
@@ -221,7 +226,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 }
 
 - (NSInteger)changeTagsFrom:(NSString *)oldLabel to:(NSString *)newLabel {
-    NSInteger labelId = [_tagList changeTagNameFrom:oldLabel to:newLabel];
+    NSInteger foundLabelId = [_tagList changeTagNameFrom:oldLabel to:newLabel];
 
 
     NSArray *droppedTags = [_dropOverlayView subviews];
@@ -231,11 +236,10 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
             if ([tagView.text isEqualToString:oldLabel]) {
                 tagView.text = newLabel;
                 [tagView setNeedsDisplay];
-                return tagView.labelId;
             }
         }
     }
-    return -1;
+    return foundLabelId;
 }
 
 
@@ -269,6 +273,8 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 }
 
+#pragma mark - Popovers
+
 - (void)showDeletePopoverWithSelectedTag:(UIView *)tagView withFlag:(NSString *)flag withText:(NSString *)text {
 
     PopoverTagContentViewController *content = [[PopoverTagContentViewController alloc] initWithNibName:@"PopoverTagContentViewController" bundle:nil];
@@ -286,6 +292,8 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         if ([flag isEqualToString:DELETE_ALL_LABELS]) {
             //delete main label
             TagView *t = (TagView *) tagView;
+            [[EUCDatabase sharedInstance] removeMasterLabel:t.labelId];
+
             [_tagList removeTag:t.text];
             lastTagName = nil;
             //now delete all the ones in the image
@@ -476,10 +484,11 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
         gesture.view.frame = newFrame;
 
+    } else if (gesture.state == UIGestureRecognizerStateEnded) {
         TagView *tv = (TagView *)gesture.view;
         EUCBurst *eucBurst = bursts[burstIndex];
-      //  [eucBurst updateLabelID:<#(EUCLabel *)label#> location:<#(CGPoint)location#>];
 
+        [eucBurst updateLabelWithId:tv.labelId toLocation:tv.center];
     }
 }
 
@@ -495,99 +504,84 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 - (IBAction)swipeImagePrevious:(id)sender {
 
-    if (_imageView.isAnimating) {
-        [_playPauseButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-    }
+//    if (_imageView.isAnimating) {
+//        [_playPauseButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+//    }
 
-    if (burstIndex >= bursts.count) {
-        burstIndex = bursts.count - 1;
+    burstIndex--;
+
+    BOOL exists = burstIndex >= 0 ? YES : NO;
+
+    if(exists == NO) {
+        burstIndex++;
     } else {
-        burstIndex--;
-    }
-
-
-    //we have another
-    if (burstIndex >= 0) {
 
         [self removeAllTagsFromDragOverlay];
 
-        NSLog(@"left swipe %d", burstIndex);
+        NSLog(@"right swipe %d", burstIndex);
         EUCBurst *burst = bursts[burstIndex];
-        EUCImage *image = burst.images[0];
-        currentImageName = image.filename;
-        _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
 
+        [self addLabelsToDropOverlay:burst];
 
-        NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
+        // [self playAnimation];
 
-        if (pts.count > 0) {
-            for (PhotoTag *pt in pts) {
-                [_dropOverlayView addSubview:pt.tagView];
-            }
-        }
-        [self playAnimation];
     }
 }
 
 - (IBAction)swipeImageNext:(id)sender {
 
 
-    if (_imageView.isAnimating) {
-        [_playPauseButton sendActionsForControlEvents:UIControlEventTouchUpInside];
-    }
+//    if (_imageView.isAnimating) {
+//        [_playPauseButton sendActionsForControlEvents:UIControlEventTouchUpInside];
+//    }
 
-        burstIndex++;
+    burstIndex++;
 
+    BOOL exists = burstIndex < [bursts count] ? YES : NO;
 
-    //we have another
-    if (burstIndex < bursts.count) {
+    if(exists == NO) {
+        burstIndex--;
+    } else {
 
         [self removeAllTagsFromDragOverlay];
 
         NSLog(@"right swipe %d", burstIndex);
         EUCBurst *burst = bursts[burstIndex];
-        EUCImage *image = burst.images[0];
-        currentImageName = image.filename;
-        _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
 
-        NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
+        [self addLabelsToDropOverlay:burst];
 
-
-        if (pts.count > 0) {
-
-            for (PhotoTag *pt in pts) {
-                [_dropOverlayView addSubview:pt.tagView];
-            }
-        }
-
-        [self playAnimation];
+       // [self playAnimation];
 
     }
 
+}
 
+-(void)addLabelsToDropOverlay:(EUCBurst *)burst {
+    EUCImage *image = burst.images[0];
+    currentImageName = image.filename;
+    _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
+
+
+    NSMutableArray *labels = [[EUCDatabase sharedInstance] labelsForBurst:burst.burstId];
+
+    for(EUCLabel *l in labels) {
+
+        TagView *tv = [_tagList createDropTagView:l.name withLabelId:l.labelId];
+
+        [self enableImageViewGesturesOnTagView:tv];
+        [self enableDropColor:tv];
+        [_dropOverlayView addSubview:tv];
+        tv.center = l.location;
+
+
+    }
 }
 
 - (void)removeAllTagsFromDragOverlay {
 
-
-    //remove all the tags for this image
-    NSArray *pts = [photoTags filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"imageName == %@", currentImageName]];
-    for (PhotoTag *pt in pts) {
-        [photoTags removeObject:pt];
-    }
-
     NSArray *subviews = [_dropOverlayView subviews];
 
     for (UIView *v in subviews) {
-        //add them again
-        //save it for later
-        PhotoTag *pt = [[PhotoTag alloc] init];
-        //needs to be dynamic, not hardcoded
-        pt.imageName = currentImageName;
-        pt.tagView = v;
-        pt.xPosition = v.frame.origin.x;
-        pt.yPosition = v.frame.origin.y;
-        [photoTags addObject:pt];
         [v removeFromSuperview];
     }
 }

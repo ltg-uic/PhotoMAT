@@ -113,6 +113,12 @@
     [[EUCDatabase sharedInstance] updateLabel: label];
 }
 
+-(void) updateLabelWithId:(NSInteger) labelId toLocation: (CGPoint) location {
+    [[EUCDatabase sharedInstance] updateLabelWithId:labelId toLocation:location];
+}
+
+
+
 -(void) updateLabel: (EUCLabel *) label location: (CGPoint) location {
     label.location = location;
     [self saveLabelLocation: label];

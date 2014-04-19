@@ -118,6 +118,18 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
     return NO;
 }
 
+-(TagView *)createDropTagView:(NSString *)tagName withLabelId:(NSInteger)labelId {
+    TagView *tagView = [[TagView alloc] initWithFrame:CGRectMake(0, 0, TagListElementWidth, TagListElementHeight)];
+    tagView.labelId = labelId;
+
+    NSInteger randomNumber = arc4random() % 100;
+    tagView.tag = randomNumber;
+
+    [tagView setText:tagName];
+    [tagView setColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0]];
+
+    return tagView;
+}
 
 - (BOOL)addTag:(NSString *)tagName withLabelId:(NSInteger)labelId {
 
@@ -179,6 +191,16 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
 - (BOOL)removeTag:(NSString *)tagName {
     if ([tagNames containsObject:tagName]) {
         [tagNames removeObject:tagName];
+
+        NSArray *tag = [tagViews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"text == %@", tagName]];
+
+        if( tag.count > 0 ) {
+            TagView *t = (TagView *)tag[0];
+            [t removeFromSuperview];
+            [tagViews removeObject:t];
+
+        }
+
         [self refreshUI];
         return YES;
     }

@@ -29,6 +29,10 @@
 
 - (void)clearList;
 
+- (BOOL)isDuplicateTag:(NSString *)tagName;
+
+- (TagView *)createDropTagView:(NSString *)tagName withLabelId:(NSInteger)labelId;
+
 - (BOOL)addTag:(NSString *)tagName withLabelId:(NSInteger)labelId;
 
 - (int)indexOfTag:(NSString *)tagName;
