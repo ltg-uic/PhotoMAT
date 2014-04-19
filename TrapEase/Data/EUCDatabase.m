@@ -701,6 +701,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
  *  @param masterLabelId the id of the master label
  */
 -(void) removeMasterLabel: (NSInteger) masterLabelId {
+    NSString* sql = @"PRAGMA foreign_keys = ON;";
+    [self.db executeUpdate:sql];
     [self.db executeUpdate:@"delete from master_label where id=?", @(masterLabelId)];
 }
 
