@@ -26,7 +26,7 @@
 #import "TimelineView.h"
 
 
-@interface EUCLabelViewController () <UITextFieldDelegate, OBOvumSource, OBDropZone> {
+@interface EUCLabelViewController () <UITextFieldDelegate, UITextViewDelegate, OBOvumSource, OBDropZone> {
     NSString *lastTagName;
     NSMutableArray *tag_array;
     NSMutableArray *photoTags;
@@ -85,6 +85,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     //setup textviews
     [self textViewLikeTextField:_noteTextView];
+    [_noteTextView setDelegate:self];
     [_addLabelField setDelegate:self];
     [_addLabelField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 
@@ -120,6 +121,8 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     schoolClassGroupLabel.text = [NSString stringWithFormat:@"%@ : %@ : %@", selectedSet.schoolName, selectedSet.className, selectedSet.groupName];
 }
 
+
+
 - (void)refreshLocalBurstCache {
 
     [self removeAllTagsFromDragOverlay];
@@ -150,7 +153,11 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     burstIndex = 0;
     EUCBurst *burst = bursts[burstIndex];
 
-    //[[EUCDatabase sharedInstance] bur ];
+    NSString *note = [[EUCDatabase sharedInstance] getNoteForBurst:burst.burstId];
+
+    if( note != nil ) {
+        _noteTextView.text = note;
+    }
 
 
     [self addLabelsToDropOverlay:burst];
@@ -178,6 +185,16 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     [textView.layer setCornerRadius:7.0f];
     [textView.layer setMasksToBounds:YES];
 }
+
+#pragma mark - UITextView delegates
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+
+    EUCBurst *burst = bursts[burstIndex];
+
+    [[EUCDatabase sharedInstance] addNote:textView.text toBurst:burst.burstId];
+}
+
 
 #pragma mark - Textfield delegates
 
@@ -265,6 +282,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     return YES;
 }
 
+#pragma mark - Popovers
 
 - (void)showErrorMessageWith:(NSString *)errorMessage withForView:(UIView *)targetView {
     PopoverErrorContentViewController *content = [[PopoverErrorContentViewController alloc] initWithNibName:@"PopoverErrorContentViewController" bundle:nil];
@@ -280,8 +298,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
 }
-
-#pragma mark - Popovers
 
 - (void)showDeletePopoverWithSelectedTag:(UIView *)tagView withFlag:(NSString *)flag withText:(NSString *)text {
 
