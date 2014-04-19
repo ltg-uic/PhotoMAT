@@ -12,6 +12,8 @@
 
 
 @property (nonatomic) NSMutableArray *bursts;
+@property (nonatomic) int *selectedBurstIndex;
+
 
 
 @end

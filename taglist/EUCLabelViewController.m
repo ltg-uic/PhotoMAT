@@ -36,7 +36,7 @@
     UIPopoverController *errorPopoverController;
     NSString *currentImageName;
     EUCAppDelegate *appDelegate;
-    NSArray *bursts;
+    NSMutableArray *bursts;
     int burstIndex;
     NSInteger deploymentId;
 }
@@ -132,8 +132,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
     bursts = burstDetailController.importedBursts;
 
-    _timelineView.bursts = bursts;
-    [_timelineView setNeedsDisplay];
+
 
     deploymentId = burstDetailController.deploymentId;
 
@@ -152,6 +151,14 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     //TODO for testing
     burstIndex = 0;
     EUCBurst *burst = bursts[burstIndex];
+
+    //visited
+    burst.selected = YES;
+
+    bursts[burstIndex] = burst;
+
+    _timelineView.bursts = bursts;
+    [_timelineView setNeedsDisplay];
 
     NSString *note = [[EUCDatabase sharedInstance] getNoteForBurst:burst.burstId];
 
