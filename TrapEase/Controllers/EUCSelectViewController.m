@@ -192,12 +192,7 @@ extern CGFloat defaultWideness;
 -(void) configureSelectedForCell: (EUCSelectCell *) cell atIndexPath:(NSIndexPath *) indexPath {
     EUCBurst * burst = self.bursts[indexPath.row];
     if (burst.selected == NO) {
-        cell.mask.hidden = NO;
-        CGRect f = CGRectMake((cell.imageView.frame.size.width - cell.imageView.image.size.width)/2,
-                              (cell.imageView.frame.size.height - cell.imageView.image.size.height),
-                              cell.imageView.image.size.width,
-                              cell.imageView.image.size.height);
-        cell.mask.frame = f;
+        cell.mask.hidden = YES;
         
         [cell.button setImage:[UIImage imageNamed:@"thumbs-down.png"] forState:UIControlStateNormal];
     }
