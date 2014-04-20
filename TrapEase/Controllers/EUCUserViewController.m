@@ -22,7 +22,6 @@
 @property (assign, nonatomic) NSInteger classRow;
 @property (assign, nonatomic) NSInteger groupRow;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *visibility;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UILabel *heading;
 @property (weak, nonatomic) IBOutlet UILabel *schoolLabel;
@@ -68,9 +67,6 @@
     self.group.delegate = self;
     [self refreshViewForLoggedIn:[self loggedIn]];
 
-    [self.visibility addTarget:self
-                         action:@selector(done:)
-               forControlEvents:UIControlEventValueChanged];
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -85,17 +81,7 @@
     
     EUCDatabase * db = [EUCDatabase sharedInstance];
     NSDictionary * settings = db.settings;
-    NSString * visibility = settings[@"visibility"];
-    if ([visibility isEqualToString:@"class"]) {
-        self.visibility.selectedSegmentIndex = 0;
-    }
-    else if ([visibility isEqualToString:@"school"]) {
-        self.visibility.selectedSegmentIndex = 1;
-    }
-    else {
-        self.visibility.selectedSegmentIndex = 2;
-    }
-        
+    
     
     for (NSDictionary * school in self.schools) {
         if ([school[@"id"] isEqualToNumber:settings[@"schoolId"]]) {
@@ -228,29 +214,18 @@
 }
 
 - (IBAction)done:(id)sender {
-    NSString * visibilityString;
-    if (self.visibility.selectedSegmentIndex == 0) {
-        visibilityString = @"class";
-    }
-    else if (self.visibility.selectedSegmentIndex == 1) {
-        visibilityString = @"school";
-    }
-    else {
-        visibilityString = @"world";
-    }
     
     NSDictionary * settings = @{
         @"schoolId": self.schools[self.schoolRow][@"id"],
         @"classId": self.schools[self.schoolRow][@"class"][self.classRow][@"id"],
         @"personId": self.schools[self.schoolRow][@"class"][self.classRow][@"person"][self.groupRow][@"id"],
-        @"visibility": visibilityString
+        @"visibility": @"school" // hardcoded to school for now
         };
     
     EUCDatabase * db = [EUCDatabase sharedInstance];
     db.settings = settings;
     [EUCNetwork updatePersonId:settings[@"personId"]];
     
-    [self.visibilityDelegate visibilityChanged];
 }
 
 - (IBAction)login:(id)sender {
