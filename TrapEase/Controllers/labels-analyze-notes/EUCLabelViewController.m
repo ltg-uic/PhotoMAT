@@ -12,14 +12,12 @@
 #import "UIView+OBDropZone.h"
 #import "TagView.h"
 #import "PopoverTagContentViewController.h"
-#import "PhotoTag.h"
 #import "PopoverErrorContentViewController.h"
 #import "EUCSelectedSet.h"
 #import "EUCAppDelegate.h"
 #import "EUCDeploymentDetailViewController.h"
 #import "EUCBurst.h"
 #import "EUCImage.h"
-#import "UIUpdateDelegate.h"
 #import "EUCDatabase.h"
 #import "EUCLabel.h"
 #import "EUCMasterLabel.h"
@@ -47,7 +45,7 @@
 @property(weak, nonatomic) IBOutlet UITextView *noteTextView;
 @property(weak, nonatomic) IBOutlet UIView *dropOverlayView;
 @property(weak, nonatomic) IBOutlet UIButton *playPauseButton;
-@property (weak, nonatomic) IBOutlet TimelineView *timelineView;
+@property(weak, nonatomic) IBOutlet TimelineView *timelineView;
 
 @end
 
@@ -99,7 +97,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     [self refreshLocalBurstCache];
 
 
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -111,8 +108,8 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 //
     [self refreshGroupLabel];
 //
-    
-    
+
+
     [self refreshLocalBurstCache];
 }
 
@@ -122,7 +119,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
     schoolClassGroupLabel.text = [NSString stringWithFormat:@"%@ : %@ : %@", selectedSet.schoolName, selectedSet.className, selectedSet.groupName];
 }
-
 
 
 - (void)refreshLocalBurstCache {
@@ -135,14 +131,13 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     bursts = burstDetailController.importedBursts;
 
 
-
     deploymentId = burstDetailController.deploymentId;
 
-    NSArray *labels = [[EUCDatabase sharedInstance] masterLabelsForDeployment: burstDetailController.deploymentId ];
+    NSArray *labels = [[EUCDatabase sharedInstance] masterLabelsForDeployment:burstDetailController.deploymentId];
 
     tag_array = [[NSMutableArray alloc] init];
-    if( labels.count > 0 ) {
-        for(EUCMasterLabel *label in labels) {
+    if (labels.count > 0) {
+        for (EUCMasterLabel *label in labels) {
             [_tagList addTag:label.name withLabelId:label.masterLabelID];
         }
     } else {
@@ -164,7 +159,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     NSString *note = [[EUCDatabase sharedInstance] getNoteForBurst:burst.burstId];
 
-    if( note != nil ) {
+    if (note != nil ) {
         _noteTextView.text = note;
     }
 
@@ -215,7 +210,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
         BOOL DUP = [_tagList isDuplicateTag:newTag];
 
-        if( DUP ) {
+        if (DUP) {
             return YES;
         } else {
             NSInteger labelId = [[EUCDatabase sharedInstance] addMasterLabel:newTag toDeployment:deploymentId];
@@ -230,8 +225,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
         }
-
-
 
 
     }
@@ -250,7 +243,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
             NSInteger labelId = [self changeTagsFrom:lastTagName to:newTagName];
 
-            if( labelId != -1 ) {
+            if (labelId != -1) {
                 [[EUCDatabase sharedInstance] renameMasterLabel:labelId toName:newTagName];
                 lastTagName = newTagName;
             }
@@ -521,7 +514,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         gesture.view.frame = newFrame;
 
     } else if (gesture.state == UIGestureRecognizerStateEnded) {
-        TagView *tv = (TagView *)gesture.view;
+        TagView *tv = (TagView *) gesture.view;
         EUCBurst *eucBurst = bursts[burstIndex];
 
         [eucBurst updateLabelWithId:tv.labelId toLocation:tv.center];
@@ -548,7 +541,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     BOOL exists = burstIndex >= 0 ? YES : NO;
 
-    if(exists == NO) {
+    if (exists == NO) {
         burstIndex++;
     } else {
 
@@ -558,13 +551,13 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
         //previous burst
-        BOOL hasNext = burstIndex+1 < bursts.count ? YES : NO;
+        BOOL hasNext = burstIndex + 1 < bursts.count ? YES : NO;
 
-        if(hasNext) {
-            EUCBurst *burst = bursts[burstIndex+1];
+        if (hasNext) {
+            EUCBurst *burst = bursts[burstIndex + 1];
             burst.hasBeenVisited = YES;
             burst.highlighted = NO;
-            bursts[burstIndex+1] = burst;
+            bursts[burstIndex + 1] = burst;
         }
 
         //current burst
@@ -573,9 +566,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         burst.highlighted = YES;
         bursts[burstIndex] = burst;
         [self updateTimelineWithBurstHighlightingBursts:bursts];
-
-
-
 
 
         [self addLabelsToDropOverlay:burst];
@@ -596,7 +586,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     BOOL exists = burstIndex < [bursts count] ? YES : NO;
 
-    if(exists == NO) {
+    if (exists == NO) {
         burstIndex--;
     } else {
 
@@ -606,13 +596,13 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
         //previous burst
-        BOOL hasPrevious = burstIndex-1 > -1  ? YES : NO;
+        BOOL hasPrevious = burstIndex - 1 > -1 ? YES : NO;
 
-        if(hasPrevious) {
-            EUCBurst *burst = bursts[burstIndex-1];
+        if (hasPrevious) {
+            EUCBurst *burst = bursts[burstIndex - 1];
             burst.hasBeenVisited = YES;
             burst.highlighted = NO;
-            bursts[burstIndex-1] = burst;
+            bursts[burstIndex - 1] = burst;
         }
 
         //current burst
@@ -624,7 +614,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
         [self addLabelsToDropOverlay:burst];
 
-       // [self playAnimation];
+        // [self playAnimation];
 
     }
 
@@ -635,7 +625,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     [_timelineView setNeedsDisplay];
 }
 
--(void)addLabelsToDropOverlay:(EUCBurst *)burst {
+- (void)addLabelsToDropOverlay:(EUCBurst *)burst {
     EUCImage *image = burst.images[0];
     currentImageName = image.filename;
     _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
@@ -643,7 +633,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     NSMutableArray *labels = [[EUCDatabase sharedInstance] labelsForBurst:burst.burstId];
 
-    for(EUCLabel *l in labels) {
+    for (EUCLabel *l in labels) {
 
         TagView *tv = [_tagList createDropTagView:l.name withLabelId:l.labelId];
 
@@ -682,24 +672,24 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     }
 }
 
--(void)playAnimation {
+- (void)playAnimation {
 
-    if( burstIndex > 0 && burstIndex < bursts.count ) {
-    EUCBurst *burst = bursts[burstIndex];
+    if (burstIndex > 0 && burstIndex < bursts.count) {
+        EUCBurst *burst = bursts[burstIndex];
 
-    NSMutableArray *ani = [[NSMutableArray alloc] init];
-    for (EUCImage *image in burst.images) {
-        [ani addObject:[UIImage imageWithContentsOfFile:image.filename]];
-    }
+        NSMutableArray *ani = [[NSMutableArray alloc] init];
+        for (EUCImage *image in burst.images) {
+            [ani addObject:[UIImage imageWithContentsOfFile:image.filename]];
+        }
 
-    _imageView.animationImages = ani;
-    _imageView.animationDuration = .3;
-    _imageView.animationRepeatCount = 0;
-    [_imageView startAnimating];
+        _imageView.animationImages = ani;
+        _imageView.animationDuration = .3;
+        _imageView.animationRepeatCount = 0;
+        [_imageView startAnimating];
     }
 }
 
--(void)pauseAnimation {
+- (void)pauseAnimation {
     if (_imageView.isAnimating) {
         [_imageView stopAnimating];
 

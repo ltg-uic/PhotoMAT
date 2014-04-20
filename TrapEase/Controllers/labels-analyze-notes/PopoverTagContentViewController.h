@@ -10,13 +10,14 @@
 
 @interface PopoverTagContentViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UILabel *deleteLabel;
-@property (nonatomic, copy) void (^deleteTagHandler)();
+@property(weak, nonatomic) IBOutlet UILabel *deleteLabel;
+@property(nonatomic, copy) void (^deleteTagHandler)();
 
 
 @property(nonatomic, strong) UIPopoverController *popoverController;
 
 - (IBAction)deleteNO:(id)sender;
+
 - (IBAction)deleteYES:(id)sender;
 
 @end

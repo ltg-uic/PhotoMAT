@@ -15,23 +15,24 @@
 
 @interface EUCDeploymentDetailViewController : UIViewController <EUCImportDoneDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, EUCDatePickerDelegate, GPUImageCameraDelegate, UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *editView;
-@property (weak, nonatomic) EUCDeploymentMasterViewController * master;
+@property(weak, nonatomic) IBOutlet UIView *editView;
+@property(weak, nonatomic) EUCDeploymentMasterViewController *master;
 
 
-@property (assign, nonatomic) BOOL editViewVisible;
-@property (assign, nonatomic) BOOL updateMode;
+@property(assign, nonatomic) BOOL editViewVisible;
+@property(assign, nonatomic) BOOL updateMode;
 
 
-@property (readonly, nonatomic) NSDate *nominalDate;
-@property (readonly, nonatomic) NSDate *actualDate;
-@property (readonly, nonatomic) NSMutableArray *importedBursts;
-@property (readonly, nonatomic) NSMutableArray *addedImages;
-@property (readonly, nonatomic) NSMutableArray *burstImages;
-@property (assign, nonatomic) NSInteger deploymentId;
+@property(readonly, nonatomic) NSDate *nominalDate;
+@property(readonly, nonatomic) NSDate *actualDate;
+@property(readonly, nonatomic) NSMutableArray *importedBursts;
+@property(readonly, nonatomic) NSMutableArray *addedImages;
+@property(readonly, nonatomic) NSMutableArray *burstImages;
+@property(assign, nonatomic) NSInteger deploymentId;
 
--(void) clearEditView;
--(void) loadDeployment: (NSNumber *) deploymentId;
+- (void)clearEditView;
+
+- (void)loadDeployment:(NSNumber *)deploymentId;
 
 
 @end

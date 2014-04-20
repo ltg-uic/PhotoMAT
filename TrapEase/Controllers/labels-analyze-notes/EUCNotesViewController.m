@@ -17,8 +17,7 @@
 
 #define HOME_URL @"http://safari.encorelab.org/mobile/mobile.html"
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -29,8 +28,7 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     _webView.delegate = self;
 
@@ -48,11 +46,11 @@
 //    [self loadURL:url];
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
 
-    EUCDatabase * db = [EUCDatabase sharedInstance];
-    NSString * groupName = db.groupName;
-    NSString * className = db.className;
+    EUCDatabase *db = [EUCDatabase sharedInstance];
+    NSString *groupName = db.groupName;
+    NSString *className = db.className;
 
     NSString *fullURL = [NSString stringWithFormat:@"http://safari.encorelab.org/mobile/mobile.html?runId=%@&username=%@&showLogout=false", className, groupName];
 
@@ -62,13 +60,12 @@
     [self loadURL:url];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
--(void)loadURL:(NSURL *)url {
-   [_webView loadRequest:[NSURLRequest requestWithURL:url]];
+- (void)loadURL:(NSURL *)url {
+    [_webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {

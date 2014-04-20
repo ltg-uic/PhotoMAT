@@ -9,6 +9,6 @@
 
 
 @interface PopoverErrorContentViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property(weak, nonatomic) IBOutlet UILabel *messageLabel;
 
 @end

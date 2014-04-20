@@ -11,19 +11,20 @@
 #import "EUCKnapsackViewController.h"
 #import "EUCDatabase.h"
 
-@interface EUCTabBarViewControllerDelegate () {}
-@property (assign, nonatomic) BOOL setSelected;
+@interface EUCTabBarViewControllerDelegate () {
+}
+@property(assign, nonatomic) BOOL setSelected;
 
 @end
 
 
-@implementation EUCTabBarViewControllerDelegate 
+@implementation EUCTabBarViewControllerDelegate
 
 
 
 #pragma mark - UITabBarControllerDelegate
 
--(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
 //    if (viewController == self.snapshot) {
 //        UIImage * image = [EUCImageUtilities snapshotForWindow:self.window];
 //        EUCKnapsackViewController * snapshot = (EUCKnapsackViewController *) self.snapshot;
@@ -33,23 +34,23 @@
 //    else {
 //        return YES;
 //    }
-    EUCDatabase * db = [EUCDatabase sharedInstance];
-    NSDictionary * settings = db.settings;
+    EUCDatabase *db = [EUCDatabase sharedInstance];
+    NSDictionary *settings = db.settings;
     if ([settings[@"personId"] isEqualToNumber:@0]) {
         return NO;
     }
-    
+
     if (viewController == self.snapshot
-        &&
-        (tabBarController.selectedViewController != self.snapshot)
-        ) {
-        UIImage * image = [EUCImageUtilities snapshotForWindow:self.window];
-        EUCKnapsackViewController * snapshot = (EUCKnapsackViewController *) self.snapshot;
+            &&
+            (tabBarController.selectedViewController != self.snapshot)
+            ) {
+        UIImage *image = [EUCImageUtilities snapshotForWindow:self.window];
+        EUCKnapsackViewController *snapshot = (EUCKnapsackViewController *) self.snapshot;
         snapshot.imageView.image = image;
         snapshot.savedImage = image;
     }
     if (viewController == self.analyze ||
-        viewController == self.label) {
+            viewController == self.label) {
         return self.setSelected;
     }
 
@@ -57,7 +58,7 @@
 }
 
 #pragma mark - SetChangedDelegate 
--(void)currentDeploymentIdSetTo:(NSInteger)deploymentId {
+- (void)currentDeploymentIdSetTo:(NSInteger)deploymentId {
     self.setSelected = YES;
 }
 @end

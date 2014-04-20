@@ -2,7 +2,6 @@
 #import "TagView.h"
 
 
-
 static const CGFloat TagListElementWidth = 151;
 static const CGFloat TagListElementHeight = 30;
 static const CGFloat TagListElementSpacingX = 2;
@@ -76,7 +75,7 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
 
     tagViews = [[NSMutableArray alloc] init];
 
-    if( tagTexts != nil ) {
+    if (tagTexts != nil ) {
         tagNames = tagTexts;
 
     } else {
@@ -98,11 +97,10 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
     tagNames = [[NSMutableArray alloc] init];
 
 
-
 }
 
 
--(void) clearList {
+- (void)clearList {
     [tagNames removeAllObjects];
 
     for (TagView *tv in tagViews) {
@@ -111,14 +109,14 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
     [tagViews removeAllObjects];
 }
 
--(BOOL)isDuplicateTag:(NSString *)tagName {
-    if( [tagNames containsObject:tagName] ) {
-         return YES;
+- (BOOL)isDuplicateTag:(NSString *)tagName {
+    if ([tagNames containsObject:tagName]) {
+        return YES;
     }
     return NO;
 }
 
--(TagView *)createDropTagView:(NSString *)tagName withLabelId:(NSInteger)labelId {
+- (TagView *)createDropTagView:(NSString *)tagName withLabelId:(NSInteger)labelId {
     TagView *tagView = [[TagView alloc] initWithFrame:CGRectMake(0, 0, TagListElementWidth, TagListElementHeight)];
     tagView.labelId = labelId;
 
@@ -133,7 +131,7 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
 
 - (BOOL)addTag:(NSString *)tagName withLabelId:(NSInteger)labelId {
 
-    if( tagNames == nil ) {
+    if (tagNames == nil ) {
         tagNames = [[NSMutableArray alloc] init];
     }
 
@@ -158,10 +156,6 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
             [tagViews addObject:tagView];
 
 
-
-
-
-
             [self refreshUI];
             return YES;
         }
@@ -170,11 +164,11 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
     return NO;
 }
 
--(TagView *)getTagViewCopy: (NSString *)tagName {
+- (TagView *)getTagViewCopy:(NSString *)tagName {
 
     NSArray *tag = [tagViews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"text == %@", tagName]];
 
-    if( tag.count > 0 ) {
+    if (tag.count > 0) {
         return tag[0];
     }
 
@@ -194,8 +188,8 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
 
         NSArray *tag = [tagViews filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"text == %@", tagName]];
 
-        if( tag.count > 0 ) {
-            TagView *t = (TagView *)tag[0];
+        if (tag.count > 0) {
+            TagView *t = (TagView *) tag[0];
             [t removeFromSuperview];
             [tagViews removeObject:t];
 
@@ -247,7 +241,6 @@ static const CGFloat TagListDefaultHighlightAlpha = 0.7f;
 
     for (TagView *tv in tagViews) {
         tv.frame = CGRectMake(x, y, TagListElementWidth, TagListElementHeight);
-
 
 
         [self addSubview:tv];

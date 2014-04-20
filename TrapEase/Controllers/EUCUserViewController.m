@@ -1,4 +1,3 @@
-
 //
 //  EUCUserViewController.m
 //  TrapEase
@@ -10,26 +9,26 @@
 #import "EUCUserViewController.h"
 #import "EUCDatabase.h"
 #import "EUCNetwork.h"
-#import "EUCFileSystem.h"
 
 @interface EUCUserViewController ()
-@property (weak, nonatomic) IBOutlet UIPickerView *school;
-@property (weak, nonatomic) IBOutlet UIPickerView *classRoom;
-@property (weak, nonatomic) IBOutlet UIPickerView *group;
-@property (strong, nonatomic) NSArray *schools;
+@property(weak, nonatomic) IBOutlet UIPickerView *school;
+@property(weak, nonatomic) IBOutlet UIPickerView *classRoom;
+@property(weak, nonatomic) IBOutlet UIPickerView *group;
+@property(strong, nonatomic) NSArray *schools;
 
-@property (assign, nonatomic) NSInteger schoolRow;
-@property (assign, nonatomic) NSInteger classRow;
-@property (assign, nonatomic) NSInteger groupRow;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (weak, nonatomic) IBOutlet UILabel *heading;
-@property (weak, nonatomic) IBOutlet UILabel *schoolLabel;
-@property (weak, nonatomic) IBOutlet UILabel *classLabel;
-@property (weak, nonatomic) IBOutlet UILabel *groupLabel;
-@property (weak, nonatomic) IBOutlet UIButton *refreshButton;
+@property(assign, nonatomic) NSInteger schoolRow;
+@property(assign, nonatomic) NSInteger classRow;
+@property(assign, nonatomic) NSInteger groupRow;
+@property(weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property(weak, nonatomic) IBOutlet UIButton *loginButton;
+@property(weak, nonatomic) IBOutlet UILabel *heading;
+@property(weak, nonatomic) IBOutlet UILabel *schoolLabel;
+@property(weak, nonatomic) IBOutlet UILabel *classLabel;
+@property(weak, nonatomic) IBOutlet UILabel *groupLabel;
+@property(weak, nonatomic) IBOutlet UIButton *refreshButton;
 
 - (IBAction)refresh:(id)sender;
+
 - (IBAction)done:(id)sender;
 
 - (IBAction)login:(id)sender;
@@ -39,8 +38,7 @@
 
 @implementation EUCUserViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -52,13 +50,12 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+
     self.activityIndicator.hidden = YES;
-    
+
     self.school.dataSource = self;
     self.school.delegate = self;
     self.classRoom.dataSource = self;
@@ -69,25 +66,25 @@
 
 }
 
--(void) viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self refreshControlsWithData];
 }
 
--(void) refreshControlsWithData {
+- (void)refreshControlsWithData {
     self.schools = [[EUCDatabase sharedInstance] schools];
-    
+
     self.schoolRow = self.classRow = self.groupRow = 0;
-    
-    EUCDatabase * db = [EUCDatabase sharedInstance];
-    NSDictionary * settings = db.settings;
-    
-    
-    for (NSDictionary * school in self.schools) {
+
+    EUCDatabase *db = [EUCDatabase sharedInstance];
+    NSDictionary *settings = db.settings;
+
+
+    for (NSDictionary *school in self.schools) {
         if ([school[@"id"] isEqualToNumber:settings[@"schoolId"]]) {
-            for (NSDictionary * classRoom in school[@"class"]) {
-                if ([classRoom[@"id"] isEqualToNumber: settings[@"classId"]]) {
-                    for (NSDictionary * person in classRoom[@"person"]) {
+            for (NSDictionary *classRoom in school[@"class"]) {
+                if ([classRoom[@"id"] isEqualToNumber:settings[@"classId"]]) {
+                    for (NSDictionary *person in classRoom[@"person"]) {
                         if ([person[@"id"] isEqualToNumber:settings[@"personId"]]) {
                             [self reloadAllPickers];
                             return;
@@ -105,12 +102,12 @@
     // if you got here, you didn't find a match for all 3, school, class and group
     self.schoolRow = self.classRow = self.groupRow = 0;
 
-    
+
     [self reloadAllPickers];
-    
+
 }
 
--(void) reloadAllPickers {
+- (void)reloadAllPickers {
     [self.school reloadAllComponents];
     [self.classRoom reloadAllComponents];
     [self.group reloadAllComponents];
@@ -119,16 +116,16 @@
     [self.group selectRow:self.groupRow inComponent:0 animated:YES];
 //    [self done:nil];
 }
-- (void)didReceiveMemoryWarning
-{
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - UIPickerViewDataSource
 
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+
     if (pickerView == self.school) {
         return [self.schools count];
     }
@@ -136,7 +133,7 @@
         return ([self.schools[self.schoolRow][@"class"] count]);
     }
     else if (pickerView == self.group) {
-        NSInteger num =  ([self.schools[self.schoolRow][@"class"][self.classRow][@"person"] count]);
+        NSInteger num = ([self.schools[self.schoolRow][@"class"][self.classRow][@"person"] count]);
         return num;
     }
     else {
@@ -144,13 +141,13 @@
     }
 }
 
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
 #pragma mark - UIPickerViewDelegate
 
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (pickerView == self.school) {
         return self.schools[row][@"name"];
     }
@@ -158,7 +155,7 @@
         return (self.schools[self.schoolRow][@"class"][row][@"name"]);
     }
     else if (pickerView == self.group) {
-        NSString * str =  (self.schools[self.schoolRow][@"class"][self.classRow][@"person"][row][@"firstName"]);
+        NSString *str = (self.schools[self.schoolRow][@"class"][self.classRow][@"person"][row][@"firstName"]);
         return str;
     }
     else {
@@ -166,7 +163,7 @@
     }
 }
 
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (pickerView == self.school) {
         self.schoolRow = [self.school selectedRowInComponent:0];
         self.classRow = 0;
@@ -193,53 +190,53 @@
     self.activityIndicator.hidden = NO;
     [EUCNetwork getSchoolsWithSuccessBlock:^(NSArray *objects) {
         self.activityIndicator.hidden = YES;
-        
-        EUCDatabase * db = [EUCDatabase sharedInstance];
-        [db refreshSchools: objects];
-        
+
+        EUCDatabase *db = [EUCDatabase sharedInstance];
+        [db refreshSchools:objects];
+
         [self refreshControlsWithData];
-        
-    } failureBlock:^(NSString *reason) {
+
+    }                         failureBlock:^(NSString *reason) {
         self.activityIndicator.hidden = YES;
-        
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                             message:reason
-                                                            delegate:self
-                                                   cancelButtonTitle:nil
-                                                   otherButtonTitles:@"OK", nil];
-        
+
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:reason
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"OK", nil];
+
         [alertView show];
-        
+
     }];
 }
 
 - (IBAction)done:(id)sender {
-    
-    NSDictionary * settings = @{
-        @"schoolId": self.schools[self.schoolRow][@"id"],
-        @"classId": self.schools[self.schoolRow][@"class"][self.classRow][@"id"],
-        @"personId": self.schools[self.schoolRow][@"class"][self.classRow][@"person"][self.groupRow][@"id"],
-        @"visibility": @"school" // hardcoded to school for now
-        };
-    
-    EUCDatabase * db = [EUCDatabase sharedInstance];
+
+    NSDictionary *settings = @{
+            @"schoolId" : self.schools[self.schoolRow][@"id"],
+            @"classId" : self.schools[self.schoolRow][@"class"][self.classRow][@"id"],
+            @"personId" : self.schools[self.schoolRow][@"class"][self.classRow][@"person"][self.groupRow][@"id"],
+            @"visibility" : @"school" // hardcoded to school for now
+    };
+
+    EUCDatabase *db = [EUCDatabase sharedInstance];
     db.settings = settings;
     [EUCNetwork updatePersonId:settings[@"personId"]];
-    
+
 }
 
 - (IBAction)login:(id)sender {
-    EUCDatabase * db = [EUCDatabase sharedInstance];
+    EUCDatabase *db = [EUCDatabase sharedInstance];
 
     if ([self loggedIn]) {
         // log out
 
-        NSDictionary * settings = @{
-                                    @"schoolId": @0,
-                                    @"classId": @0,
-                                    @"personId": @0,
-                                    @"visibility": @"school"
-                                    };
+        NSDictionary *settings = @{
+                @"schoolId" : @0,
+                @"classId" : @0,
+                @"personId" : @0,
+                @"visibility" : @"school"
+        };
         db.settings = settings;
         [EUCNetwork updatePersonId:settings[@"personId"]];
         [self.loginButton setTitle:@"Log in" forState:UIControlStateNormal];
@@ -254,16 +251,16 @@
 }
 
 
--(BOOL) loggedIn {
-    EUCDatabase * db = [EUCDatabase sharedInstance];
-    NSDictionary * settings = db.settings;
+- (BOOL)loggedIn {
+    EUCDatabase *db = [EUCDatabase sharedInstance];
+    NSDictionary *settings = db.settings;
     if ([settings[@"personId"] isEqualToNumber:@0]) {
         return NO;
     }
     return YES;
 }
 
--(void) refreshViewForLoggedIn: (BOOL) loggedIn {
+- (void)refreshViewForLoggedIn:(BOOL)loggedIn {
     if (loggedIn) {
         [self.loginButton setTitle:@"Log out" forState:UIControlStateNormal];
         self.school.hidden = YES;
@@ -273,9 +270,9 @@
         self.classLabel.hidden = YES;
         self.groupLabel.hidden = YES;
         self.refreshButton.hidden = YES;
-        EUCDatabase * db = [EUCDatabase sharedInstance];
-        NSString * groupName = db.groupName;
-        NSString * className = db.className;
+        EUCDatabase *db = [EUCDatabase sharedInstance];
+        NSString *groupName = db.groupName;
+        NSString *className = db.className;
         self.heading.text = [NSString stringWithFormat:@"Currently logged in as %@ from %@", groupName, className];
     }
     else {

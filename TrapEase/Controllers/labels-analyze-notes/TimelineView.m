@@ -7,10 +7,6 @@
 #import "EUCBurst.h"
 
 
-
-
-
-
 @implementation TimelineView {
 
 }
@@ -86,15 +82,14 @@ int textWidth = 52;
 
         [self drawCircleTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos) isHighlighted:firstBurst.highlighted hasBeenVisited:firstBurst.hasBeenVisited showLabel:YES];
 
-        
-        
+
         for (int j = 1; j < _bursts.count; j++) {
             EUCBurst *b = _bursts[j];
-            CGFloat tickOffset = xposStart + ([firstBurst.date timeIntervalSinceDate:b.date]/(totalTime))*lineLength;
+            CGFloat tickOffset = xposStart + ([firstBurst.date timeIntervalSinceDate:b.date] / (totalTime)) * lineLength;
             NSString *formatedLabel = [dateformat stringFromDate:b.date];
 
             BOOL showLabel = NO;
-            if( j == _bursts.count-1 ){
+            if (j == _bursts.count - 1) {
                 showLabel = YES;
             }
             [self drawCircleTickMarkAtPoint:formatedLabel atPoint:CGPointMake(tickOffset, ypos) isHighlighted:b.highlighted hasBeenVisited:b.hasBeenVisited showLabel:showLabel];
@@ -130,13 +125,13 @@ int textWidth = 52;
     int offset = 10;
     CGFloat circleRadius = 20;
 
-    UIBezierPath *ovalPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(point.x-(circleRadius/2), point.y-(circleRadius/2), circleRadius, circleRadius)];
+    UIBezierPath *ovalPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(point.x - (circleRadius / 2), point.y - (circleRadius / 2), circleRadius, circleRadius)];
     [[UIColor lightGrayColor] setStroke];
 
-    if( isHighlighted ) {
+    if (isHighlighted) {
         [[UIColor blueColor] setFill];
     } else {
-        if(  hasBeenVisited ) {
+        if (hasBeenVisited) {
             [[UIColor blackColor] setFill];
 
         } else {
@@ -152,7 +147,7 @@ int textWidth = 52;
 
 
     //[self drawTickMark:point];
-    if( hasLabel )
+    if (hasLabel)
         [self drawTickLabel:text atPoint:CGPointMake(point.x, point.y + offset)];
 
 }

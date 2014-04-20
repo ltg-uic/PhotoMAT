@@ -11,22 +11,23 @@
 
 @protocol SetChangedDelegate <NSObject>
 
--(void) currentDeploymentIdSetTo: (NSInteger) deploymentId;
+- (void)currentDeploymentIdSetTo:(NSInteger)deploymentId;
 
 @end
 
 @class EUCDeploymentDetailViewController;
 
 @interface EUCDeploymentMasterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property(weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) NSArray *deployments;
+@property(strong, nonatomic) NSArray *deployments;
 
 
-@property (strong, nonatomic) EUCDeploymentDetailViewController  *detailViewController;
-@property (weak, nonatomic) id<SetChangedDelegate> setChangedDelegate;
-@property (weak, nonatomic) id<SetChangedDelegate> setSelectedDelegate;
+@property(strong, nonatomic) EUCDeploymentDetailViewController *detailViewController;
+@property(weak, nonatomic) id <SetChangedDelegate> setChangedDelegate;
+@property(weak, nonatomic) id <SetChangedDelegate> setSelectedDelegate;
 
 - (IBAction)handleAdd:(id)sender;
+
 - (IBAction)handleRefresh:(id)sender;
 @end

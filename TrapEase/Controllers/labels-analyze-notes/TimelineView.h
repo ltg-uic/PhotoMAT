@@ -11,9 +11,8 @@
 }
 
 
-@property (nonatomic) NSMutableArray *bursts;
-@property (nonatomic) int *selectedBurstIndex;
-
+@property(nonatomic) NSMutableArray *bursts;
+@property(nonatomic) int *selectedBurstIndex;
 
 
 @end
