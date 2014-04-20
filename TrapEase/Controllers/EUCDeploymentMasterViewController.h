@@ -25,6 +25,7 @@
 
 @property (strong, nonatomic) EUCDeploymentDetailViewController  *detailViewController;
 @property (weak, nonatomic) id<SetChangedDelegate> setChangedDelegate;
+@property (weak, nonatomic) id<SetChangedDelegate> setSelectedDelegate;
 
 - (IBAction)handleAdd:(id)sender;
 - (IBAction)handleRefresh:(id)sender;

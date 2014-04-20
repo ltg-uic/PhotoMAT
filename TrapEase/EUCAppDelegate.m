@@ -101,11 +101,11 @@
     self.tabBarVCDelegate = [[EUCTabBarViewControllerDelegate alloc] init];
     self.tabBarVCDelegate.snapshot = snapshot;
     self.tabBarVCDelegate.photos = photos;
+    self.tabBarVCDelegate.analyze = analyze;
+    self.tabBarVCDelegate.label = label;
     self.homeViewController.delegate = self.tabBarVCDelegate;
     self.tabBarVCDelegate.window = self.window;
-    
-    
-    user.visibilityDelegate = master;
+    master.setSelectedDelegate = self.tabBarVCDelegate;
     
     // check to see if you have school data
 

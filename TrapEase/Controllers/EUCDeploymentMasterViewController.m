@@ -120,6 +120,7 @@
     [self.detailViewController loadDeployment:deployment[@"id"]];
     NSNumber * depId = deployment[@"id"];
     [self.setChangedDelegate currentDeploymentIdSetTo:[depId integerValue]];
+    [self.setSelectedDelegate currentDeploymentIdSetTo:[depId integerValue]];
 }
 
 
