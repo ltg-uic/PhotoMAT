@@ -24,22 +24,20 @@
 
 #pragma mark - labels
 
--(NSInteger) addLabel: (EUCLabel *) label;
+// These are the only two used methods
 -(NSInteger)addLabelId:(NSInteger)labelId atLocation: (CGPoint) location;
--(void) addLabels: (NSArray *) labelArray;
+- (void)updateLabelWithId:(NSInteger)labelId toLocation:(CGPoint)location;
 
+// The following methods are never used
+-(NSInteger) addLabel: (EUCLabel *) label;
+-(void) addLabels: (NSArray *) labelArray;
 -(void) deleteLabel: (EUCLabel *) label;
 -(void) deleteLabelNamed: (NSString *) labelName;
 -(void) deleteLabels: (NSArray *) labelArray;
 -(void) deleteAllLabels;
-
 -(void) saveLabelLocation: (EUCLabel *) label;
-
-- (void)updateLabelWithId:(NSInteger)labelId toLocation:(CGPoint)location;
-
 -(void) updateLabel: (EUCLabel *) label location: (CGPoint) location;
 -(void) updateLabelNamed: (NSString *) labelName location: (CGPoint) location;
-
 -(void) renameLabelNamed: (NSString *) oldName toName: (NSString *) newName;
 
 @end
