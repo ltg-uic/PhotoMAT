@@ -17,7 +17,7 @@
 
 @class EUCDeploymentDetailViewController;
 
-@interface EUCDeploymentMasterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, EUCVisibilityChangedDelegate>
+@interface EUCDeploymentMasterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSArray *deployments;
@@ -25,6 +25,7 @@
 
 @property (strong, nonatomic) EUCDeploymentDetailViewController  *detailViewController;
 @property (weak, nonatomic) id<SetChangedDelegate> setChangedDelegate;
+@property (weak, nonatomic) id<SetChangedDelegate> setSelectedDelegate;
 
 - (IBAction)handleAdd:(id)sender;
 - (IBAction)handleRefresh:(id)sender;

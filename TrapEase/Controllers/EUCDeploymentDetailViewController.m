@@ -21,6 +21,7 @@
 #import "EUCFileSystem.h"
 #import "EUCTimeUtilities.h"
 #import "Toast+UIView.h"
+#import "EUCDeploymentMasterViewController.h"
 
 CGFloat defaultDeploymentWideness = 96.0/64.0;
 
@@ -85,6 +86,7 @@ typedef enum : NSUInteger {
 
 @property (assign, nonatomic) NSInteger numberToDownload;
 @property (assign, nonatomic) NSInteger numberDownloaded;
+
 
 
 - (IBAction)addImage:(id)sender;
@@ -158,6 +160,8 @@ typedef enum : NSUInteger {
     [self.bursts registerNib:[UINib nibWithNibName:@"EUCDeploymentImageCell" bundle:nil] forCellWithReuseIdentifier:@"deploymentImageCell"];
     [self.deploymentImages registerNib:[UINib nibWithNibName:@"EUCDeploymentImageCell" bundle:nil] forCellWithReuseIdentifier:@"deploymentImageCell"];
 
+    self.doneButton.enabled = NO;
+    self.shortName.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -175,8 +179,15 @@ typedef enum : NSUInteger {
     [textView.layer setMasksToBounds:YES];
 }
 
+#pragma mark - textFieldDelegate
+-(void)textFieldDidEndEditing:(UITextField *)textField {
+    [self enableDoneButtonIfNecessary];
+    
+}
+
 #pragma mark - ImportDoneDelegate
 -(void)importDone:(NSMutableArray *)bursts {
+    [self enableDoneButtonIfNecessary];
     self.importedBursts = bursts;
     
     
@@ -215,6 +226,7 @@ typedef enum : NSUInteger {
                     if (imageNumber >= numImages) {
                         [self.view hideToastActivity];
                         [self.bursts reloadData];
+                        [self enableDoneButtonIfNecessary];
                     }
 
                 }
@@ -712,6 +724,7 @@ typedef enum : NSUInteger {
         }
     }
     [self dismissViewControllerAnimated:YES completion:nil];
+    [self.master handleRefresh:nil];
 
 }
 
@@ -973,6 +986,7 @@ typedef enum : NSUInteger {
         self.actualDate = date;
         [self.actualButton setTitle:[self.parser stringFromDate:date] forState:UIControlStateNormal];
     }
+    [self enableDoneButtonIfNecessary];
 }
 
 #pragma mark - 
@@ -1134,8 +1148,18 @@ typedef enum : NSUInteger {
 
 -(void) refreshProgress {
     self.downloadProgressView.progress = self.numberDownloaded*1.0/self.numberToDownload;
-    self.downloadStatus.text = [NSString stringWithFormat:@"%ld/%ld images downloaded", self.numberDownloaded, self.numberToDownload];
+    self.downloadStatus.text = [NSString stringWithFormat:@"%ld/%ld images downloaded", (long)self.numberDownloaded, (long)self.numberToDownload];
 }
 
+-(void) enableDoneButtonIfNecessary {
+    if (self.importedBursts &&
+        (![NSString isStringEmpty: self.shortName.text]) &&
+        (self.actualDate) ) {
+        self.doneButton.enabled = YES;
+    }
+    else {
+        self.doneButton.enabled = NO;
+    }
+}
 
 @end

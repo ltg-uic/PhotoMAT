@@ -11,9 +11,12 @@
 #import "EUCDatePickerViewController.h"
 #import "GPUCameraViewController.h"
 
-@interface EUCDeploymentDetailViewController : UIViewController <EUCImportDoneDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, EUCDatePickerDelegate, GPUImageCameraDelegate>
+@class EUCDeploymentMasterViewController;
+
+@interface EUCDeploymentDetailViewController : UIViewController <EUCImportDoneDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, EUCDatePickerDelegate, GPUImageCameraDelegate, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *editView;
+@property (weak, nonatomic) EUCDeploymentMasterViewController * master;
 
 
 @property (assign, nonatomic) BOOL editViewVisible;
