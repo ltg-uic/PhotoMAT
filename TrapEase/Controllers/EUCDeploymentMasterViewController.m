@@ -8,7 +8,6 @@
 
 #import "EUCDeploymentMasterViewController.h"
 #import "EUCDeploymentCell.h"
-#import "EUCNetwork.h"
 #import "EUCDatabase.h"
 #import "EUCDeploymentDetailViewController.h"
 #import "EUCSelectedSet.h"
@@ -18,8 +17,7 @@
 
 @implementation EUCDeploymentMasterViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -28,22 +26,21 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
+
     [self.tableView registerNib:[UINib nibWithNibName:@"EUCDeploymentMasterCell" bundle:nil] forCellReuseIdentifier:@"deploymentMasterCell"];
 }
 
--(void) viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self handleRefresh:nil];
 }
-- (void)didReceiveMemoryWarning
-{
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -51,7 +48,7 @@
 - (IBAction)handleAdd:(id)sender {
 //    [self.detailViewController clearEditView];
 //    self.detailViewController.editViewVisible = YES;
-    EUCDeploymentDetailViewController * detail = [[EUCDeploymentDetailViewController alloc] initWithNibName:@"EUCDeploymentDetailViewController" bundle:nil];
+    EUCDeploymentDetailViewController *detail = [[EUCDeploymentDetailViewController alloc] initWithNibName:@"EUCDeploymentDetailViewController" bundle:nil];
     detail.editViewVisible = YES;
     detail.updateMode = NO;
     detail.master = self;
@@ -61,7 +58,7 @@
 
 - (IBAction)handleRefresh:(id)sender {
     self.deployments = [[EUCDatabase sharedInstance] getDeployments];
-    [self.tableView reloadData];    
+    [self.tableView reloadData];
 }
 
 
@@ -72,54 +69,51 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section
-{
+ numberOfRowsInSection:(NSInteger)section {
     return [self.deployments count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EUCDeploymentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"deploymentMasterCell"];
-    
+
     [self configureCell:cell forRowAtIndexPath:indexPath];
-    
+
     return cell;
 }
 
 - (void)configureCell:(EUCDeploymentCell *)cell
-    forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSDictionary * deployment = (NSDictionary *) self.deployments[indexPath.row];
-    
+    forRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *deployment = (NSDictionary *) self.deployments[indexPath.row];
+
     cell.name.text = [NSString stringWithFormat:@"%@ - %@", deployment[@"person_name"], deployment[@"short_name"]];
     cell.school.text = [NSString stringWithFormat:@"%@, %@", deployment[@"school_name"], deployment[@"class_name"]];
     cell.date.text = deployment[@"date"];
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 88;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary * deployment = (NSDictionary *) self.deployments[indexPath.row];
-    
+    NSDictionary *deployment = (NSDictionary *) self.deployments[indexPath.row];
+
     self.detailViewController.editViewVisible = YES;
     self.detailViewController.updateMode = YES;
-    
-    EUCSelectedSet * selected = [EUCSelectedSet sharedInstance];
+
+    EUCSelectedSet *selected = [EUCSelectedSet sharedInstance];
     selected.schoolName = deployment[@"school_name"];
     selected.className = deployment[@"class_name"];
     selected.groupName = deployment[@"person_name"];
     selected.deploymentName = deployment[@"short_name"];
-    NSNumber * ownerId = deployment[@"person_id"];
+    NSNumber *ownerId = deployment[@"person_id"];
     selected.ownerId = [ownerId integerValue];
-    
-    
+
+
     [self.detailViewController loadDeployment:deployment[@"id"]];
-    NSNumber * depId = deployment[@"id"];
+    NSNumber *depId = deployment[@"id"];
     [self.setChangedDelegate currentDeploymentIdSetTo:[depId integerValue]];
     [self.setSelectedDelegate currentDeploymentIdSetTo:[depId integerValue]];
 }
