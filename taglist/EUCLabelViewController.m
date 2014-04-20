@@ -19,7 +19,6 @@
 #import "EUCDeploymentDetailViewController.h"
 #import "EUCBurst.h"
 #import "EUCImage.h"
-#import "UIUpdateDelegate.h"
 #import "EUCDatabase.h"
 #import "EUCLabel.h"
 #import "EUCMasterLabel.h"
