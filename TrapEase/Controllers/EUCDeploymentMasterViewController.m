@@ -54,6 +54,7 @@
     EUCDeploymentDetailViewController * detail = [[EUCDeploymentDetailViewController alloc] initWithNibName:@"EUCDeploymentDetailViewController" bundle:nil];
     detail.editViewVisible = YES;
     detail.updateMode = NO;
+    detail.master = self;
     detail.modalPresentationStyle = UIModalPresentationPageSheet;
     [self presentViewController:detail animated:YES completion:nil];
 }

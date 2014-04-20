@@ -89,6 +89,7 @@
     
     master.detailViewController = self.detail;
     master.setChangedDelegate = label;
+    self.detail.master = master;
     
     dsvc.viewControllers = @[master, self.detail];
     
