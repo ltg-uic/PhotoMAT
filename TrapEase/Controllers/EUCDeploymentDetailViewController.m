@@ -57,6 +57,7 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UIProgressView *downloadProgressView;
 @property (weak, nonatomic) IBOutlet UILabel *downloadStatus;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UILabel *burstStatus;
 
 
 
@@ -225,8 +226,9 @@ typedef enum : NSUInteger {
                     imageNumber++;
                     if (imageNumber >= numImages) {
                         [self.view hideToastActivity];
-                        [self.bursts reloadData];
                         [self enableDoneButtonIfNecessary];
+                        self.burstStatus.text = [NSString stringWithFormat:@"%ld burst%@ added", (unsigned long)[self.importedBursts count],
+                                                 ([self.importedBursts count] == 1)?@"" : @"s"];
                     }
 
                 }
@@ -1021,7 +1023,8 @@ typedef enum : NSUInteger {
             [self.burstImages addObject:image];
         }
     }
-    [self.bursts reloadData];
+    self.burstStatus.text = [NSString stringWithFormat:@"%ld burst%@ added", (unsigned long)[self.importedBursts count],
+                             ([self.importedBursts count] == 1)?@"" : @"s"];
     [self.deploymentImages reloadData];
     
     
