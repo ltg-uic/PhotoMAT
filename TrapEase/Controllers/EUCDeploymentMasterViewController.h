@@ -17,7 +17,7 @@
 
 @class EUCDeploymentDetailViewController;
 
-@interface EUCDeploymentMasterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, EUCVisibilityChangedDelegate>
+@interface EUCDeploymentMasterViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSArray *deployments;

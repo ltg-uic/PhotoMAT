@@ -14,8 +14,6 @@
 #import "EUCSelectedSet.h"
 
 @interface EUCDeploymentMasterViewController ()
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshButton;
-@property (assign, nonatomic) BOOL refreshNeeded;
 @end
 
 @implementation EUCDeploymentMasterViewController
@@ -42,10 +40,7 @@
 
 -(void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (self.refreshNeeded) {
-        self.refreshNeeded = NO;
-        [self handleRefresh:nil];
-    }
+    [self handleRefresh:nil];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -65,35 +60,10 @@
 
 - (IBAction)handleRefresh:(id)sender {
     self.deployments = [[EUCDatabase sharedInstance] getDeployments];
-    [self.tableView reloadData];
-    
-    
-    /* network refresh not being handled for now */
-//    EUCDatabase * db = [EUCDatabase sharedInstance];
-//    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-//    NSString * visibility = db.settings[@"visibility"];
-//    [EUCNetwork getDeploymentsWithVisibility:visibility andSuccessBlock:^(NSArray *deployments) {
-//        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-//        [[EUCDatabase sharedInstance] refreshDeployments:deployments];
-//        self.deployments = [[EUCDatabase sharedInstance] getDeployments];
-//        [self.tableView reloadData];
-//    } failureBlock:^(NSString *reason) {
-//        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-//        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-//                                                             message:reason
-//                                                            delegate:nil
-//                                                   cancelButtonTitle:nil
-//                                                   otherButtonTitles:@"OK", nil];
-//        
-//        [alertView show];
-//    }];
+    [self.tableView reloadData];    
 }
 
 
-#pragma mark - VisibilityChangedDelegate
--(void)visibilityChanged {
-    self.refreshNeeded = YES;
-}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
