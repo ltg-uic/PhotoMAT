@@ -69,23 +69,22 @@
 
         burst.labels = labels;
         //check the date
-        if (startDate != nil ) {
+        if (startDate == nil &&  endDate == nil ) {
+            startDate = burst.date;
+            endDate = burst.date;
+        } else {
             //The receiver is later in time than anotherDate, NSOrderedDescending
             if (([startDate compare:burst.date]) == NSOrderedDescending) {
                 startDate = burst.date;
             }
-        } else {
-            startDate = burst.date;
-        }
 
-        if (endDate != nil ) {
+
             if (([endDate compare:burst.date]) == NSOrderedAscending) {
                 endDate = burst.date;
             }
-        } else {
-            //The receiver is earlier in time than anotherDate, NSOrderedAscending
-            endDate = burst.date;
+
         }
+
 
         if (burst.labels != nil ) {
             for (EUCLabel *label in burst.labels) {
@@ -116,7 +115,7 @@
     if (analyzeItems != nil && analyzeItems.count > 0) {
 
         int y = 50;
-        int offset = 47;
+        int offset = 100;
         for (AnalyzeItem *a in analyzeItems) {
 
 

@@ -92,7 +92,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q9u-rr-fPe" customClass="TimelineView">
-                    <rect key="frame" x="6" y="601" width="700" height="99"/>
+                    <rect key="frame" x="6" y="600" width="700" height="100"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>

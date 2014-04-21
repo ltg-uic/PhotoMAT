@@ -566,7 +566,14 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         [self updateTimelineWithBurstHighlightingBursts:bursts];
 
 
+        NSString *note = [[EUCDatabase sharedInstance] getNoteForBurst:burst.burstId];
+
+        _noteTextView.text = note;
+
         [self addLabelsToDropOverlay:burst];
+
+
+
 
         // [self playAnimation];
 
@@ -608,9 +615,15 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         burst.hasBeenVisited = YES;
         burst.highlighted = YES;
         bursts[burstIndex] = burst;
+
+        NSString *note = [[EUCDatabase sharedInstance] getNoteForBurst:burst.burstId];
+
+        _noteTextView.text = note;
+
         [self updateTimelineWithBurstHighlightingBursts:bursts];
 
         [self addLabelsToDropOverlay:burst];
+
 
         // [self playAnimation];
 

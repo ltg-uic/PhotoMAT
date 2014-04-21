@@ -23,6 +23,19 @@
     return self;
 }
 
+
+- (BOOL)hasBeenVisited {
+
+    //db call
+
+    return NO;
+}
+
+- (void)setHasBeenVisited:(BOOL)hasBeenVisited {
+    //db call
+}
+
+
 #pragma mark - date
 -(NSDate *)date {
     if (self.images) {
