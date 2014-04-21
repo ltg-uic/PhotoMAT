@@ -36,6 +36,19 @@ static const CGFloat TagViewCornerHeight = 5.0;
     return self;
 }
 
+- (id)initWithFrame:(CGRect)frame andText:(NSString *)text {
+    self = [super initWithFrame:frame];
+    if (self) {
+        state = TagViewStateNormal;
+        self.fontColor = [UIColor whiteColor];
+        self.text = text;
+        [self setBackgroundColor:[UIColor blackColor]];
+    }
+
+    return self;
+}
+
+
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextClearRect(context, rect);
@@ -67,8 +80,15 @@ static const CGFloat TagViewCornerHeight = 5.0;
 
     CTFontRef font = CTFontCreateWithName((__bridge CFStringRef) TagViewFontFamily, (reduce ? TagViewFontSizeMin : TagViewFontSize), NULL);
     CGColorRef fontColorRef = self.fontColor.CGColor;
+    if( fontColorRef == nil ) {
+         fontColorRef = [[UIColor whiteColor] CGColor];
+    }
 
     NSString *finalText = (!reduce ? self.text : [NSString stringWithFormat:@"%@...", [self.text substringToIndex:TagViewMaxCharacter]]);
+
+    if(finalText == nil) {
+        finalText = @"error?";
+    }
 
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
     CGContextTranslateCTM(context, 0, rect.size.height);
@@ -86,6 +106,9 @@ static const CGFloat TagViewCornerHeight = 5.0;
     CFTypeRef values[] = {font, paragraphStyle, fontColorRef};
     CFDictionaryRef attr = CFDictionaryCreate(NULL, (const void **) &keys, (const void **) &values, sizeof(keys) / sizeof(keys[0]), &kCFTypeDictionaryKeyCallBacks,
             &kCFTypeDictionaryValueCallBacks);
+
+
+
     CFAttributedStringRef attrString = CFAttributedStringCreate(NULL, (__bridge CFStringRef) finalText, attr);
 
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef) attrString);

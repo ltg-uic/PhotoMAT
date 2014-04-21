@@ -108,8 +108,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 //
     [self refreshGroupLabel];
 //
-
-
     [self refreshLocalBurstCache];
 }
 

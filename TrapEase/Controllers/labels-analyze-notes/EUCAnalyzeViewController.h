@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EUCAnalyzeViewController : UIViewController
+@interface EUCAnalyzeViewController : UIViewController {
+}
 
 @end

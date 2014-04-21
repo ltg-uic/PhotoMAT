@@ -10,9 +10,9 @@
 
 }
 
-
 @property(nonatomic) NSMutableArray *bursts;
-@property(nonatomic) int *selectedBurstIndex;
-
+@property(nonatomic) int selectedBurstIndex;
+@property(nonatomic) NSDate *startDate;
+@property(nonatomic) NSDate *endDate;
 
 @end

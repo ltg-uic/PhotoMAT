@@ -8,7 +8,14 @@
 
 
 @implementation TimelineView {
+    NSDateFormatter *dateformat;
+    CGFloat ypos;
+    CGFloat lineLength;
+    CGFloat xposStart;
+    CGFloat xposEnd;
 
+
+    NSTimeInterval totalTime;
 }
 
 int textWidth = 52;
@@ -17,6 +24,8 @@ int textWidth = 52;
 //called when defined in interface builder
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
+    [self setup];
+
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -28,57 +37,82 @@ int textWidth = 52;
 }
 
 - (void)setup {
-    //UIView *
-    //[[NSBundle mainBundle] loadNibNamed:@"WidgetView" owner:self options:nil];
-//    [self addSubview:self.view];
-//
-//    // The new self.view needs autolayout constraints for sizing
-//    self.view.translatesAutoresizingMaskIntoConstraints = NO;
-//    // Horizontal  200 in width
-//    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_view(200)]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_view, self)]];
-//    // Vertical   100 in height
-//    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_view(100)]|" options:NSLayoutFormatDirectionLeadingToTrailing metrics:nil views:NSDictionaryOfVariableBindings(_view, self)]];
 
+    dateformat = [[NSDateFormatter alloc] init];
+    [dateformat setDateFormat:@"hh:mm:ss a M/d/Y"];
+
+
+
+}
+
+-(void)drawLineWithStartDate:(NSDate *)sDate andEndDate:(NSDate *)eDate {
+    //init
+
+    //set in the middle of the views height
+
+    ypos = self.frame.size.height / 2.0;
+
+    //the starting point
+    xposStart = textWidth / 2;
+    //the ending point
+    xposEnd = self.frame.size.width - xposStart;
+
+
+    //get the total time
+    totalTime = [sDate timeIntervalSinceDate:eDate];
+
+    lineLength = xposEnd - xposStart;
+
+    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+    [bezierPath moveToPoint:CGPointMake(xposStart, ypos)];
+    [bezierPath addLineToPoint:CGPointMake(xposEnd, ypos)];
+    bezierPath.lineCapStyle = kCGLineCapRound;
+
+    [[UIColor blackColor] setStroke];
+    bezierPath.lineWidth = 1;
+    [bezierPath stroke];
 }
 
 - (void)drawRect:(CGRect)rect {
 
-    if (_bursts != nil ) {
+    if( _startDate != nil && _endDate != nil ) {
+        [self drawLineWithStartDate:_startDate andEndDate:_endDate];
 
-        NSDateFormatter *dateformat = [[NSDateFormatter alloc] init];
-        [dateformat setDateFormat:@"hh:mm:ss M/d/Y"];
 
-        //init
+        NSString *firstTextLabel = [dateformat stringFromDate:_startDate];
+        NSString *lastTextLabel = [dateformat stringFromDate:_endDate];
 
-        //set in the middle of the views height
-        CGFloat ypos = self.frame.size.height / 2.0;
+        [self drawCircleTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos) isHighlighted:YES hasBeenVisited:YES showLabel:YES];
 
-        //the starting point
-        CGFloat xposStart = textWidth / 2;
-        //the ending point
-        CGFloat xposEnd = self.frame.size.width - xposStart;
+
+
+
+        for (int j = 1; j < _bursts.count; j++) {
+            EUCBurst *b = _bursts[j];
+            CGFloat tickOffset = xposStart + ([_startDate timeIntervalSinceDate:b.date] / (totalTime)) * lineLength;
+            NSString *formatedLabel = [dateformat stringFromDate:b.date];
+
+            BOOL showLabel = NO;
+            if (j == _bursts.count - 1) {
+                showLabel = YES;
+            }
+            [self drawCircleTickMarkAtPoint:formatedLabel atPoint:CGPointMake(tickOffset, ypos) isHighlighted:b.highlighted hasBeenVisited:b.hasBeenVisited showLabel:showLabel];
+
+
+        }
+    } else if (_bursts != nil ) {
+
+
 
         //create end point labels
         EUCBurst *firstBurst = _bursts[0];
-
         NSString *firstTextLabel = [dateformat stringFromDate:firstBurst.date];
 
 
         EUCBurst *lastBurst = _bursts[_bursts.count - 1];
         NSString *lastTextLabel = [dateformat stringFromDate:lastBurst.date];
 
-        //get the total time
-        NSTimeInterval totalTime = [firstBurst.date timeIntervalSinceDate:lastBurst.date];
-        CGFloat lineLength = xposEnd - xposStart;
-
-        UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-        [bezierPath moveToPoint:CGPointMake(xposStart, ypos)];
-        [bezierPath addLineToPoint:CGPointMake(xposEnd, ypos)];
-        bezierPath.lineCapStyle = kCGLineCapRound;
-
-        [[UIColor blackColor] setStroke];
-        bezierPath.lineWidth = 1;
-        [bezierPath stroke];
+        [self drawLineWithStartDate:firstBurst.date andEndDate:lastBurst.date];
 
         [self drawCircleTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos) isHighlighted:firstBurst.highlighted hasBeenVisited:firstBurst.hasBeenVisited showLabel:YES];
 
@@ -99,6 +133,7 @@ int textWidth = 52;
 
     }
 }
+
 
 
 - (void)drawRectOpenCircle:(CGRect)rect {

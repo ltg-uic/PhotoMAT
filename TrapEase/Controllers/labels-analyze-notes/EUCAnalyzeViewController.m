@@ -7,9 +7,25 @@
 //
 
 #import "EUCAnalyzeViewController.h"
+#import "EUCDeploymentDetailViewController.h"
+#import "EUCDatabase.h"
+#import "EUCBurst.h"
+#import "EUCLabel.h"
+#import "EUCAppDelegate.h"
+#import "AnalyzeItem.h"
+#import "AnalyzeLabelUIView.h"
 
-@interface EUCAnalyzeViewController ()
 
+@interface EUCAnalyzeViewController () {
+    NSMutableArray *bursts;
+    NSMutableArray *analyzeItems;
+    NSInteger deploymentId;
+    NSDate *startDate;
+    NSDate *endDate;
+    EUCAppDelegate *appDelegate;
+
+
+}
 @end
 
 @implementation EUCAnalyzeViewController
@@ -21,18 +37,107 @@
         self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Analyze", "Analyze")
                                                         image:[UIImage imageNamed:@"line-chart"]
                                                 selectedImage:nil];
+        appDelegate = (EUCAppDelegate *) [[UIApplication sharedApplication] delegate];
+
     }
     return self;
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+
+    [self loadData];
+
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)loadData {
+
+    EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
+    bursts = burstDetailController.importedBursts;
+
+
+    deploymentId = burstDetailController.deploymentId;
+
+    //collect labels
+    analyzeItems = [[NSMutableArray alloc] init];
+
+    for (EUCBurst *burst in bursts) {
+
+
+        NSArray *labels = [[EUCDatabase sharedInstance] labelsForBurst:burst.burstId];
+
+        burst.labels = labels;
+        //check the date
+        if (startDate != nil ) {
+            //The receiver is later in time than anotherDate, NSOrderedDescending
+            if (([startDate compare:burst.date]) == NSOrderedDescending) {
+                startDate = burst.date;
+            }
+        } else {
+            startDate = burst.date;
+        }
+
+        if (endDate != nil ) {
+            if (([endDate compare:burst.date]) == NSOrderedAscending) {
+                endDate = burst.date;
+            }
+        } else {
+            //The receiver is earlier in time than anotherDate, NSOrderedAscending
+            endDate = burst.date;
+        }
+
+        if (burst.labels != nil ) {
+            for (EUCLabel *label in burst.labels) {
+
+                //see if it is
+                NSPredicate *pred = [NSPredicate predicateWithFormat:@"labelName == %@", label.name];
+                NSArray *foundObjs = [analyzeItems filteredArrayUsingPredicate:pred];
+
+                AnalyzeItem *analyzeItem;
+                if (foundObjs.count > 0) {
+                    analyzeItem = foundObjs[0];
+                    analyzeItem.labelName = label.name;
+                    [analyzeItem addBurst:burst];
+                    int index = [analyzeItems indexOfObject:analyzeItem];
+                    [analyzeItems replaceObjectAtIndex:index withObject:analyzeItem];
+                } else {
+                    analyzeItem = [[AnalyzeItem alloc] init];
+                    analyzeItem.labelName = label.name;
+                    [analyzeItem addBurst:burst];
+                    [analyzeItems addObject:analyzeItem];
+                }
+
+            }
+        }
+    }
+    int height = 71;
+    int offset = 5;
+
+    if (analyzeItems != nil && analyzeItems.count > 0) {
+        for (AnalyzeItem *a in analyzeItems) {
+
+            NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"AnalyzeLabelUIView" owner:nil options:nil];
+            AnalyzeLabelUIView *aView = [nibViews objectAtIndex:0];
+            CGRect newFrame = CGRectMake(0, height, aView.frame.size.width, aView.frame.size.width);
+            aView.frame = newFrame;
+
+//            [aView displayAnalyzeItem:a withStartDate:startDate endDate:endDate];
+            height = height + offset;
+
+        }
+
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadData];
+
 }
 
 @end

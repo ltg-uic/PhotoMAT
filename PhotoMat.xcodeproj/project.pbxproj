@@ -15,8 +15,6 @@
 		7080F7B918F743210087A66F /* PhotoTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7AD18F743210087A66F /* PhotoTag.m */; };
 		7080F7BA18F743210087A66F /* TagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7AF18F743210087A66F /* TagList.m */; };
 		7080F7BB18F743210087A66F /* TagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7B118F743210087A66F /* TagView.m */; };
-		7080F7BC18F743210087A66F /* TimelineItemSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7B318F743210087A66F /* TimelineItemSubView.m */; };
-		7080F7BD18F743210087A66F /* TimelineItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7B418F743210087A66F /* TimelineItemView.xib */; };
 		7080F7BE18F743210087A66F /* TimelineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7B618F743210087A66F /* TimelineView.m */; };
 		7080F7C118F743560087A66F /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7BF18F743560087A66F /* sample.jpg */; };
 		7080F7C218F743560087A66F /* sample2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7C018F743560087A66F /* sample2.jpg */; };
@@ -32,9 +30,9 @@
 		7080F7DD18F746F60087A66F /* PopoverTagContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7D918F746F60087A66F /* PopoverTagContentViewController.xib */; };
 		7080F7E118F747620087A66F /* EUCNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7DF18F747620087A66F /* EUCNotesViewController.m */; };
 		7080F7E218F747620087A66F /* EUCNotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7E018F747620087A66F /* EUCNotesViewController.xib */; };
-		70BB003419044A4800ACB494 /* AnalyzeItemUIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70BB003319044A4800ACB494 /* AnalyzeItemUIView.xib */; };
 		70BB003919044C5400ACB494 /* EUCAnalyzeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BB003719044C5400ACB494 /* EUCAnalyzeViewController.m */; };
 		70BB003A19044C5400ACB494 /* EUCAnalyzeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70BB003819044C5400ACB494 /* EUCAnalyzeViewController.xib */; };
+		70BB004C190487FC00ACB494 /* AnalyzeLabelUIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70BB004B190487FC00ACB494 /* AnalyzeLabelUIView.xib */; };
 		B4116D9918F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */; };
 		B41BB22F18FDF28700388779 /* EUCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B41BB22E18FDF28700388779 /* EUCLabel.m */; };
 		B43658D518E4B95F0017672E /* EUCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658D418E4B95F0017672E /* EUCImage.m */; };
@@ -143,6 +141,9 @@
 		B4E6BEA418E23D8200AC9D84 /* EUCConnectingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4E6BEA218E23D8200AC9D84 /* EUCConnectingViewController.m */; };
 		B4E6BEA518E23D8200AC9D84 /* EUCConnectingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4E6BEA318E23D8200AC9D84 /* EUCConnectingViewController.xib */; };
 		B4F6930F18F75872000C7AD0 /* EUCSelectedSet.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F6930E18F75872000C7AD0 /* EUCSelectedSet.m */; };
+		C0A7D4B3661485EED050690D /* AnalyzeLabelUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A7D7FAFABDDCAA110F111F /* AnalyzeLabelUIView.m */; };
+		C0A7D560941CFF15C5CA860E /* AnalyzeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A7D6E70C791FBA3DE6FD43 /* AnalyzeItem.m */; };
+		C0A7DAB460A6F2D9B11CD0B0 /* AnalyzeItemUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A7D9389B5916AC013251B5 /* AnalyzeItemUIView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -191,9 +192,6 @@
 		7080F7AF18F743210087A66F /* TagList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagList.m; sourceTree = "<group>"; };
 		7080F7B018F743210087A66F /* TagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagView.h; sourceTree = "<group>"; };
 		7080F7B118F743210087A66F /* TagView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagView.m; sourceTree = "<group>"; };
-		7080F7B218F743210087A66F /* TimelineItemSubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineItemSubView.h; sourceTree = "<group>"; };
-		7080F7B318F743210087A66F /* TimelineItemSubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineItemSubView.m; sourceTree = "<group>"; };
-		7080F7B418F743210087A66F /* TimelineItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimelineItemView.xib; sourceTree = "<group>"; };
 		7080F7B518F743210087A66F /* TimelineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineView.h; sourceTree = "<group>"; };
 		7080F7B618F743210087A66F /* TimelineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineView.m; sourceTree = "<group>"; };
 		7080F7BF18F743560087A66F /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
@@ -213,10 +211,10 @@
 		7080F7DE18F747620087A66F /* EUCNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUCNotesViewController.h; sourceTree = "<group>"; };
 		7080F7DF18F747620087A66F /* EUCNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUCNotesViewController.m; sourceTree = "<group>"; };
 		7080F7E018F747620087A66F /* EUCNotesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCNotesViewController.xib; sourceTree = "<group>"; };
-		70BB003319044A4800ACB494 /* AnalyzeItemUIView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalyzeItemUIView.xib; sourceTree = "<group>"; };
 		70BB003619044C5400ACB494 /* EUCAnalyzeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUCAnalyzeViewController.h; sourceTree = "<group>"; };
 		70BB003719044C5400ACB494 /* EUCAnalyzeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUCAnalyzeViewController.m; sourceTree = "<group>"; };
 		70BB003819044C5400ACB494 /* EUCAnalyzeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCAnalyzeViewController.xib; sourceTree = "<group>"; };
+		70BB004B190487FC00ACB494 /* AnalyzeLabelUIView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalyzeLabelUIView.xib; sourceTree = "<group>"; };
 		B4116D9718F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCTabBarViewControllerDelegate.h; path = TrapEase/Controllers/EUCTabBarViewControllerDelegate.h; sourceTree = "<group>"; };
 		B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCTabBarViewControllerDelegate.m; path = TrapEase/Controllers/EUCTabBarViewControllerDelegate.m; sourceTree = "<group>"; };
 		B41BB22D18FDF28700388779 /* EUCLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCLabel.h; path = Model/EUCLabel.h; sourceTree = "<group>"; };
@@ -364,6 +362,12 @@
 		B4E6BEA318E23D8200AC9D84 /* EUCConnectingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = EUCConnectingViewController.xib; path = TrapEase/Controllers/EUCConnectingViewController.xib; sourceTree = "<group>"; };
 		B4F6930D18F75872000C7AD0 /* EUCSelectedSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCSelectedSet.h; path = Model/EUCSelectedSet.h; sourceTree = "<group>"; };
 		B4F6930E18F75872000C7AD0 /* EUCSelectedSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCSelectedSet.m; path = Model/EUCSelectedSet.m; sourceTree = "<group>"; };
+		C0A7D0F33421A37116664BBA /* AnalyzeLabelUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeLabelUIView.h; sourceTree = "<group>"; };
+		C0A7D18714E4DA3F80881BF0 /* AnalyzeItemUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeItemUIView.h; sourceTree = "<group>"; };
+		C0A7D6E70C791FBA3DE6FD43 /* AnalyzeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeItem.m; sourceTree = "<group>"; };
+		C0A7D7FAFABDDCAA110F111F /* AnalyzeLabelUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeLabelUIView.m; sourceTree = "<group>"; };
+		C0A7D9389B5916AC013251B5 /* AnalyzeItemUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeItemUIView.m; sourceTree = "<group>"; };
+		C0A7DDF318662ADEE1385028 /* AnalyzeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeItem.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -436,9 +440,6 @@
 				7080F7AF18F743210087A66F /* TagList.m */,
 				7080F7B018F743210087A66F /* TagView.h */,
 				7080F7B118F743210087A66F /* TagView.m */,
-				7080F7B218F743210087A66F /* TimelineItemSubView.h */,
-				7080F7B318F743210087A66F /* TimelineItemSubView.m */,
-				7080F7B418F743210087A66F /* TimelineItemView.xib */,
 				7080F7B518F743210087A66F /* TimelineView.h */,
 				7080F7B618F743210087A66F /* TimelineView.m */,
 			);
@@ -461,7 +462,13 @@
 				70BB003619044C5400ACB494 /* EUCAnalyzeViewController.h */,
 				70BB003719044C5400ACB494 /* EUCAnalyzeViewController.m */,
 				70BB003819044C5400ACB494 /* EUCAnalyzeViewController.xib */,
-				70BB003319044A4800ACB494 /* AnalyzeItemUIView.xib */,
+				C0A7D6E70C791FBA3DE6FD43 /* AnalyzeItem.m */,
+				C0A7DDF318662ADEE1385028 /* AnalyzeItem.h */,
+				C0A7D18714E4DA3F80881BF0 /* AnalyzeItemUIView.h */,
+				C0A7D9389B5916AC013251B5 /* AnalyzeItemUIView.m */,
+				70BB004B190487FC00ACB494 /* AnalyzeLabelUIView.xib */,
+				C0A7D0F33421A37116664BBA /* AnalyzeLabelUIView.h */,
+				C0A7D7FAFABDDCAA110F111F /* AnalyzeLabelUIView.m */,
 			);
 			name = "analyze-tab";
 			sourceTree = "<group>";
@@ -912,6 +919,7 @@
 				B4E6BE9318E13C5800AC9D84 /* thumbs-up-selected.png in Resources */,
 				B4521C6D18FB3154001F42AF /* GPUCameraViewController.xib in Resources */,
 				7080F7DD18F746F60087A66F /* PopoverTagContentViewController.xib in Resources */,
+				70BB004C190487FC00ACB494 /* AnalyzeLabelUIView.xib in Resources */,
 				B4E6BE1E18DE3EB400AC9D84 /* cloud.png in Resources */,
 				B4E6BE0F18DDFF2F00AC9D84 /* upload.png in Resources */,
 				B4E6BD8A18DDC82600AC9D84 /* download@2x.png in Resources */,
@@ -958,7 +966,6 @@
 				7080F7E218F747620087A66F /* EUCNotesViewController.xib in Resources */,
 				B4E6BD9018DDC82600AC9D84 /* share@2x.png in Resources */,
 				B4E6BD8B18DDC82600AC9D84 /* filter.png in Resources */,
-				70BB003419044A4800ACB494 /* AnalyzeItemUIView.xib in Resources */,
 				B4E6BE2B18DE3EE200AC9D84 /* EUCSettingsViewController.xib in Resources */,
 				7080F7CC18F7439B0087A66F /* webview-back@2x.png in Resources */,
 				B4E6BE8A18E0729900AC9D84 /* EUCDeploymentDetailViewController.xib in Resources */,
@@ -966,7 +973,6 @@
 				B4E6BE9718E13C5800AC9D84 /* photo.png in Resources */,
 				B4E6BE1418DE005500AC9D84 /* hiking@2x.png in Resources */,
 				7080F7DB18F746F60087A66F /* PopoverErrorContentViewController.xib in Resources */,
-				7080F7BD18F743210087A66F /* TimelineItemView.xib in Resources */,
 				B4E6BE9818E13C5800AC9D84 /* photo@2x.png in Resources */,
 				B4E6BE8518DFDB5B00AC9D84 /* EUCDeploymentMasterCell.xib in Resources */,
 				7080F7C218F743560087A66F /* sample2.jpg in Resources */,
@@ -1054,7 +1060,6 @@
 				B4521C4718F9BE67001F42AF /* Toast+UIView.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
 				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,
-				7080F7BC18F743210087A66F /* TimelineItemSubView.m in Sources */,
 				B4E6BE8218DFD47700AC9D84 /* EUCDeploymentMasterViewController.m in Sources */,
 				B4E6BE0B18DDFD3400AC9D84 /* EUCUploadViewController.m in Sources */,
 				7080F7DC18F746F60087A66F /* PopoverTagContentViewController.m in Sources */,
@@ -1078,6 +1083,9 @@
 				B4E6BD6318DDC30C00AC9D84 /* EUCImportViewController.m in Sources */,
 				B43658E018E5213F0017672E /* EUCImageUtilities.m in Sources */,
 				B4E6BE5D18DF9F9800AC9D84 /* EUCDatabase.m in Sources */,
+				C0A7D560941CFF15C5CA860E /* AnalyzeItem.m in Sources */,
+				C0A7DAB460A6F2D9B11CD0B0 /* AnalyzeItemUIView.m in Sources */,
+				C0A7D4B3661485EED050690D /* AnalyzeLabelUIView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
