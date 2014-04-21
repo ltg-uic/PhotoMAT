@@ -10,5 +10,6 @@
 
 @interface EUCAnalyzeViewController : UIViewController {
 }
+@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 
 @end

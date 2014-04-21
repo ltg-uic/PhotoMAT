@@ -68,46 +68,55 @@
         NSArray *labels = [[EUCDatabase sharedInstance] labelsForBurst:burst.burstId];
 
         burst.labels = labels;
-        //check the date
-        if (startDate == nil &&  endDate == nil ) {
-            startDate = burst.date;
-            endDate = burst.date;
-        } else {
-            //The receiver is later in time than anotherDate, NSOrderedDescending
-            if (([startDate compare:burst.date]) == NSOrderedDescending) {
+
+        if (labels != nil && labels.count > 0) {
+
+            _errorLabel.hidden = YES;
+
+            //check the date
+            if (startDate == nil && endDate == nil ) {
                 startDate = burst.date;
-            }
-
-
-            if (([endDate compare:burst.date]) == NSOrderedAscending) {
                 endDate = burst.date;
-            }
 
-        }
+            } else {
+                //The receiver is later in time than anotherDate, NSOrderedDescending
+                if (([startDate compare:burst.date]) == NSOrderedDescending) {
+                    startDate = burst.date;
+                }
 
 
-        if (burst.labels != nil ) {
-            for (EUCLabel *label in burst.labels) {
-
-                //see if it is
-                NSPredicate *pred = [NSPredicate predicateWithFormat:@"labelName == %@", label.name];
-                NSArray *foundObjs = [analyzeItems filteredArrayUsingPredicate:pred];
-
-                AnalyzeItem *analyzeItem;
-                if (foundObjs.count > 0) {
-                    analyzeItem = foundObjs[0];
-                    analyzeItem.labelName = label.name;
-                    [analyzeItem addBurst:burst];
-                    int index = [analyzeItems indexOfObject:analyzeItem];
-                    [analyzeItems replaceObjectAtIndex:index withObject:analyzeItem];
-                } else {
-                    analyzeItem = [[AnalyzeItem alloc] init];
-                    analyzeItem.labelName = label.name;
-                    [analyzeItem addBurst:burst];
-                    [analyzeItems addObject:analyzeItem];
+                if (([endDate compare:burst.date]) == NSOrderedAscending) {
+                    endDate = burst.date;
                 }
 
             }
+
+
+            if (burst.labels != nil ) {
+                for (EUCLabel *label in burst.labels) {
+
+                    //see if it is
+                    NSPredicate *pred = [NSPredicate predicateWithFormat:@"labelName == %@", label.name];
+                    NSArray *foundObjs = [analyzeItems filteredArrayUsingPredicate:pred];
+
+                    AnalyzeItem *analyzeItem;
+                    if (foundObjs.count > 0) {
+                        analyzeItem = foundObjs[0];
+                        analyzeItem.labelName = label.name;
+                        [analyzeItem addBurst:burst];
+                        int index = [analyzeItems indexOfObject:analyzeItem];
+                        [analyzeItems replaceObjectAtIndex:index withObject:analyzeItem];
+                    } else {
+                        analyzeItem = [[AnalyzeItem alloc] init];
+                        analyzeItem.labelName = label.name;
+                        [analyzeItem addBurst:burst];
+                        [analyzeItems addObject:analyzeItem];
+                    }
+
+                }
+            }
+        } else {
+            _errorLabel.hidden = NO;
         }
     }
 

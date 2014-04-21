@@ -187,16 +187,25 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     [textView.layer setCornerRadius:7.0f];
     [textView.layer setMasksToBounds:YES];
 }
+#pragma mark - Save Note
+
+- (void)saveNote {
+
+    if( burstIndex >= 0 && burstIndex < bursts.count ) {
+        EUCBurst *burst = bursts[burstIndex];
+
+        [[EUCDatabase sharedInstance] addNote:_noteTextView.text toBurst:burst.burstId];
+    }
+
+}
+
 
 #pragma mark - UITextView delegates
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
 
-    EUCBurst *burst = bursts[burstIndex];
-
-    [[EUCDatabase sharedInstance] addNote:textView.text toBurst:burst.burstId];
+   [self saveNote];
 }
-
 
 #pragma mark - Textfield delegates
 
@@ -531,6 +540,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 - (IBAction)swipeImagePrevious:(id)sender {
 
+    [self saveNote];
 //    if (_imageView.isAnimating) {
 //        [_playPauseButton sendActionsForControlEvents:UIControlEventTouchUpInside];
 //    }
@@ -581,7 +591,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 }
 
 - (IBAction)swipeImageNext:(id)sender {
-
+    [self saveNote];
 
 //    if (_imageView.isAnimating) {
 //        [_playPauseButton sendActionsForControlEvents:UIControlEventTouchUpInside];
