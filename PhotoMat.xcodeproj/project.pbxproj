@@ -12,7 +12,6 @@
 		702ACBC318F756760001C9D7 /* EUCCloudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 702ACBC118F756760001C9D7 /* EUCCloudViewController.xib */; };
 		7080F7B718F743210087A66F /* EUCLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7AA18F743210087A66F /* EUCLabelViewController.m */; };
 		7080F7B818F743210087A66F /* EUCLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7AB18F743210087A66F /* EUCLabelViewController.xib */; };
-		7080F7B918F743210087A66F /* PhotoTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7AD18F743210087A66F /* PhotoTag.m */; };
 		7080F7BA18F743210087A66F /* TagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7AF18F743210087A66F /* TagList.m */; };
 		7080F7BB18F743210087A66F /* TagView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7B118F743210087A66F /* TagView.m */; };
 		7080F7BE18F743210087A66F /* TimelineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7B618F743210087A66F /* TimelineView.m */; };
@@ -186,8 +185,6 @@
 		7080F7A918F743210087A66F /* EUCLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUCLabelViewController.h; sourceTree = "<group>"; };
 		7080F7AA18F743210087A66F /* EUCLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUCLabelViewController.m; sourceTree = "<group>"; };
 		7080F7AB18F743210087A66F /* EUCLabelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCLabelViewController.xib; sourceTree = "<group>"; };
-		7080F7AC18F743210087A66F /* PhotoTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTag.h; sourceTree = "<group>"; };
-		7080F7AD18F743210087A66F /* PhotoTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTag.m; sourceTree = "<group>"; };
 		7080F7AE18F743210087A66F /* TagList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagList.h; sourceTree = "<group>"; };
 		7080F7AF18F743210087A66F /* TagList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TagList.m; sourceTree = "<group>"; };
 		7080F7B018F743210087A66F /* TagView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagView.h; sourceTree = "<group>"; };
@@ -434,8 +431,6 @@
 				7080F7A918F743210087A66F /* EUCLabelViewController.h */,
 				7080F7AA18F743210087A66F /* EUCLabelViewController.m */,
 				7080F7AB18F743210087A66F /* EUCLabelViewController.xib */,
-				7080F7AC18F743210087A66F /* PhotoTag.h */,
-				7080F7AD18F743210087A66F /* PhotoTag.m */,
 				7080F7AE18F743210087A66F /* TagList.h */,
 				7080F7AF18F743210087A66F /* TagList.m */,
 				7080F7B018F743210087A66F /* TagView.h */,
@@ -1075,7 +1070,6 @@
 				7080F7DA18F746F60087A66F /* PopoverErrorContentViewController.m in Sources */,
 				70BB003919044C5400ACB494 /* EUCAnalyzeViewController.m in Sources */,
 				B4E554721900BBFF000F2136 /* EUCMasterLabel.m in Sources */,
-				7080F7B918F743210087A66F /* PhotoTag.m in Sources */,
 				7080F7BA18F743210087A66F /* TagList.m in Sources */,
 				B43658E818E542480017672E /* EUCImageDisplayViewController.m in Sources */,
 				B43658F718F1B9000017672E /* EUCDatePickerViewController.m in Sources */,
