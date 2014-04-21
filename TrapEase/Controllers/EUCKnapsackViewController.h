@@ -24,4 +24,6 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil asSnapshot: (BOOL) asSnapshot;
 
+- (IBAction)importLibrary:(id)sender;
+- (IBAction)takePicture:(id)sender;
 @end
