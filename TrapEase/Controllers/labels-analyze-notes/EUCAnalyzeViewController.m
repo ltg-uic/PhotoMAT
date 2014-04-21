@@ -111,19 +111,24 @@
             }
         }
     }
-    int height = 71;
-    int offset = 5;
+
 
     if (analyzeItems != nil && analyzeItems.count > 0) {
+
+        int y = 50;
+        int offset = 47;
         for (AnalyzeItem *a in analyzeItems) {
 
-            NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"AnalyzeLabelUIView" owner:nil options:nil];
-            AnalyzeLabelUIView *aView = [nibViews objectAtIndex:0];
-            CGRect newFrame = CGRectMake(0, height, aView.frame.size.width, aView.frame.size.width);
-            aView.frame = newFrame;
 
-//            [aView displayAnalyzeItem:a withStartDate:startDate endDate:endDate];
-            height = height + offset;
+            AnalyzeLabelUIView *labelUIView = [[AnalyzeLabelUIView alloc] init];
+
+
+            [labelUIView displayAnalyzeItem:a withStartDate:startDate endDate:endDate];
+            [self.view addSubview:labelUIView];
+            CGRect newFrame = CGRectMake(6, y, labelUIView.frame.size.width, labelUIView.frame.size.width);
+            labelUIView.frame = newFrame;
+
+            y = y + offset;
 
         }
 

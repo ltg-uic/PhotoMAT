@@ -9,9 +9,14 @@
 
 #import "TagView.h"
 #import "TimelineView.h"
-@interface AnalyzeLabelUIView : UIView
-@property (weak, nonatomic) IBOutlet TagView *tagView;
-@property (weak, nonatomic) IBOutlet TimelineView *timelineView;
-@property (weak, nonatomic) IBOutlet UILabel *tagCountLabel;
+#import "AnalyzeItem.h"
 
+@interface AnalyzeLabelUIView : UIView {
+    
+}
+@property (weak, nonatomic) IBOutlet TagView *tagView;
+@property (weak, nonatomic) IBOutlet TimelineView *timeliveView;
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;
+
+- (void)displayAnalyzeItem:(AnalyzeItem *)analyzeItem withStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
 @end

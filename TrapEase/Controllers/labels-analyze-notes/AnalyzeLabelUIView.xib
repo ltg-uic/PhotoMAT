@@ -6,13 +6,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AnalyzeLabelUIView">
             <connections>
-                <outlet property="tagView" destination="b6S-m6-lKb" id="UE3-Rq-S4T"/>
-                <outlet property="timelineView" destination="crx-sb-cJZ" id="nUP-vL-fID"/>
+                <outlet property="countLabel" destination="Yz2-cx-cCn" id="pFc-TB-hBL"/>
+                <outlet property="tagView" destination="b6S-m6-lKb" id="ATV-1A-XUa"/>
+                <outlet property="timeliveView" destination="crx-sb-cJZ" id="6vB-L1-H8i"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AnalyzeItemUIView">
-            <rect key="frame" x="0.0" y="0.0" width="1024" height="46"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AnalyzeLabelUIView">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="76"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b6S-m6-lKb" customClass="TagView">
@@ -21,17 +22,25 @@
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="crx-sb-cJZ" customClass="TimelineView">
-                    <rect key="frame" x="153" y="8" width="817" height="30"/>
+                    <rect key="frame" x="153" y="0.0" width="817" height="76"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yz2-cx-cCn">
+                    <rect key="frame" x="973" y="12" width="29" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="tagView" destination="b6S-m6-lKb" id="ACH-gD-Bzy"/>
-                <outlet property="timelineView" destination="crx-sb-cJZ" id="lGC-cS-a6w"/>
+                <outlet property="countLabel" destination="Yz2-cx-cCn" id="3zx-ZV-7uS"/>
+                <outlet property="tagView" destination="b6S-m6-lKb" id="Cx3-EU-LHn"/>
+                <outlet property="timeliveView" destination="crx-sb-cJZ" id="5ee-cV-VdA"/>
             </connections>
         </view>
     </objects>

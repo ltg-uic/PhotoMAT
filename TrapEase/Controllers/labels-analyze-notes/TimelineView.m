@@ -18,7 +18,7 @@
     NSTimeInterval totalTime;
 }
 
-int textWidth = 52;
+int textWidth = 80;
 
 
 //called when defined in interface builder
@@ -40,12 +40,14 @@ int textWidth = 52;
 
     dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"hh:mm:ss a M/d/Y"];
+//    [dateformat setAMSymbol:@"am"];
+//    [dateformat setPMSymbol:@"pm"];
 
 
 
 }
 
--(void)drawLineWithStartDate:(NSDate *)sDate andEndDate:(NSDate *)eDate {
+- (void)drawLineWithStartDate:(NSDate *)sDate andEndDate:(NSDate *)eDate {
     //init
 
     //set in the middle of the views height
@@ -75,7 +77,7 @@ int textWidth = 52;
 
 - (void)drawRect:(CGRect)rect {
 
-    if( _startDate != nil && _endDate != nil ) {
+    if (_startDate != nil && _endDate != nil ) {
         [self drawLineWithStartDate:_startDate andEndDate:_endDate];
 
 
@@ -83,8 +85,6 @@ int textWidth = 52;
         NSString *lastTextLabel = [dateformat stringFromDate:_endDate];
 
         [self drawCircleTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos) isHighlighted:YES hasBeenVisited:YES showLabel:YES];
-
-
 
 
         for (int j = 1; j < _bursts.count; j++) {
@@ -133,7 +133,6 @@ int textWidth = 52;
 
     }
 }
-
 
 
 - (void)drawRectOpenCircle:(CGRect)rect {
@@ -198,14 +197,14 @@ int textWidth = 52;
 
 - (void)drawTickLabel:(NSString *)text atPoint:(CGPoint)point {
 
-    int textHeight = 26;
+    int textHeight = 30;
     CGRect textRect = CGRectMake(point.x - (textWidth / 2), point.y, textWidth, textHeight);
 
     NSMutableParagraphStyle *textStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
     [textStyle setAlignment:NSTextAlignmentCenter];
 
-    UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:10];
-    NSDictionary *textFontAttributes = @{NSFontAttributeName : font, NSForegroundColorAttributeName : [UIColor blackColor], NSParagraphStyleAttributeName : textStyle};
+    UIFont *font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+    NSDictionary *textFontAttributes = @{NSFontAttributeName : font, NSForegroundColorAttributeName : [UIColor blackColor], NSBackgroundColorAttributeName : [UIColor clearColor], NSParagraphStyleAttributeName : textStyle};
 
 
     [text drawInRect:textRect withAttributes:textFontAttributes];

@@ -142,7 +142,6 @@
 		B4F6930F18F75872000C7AD0 /* EUCSelectedSet.m in Sources */ = {isa = PBXBuildFile; fileRef = B4F6930E18F75872000C7AD0 /* EUCSelectedSet.m */; };
 		C0A7D4B3661485EED050690D /* AnalyzeLabelUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A7D7FAFABDDCAA110F111F /* AnalyzeLabelUIView.m */; };
 		C0A7D560941CFF15C5CA860E /* AnalyzeItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A7D6E70C791FBA3DE6FD43 /* AnalyzeItem.m */; };
-		C0A7DAB460A6F2D9B11CD0B0 /* AnalyzeItemUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = C0A7D9389B5916AC013251B5 /* AnalyzeItemUIView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -360,10 +359,8 @@
 		B4F6930D18F75872000C7AD0 /* EUCSelectedSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCSelectedSet.h; path = Model/EUCSelectedSet.h; sourceTree = "<group>"; };
 		B4F6930E18F75872000C7AD0 /* EUCSelectedSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCSelectedSet.m; path = Model/EUCSelectedSet.m; sourceTree = "<group>"; };
 		C0A7D0F33421A37116664BBA /* AnalyzeLabelUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeLabelUIView.h; sourceTree = "<group>"; };
-		C0A7D18714E4DA3F80881BF0 /* AnalyzeItemUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeItemUIView.h; sourceTree = "<group>"; };
 		C0A7D6E70C791FBA3DE6FD43 /* AnalyzeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeItem.m; sourceTree = "<group>"; };
 		C0A7D7FAFABDDCAA110F111F /* AnalyzeLabelUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeLabelUIView.m; sourceTree = "<group>"; };
-		C0A7D9389B5916AC013251B5 /* AnalyzeItemUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeItemUIView.m; sourceTree = "<group>"; };
 		C0A7DDF318662ADEE1385028 /* AnalyzeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeItem.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -459,8 +456,6 @@
 				70BB003819044C5400ACB494 /* EUCAnalyzeViewController.xib */,
 				C0A7D6E70C791FBA3DE6FD43 /* AnalyzeItem.m */,
 				C0A7DDF318662ADEE1385028 /* AnalyzeItem.h */,
-				C0A7D18714E4DA3F80881BF0 /* AnalyzeItemUIView.h */,
-				C0A7D9389B5916AC013251B5 /* AnalyzeItemUIView.m */,
 				70BB004B190487FC00ACB494 /* AnalyzeLabelUIView.xib */,
 				C0A7D0F33421A37116664BBA /* AnalyzeLabelUIView.h */,
 				C0A7D7FAFABDDCAA110F111F /* AnalyzeLabelUIView.m */,
@@ -1078,7 +1073,6 @@
 				B43658E018E5213F0017672E /* EUCImageUtilities.m in Sources */,
 				B4E6BE5D18DF9F9800AC9D84 /* EUCDatabase.m in Sources */,
 				C0A7D560941CFF15C5CA860E /* AnalyzeItem.m in Sources */,
-				C0A7DAB460A6F2D9B11CD0B0 /* AnalyzeItemUIView.m in Sources */,
 				C0A7D4B3661485EED050690D /* AnalyzeLabelUIView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
