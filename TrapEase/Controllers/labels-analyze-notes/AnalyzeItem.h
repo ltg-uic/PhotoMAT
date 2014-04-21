@@ -12,6 +12,7 @@
 
 }
 
+@property(nonatomic) int labelCount;
 @property(nonatomic, strong) NSMutableArray *bursts;
 @property(nonatomic, strong) NSString *labelName;
 

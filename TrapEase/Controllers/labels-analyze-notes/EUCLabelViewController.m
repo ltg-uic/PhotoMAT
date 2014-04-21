@@ -57,7 +57,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 #define MAX_LABELS_ALLOWED 18
 
 
-@implementation EUCLabelViewController
+@implementation EUCLabelViewController {
+    NSDateFormatter *dateformat;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -69,6 +71,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
         appDelegate = (EUCAppDelegate *) [[UIApplication sharedApplication] delegate];
+
+        dateformat = [[NSDateFormatter alloc] init];
+        [dateformat setDateFormat:@"hh:mm:ss a M/d/Y"];
 
     }
     return self;
@@ -112,8 +117,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 }
 
 - (void)refreshGroupLabel {
-
-
     EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
     schoolClassGroupLabel.text = [NSString stringWithFormat:@"%@ : %@ : %@", selectedSet.schoolName, selectedSet.className, selectedSet.groupName];
 }
@@ -153,6 +156,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     bursts[burstIndex] = burst;
 
     [self updateTimelineWithBurstHighlightingBursts:bursts];
+    [self updatePhotoLabels:burst];
 
 
     NSString *note = [[EUCDatabase sharedInstance] getNoteForBurst:burst.burstId];
@@ -165,6 +169,12 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     [self addLabelsToDropOverlay:burst];
 
     [self playPauseImageAnimation:nil];
+}
+
+- (void)updatePhotoLabels:(EUCBurst *)burst {
+    _timestampLabel.text = [dateformat stringFromDate:burst.date];
+
+    _countLabel.text = [NSString stringWithFormat:@"%d/%d",burstIndex+1, bursts.count];
 }
 
 
@@ -575,6 +585,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         bursts[burstIndex] = burst;
         [self updateTimelineWithBurstHighlightingBursts:bursts];
 
+        [self updatePhotoLabels:burst];
 
         NSString *note = [[EUCDatabase sharedInstance] getNoteForBurst:burst.burstId];
 
@@ -625,6 +636,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         burst.hasBeenVisited = YES;
         burst.highlighted = YES;
         bursts[burstIndex] = burst;
+
+        [self updatePhotoLabels:burst];
+
 
         NSString *note = [[EUCDatabase sharedInstance] getNoteForBurst:burst.burstId];
 

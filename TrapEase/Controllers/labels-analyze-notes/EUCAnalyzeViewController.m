@@ -44,18 +44,24 @@
 }
 
 - (void)viewDidLoad {
-
-
-    [self loadData];
-
-
+    //[self loadData];
 }
 
 - (void)loadData {
 
+    startDate = nil;
+    endDate = nil;
+
     EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
     bursts = burstDetailController.importedBursts;
 
+    //check the date
+    if (startDate == nil && endDate == nil ) {
+        EUCBurst *firstBurst = [bursts firstObject];
+        startDate = firstBurst.date;
+        EUCBurst *lastBurst = [bursts lastObject];
+        endDate = lastBurst.date;
+    }
 
     deploymentId = burstDetailController.deploymentId;
 
@@ -69,28 +75,11 @@
 
         burst.labels = labels;
 
+        NSLog(@"BURST %@", burst.date);
+
         if (labels != nil && labels.count > 0) {
 
             _errorLabel.hidden = YES;
-
-            //check the date
-            if (startDate == nil && endDate == nil ) {
-                startDate = burst.date;
-                endDate = burst.date;
-
-            } else {
-                //The receiver is later in time than anotherDate, NSOrderedDescending
-                if (([startDate compare:burst.date]) == NSOrderedDescending) {
-                    startDate = burst.date;
-                }
-
-
-                if (([endDate compare:burst.date]) == NSOrderedAscending) {
-                    endDate = burst.date;
-                }
-
-            }
-
 
             if (burst.labels != nil ) {
                 for (EUCLabel *label in burst.labels) {
@@ -102,7 +91,6 @@
                     AnalyzeItem *analyzeItem;
                     if (foundObjs.count > 0) {
                         analyzeItem = foundObjs[0];
-                        analyzeItem.labelName = label.name;
                         [analyzeItem addBurst:burst];
                         int index = [analyzeItems indexOfObject:analyzeItem];
                         [analyzeItems replaceObjectAtIndex:index withObject:analyzeItem];
@@ -124,7 +112,7 @@
     if (analyzeItems != nil && analyzeItems.count > 0) {
 
         int y = 50;
-        int offset = 100;
+        int offset = 90;
         for (AnalyzeItem *a in analyzeItems) {
 
 
@@ -132,13 +120,15 @@
 
 
             [labelUIView displayAnalyzeItem:a withStartDate:startDate endDate:endDate];
-            [self.view addSubview:labelUIView];
+            [_contentView addSubview: labelUIView];
             CGRect newFrame = CGRectMake(6, y, labelUIView.frame.size.width, labelUIView.frame.size.width);
             labelUIView.frame = newFrame;
 
             y = y + offset;
 
         }
+
+
 
     }
 }

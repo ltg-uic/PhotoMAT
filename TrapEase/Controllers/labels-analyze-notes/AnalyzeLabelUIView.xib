@@ -13,16 +13,16 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AnalyzeLabelUIView">
-            <rect key="frame" x="0.0" y="0.0" width="1024" height="100"/>
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="90"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b6S-m6-lKb" customClass="TagView">
-                    <rect key="frame" x="0.0" y="32" width="151" height="30"/>
+                    <rect key="frame" x="0.0" y="32" width="151" height="20"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="crx-sb-cJZ" customClass="TimelineView">
-                    <rect key="frame" x="153" y="0.0" width="817" height="100"/>
+                    <rect key="frame" x="153" y="0.0" width="817" height="90"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>

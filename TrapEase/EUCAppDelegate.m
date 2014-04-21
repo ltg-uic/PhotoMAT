@@ -91,6 +91,8 @@
     dsvc.viewControllers = @[master, self.detail];
 
     self.homeViewController = [[EUCHomeViewController alloc] init];
+
+    //self.homeViewController.viewControllers = @[user, notes, snapshot, photos];
     self.homeViewController.viewControllers = @[user, dsvc, label, analyze, notes, cloud, snapshot, photos];
     //label, analyze, settings,
 

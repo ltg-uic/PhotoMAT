@@ -32,6 +32,7 @@
 		70BB003919044C5400ACB494 /* EUCAnalyzeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BB003719044C5400ACB494 /* EUCAnalyzeViewController.m */; };
 		70BB003A19044C5400ACB494 /* EUCAnalyzeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70BB003819044C5400ACB494 /* EUCAnalyzeViewController.xib */; };
 		70BB004C190487FC00ACB494 /* AnalyzeLabelUIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70BB004B190487FC00ACB494 /* AnalyzeLabelUIView.xib */; };
+		70F799A61905CDAB00AD33D9 /* EUCAnalyzeTableViewControllerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70F799A51905CDAB00AD33D9 /* EUCAnalyzeTableViewControllerView.xib */; };
 		B4116D9918F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */; };
 		B41BB22F18FDF28700388779 /* EUCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B41BB22E18FDF28700388779 /* EUCLabel.m */; };
 		B43658D518E4B95F0017672E /* EUCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658D418E4B95F0017672E /* EUCImage.m */; };
@@ -211,6 +212,7 @@
 		70BB003719044C5400ACB494 /* EUCAnalyzeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUCAnalyzeViewController.m; sourceTree = "<group>"; };
 		70BB003819044C5400ACB494 /* EUCAnalyzeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCAnalyzeViewController.xib; sourceTree = "<group>"; };
 		70BB004B190487FC00ACB494 /* AnalyzeLabelUIView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalyzeLabelUIView.xib; sourceTree = "<group>"; };
+		70F799A51905CDAB00AD33D9 /* EUCAnalyzeTableViewControllerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCAnalyzeTableViewControllerView.xib; sourceTree = "<group>"; };
 		B4116D9718F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCTabBarViewControllerDelegate.h; path = TrapEase/Controllers/EUCTabBarViewControllerDelegate.h; sourceTree = "<group>"; };
 		B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCTabBarViewControllerDelegate.m; path = TrapEase/Controllers/EUCTabBarViewControllerDelegate.m; sourceTree = "<group>"; };
 		B41BB22D18FDF28700388779 /* EUCLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCLabel.h; path = Model/EUCLabel.h; sourceTree = "<group>"; };
@@ -459,6 +461,7 @@
 				70BB004B190487FC00ACB494 /* AnalyzeLabelUIView.xib */,
 				C0A7D0F33421A37116664BBA /* AnalyzeLabelUIView.h */,
 				C0A7D7FAFABDDCAA110F111F /* AnalyzeLabelUIView.m */,
+				70F799A51905CDAB00AD33D9 /* EUCAnalyzeTableViewControllerView.xib */,
 			);
 			name = "analyze-tab";
 			sourceTree = "<group>";
@@ -930,6 +933,7 @@
 				7080F7C118F743560087A66F /* sample.jpg in Resources */,
 				B4E6BE8318DFD47700AC9D84 /* EUCDeploymentMasterViewController.xib in Resources */,
 				B4E6BE5018DEA6DE00AC9D84 /* thumbs-up.png in Resources */,
+				70F799A61905CDAB00AD33D9 /* EUCAnalyzeTableViewControllerView.xib in Resources */,
 				B4E6BE9418E13C5800AC9D84 /* thumbs-up-selected@2x.png in Resources */,
 				B4E6BD8C18DDC82600AC9D84 /* filter@2x.png in Resources */,
 				B4E6BE2118DE3EB400AC9D84 /* gear@2x.png in Resources */,

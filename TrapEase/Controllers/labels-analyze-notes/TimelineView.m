@@ -84,32 +84,34 @@ int textWidth = 80;
         NSString *firstTextLabel = [dateformat stringFromDate:_startDate];
         NSString *lastTextLabel = [dateformat stringFromDate:_endDate];
 
-        [self drawCircleTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos) isHighlighted:YES hasBeenVisited:YES showLabel:YES];
+        [self drawCircleTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos) isHighlighted:NO hasBeenVisited:YES showLabel:YES];
 
 
-        for (int j = 1; j < _bursts.count; j++) {
+        for (int j = 1; j < _bursts.count-1; j++) {
             EUCBurst *b = _bursts[j];
             CGFloat tickOffset = xposStart + ([_startDate timeIntervalSinceDate:b.date] / (totalTime)) * lineLength;
             NSString *formatedLabel = [dateformat stringFromDate:b.date];
 
-            BOOL showLabel = NO;
-            if (j == _bursts.count - 1) {
-                showLabel = YES;
-            }
-            [self drawCircleTickMarkAtPoint:formatedLabel atPoint:CGPointMake(tickOffset, ypos) isHighlighted:b.highlighted hasBeenVisited:b.hasBeenVisited showLabel:showLabel];
+//            BOOL showLabel = YES;
+//            if (j == _bursts.count - 1) {
+//                showLabel = NO;
+//            }
+            [self drawCircleTickMarkAtPoint:formatedLabel atPoint:CGPointMake(tickOffset, ypos) isHighlighted:NO hasBeenVisited:YES showLabel:YES];
 
 
         }
+        [self drawCircleTickMarkAtPoint:lastTextLabel atPoint:CGPointMake(xposEnd, ypos) isHighlighted:NO hasBeenVisited:YES showLabel:YES];
+
     } else if (_bursts != nil ) {
 
 
 
         //create end point labels
-        EUCBurst *firstBurst = _bursts[0];
+        EUCBurst *firstBurst = [_bursts firstObject];
         NSString *firstTextLabel = [dateformat stringFromDate:firstBurst.date];
 
 
-        EUCBurst *lastBurst = _bursts[_bursts.count - 1];
+        EUCBurst *lastBurst = [_bursts lastObject];
         NSString *lastTextLabel = [dateformat stringFromDate:lastBurst.date];
 
         [self drawLineWithStartDate:firstBurst.date andEndDate:lastBurst.date];

@@ -18,7 +18,6 @@
 
 - (void)displayAnalyzeItem:(AnalyzeItem *)analyzeItem withStartDate:(NSDate *)startDate endDate:(NSDate *)endDate {
 
-
     NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
 
     NSArray *descriptors = [NSArray arrayWithObject:valueDescriptor];
@@ -26,13 +25,16 @@
 
     analyzeItem.bursts = sortedBurts;
 
+   // _tagView.frame
     _tagView.text = analyzeItem.labelName;
+
+    //for(So)
 
     _timeliveView.bursts = sortedBurts;
     _timeliveView.startDate = startDate;
     _timeliveView.endDate = endDate;
 
-    _countLabel.text = [NSString stringWithFormat:@"%d", analyzeItem.bursts.count];
+    _countLabel.text = [NSString stringWithFormat:@"%d", analyzeItem.labelCount];
 
     [self setNeedsDisplay];
 

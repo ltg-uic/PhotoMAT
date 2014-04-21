@@ -17,6 +17,9 @@
 }
 
 -(void) addBurst:(EUCBurst *)burst {
+
+    _labelCount++;
+
     if( _bursts == nil ) {
          _bursts = [[NSMutableArray alloc] init];
     }

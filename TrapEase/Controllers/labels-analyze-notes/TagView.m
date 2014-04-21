@@ -42,7 +42,7 @@ static const CGFloat TagViewCornerHeight = 5.0;
         state = TagViewStateNormal;
         self.fontColor = [UIColor whiteColor];
         self.text = text;
-        [self setBackgroundColor:[UIColor blackColor]];
+        [self setBackgroundColor:[UIColor clearColor]];
     }
 
     return self;
