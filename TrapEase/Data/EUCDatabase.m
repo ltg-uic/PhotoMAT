@@ -300,7 +300,8 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 -(NSArray *) classRoomsForSchool: (NSInteger) schoolId {
     NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:8];
-    NSString * sql = @"select id, name from class where school_id = ? order by name";
+//    NSString * sql = @"select id, name from class where school_id = ? and name != 'test' order by name";
+    NSString * sql = @"select id, name from class where school_id = ?  order by name";
     FMResultSet * rs = [self.db executeQuery:sql, @(schoolId)];
     while ([rs next]) {
         NSInteger classId = [rs intForColumnIndex:0];

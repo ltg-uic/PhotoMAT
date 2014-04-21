@@ -27,6 +27,7 @@ static BOOL DEV = NO;
 @property (strong, nonatomic) NSURL *assetURL;
 @property (weak, nonatomic) IBOutlet UIView *toastView;
 @property (weak, nonatomic) IBOutlet UILabel *status;
+@property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 
 @end
 
@@ -52,6 +53,29 @@ static BOOL DEV = NO;
         
     }
     return self;
+}
+
+- (IBAction)importLibrary:(id)sender {
+    self.picker = [[UIImagePickerController alloc] init];
+    self.picker.delegate = self;
+    self.picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    UIButton * button = (UIButton *) sender;
+    self.popover = [[UIPopoverController alloc] initWithContentViewController:self.picker];
+    [self.popover presentPopoverFromRect:button.bounds
+                                  inView:button
+                permittedArrowDirections:UIPopoverArrowDirectionAny
+                                animated:YES];
+}
+
+- (IBAction)takePicture:(id)sender {
+    UIButton * button = (UIButton *) sender;
+    GPUCameraViewController * cameraVC = [[GPUCameraViewController alloc] init];
+    cameraVC.delegate = self;
+    self.popover = [[UIPopoverController alloc] initWithContentViewController:cameraVC];
+    [self.popover presentPopoverFromRect:button.bounds
+                                  inView:button
+                permittedArrowDirections:UIPopoverArrowDirectionAny
+                                animated:YES];
 }
 
 
@@ -87,6 +111,20 @@ static BOOL DEV = NO;
         self.imageView.image = self.savedImage;
         self.savedImage = nil;
     }
+    
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        self.hasCamera = YES;
+        self.cameraButton.hidden = NO;
+    }
+    else {
+        self.cameraButton.hidden = YES;
+    }
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        self.hasLibrary = YES;
+    }
+    
     
 }
 
