@@ -879,5 +879,34 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     [self.db executeUpdate:@"update burst set label_note=null where id=?", @(burstId)];
 }
 
+#pragma mark - Labels - visited
+
+/**
+ *  Returns the visited status of a certain burst
+ *
+ *  @param burstId the id of the burst
+ *  @return the visited status of a burst
+ */
+-(BOOL) getVisitedForBurst: (NSInteger) burstId {
+    NSString * sql = @"select visited from burst where id=?";
+    FMResultSet * rs = [self.db executeQuery:sql, @(burstId)];
+    if ([rs next]) {
+        if ([rs intForColumnIndex:0] == 1)
+            return YES;
+    }
+    return NO;
+}
+
+
+/**
+ *  Update visited in a burst
+ *
+ *  @param burstId the id of the burst whose visitated state we are trying to change
+ *  @param status    the visited  status we are trying to set
+ */
+-(void) updateVisited: (BOOL) status inBurst: (NSInteger) burstId {
+    [self.db executeUpdate:@"update burst set visited=? where id=?", @(status ? 1: 0), @(burstId)];
+}
+
 
 @end
