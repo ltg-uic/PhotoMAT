@@ -44,7 +44,6 @@
 @property(weak, nonatomic) IBOutlet UITextField *addLabelField;
 @property(weak, nonatomic) IBOutlet UITextView *noteTextView;
 @property(weak, nonatomic) IBOutlet UIView *dropOverlayView;
-@property(weak, nonatomic) IBOutlet UIButton *playPauseButton;
 @property(weak, nonatomic) IBOutlet TimelineView *timelineView;
 
 @end
@@ -168,7 +167,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     [self addLabelsToDropOverlay:burst];
 
-    [self playPauseImageAnimation:nil];
+    [self playAnimation];
 }
 
 - (void)updatePhotoLabels:(EUCBurst *)burst {
@@ -562,7 +561,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     if (exists == NO) {
         burstIndex++;
     } else {
-
         [self removeAllTagsFromDragOverlay];
 
         NSLog(@"right swipe %d", burstIndex);
@@ -594,9 +592,10 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         [self addLabelsToDropOverlay:burst];
 
 
+        BOOL wasPlaying = [self pauseAnimation];
 
-
-        // [self playAnimation];
+        if (wasPlaying)
+            [self playAnimation];
 
     }
 }
@@ -615,6 +614,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     if (exists == NO) {
         burstIndex--;
     } else {
+
 
         [self removeAllTagsFromDragOverlay];
 
@@ -648,8 +648,10 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
         [self addLabelsToDropOverlay:burst];
 
+        BOOL wasPlaying = [self pauseAnimation];
 
-        // [self playAnimation];
+        if (wasPlaying)
+            [self playAnimation];
 
     }
 
@@ -690,49 +692,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     }
 }
 
-- (IBAction)playPauseImageAnimation:(id)sender {
-    UIButton *btn = (UIButton *) sender;
-
-    if ([_playPauseButton.titleLabel.text isEqualToString:@"Play"]) {
-        //[btn setSelected:YES];
-        //play
-
-        [_playPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
-
-        [self playAnimation];
-    } else {
-        [_playPauseButton setTitle:@"Play" forState:UIControlStateNormal];
-
-        [self pauseAnimation];
-    }
-}
-
-- (void)playAnimation {
-
-    if (burstIndex > 0 && burstIndex < bursts.count) {
-        EUCBurst *burst = bursts[burstIndex];
-
-        NSMutableArray *ani = [[NSMutableArray alloc] init];
-        for (EUCImage *image in burst.images) {
-            [ani addObject:[UIImage imageWithContentsOfFile:image.filename]];
-        }
-
-        _imageView.animationImages = ani;
-        _imageView.animationDuration = .3;
-        _imageView.animationRepeatCount = 0;
-        [_imageView startAnimating];
-    }
-}
-
-- (void)pauseAnimation {
-    if (_imageView.isAnimating) {
-        [_imageView stopAnimating];
-
-        _imageView.animationImages = nil;
-        _imageView.animationDuration = 0;
-        _imageView.animationRepeatCount = 0;
-    }
-}
 
 - (void)currentDeploymentIdSetTo:(NSInteger)deploymentId {
 
@@ -743,5 +702,52 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 //    [self refreshLocalBurstCache];
 }
 
+#pragma mark - Animation
+
+- (IBAction)animateButton:(id)sender {
+    if ([_animateButton.titleLabel.text isEqualToString:@"Play"]) {
+
+
+        [self playAnimation];
+    } else {
+
+        [self pauseAnimation];
+    }
+}
+
+- (void)playAnimation {
+
+    if (burstIndex >= 0 && burstIndex < bursts.count) {
+        EUCBurst *burst = bursts[burstIndex];
+
+        NSMutableArray *ani = [[NSMutableArray alloc] init];
+        for (EUCImage *image in burst.images) {
+            [ani addObject:[UIImage imageWithContentsOfFile:image.filename]];
+        }
+
+        _imageView.animationImages = ani;
+        _imageView.animationDuration = .3;
+        _imageView.animationRepeatCount = 0;
+
+        [_imageView startAnimating];
+
+        [_animateButton setTitle:@"Pause" forState:UIControlStateNormal];
+
+    }
+}
+
+- (BOOL)pauseAnimation {
+    if (_imageView.isAnimating) {
+        [_imageView stopAnimating];
+
+        _imageView.animationImages = nil;
+        _imageView.animationDuration = 0;
+        _imageView.animationRepeatCount = 0;
+        [_animateButton setTitle:@"Play" forState:UIControlStateNormal];
+
+        return YES;
+    }
+    return NO;
+}
 
 @end

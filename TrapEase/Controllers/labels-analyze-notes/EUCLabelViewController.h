@@ -13,8 +13,9 @@
 
     __weak IBOutlet UILabel *schoolClassGroupLabel;
 }
-@property (weak, nonatomic) IBOutlet UILabel *countLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
-@property (weak, nonatomic) IBOutlet UILabel *cameraLabel;
+@property(weak, nonatomic) IBOutlet UILabel *countLabel;
+@property(weak, nonatomic) IBOutlet UILabel *timestampLabel;
+@property(weak, nonatomic) IBOutlet UILabel *cameraLabel;
+@property(weak, nonatomic) IBOutlet UIButton *animateButton;
 
 @end
