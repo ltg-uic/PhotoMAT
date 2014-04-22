@@ -6,8 +6,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EUCAnalyzeViewController">
             <connections>
+                <outlet property="endDateButton" destination="4iE-P9-2Fy" id="suO-u1-akq"/>
                 <outlet property="errorLabel" destination="YTL-L3-pGY" id="30V-hF-j0z"/>
                 <outlet property="scrollView" destination="21c-wL-N0U" id="DlI-YK-j0G"/>
+                <outlet property="startDateButton" destination="Efs-Fb-1Lg" id="cVX-f7-u4L"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,10 +26,28 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" directionalLockEnabled="YES" indicatorStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="21c-wL-N0U">
-                    <rect key="frame" x="0.0" y="20" width="1024" height="692"/>
+                    <rect key="frame" x="0.0" y="41" width="1024" height="671"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.80000001192092896" green="0.40000000596046448" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efs-Fb-1Lg">
+                    <rect key="frame" x="153" y="11" width="223" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="12:20 PM 3/14/2014"/>
+                    <connections>
+                        <action selector="showStartDatePicker:" destination="-1" eventType="touchUpInside" id="iNv-MT-MgN"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4iE-P9-2Fy">
+                    <rect key="frame" x="750" y="11" width="221" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="12:20 PM 3/14/2014">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="showEndDatePicker:" destination="-1" eventType="touchUpInside" id="hn1-ez-rqb"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

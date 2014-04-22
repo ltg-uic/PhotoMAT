@@ -14,15 +14,17 @@
 #import "EUCAppDelegate.h"
 #import "AnalyzeItem.h"
 #import "AnalyzeLabelUIView.h"
+#import "AnalyzeDatePopoverViewController.h"
 
 
-@interface EUCAnalyzeViewController () {
+@interface EUCAnalyzeViewController () <UIPopoverControllerDelegate> {
     NSMutableArray *bursts;
     NSMutableArray *analyzeItems;
     NSInteger deploymentId;
     NSDate *startDate;
     NSDate *endDate;
     EUCAppDelegate *appDelegate;
+    UIPopoverController *popoverController;
 
 
 }
@@ -38,6 +40,9 @@
                                                         image:[UIImage imageNamed:@"line-chart"]
                                                 selectedImage:nil];
         appDelegate = (EUCAppDelegate *) [[UIApplication sharedApplication] delegate];
+
+        dateformat = [[NSDateFormatter alloc] init];
+        [dateformat setDateFormat:@"hh:mm a M/d/Y"];
 
     }
     return self;
@@ -59,8 +64,11 @@
     if (startDate == nil && endDate == nil ) {
         EUCBurst *firstBurst = [bursts firstObject];
         startDate = firstBurst.date;
+
         EUCBurst *lastBurst = [bursts lastObject];
         endDate = lastBurst.date;
+
+        [self setButtonLabelDateStartDate:startDate withEndDate:endDate];
     }
 
     deploymentId = burstDetailController.deploymentId;
@@ -108,6 +116,11 @@
         }
     }
 
+    [self refreshViews];
+
+}
+
+- (void)refreshViews {
 
     if (analyzeItems != nil && analyzeItems.count > 0) {
 
@@ -138,6 +151,19 @@
         self.scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, maxHeight + 5);
 
     }
+
+
+}
+
+- (void)setButtonLabelDateStartDate:(NSDate *)startDate withEndDate:(NSDate *)endDate {
+    [_startDateButton setTitle:[dateformat stringFromDate:startDate] forState:UIControlStateNormal];
+    [_startDateButton setTitle:[dateformat stringFromDate:startDate] forState:UIControlStateHighlighted];
+    [_startDateButton setTitle:[dateformat stringFromDate:startDate] forState:UIControlStateSelected];
+
+    [_endDateButton setTitle:[dateformat stringFromDate:endDate] forState:UIControlStateNormal];
+    [_endDateButton setTitle:[dateformat stringFromDate:endDate] forState:UIControlStateHighlighted];
+    [_endDateButton setTitle:[dateformat stringFromDate:endDate] forState:UIControlStateSelected];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -149,5 +175,68 @@
     [self loadData];
 
 }
+
+- (IBAction)showStartDatePicker:(id)sender {
+
+    AnalyzeDatePopoverViewController *content = [[AnalyzeDatePopoverViewController alloc] initWithNibName:@"AnalyzeDatePopoverViewController" bundle:nil];
+
+    popoverController = [[UIPopoverController alloc]
+            initWithContentViewController:content];
+
+    //popoverController = self;
+    content.somePopoverController = popoverController;
+
+    content.datePicker.maximumDate = [endDate dateByAddingTimeInterval:-60];
+    content.datePicker.date = startDate;
+    content.modalInPopover = YES;
+    void (^finishedHandler)(NSDate *) = ^(NSDate *newDate) {
+
+        NSLog(@"start date button: %@", [dateformat stringFromDate:newDate]);
+        startDate = newDate;
+        [self changeButtonTitleWithButton:_startDateButton andStringDate:[dateformat stringFromDate:newDate]];
+        [self refreshViews];
+
+    };
+    content.finishedHandler = finishedHandler;
+
+    [popoverController setPopoverContentSize:CGSizeMake(250, 240) animated:true];
+    [popoverController presentPopoverFromRect:_startDateButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+
+- (IBAction)showEndDatePicker:(id)sender {
+
+    AnalyzeDatePopoverViewController *content = [[AnalyzeDatePopoverViewController alloc] initWithNibName:@"AnalyzeDatePopoverViewController" bundle:nil];
+
+    popoverController = [[UIPopoverController alloc]
+            initWithContentViewController:content];
+
+    //popoverController = self;
+    content.somePopoverController = popoverController;
+
+    content.datePicker.minimumDate = [startDate dateByAddingTimeInterval:+60];
+    content.datePicker.date = endDate;
+    content.modalInPopover = YES;
+    void (^finishedHandler)(NSDate *) = ^(NSDate *newDate) {
+
+        NSLog(@"enddate button: %@", [dateformat stringFromDate:newDate]);
+        endDate = newDate;
+        [self changeButtonTitleWithButton:_endDateButton andStringDate:[dateformat stringFromDate:newDate]];
+        [self refreshViews];
+
+    };
+    [popoverController setPopoverContentSize:CGSizeMake(250, 240) animated:true];
+    [popoverController presentPopoverFromRect:_endDateButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)changeButtonTitleWithButton:(UIButton *)button andStringDate:(NSString *)newDate {
+
+
+    [button setTitle:newDate forState:UIControlStateNormal];
+    [button setTitle:newDate forState:UIControlStateNormal];
+    [button setTitle:newDate forState:UIControlStateHighlighted];
+
+}
+
 
 @end

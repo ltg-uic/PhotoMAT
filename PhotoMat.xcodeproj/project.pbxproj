@@ -10,6 +10,8 @@
 		35D4F084544C46C2BE466AC9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FB35A88ACFB41A99F3E3EC4 /* libPods.a */; };
 		702ACBC218F756760001C9D7 /* EUCCloudViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 702ACBC018F756760001C9D7 /* EUCCloudViewController.m */; };
 		702ACBC318F756760001C9D7 /* EUCCloudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 702ACBC118F756760001C9D7 /* EUCCloudViewController.xib */; };
+		7043EAF81906106600BC16D8 /* AnalyzeDatePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7043EAF61906106600BC16D8 /* AnalyzeDatePopoverViewController.m */; };
+		7043EAF91906106600BC16D8 /* AnalyzeDatePopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7043EAF71906106600BC16D8 /* AnalyzeDatePopoverViewController.xib */; };
 		7080F7B718F743210087A66F /* EUCLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7AA18F743210087A66F /* EUCLabelViewController.m */; };
 		7080F7B818F743210087A66F /* EUCLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7AB18F743210087A66F /* EUCLabelViewController.xib */; };
 		7080F7BA18F743210087A66F /* TagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7AF18F743210087A66F /* TagList.m */; };
@@ -181,6 +183,9 @@
 		702ACBBF18F756760001C9D7 /* EUCCloudViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUCCloudViewController.h; sourceTree = "<group>"; };
 		702ACBC018F756760001C9D7 /* EUCCloudViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUCCloudViewController.m; sourceTree = "<group>"; };
 		702ACBC118F756760001C9D7 /* EUCCloudViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCCloudViewController.xib; sourceTree = "<group>"; };
+		7043EAF51906106600BC16D8 /* AnalyzeDatePopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeDatePopoverViewController.h; sourceTree = "<group>"; };
+		7043EAF61906106600BC16D8 /* AnalyzeDatePopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeDatePopoverViewController.m; sourceTree = "<group>"; };
+		7043EAF71906106600BC16D8 /* AnalyzeDatePopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalyzeDatePopoverViewController.xib; sourceTree = "<group>"; };
 		7080F7A918F743210087A66F /* EUCLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUCLabelViewController.h; sourceTree = "<group>"; };
 		7080F7AA18F743210087A66F /* EUCLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUCLabelViewController.m; sourceTree = "<group>"; };
 		7080F7AB18F743210087A66F /* EUCLabelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCLabelViewController.xib; sourceTree = "<group>"; };
@@ -418,6 +423,9 @@
 				7080F7D718F746F60087A66F /* PopoverTagContentViewController.h */,
 				7080F7D818F746F60087A66F /* PopoverTagContentViewController.m */,
 				7080F7D918F746F60087A66F /* PopoverTagContentViewController.xib */,
+				7043EAF51906106600BC16D8 /* AnalyzeDatePopoverViewController.h */,
+				7043EAF61906106600BC16D8 /* AnalyzeDatePopoverViewController.m */,
+				7043EAF71906106600BC16D8 /* AnalyzeDatePopoverViewController.xib */,
 			);
 			name = popover;
 			sourceTree = "<group>";
@@ -938,6 +946,7 @@
 				702ACBC318F756760001C9D7 /* EUCCloudViewController.xib in Resources */,
 				B4E6BE1918DE008000AC9D84 /* EUCKnapsackViewController.xib in Resources */,
 				7080F7B818F743210087A66F /* EUCLabelViewController.xib in Resources */,
+				7043EAF91906106600BC16D8 /* AnalyzeDatePopoverViewController.xib in Resources */,
 				B4E6BE5918DF9F6400AC9D84 /* trap.db in Resources */,
 				B43658DD18E4E43B0017672E /* EUCDeploymentImageCell.xib in Resources */,
 				B4D1EC4318BD729300E01EFE /* Images.xcassets in Resources */,
@@ -1072,6 +1081,7 @@
 				B4E6BD6318DDC30C00AC9D84 /* EUCImportViewController.m in Sources */,
 				B43658E018E5213F0017672E /* EUCImageUtilities.m in Sources */,
 				B4E6BE5D18DF9F9800AC9D84 /* EUCDatabase.m in Sources */,
+				7043EAF81906106600BC16D8 /* AnalyzeDatePopoverViewController.m in Sources */,
 				C0A7D560941CFF15C5CA860E /* AnalyzeItem.m in Sources */,
 				C0A7D4B3661485EED050690D /* AnalyzeLabelUIView.m in Sources */,
 			);
