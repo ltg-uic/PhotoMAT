@@ -192,6 +192,22 @@
 -(void) deleteNoteFromBurst: (NSInteger) burstId;
 
 
+/**
+ *  Returns the visited status of a certain burst
+ *
+ *  @param burstId the id of the burst
+ *  @return the visited status of a burst
+ */
+-(BOOL) getVisitedForBurst: (NSInteger) burstId;
+
+
+/**
+ *  Update visited in a burst
+ *
+ *  @param burstId the id of the burst whose visitated state we are trying to change
+ *  @param status    the visited  status we are trying to set
+ */
+-(void) updateVisited: (BOOL) status inBurst: (NSInteger) burstId;
 
 
 @end

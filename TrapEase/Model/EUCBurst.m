@@ -25,14 +25,11 @@
 
 
 - (BOOL)hasBeenVisited {
-
-    //db call
-
-    return NO;
+    return [[EUCDatabase sharedInstance] getVisitedForBurst: self.burstId];
 }
 
 - (void)setHasBeenVisited:(BOOL)hasBeenVisited {
-    //db call
+    [[EUCDatabase sharedInstance] updateVisited:hasBeenVisited inBurst:self.burstId];
 }
 
 
