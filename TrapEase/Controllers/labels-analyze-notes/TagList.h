@@ -10,7 +10,7 @@
 
 @class TagView;
 
-@interface TagList : UIScrollView {
+@interface TagList : UIView {
 
 
 }

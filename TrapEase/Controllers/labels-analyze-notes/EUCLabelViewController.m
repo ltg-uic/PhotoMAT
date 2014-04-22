@@ -53,7 +53,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
 #define MAX_TEXT_CHAR_LENGTH 16
-#define MAX_LABELS_ALLOWED 18
+#define MAX_LABELS_ALLOWED 12
 
 
 @implementation EUCLabelViewController {
@@ -97,7 +97,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     //setup gestures for taglist
     [self addGesturesToTagList];
     //create the tag list
-    _tagList.maxNumberOfLabels = 18;
+    _tagList.maxNumberOfLabels = 12;
     [self refreshLocalBurstCache];
 
 
@@ -118,6 +118,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 - (void)refreshGroupLabel {
     EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
     schoolClassGroupLabel.text = [NSString stringWithFormat:@"%@ : %@ : %@", selectedSet.schoolName, selectedSet.className, selectedSet.groupName];
+    _cameraLabel.text = [NSString stringWithFormat:@"%@", selectedSet.deploymentName];
 }
 
 
@@ -151,7 +152,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     //visited
     burst.highlighted = YES;
-    burst.hasBeenVisited = YES;
+    [burst setHasBeenVisited:YES];
     bursts[burstIndex] = burst;
 
     [self updateTimelineWithBurstHighlightingBursts:bursts];
@@ -626,14 +627,14 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
         if (hasPrevious) {
             EUCBurst *burst = bursts[burstIndex - 1];
-            burst.hasBeenVisited = YES;
+            [burst setHasBeenVisited: YES];
             burst.highlighted = NO;
             bursts[burstIndex - 1] = burst;
         }
 
         //current burst
         EUCBurst *burst = bursts[burstIndex];
-        burst.hasBeenVisited = YES;
+        [burst setHasBeenVisited: YES];
         burst.highlighted = YES;
         bursts[burstIndex] = burst;
 
