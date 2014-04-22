@@ -120,7 +120,7 @@
 
 
             [labelUIView displayAnalyzeItem:a withStartDate:startDate endDate:endDate];
-            [_contentView addSubview: labelUIView];
+            [_scrollView addSubview:labelUIView];
             CGRect newFrame = CGRectMake(6, y, labelUIView.frame.size.width, labelUIView.frame.size.width);
             labelUIView.frame = newFrame;
 
@@ -128,7 +128,14 @@
 
         }
 
+        float maxHeight = 0;
 
+        for (UIView *v in [_scrollView subviews]) {
+            if (v.frame.origin.x + v.frame.size.height > maxHeight)
+                maxHeight = v.frame.origin.x + v.frame.size.height;
+        }
+
+        self.scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, maxHeight + 5);
 
     }
 }

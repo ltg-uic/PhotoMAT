@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:TrapEase/Controllers/labels-analyze-notes/EUCAnalyzeTableViewControllerView.xib">
+   </FileRef>
+   <FileRef
       location = "group:PhotoMat.xcodeproj">
    </FileRef>
    <FileRef
