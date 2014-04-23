@@ -339,6 +339,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 -(NSArray *) getDeployments {
     NSMutableArray * array = [[NSMutableArray alloc] initWithCapacity:64];
+    NSDateFormatter * formatter1 = [[NSDateFormatter alloc] init];
+    [formatter1 setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z"];
+    [formatter1 setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm a"];
     
     NSString * sql = @"select person_name, deployment_date, school_name, class_name, short_name, id, person_id from deployment order by deployment_date desc";
     
@@ -346,8 +351,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     while ([rs next]) {
         
+        NSString * dateStr = [rs stringForColumnIndex:1];
+        NSDate * dateDate = [formatter1 dateFromString:dateStr];
+        NSString * fixedDateStr = [formatter stringFromDate:dateDate];
         NSDictionary * row = @{@"person_name": [rs stringForColumnIndex:0],
-                               @"date": [rs stringForColumnIndex:1],
+                               @"date": fixedDateStr,
                                @"school_name": [rs stringForColumnIndex:2],
                                @"class_name": [rs stringForColumnIndex:3],
                                @"short_name": [rs stringForColumnIndex:4],
