@@ -37,6 +37,7 @@
     NSMutableArray *bursts;
     int burstIndex;
     NSInteger deploymentId;
+    int highlightedImageIndex;
 }
 
 @property(weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -170,6 +171,8 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
     [self addLabelsToDropOverlay:burst];
+
+    highlightedImageIndex = 0;
 
     [self playAnimation];
 }
@@ -724,13 +727,20 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     if (burstIndex >= 0 && burstIndex < bursts.count) {
         EUCBurst *burst = bursts[burstIndex];
 
+
         NSMutableArray *ani = [[NSMutableArray alloc] init];
         for (EUCImage *image in burst.images) {
             [ani addObject:[UIImage imageWithContentsOfFile:image.filename]];
         }
 
+        _imageView.highlighted = NO;
+
+
+        EUCImage *image = burst.images[highlightedImageIndex];
+
+        _imageView.highlightedImage = [UIImage imageWithContentsOfFile:image.filename];
         _imageView.animationImages = ani;
-        _imageView.animationDuration = .3;
+        _imageView.animationDuration = 3;
         _imageView.animationRepeatCount = 0;
 
         [_imageView startAnimating];
@@ -747,6 +757,16 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         _imageView.animationImages = nil;
         _imageView.animationDuration = 0;
         _imageView.animationRepeatCount = 0;
+        _imageView.highlighted = YES;
+        highlightedImageIndex++;
+
+
+        EUCBurst *currentBurst = bursts[burstIndex];
+
+        if (highlightedImageIndex >= currentBurst.images.count) {
+            highlightedImageIndex = 0;
+        }
+
         [_animateButton setTitle:@"Play" forState:UIControlStateNormal];
 
         return YES;
