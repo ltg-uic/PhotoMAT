@@ -47,15 +47,18 @@ int textWidth = 80;
 
 }
 
-- (void)drawLineWithStartDate:(NSDate *)sDate andEndDate:(NSDate *)eDate {
+- (void)drawLineWithStartDate:(NSDate *)sDate andEndDate:(NSDate *)eDate andXStart:(CGFloat)xStart {
     //init
+
+    xposStart = xStart;
 
     //set in the middle of the views height
 
     ypos = self.frame.size.height / 2.0;
 
     //the starting point
-    xposStart = textWidth / 2;
+
+
     //the ending point
     xposEnd = self.frame.size.width - xposStart;
 
@@ -78,29 +81,25 @@ int textWidth = 80;
 - (void)drawRect:(CGRect)rect {
 
     if (_startDate != nil && _endDate != nil ) {
-        [self drawLineWithStartDate:_startDate andEndDate:_endDate];
+        [self drawLineWithStartDate:_startDate andEndDate:_endDate andXStart:12];
 
 
         NSString *firstTextLabel = [dateformat stringFromDate:_startDate];
         NSString *lastTextLabel = [dateformat stringFromDate:_endDate];
 
-        [self drawCircleTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos) isHighlighted:NO hasBeenVisited:YES showLabel:YES];
+        // [self drawCircleTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos) isHighlighted:NO hasBeenVisited:YES showLabel:NO];
 
 
-        for (int j = 1; j < _bursts.count-1; j++) {
+        for (int j = 0; j < _bursts.count; j++) {
             EUCBurst *b = _bursts[j];
             CGFloat tickOffset = xposStart + ([_startDate timeIntervalSinceDate:b.date] / (totalTime)) * lineLength;
             NSString *formatedLabel = [dateformat stringFromDate:b.date];
 
-//            BOOL showLabel = YES;
-//            if (j == _bursts.count - 1) {
-//                showLabel = NO;
-//            }
-            [self drawCircleTickMarkAtPoint:formatedLabel atPoint:CGPointMake(tickOffset, ypos) isHighlighted:NO hasBeenVisited:YES showLabel:YES];
+            [self drawCircleTickMarkAtPoint:formatedLabel atPoint:CGPointMake(tickOffset, ypos) isHighlighted:NO hasBeenVisited:YES showLabel:NO];
 
 
         }
-        [self drawCircleTickMarkAtPoint:lastTextLabel atPoint:CGPointMake(xposEnd, ypos) isHighlighted:NO hasBeenVisited:YES showLabel:YES];
+        //[self drawCircleTickMarkAtPoint:lastTextLabel atPoint:CGPointMake(xposEnd, ypos) isHighlighted:NO hasBeenVisited:YES showLabel:NO];
 
     } else if (_bursts != nil ) {
 
@@ -114,7 +113,7 @@ int textWidth = 80;
         EUCBurst *lastBurst = [_bursts lastObject];
         NSString *lastTextLabel = [dateformat stringFromDate:lastBurst.date];
 
-        [self drawLineWithStartDate:firstBurst.date andEndDate:lastBurst.date];
+        [self drawLineWithStartDate:firstBurst.date andEndDate:lastBurst.date andXStart:(textWidth / 2.0f)];
 
         [self drawCircleTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos) isHighlighted:firstBurst.highlighted hasBeenVisited:firstBurst.hasBeenVisited showLabel:YES];
 

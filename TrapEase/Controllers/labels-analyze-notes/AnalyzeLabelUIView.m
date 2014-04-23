@@ -7,28 +7,29 @@
 //
 
 #import "AnalyzeLabelUIView.h"
-#import "AnalyzeItem.h"
+#import "EUCBurst.h"
 
 @implementation AnalyzeLabelUIView
 
--(id)init {
+- (id)init {
     AnalyzeLabelUIView *customView = [[[NSBundle mainBundle] loadNibNamed:@"AnalyzeLabelUIView" owner:self options:nil] lastObject];
     return customView;
 }
 
 - (void)displayAnalyzeItem:(AnalyzeItem *)analyzeItem withStartDate:(NSDate *)startDate endDate:(NSDate *)endDate {
 
-    NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
 
-    NSArray *descriptors = [NSArray arrayWithObject:valueDescriptor];
-    NSArray *sortedBurts = [analyzeItem.bursts sortedArrayUsingDescriptors:descriptors];
+    NSArray *sortedBurts = [analyzeItem sortedBurstsByDate];
 
-    analyzeItem.bursts = sortedBurts;
-
-   // _tagView.frame
+    // _tagView.frame
     _tagView.text = analyzeItem.labelName;
 
     //for(So)
+
+    for (EUCBurst *b in sortedBurts) {
+        NSLog(@"Sorted burts %@", b.date);
+    }
+
 
     _timeliveView.bursts = sortedBurts;
     _timeliveView.startDate = startDate;

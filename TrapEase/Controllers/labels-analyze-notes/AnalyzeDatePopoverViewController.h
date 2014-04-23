@@ -18,6 +18,8 @@
 
 @property(nonatomic, copy) void (^finishedHandler)(NSDate *);
 
+@property(nonatomic, strong) NSDate *orginalDate;
+
 - (IBAction)selectedDate:(id)sender;
 
 @end

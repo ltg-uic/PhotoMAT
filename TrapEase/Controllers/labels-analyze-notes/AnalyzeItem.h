@@ -8,14 +8,15 @@
 @class EUCBurst;
 
 
-@interface AnalyzeItem : NSObject  {
+@interface AnalyzeItem : NSObject {
 
 }
 
 @property(nonatomic) int labelCount;
-@property(nonatomic, strong) NSMutableArray *bursts;
 @property(nonatomic, strong) NSString *labelName;
 
 
 - (void)addBurst:(EUCBurst *)burst;
+
+- (NSArray *)sortedBurstsByDate;
 @end

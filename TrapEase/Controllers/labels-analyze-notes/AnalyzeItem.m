@@ -7,7 +7,7 @@
 #import "EUCBurst.h"
 
 @interface AnalyzeItem () {
-    
+    NSMutableArray *bursts;
 }
 
 @end
@@ -15,16 +15,35 @@
 @implementation AnalyzeItem {
 
 }
+- (id)init {
+    self = [super init];
+    if (self) {
+
+    }
+
+    return self;
+}
 
 -(void) addBurst:(EUCBurst *)burst {
 
+    if (bursts == nil ) {
+        bursts = [[NSMutableArray alloc] init];
+        _labelCount = 0;
+    }
+
     _labelCount++;
 
-    if( _bursts == nil ) {
-         _bursts = [[NSMutableArray alloc] init];
+    if (![bursts containsObject:burst]) {
+
+        [bursts addObject:burst];
     }
-    if(![_bursts containsObject:burst]) {
-        [_bursts addObject:burst];
-    }
+}
+
+- (NSArray *)sortedBurstsByDate {
+    NSSortDescriptor *valueDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:YES];
+
+    NSArray *descriptors = [NSArray arrayWithObject:valueDescriptor];
+
+    return [bursts sortedArrayUsingDescriptors:descriptors];
 }
 @end
