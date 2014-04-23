@@ -75,6 +75,7 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) EUCDatePickerViewController *datePickerViewController;
 @property (strong, nonatomic) NSDateFormatter *format;
 @property (strong, nonatomic) NSDateFormatter *parser;
+@property (strong, nonatomic) NSDateFormatter *humanFormat;
 
 @property (strong, nonatomic) dispatch_queue_t uploadQueue;
 
@@ -116,6 +117,8 @@ typedef enum : NSUInteger {
         _uploadQueue = dispatch_queue_create("com.euclidsoftware.uploadQueue", NULL);
         _parser = [[NSDateFormatter alloc] init];
         [_parser setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+        _humanFormat = [[NSDateFormatter alloc] init];
+        [_humanFormat setDateFormat:@"yyyy-MM-dd hh:mm a"];
         
     }
     return self;
@@ -207,6 +210,11 @@ typedef enum : NSUInteger {
         for (EUCImage * image in burst.images) {
             if (first) {
                 self.nominalDate = image.assetDate;
+                if (self.actualDate == nil) {
+                    self.actualDate = image.assetDate;
+                    NSString * date = [self.humanFormat stringFromDate:image.assetDate];
+                    [self.actualButton setTitle:date forState:UIControlStateNormal];
+                }
                 first = NO;
             }
             [self.burstImages addObject:image];
@@ -293,6 +301,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)addBursts:(id)sender {
+    [self resignKbResponders];
     EUCImportViewController * import = [[EUCImportViewController alloc] initWithNibName:@"EUCImportViewController" bundle:nil];
     import.importDoneDelegate = self;
     [self presentViewController:import animated:YES completion:nil];
@@ -702,6 +711,8 @@ typedef enum : NSUInteger {
     }
     
     // save burst
+    NSTimeInterval timeDelta = [self.actualDate timeIntervalSinceDate:self.nominalDate];
+    
     for (EUCBurst * burst in self.importedBursts) {
         NSInteger burstId = [db getMinIdForTable:@"burst"];
         EUCImage * firstImage = burst.images[0];
@@ -716,7 +727,13 @@ typedef enum : NSUInteger {
                     [EUCFileSystem moveFile:image.filename toFile:fileName];
                     image.filename = fileName;
                     
-                    [db saveLocalBurstImageWithId:imageId owner:personId imageDate:[self.format stringFromDate:image.assetDate] burstId:burstId fileName:fileName width:image.dimensions.width height:image.dimensions.height];
+                    [db saveLocalBurstImageWithId:imageId
+                                            owner:personId
+                                        imageDate:[self.format stringFromDate:[image.assetDate dateByAddingTimeInterval:timeDelta]]
+                                          burstId:burstId
+                                         fileName:fileName
+                                            width:image.dimensions.width
+                                           height:image.dimensions.height];
                 }
             }
                                failureBlock:^(NSError *error) {
@@ -982,11 +999,11 @@ typedef enum : NSUInteger {
     
     if (self.dateEditingMode == editingNominal) {
         self.nominalDate = date;
-        [self.nominalButton setTitle:[self.parser stringFromDate:date] forState:UIControlStateNormal];
+        [self.nominalButton setTitle:[self.humanFormat stringFromDate:date] forState:UIControlStateNormal];
     }
     else {
         self.actualDate = date;
-        [self.actualButton setTitle:[self.parser stringFromDate:date] forState:UIControlStateNormal];
+        [self.actualButton setTitle:[self.humanFormat stringFromDate:date] forState:UIControlStateNormal];
     }
     [self enableDoneButtonIfNecessary];
 }
@@ -1002,7 +1019,7 @@ typedef enum : NSUInteger {
     
     NSString * dateString = record[@"actual_mark_time"];
     self.actualDate = [self.format dateFromString:dateString];
-    [self.actualButton setTitle:[self.parser stringFromDate:self.actualDate] forState:UIControlStateNormal];
+    [self.actualButton setTitle:[self.humanFormat stringFromDate:self.actualDate] forState:UIControlStateNormal];
 
     
     // local get
