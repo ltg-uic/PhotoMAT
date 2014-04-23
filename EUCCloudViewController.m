@@ -74,5 +74,10 @@
     [self loadURL:[NSURL URLWithString:HOME_URL]];
 }
 
+#pragma mark - LoginChangedDelegate
+
+-(void)loginDidChangeToSchool:(NSString *)schoolName {
+    // do stuff here
+}
 
 @end

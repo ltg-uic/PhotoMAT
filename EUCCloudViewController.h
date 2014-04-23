@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EUCUserViewController.h"
 
-@interface EUCCloudViewController : UIViewController <UIWebViewDelegate>
+@interface EUCCloudViewController : UIViewController <UIWebViewDelegate, EUCLoginChangedDelegate>
 
 @property(weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property(weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
