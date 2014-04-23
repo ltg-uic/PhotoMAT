@@ -58,7 +58,7 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UILabel *downloadStatus;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UILabel *burstStatus;
-@property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 
 
@@ -171,10 +171,10 @@ typedef enum : NSUInteger {
     EUCDatabase * db = [EUCDatabase sharedInstance];
     NSDictionary * settings = db.settings;
     if ([settings[@"school_id"] isEqualToNumber:@3]) {
-        self.title.text = @"Camera Name";
+        self.titleLabel.text = @"Camera Name";
     }
     else {
-        self.title.text = @"Deployment Title";
+        self.titleLabel.text = @"Deployment Title";
     }
     
 

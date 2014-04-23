@@ -21,7 +21,7 @@
                 <outlet property="editView" destination="WmK-qE-Jwf" id="VMx-Vk-1Cv"/>
                 <outlet property="notes" destination="5bj-Qu-PeV" id="Kn3-rs-7xl"/>
                 <outlet property="shortName" destination="LRj-mf-HpL" id="qyI-Jt-iUd"/>
-                <outlet property="title" destination="WDu-Rj-mch" id="HAP-Y1-uGC"/>
+                <outlet property="titleLabel" destination="WDu-Rj-mch" id="AAj-MG-Ltd"/>
                 <outlet property="trapNumber" destination="pTZ-p1-Z21" id="spA-Tu-6SP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
