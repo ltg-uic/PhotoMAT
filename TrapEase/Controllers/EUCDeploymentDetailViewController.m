@@ -125,6 +125,19 @@ typedef enum : NSUInteger {
     return self;
 }
 
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    NSDictionary * settings = db.settings;
+    if ([settings[@"schoolId"] intValue] == 3) {
+        self.titleLabel.text = @"Camera Name";
+    }
+    else {
+        self.titleLabel.text = @"Deployment Title";
+    }
+}
+    
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -170,12 +183,13 @@ typedef enum : NSUInteger {
     
     EUCDatabase * db = [EUCDatabase sharedInstance];
     NSDictionary * settings = db.settings;
-    if ([settings[@"school_id"] isEqualToNumber:@3]) {
+    if ([settings[@"schoolId"] intValue] == 3) {
         self.titleLabel.text = @"Camera Name";
     }
     else {
         self.titleLabel.text = @"Deployment Title";
     }
+    
     
 
 }
@@ -1059,7 +1073,16 @@ typedef enum : NSUInteger {
                              ([self.importedBursts count] == 1)?@"" : @"s"];
     [self.deploymentImages reloadData];
     
+    NSDictionary * settings = db.settings;
+    if ([settings[@"schoolId"] intValue] == 3) {
+        self.titleLabel.text = @"Camera Name";
+    }
+    else {
+        self.titleLabel.text = @"Deployment Title";
+    }
     
+    
+
 }
 
 -(void) populateFromDictionary: (NSDictionary *) dictionary {
