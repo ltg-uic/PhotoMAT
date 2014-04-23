@@ -5,36 +5,48 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>9736A6CF-9077-4863-8214-75A7B6895FB8</string>
+	<string>5A0D3968-B35A-4D78-B1F6-99A79364CB22</string>
 	<key>IDESourceControlProjectName</key>
 	<string>TrapEase</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>01F8D92A-BF86-46C2-8ED8-383DF618A96A</key>
-		<string>https://github.com/ltg-uic/PhotoMAT.git</string>
+		<key>5696C0E1-BEC2-4A2A-B836-B92426BA0A6E</key>
+		<string>ssh://bitbucket.org/euclidsoftware/trapease.git</string>
+		<key>ACCF69DC-8234-48C8-B0E3-0A506E081DEB</key>
+		<string>https://github.com/BradLarson/GPUImage</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>TrapEase.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>01F8D92A-BF86-46C2-8ED8-383DF618A96A</key>
+		<key>5696C0E1-BEC2-4A2A-B836-B92426BA0A6E</key>
 		<string>..</string>
+		<key>ACCF69DC-8234-48C8-B0E3-0A506E081DEB</key>
+		<string>../Vendor/GPUImage/GPUImage</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/ltg-uic/PhotoMAT.git</string>
+	<string>ssh://bitbucket.org/euclidsoftware/trapease.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>01F8D92A-BF86-46C2-8ED8-383DF618A96A</string>
+	<string>5696C0E1-BEC2-4A2A-B836-B92426BA0A6E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>01F8D92A-BF86-46C2-8ED8-383DF618A96A</string>
+			<string>ACCF69DC-8234-48C8-B0E3-0A506E081DEB</string>
 			<key>IDESourceControlWCCName</key>
-			<string>PhotoMAT</string>
+			<string>GPUImage</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5696C0E1-BEC2-4A2A-B836-B92426BA0A6E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TrapEase</string>
 		</dict>
 	</array>
 </dict>

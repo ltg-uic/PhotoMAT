@@ -222,6 +222,7 @@
     EUCDatabase *db = [EUCDatabase sharedInstance];
     db.settings = settings;
     [EUCNetwork updatePersonId:settings[@"personId"]];
+    [self.loginChangedDelegate loginDidChangeToSchool:self.schools[self.schoolRow][@"name"]];
 
 }
 

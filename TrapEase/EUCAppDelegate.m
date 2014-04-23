@@ -87,6 +87,8 @@
     master.detailViewController = self.detail;
     master.setChangedDelegate = label;
     self.detail.master = master;
+    
+    user.loginChangedDelegate = cloud;
 
     dsvc.viewControllers = @[master, self.detail];
 
