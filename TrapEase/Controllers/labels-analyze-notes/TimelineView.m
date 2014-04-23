@@ -212,4 +212,20 @@ int textWidth = 80;
 
 }
 
+- (NSString *)getDateForTouchPointXY:(CGPoint)point withStartDate:(NSDate *)startDate {
+
+//    clickX = x-coordinate of the location you touch (ignore y)
+//    selectedTime = startingTime + (clickX-PixelL) / lineLength * totalTime
+//    popover (selectedTime)
+
+
+    NSTimeInterval selectedTime = [startDate timeIntervalSince1970] + ((point.x - xposStart) / lineLength) * abs(totalTime);
+
+
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:selectedTime];
+
+    NSString *formattedDateString = [dateformat stringFromDate:date];
+    return formattedDateString;
+
+}
 @end

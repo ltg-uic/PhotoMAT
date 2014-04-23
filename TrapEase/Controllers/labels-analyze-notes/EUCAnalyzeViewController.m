@@ -15,6 +15,7 @@
 #import "AnalyzeItem.h"
 #import "AnalyzeLabelUIView.h"
 #import "AnalyzeDatePopoverViewController.h"
+#import "TimelineUIViewController.h"
 
 
 @interface EUCAnalyzeViewController () <UIPopoverControllerDelegate> {
@@ -27,6 +28,8 @@
     NSDate *orginalEndDate;
     EUCAppDelegate *appDelegate;
     UIPopoverController *popoverController;
+    UIPopoverController *errorPopoverController;
+
     NSDateFormatter *dateformat;
 
 
@@ -173,6 +176,9 @@
             [labelUIView displayAnalyzeItem:a withStartDate:startDate endDate:endDate];
             CGRect newFrame = CGRectMake(5, y, labelUIView.frame.size.width, labelUIView.frame.size.width);
             labelUIView.frame = newFrame;
+            UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+            pgr.maximumNumberOfTouches = 1;
+            [labelUIView.timeliveView addGestureRecognizer:pgr];
             [_completeTimelineView addSubview:labelUIView];
 
 
@@ -270,13 +276,63 @@
 }
 
 - (void)changeButtonTitleWithButton:(UIButton *)button andStringDate:(NSString *)newDate {
-
-
     [button setTitle:newDate forState:UIControlStateNormal];
     [button setTitle:newDate forState:UIControlStateNormal];
     [button setTitle:newDate forState:UIControlStateHighlighted];
-
 }
 
+
+- (void)enableImageViewGesturesOnTimelineView:(UIView *)timelineView {
+    UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    [timelineView addGestureRecognizer:pgr];
+}
+
+- (void)handlePan:(UIPanGestureRecognizer *)gesture {
+
+
+    static CGRect originalFrame;
+
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        // CGPoint translate = [gesture translationInView:gesture.view.superview];
+        CGPoint translate = [gesture locationInView:gesture.view];
+        TimelineUIViewController *content = [[TimelineUIViewController alloc] initWithNibName:@"TimelineUIViewController" bundle:nil];
+
+
+        errorPopoverController = [[UIPopoverController alloc]
+                initWithContentViewController:content];
+
+        content.modalInPopover = YES;
+        // content.messageLabel.text = @"hello";
+
+        TimelineView *timelineView = (TimelineView *) gesture.view;
+
+        NSString *touchDate = [timelineView getDateForTouchPointXY:CGPointMake(translate.x, translate.y) withStartDate:startDate];
+
+        content.dateLabel.text = touchDate;
+        [errorPopoverController setPopoverContentSize:CGSizeMake(196, 35) animated:true];
+        [errorPopoverController presentPopoverFromRect:CGRectMake(translate.x, translate.y, 1, 1) inView:gesture.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+
+    }
+    else if (gesture.state == UIGestureRecognizerStateChanged) {
+        // CGPoint translate = [gesture translationInView:gesture.view.superview];
+        CGPoint translate = [gesture locationInView:gesture.view];
+
+        TimelineView *timelineView = (TimelineView *) gesture.view;
+
+        TimelineUIViewController *content = errorPopoverController.contentViewController;
+        NSString *touchDate = [timelineView getDateForTouchPointXY:CGPointMake(translate.x, translate.y) withStartDate:startDate];
+
+        content.dateLabel.text = touchDate;
+
+        [errorPopoverController presentPopoverFromRect:CGRectMake(translate.x, translate.y, 1, 1) inView:gesture.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+
+
+    } else if (gesture.state == UIGestureRecognizerStateEnded) {
+        NSLog(@"JOY");
+        [errorPopoverController dismissPopoverAnimated:true];
+    } else if (gesture.state == UIGestureRecognizerStateCancelled) {
+        NSLog(@"LOL");
+    }
+}
 
 @end
