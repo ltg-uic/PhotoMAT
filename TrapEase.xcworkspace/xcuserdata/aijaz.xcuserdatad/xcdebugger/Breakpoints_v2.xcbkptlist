@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TrapEase/Controllers/EUCDeploymentDetailViewController.m"
-            timestampString = "419911075.639279"
+            timestampString = "419912348.855038"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1037"
-            endingLineNumber = "1037"
+            startingLineNumber = "1040"
+            endingLineNumber = "1040"
             landmarkName = "-loadDeployment:"
             landmarkType = "5">
          </BreakpointContent>
@@ -176,6 +176,22 @@
             startingLineNumber = "57"
             endingLineNumber = "57"
             landmarkName = "-loadData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TrapEase/Controllers/EUCDeploymentDetailViewController.m"
+            timestampString = "419912194.2434"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1020"
+            endingLineNumber = "1020"
+            landmarkName = "-loadDeployment:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

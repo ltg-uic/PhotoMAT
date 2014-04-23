@@ -1019,7 +1019,10 @@ typedef enum : NSUInteger {
     
     NSString * dateString = record[@"actual_mark_time"];
     self.actualDate = [self.format dateFromString:dateString];
+    self.actualButton.enabled = YES;
     [self.actualButton setTitle:[self.humanFormat stringFromDate:self.actualDate] forState:UIControlStateNormal];
+    self.actualButton.enabled = NO;
+    [self.actualButton setNeedsDisplay];
 
     
     // local get
