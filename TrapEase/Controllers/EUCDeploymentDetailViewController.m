@@ -58,6 +58,7 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UILabel *downloadStatus;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UILabel *burstStatus;
+@property (weak, nonatomic) IBOutlet UILabel *title;
 
 
 
@@ -166,6 +167,17 @@ typedef enum : NSUInteger {
 
     self.doneButton.enabled = NO;
     self.shortName.delegate = self;
+    
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    NSDictionary * settings = db.settings;
+    if ([settings[@"school_id"] isEqualToNumber:@3]) {
+        self.title.text = @"Camera Name";
+    }
+    else {
+        self.title.text = @"Deployment Title";
+    }
+    
+
 }
 
 - (void)didReceiveMemoryWarning
