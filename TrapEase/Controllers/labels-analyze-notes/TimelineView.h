@@ -15,4 +15,5 @@
 @property(nonatomic) NSDate *startDate;
 @property(nonatomic) NSDate *endDate;
 
+- (NSString *)getDateForTouchPointXY:(CGPoint)point withStartDate:(NSDate *)startDate;
 @end

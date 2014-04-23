@@ -12,6 +12,8 @@
 		702ACBC318F756760001C9D7 /* EUCCloudViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 702ACBC118F756760001C9D7 /* EUCCloudViewController.xib */; };
 		7043EAF81906106600BC16D8 /* AnalyzeDatePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7043EAF61906106600BC16D8 /* AnalyzeDatePopoverViewController.m */; };
 		7043EAF91906106600BC16D8 /* AnalyzeDatePopoverViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7043EAF71906106600BC16D8 /* AnalyzeDatePopoverViewController.xib */; };
+		705B9B7219075FCD00C003E8 /* TimelineUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 705B9B7019075FCD00C003E8 /* TimelineUIViewController.m */; };
+		705B9B7319075FCD00C003E8 /* TimelineUIViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 705B9B7119075FCD00C003E8 /* TimelineUIViewController.xib */; };
 		7080F7B718F743210087A66F /* EUCLabelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7AA18F743210087A66F /* EUCLabelViewController.m */; };
 		7080F7B818F743210087A66F /* EUCLabelViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7AB18F743210087A66F /* EUCLabelViewController.xib */; };
 		7080F7BA18F743210087A66F /* TagList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7AF18F743210087A66F /* TagList.m */; };
@@ -186,6 +188,9 @@
 		7043EAF51906106600BC16D8 /* AnalyzeDatePopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeDatePopoverViewController.h; sourceTree = "<group>"; };
 		7043EAF61906106600BC16D8 /* AnalyzeDatePopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeDatePopoverViewController.m; sourceTree = "<group>"; };
 		7043EAF71906106600BC16D8 /* AnalyzeDatePopoverViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalyzeDatePopoverViewController.xib; sourceTree = "<group>"; };
+		705B9B6F19075FCD00C003E8 /* TimelineUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineUIViewController.h; sourceTree = "<group>"; };
+		705B9B7019075FCD00C003E8 /* TimelineUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineUIViewController.m; sourceTree = "<group>"; };
+		705B9B7119075FCD00C003E8 /* TimelineUIViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimelineUIViewController.xib; sourceTree = "<group>"; };
 		7080F7A918F743210087A66F /* EUCLabelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUCLabelViewController.h; sourceTree = "<group>"; };
 		7080F7AA18F743210087A66F /* EUCLabelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUCLabelViewController.m; sourceTree = "<group>"; };
 		7080F7AB18F743210087A66F /* EUCLabelViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCLabelViewController.xib; sourceTree = "<group>"; };
@@ -426,6 +431,9 @@
 				7043EAF51906106600BC16D8 /* AnalyzeDatePopoverViewController.h */,
 				7043EAF61906106600BC16D8 /* AnalyzeDatePopoverViewController.m */,
 				7043EAF71906106600BC16D8 /* AnalyzeDatePopoverViewController.xib */,
+				705B9B6F19075FCD00C003E8 /* TimelineUIViewController.h */,
+				705B9B7019075FCD00C003E8 /* TimelineUIViewController.m */,
+				705B9B7119075FCD00C003E8 /* TimelineUIViewController.xib */,
 			);
 			name = popover;
 			sourceTree = "<group>";
@@ -936,6 +944,7 @@
 				B4E6BE4E18DEA6DE00AC9D84 /* thumbs-down.png in Resources */,
 				B4E6BE1318DE005500AC9D84 /* hiking.png in Resources */,
 				7080F7C118F743560087A66F /* sample.jpg in Resources */,
+				705B9B7319075FCD00C003E8 /* TimelineUIViewController.xib in Resources */,
 				B4E6BE8318DFD47700AC9D84 /* EUCDeploymentMasterViewController.xib in Resources */,
 				B4E6BE5018DEA6DE00AC9D84 /* thumbs-up.png in Resources */,
 				B4E6BE9418E13C5800AC9D84 /* thumbs-up-selected@2x.png in Resources */,
@@ -1081,6 +1090,7 @@
 				B4E6BD6318DDC30C00AC9D84 /* EUCImportViewController.m in Sources */,
 				B43658E018E5213F0017672E /* EUCImageUtilities.m in Sources */,
 				B4E6BE5D18DF9F9800AC9D84 /* EUCDatabase.m in Sources */,
+				705B9B7219075FCD00C003E8 /* TimelineUIViewController.m in Sources */,
 				7043EAF81906106600BC16D8 /* AnalyzeDatePopoverViewController.m in Sources */,
 				C0A7D560941CFF15C5CA860E /* AnalyzeItem.m in Sources */,
 				C0A7D4B3661485EED050690D /* AnalyzeLabelUIView.m in Sources */,
