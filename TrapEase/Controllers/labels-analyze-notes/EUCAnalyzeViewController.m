@@ -23,8 +23,11 @@
     NSInteger deploymentId;
     NSDate *startDate;
     NSDate *endDate;
+    NSDate *orginalStartDate;
+    NSDate *orginalEndDate;
     EUCAppDelegate *appDelegate;
     UIPopoverController *popoverController;
+    NSDateFormatter *dateformat;
 
 
 }
@@ -49,10 +52,17 @@
 }
 
 - (void)viewDidLoad {
+    [self.view addSubview:_completeTimelineView];
     //[self loadData];
 }
 
 - (void)loadData {
+
+    NSArray *subviews = [_completeTimelineView subviews];
+
+    for (UIView *v in subviews) {
+        [v removeFromSuperview];
+    }
 
     startDate = nil;
     endDate = nil;
@@ -64,9 +74,10 @@
     if (startDate == nil && endDate == nil ) {
         EUCBurst *firstBurst = [bursts firstObject];
         startDate = firstBurst.date;
-
+        orginalStartDate = firstBurst.date;
         EUCBurst *lastBurst = [bursts lastObject];
         endDate = lastBurst.date;
+        orginalEndDate = lastBurst.date;
 
         [self setButtonLabelDateStartDate:startDate withEndDate:endDate];
     }
@@ -87,8 +98,6 @@
 
         if (labels != nil && labels.count > 0) {
 
-            _errorLabel.hidden = YES;
-
             if (burst.labels != nil ) {
                 for (EUCLabel *label in burst.labels) {
 
@@ -101,7 +110,12 @@
                         analyzeItem = foundObjs[0];
                         [analyzeItem addBurst:burst];
                         int index = [analyzeItems indexOfObject:analyzeItem];
-                        [analyzeItems replaceObjectAtIndex:index withObject:analyzeItem];
+
+                        if (analyzeItem != nil && index >= 0) {
+                            [analyzeItems replaceObjectAtIndex:index withObject:analyzeItem];
+                        }
+
+
                     } else {
                         analyzeItem = [[AnalyzeItem alloc] init];
                         analyzeItem.labelName = label.name;
@@ -111,21 +125,45 @@
 
                 }
             }
-        } else {
-            _errorLabel.hidden = NO;
-        }
-    }
 
+        }
+
+    }
     [self refreshViews];
 
+
+}
+
+- (void)displayLabeling:(BOOL)shouldShow {
+    _startDateButton.hidden = !shouldShow;
+    _endDateButton.hidden = !shouldShow;
+    _timelineLabel.hidden = !shouldShow;
+    _countLabel.hidden = !shouldShow;
+    _labelLabel.hidden = !shouldShow;
+    _startTimeLabel.hidden = !shouldShow;
+    _endTimeLabel.hidden = !shouldShow;
 }
 
 - (void)refreshViews {
 
+
+    NSArray *subviews = [_completeTimelineView subviews];
+
+    for (UIView *v in subviews) {
+        [v removeFromSuperview];
+    }
+
     if (analyzeItems != nil && analyzeItems.count > 0) {
 
-        int y = 50;
-        int offset = 90;
+
+        int y = 0;
+        int offset = 47;
+
+
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"labelName" ascending:YES];
+        [analyzeItems sortUsingDescriptors:[NSArray arrayWithObject:sort]];
+
+
         for (AnalyzeItem *a in analyzeItems) {
 
 
@@ -133,23 +171,23 @@
 
 
             [labelUIView displayAnalyzeItem:a withStartDate:startDate endDate:endDate];
-            [_scrollView addSubview:labelUIView];
-            CGRect newFrame = CGRectMake(6, y, labelUIView.frame.size.width, labelUIView.frame.size.width);
+            CGRect newFrame = CGRectMake(5, y, labelUIView.frame.size.width, labelUIView.frame.size.width);
             labelUIView.frame = newFrame;
+            [_completeTimelineView addSubview:labelUIView];
+
 
             y = y + offset;
 
         }
 
-        float maxHeight = 0;
+        [self displayLabeling:YES];
+        _errorLabel.hidden = YES;
+        [self.view setNeedsDisplay];
 
-        for (UIView *v in [_scrollView subviews]) {
-            if (v.frame.origin.x + v.frame.size.height > maxHeight)
-                maxHeight = v.frame.origin.x + v.frame.size.height;
-        }
-
-        self.scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width, maxHeight + 5);
-
+    } else {
+        [self displayLabeling:NO];
+        _errorLabel.hidden = NO;
+        [self.view setNeedsDisplay];
     }
 
 
@@ -185,7 +223,7 @@
 
     //popoverController = self;
     content.somePopoverController = popoverController;
-
+    content.orginalDate = orginalStartDate;
     content.datePicker.maximumDate = [endDate dateByAddingTimeInterval:-60];
     content.datePicker.date = startDate;
     content.modalInPopover = YES;
@@ -215,6 +253,7 @@
     content.somePopoverController = popoverController;
 
     content.datePicker.minimumDate = [startDate dateByAddingTimeInterval:+60];
+    content.orginalDate = orginalEndDate;
     content.datePicker.date = endDate;
     content.modalInPopover = YES;
     void (^finishedHandler)(NSDate *) = ^(NSDate *newDate) {
@@ -225,6 +264,7 @@
         [self refreshViews];
 
     };
+    content.finishedHandler = finishedHandler;
     [popoverController setPopoverContentSize:CGSizeMake(250, 240) animated:true];
     [popoverController presentPopoverFromRect:_endDateButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }

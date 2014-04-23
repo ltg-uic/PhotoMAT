@@ -45,4 +45,12 @@
 
 
 }
+
+- (IBAction)cancelButton:(id)sender {
+    [_somePopoverController dismissPopoverAnimated:true];
+}
+
+- (IBAction)resetButton:(id)sender {
+    _datePicker.date = _orginalDate;
+}
 @end

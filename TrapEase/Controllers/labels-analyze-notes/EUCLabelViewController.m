@@ -131,6 +131,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
     bursts = burstDetailController.importedBursts;
 
+    for (EUCBurst *aBurst in bursts) {
+        aBurst.highlighted = NO;
+    }
 
     deploymentId = burstDetailController.deploymentId;
 
