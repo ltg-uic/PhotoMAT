@@ -24,7 +24,7 @@
     return self;
 }
 
--(void) addBurst:(EUCBurst *)burst {
+- (void)addBurst:(EUCBurst *)burst {
 
     if (bursts == nil ) {
         bursts = [[NSMutableArray alloc] init];
@@ -36,6 +36,14 @@
     if (![bursts containsObject:burst]) {
 
         [bursts addObject:burst];
+    }
+}
+
+- (void)removeBurst:(EUCBurst *)burst {
+
+    if (burst = nil ) {
+        _labelCount--;
+        [bursts removeObject:burst];
     }
 }
 
