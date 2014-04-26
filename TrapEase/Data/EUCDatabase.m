@@ -120,6 +120,30 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     // create the label table if it's not already there
     [self createLabelTableIfNecessary];
+    [self fixImageFilenames];
+}
+
+-(void) fixImageFilenames {
+    NSString * sql = @"SELECT id from image order by id";
+    FMResultSet * rs = [self.db executeQuery:sql];
+    NSString * updateSql = @"UPDATE image set file_name=? where id=?";
+    while ([rs next]) {
+        NSInteger imageId = [rs intForColumnIndex:0];
+        NSString * fixedFileName = [EUCFileSystem fileNameForImageWithId:imageId];
+        [self.db executeUpdate:updateSql, fixedFileName, @(imageId)];
+    }
+    [rs close];
+    
+    sql = @"SELECT id from deployment_picture order by id";
+    rs = [self.db executeQuery:sql];
+    updateSql = @"UPDATE deployment_picture set file_name=? where id=?";
+    while ([rs next]) {
+        NSInteger imageId = [rs intForColumnIndex:0];
+        NSString * fixedFileName = [EUCFileSystem fileNameForDeploymentPictureWithId:imageId];
+        [self.db executeUpdate:updateSql, fixedFileName, @(imageId)];
+    }
+    [rs close];
+
 }
 
 -(void) createLabelTableIfNecessary {
@@ -261,7 +285,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     
     if (school[@"class"] != [NSNull null]) {
         for (NSDictionary * classRoom in school[@"class"]) {
-            [self saveClass: classRoom];
+            [self saveClass: classRoom] ;
         }
     }
 }
