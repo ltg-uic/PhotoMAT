@@ -79,7 +79,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "423"
             endingLineNumber = "423"
-            landmarkName = "-getDeploymentRecord:"
+            landmarkName = "-saveDeployment:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -177,6 +177,52 @@
             endingLineNumber = "1046"
             landmarkName = "-loadDeployment:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TrapEase/Controllers/EUCSelectViewController.m"
+            timestampString = "420241799.056003"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "-createBurstGroups"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EUCSelectViewController createBurstGroups]"
+                  moduleName = "PhotoMat"
+                  urlString = "file:///Users/aijaz/CocoaApps/TrapEase/TrapEase/Controllers/EUCSelectViewController.m"
+                  timestampString = "420241285.309611"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "696">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__44-[EUCSelectViewController createBurstGroups]_block_invoke_2"
+                  moduleName = "PhotoMat"
+                  urlString = "file:///Users/aijaz/CocoaApps/TrapEase/TrapEase/Controllers/EUCSelectViewController.m"
+                  timestampString = "420241285.309913"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "79">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
