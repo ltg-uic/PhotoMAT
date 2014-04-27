@@ -588,6 +588,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         burst.hasBeenVisited = YES;
         burst.highlighted = YES;
         bursts[burstIndex] = burst;
+        highlightedImageIndex = 0;
         [self updateTimelineWithBurstHighlightingBursts:bursts];
 
         [self updatePhotoLabels:burst];
@@ -603,6 +604,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
         if (wasPlaying)
             [self playAnimation];
+
 
     }
 }
@@ -642,6 +644,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         EUCBurst *burst = bursts[burstIndex];
         [burst setHasBeenVisited: YES];
         burst.highlighted = YES;
+        highlightedImageIndex = 0;
         bursts[burstIndex] = burst;
 
         [self updatePhotoLabels:burst];
@@ -660,8 +663,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         if (wasPlaying)
             [self playAnimation];
 
-    }
 
+    }
+    
 }
 
 - (void)updateTimelineWithBurstHighlightingBursts:(NSMutableArray *)array {

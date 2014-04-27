@@ -22,6 +22,8 @@ extern CGFloat defaultWideness;
 @property (strong, nonatomic) NSMutableArray *currentBurstSubIndexes;
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) NSArray *sortedArrayOfImages;
+
 @end
 
 @implementation EUCSelectViewController
@@ -50,7 +52,24 @@ extern CGFloat defaultWideness;
     
     NSTimeInterval burstDelta = 20;
     
+    NSMutableArray * unsortedArray = [NSMutableArray arrayWithCapacity:64];
+
     [self.group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+        if (asset != nil) {
+            [unsortedArray addObject:asset];
+        }
+    }];
+    
+    self.sortedArrayOfImages = [unsortedArray sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        ALAsset * first = (ALAsset *) a;
+        ALAsset * second = (ALAsset *) b;
+        NSDate * firstDate = [first valueForProperty:ALAssetPropertyDate];
+        NSDate * secondDate = [second valueForProperty:ALAssetPropertyDate];
+        return [firstDate compare:secondDate];
+    }];
+
+    NSUInteger index = 0;
+    for (ALAsset * asset in self.sortedArrayOfImages) {
         if (asset != nil) {
             if (burstIndex == -1) {
                 burstIndex++;
@@ -60,7 +79,7 @@ extern CGFloat defaultWideness;
                 EUCImage * image = [[EUCImage alloc] initWithIndex:index andAsset:asset];
                 [self.bursts addObject:burst];
                 [burst.images addObject:image];
-
+                
                 lastDate = image.assetDate;
             }
             else {
@@ -86,8 +105,10 @@ extern CGFloat defaultWideness;
                     lastDate = image.assetDate;
                 }
             }
+            index++;
         }
-    }];
+        
+    }
     
     self.currentBurstSubIndexes = [NSMutableArray arrayWithCapacity:[self.bursts count]];  // contains subIndexes
     for (NSInteger i = 0; i < [self.bursts count]; i++) {
@@ -154,39 +175,34 @@ extern CGFloat defaultWideness;
     EUCBurst * burst = self.bursts[indexPath.row];
     EUCImage * image = burst.images[subIndex];
     NSInteger assetIndex = image.index;
-        
-    [self.group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:assetIndex]
-                                 options:0
-                              usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-                                  if (result != nil && index != NSNotFound) {
-                                      dispatch_async(self.backgroundQueue, ^(void) {
-                                          dispatch_async(dispatch_get_main_queue(), ^(void) {
-                                              UIImage * image = [UIImage imageWithCGImage:[result aspectRatioThumbnail]];
-                                              CGFloat wideness = 1.0*image.size.width/image.size.height;
-                                              CGSize size;
-                                              
-                                              if (wideness > defaultWideness) {
-                                                  size.width = 314;
-                                                  // width - height
-                                                  // 314
-                                                  size.height = 314/wideness;
-                                              }
-                                              else {
-                                                  size.height = 226;
-                                                  // width - height
-                                                  //         226
-                                                  size.width = 226 * wideness;
-                                              }
-                                              UIImage * resizedImage = [self imageWithImage:image scaledToSize:size];
-                                              cell.imageView.image = resizedImage;
-                                              cell.indexPath = indexPath;
-                                              cell.parentViewController = self;
-                                              [self configureSelectedForCell: cell atIndexPath:indexPath];
-                                              
-                                          });
-                                      });
-                                  }
-                              }];
+    
+    ALAsset * asset = self.sortedArrayOfImages[assetIndex];
+    dispatch_async(self.backgroundQueue, ^(void) {
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            UIImage * image = [UIImage imageWithCGImage:[asset aspectRatioThumbnail]];
+            CGFloat wideness = 1.0*image.size.width/image.size.height;
+            CGSize size;
+            
+            if (wideness > defaultWideness) {
+                size.width = 314;
+                // width - height
+                // 314
+                size.height = 314/wideness;
+            }
+            else {
+                size.height = 226;
+                // width - height
+                //         226
+                size.width = 226 * wideness;
+            }
+            UIImage * resizedImage = [self imageWithImage:image scaledToSize:size];
+            cell.imageView.image = resizedImage;
+            cell.indexPath = indexPath;
+            cell.parentViewController = self;
+            [self configureSelectedForCell: cell atIndexPath:indexPath];
+            
+        });
+    });
 }
 
 -(void) configureSelectedForCell: (EUCSelectCell *) cell atIndexPath:(NSIndexPath *) indexPath {
