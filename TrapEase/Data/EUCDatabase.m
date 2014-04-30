@@ -711,6 +711,9 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [rs close];
     }
     
+    [self.db executeUpdate:@"DROP TABLE depIds"];
+
+    
     return bursts;
 }
 
