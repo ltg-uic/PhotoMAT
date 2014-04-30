@@ -7,6 +7,13 @@
 //
 
 #import "EUCDeploymentCell.h"
+#import "EUCDeploymentMasterViewController.h"
+
+@interface EUCDeploymentCell ()
+
+@property (weak, nonatomic) IBOutlet UIButton *selectButton;
+@end
+
 
 @implementation EUCDeploymentCell
 
@@ -15,6 +22,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        
     }
     return self;
 }
@@ -29,5 +37,28 @@
 */
 
 - (IBAction)toggleSelected:(id)sender {
+    BOOL selected = NO;
+    if (self.master.selectedStatusBySetId[@(self.setId)] == nil) {
+        self.master.selectedStatusBySetId[@(self.setId)] = @YES;
+        selected = YES;
+    }
+    else if ([self.master.selectedStatusBySetId[@(self.setId)] isEqual:@(NO)]) {
+        self.master.selectedStatusBySetId[@(self.setId)] = @YES;
+        selected = YES;
+    }
+    else if ([self.master.selectedStatusBySetId[@(self.setId)] isEqual:@(YES)]) {
+        self.master.selectedStatusBySetId[@(self.setId)] = @NO;
+        selected = NO;
+    }
+    
+    if (selected) {
+        [self.selectButton setImage:[UIImage imageNamed:@"thumbs-up-selected"] forState:UIControlStateNormal];
+    }
+    else {
+        [self.selectButton setImage:[UIImage imageNamed:@"thumbs-up"] forState:UIControlStateNormal];
+    }
+    
 }
+
+
 @end

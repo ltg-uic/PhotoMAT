@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class EUCDeploymentMasterViewController;
+
 @interface EUCDeploymentCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *button;
 - (IBAction)toggleSelected:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *school;
 @property (weak, nonatomic) IBOutlet UILabel *date;
-@property (assign, nonatomic) BOOL included;
+@property (assign, nonatomic) NSInteger setId;
+
+
+@property (strong, nonatomic) EUCDeploymentMasterViewController *master;
+
 @end

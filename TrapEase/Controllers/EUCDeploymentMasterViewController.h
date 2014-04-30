@@ -22,6 +22,8 @@
 
 @property(strong, nonatomic) NSArray *deployments;
 
+@property (strong, nonatomic) NSMutableDictionary * selectedStatusBySetId;
+
 
 @property(strong, nonatomic) EUCDeploymentDetailViewController *detailViewController;
 @property(weak, nonatomic) id <SetChangedDelegate> setChangedDelegate;
@@ -30,4 +32,10 @@
 - (IBAction)handleAdd:(id)sender;
 
 - (IBAction)handleRefresh:(id)sender;
+
+-(NSInteger) numberOfSelectedSets;
+-(NSSet *) selectedSets;
+
+
+
 @end

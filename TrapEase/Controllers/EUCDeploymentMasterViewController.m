@@ -22,6 +22,7 @@
     if (self) {
         // Custom initialization
         self.deployments = [[NSMutableArray alloc] initWithCapacity:64];
+        self.selectedStatusBySetId = [NSMutableDictionary dictionaryWithCapacity:64];
     }
     return self;
 }
@@ -90,6 +91,8 @@
     cell.name.text = [NSString stringWithFormat:@"%@ - %@", deployment[@"person_name"], deployment[@"short_name"]];
     cell.school.text = [NSString stringWithFormat:@"%@, %@", deployment[@"school_name"], deployment[@"class_name"]];
     cell.date.text = deployment[@"date"];
+    cell.setId = [deployment[@"id"] integerValue];
+    cell.master = self;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -119,5 +122,20 @@
     [self.setSelectedDelegate currentDeploymentIdSetTo:[depId integerValue]];
 }
 
+#pragma mark - selected sets
+
+-(NSInteger)numberOfSelectedSets {
+    NSSet *resultSet = [self.selectedStatusBySetId keysOfEntriesPassingTest:^BOOL(id key, id obj, BOOL *stop) {
+        return [obj isEqual:@YES];
+    }];
+    return [resultSet count];
+}
+
+-(NSSet *) selectedSets {
+    return [self.selectedStatusBySetId keysOfEntriesPassingTest:^BOOL(id key, id obj, BOOL *stop) {
+        return [obj isEqual:@YES];
+    }];
+
+}
 
 @end
