@@ -35,6 +35,7 @@
 
 -(NSInteger) numberOfSelectedSets;
 -(NSSet *) selectedSets;
+-(NSArray *) burstsForSelectedSets;
 
 
 

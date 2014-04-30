@@ -138,4 +138,9 @@
 
 }
 
+-(NSArray *)burstsForSelectedSets {
+    EUCDatabase * db = [EUCDatabase sharedInstance];
+    return [db getBurstsForDeploymentsWithIds:[self selectedSets]];
+}
+
 @end

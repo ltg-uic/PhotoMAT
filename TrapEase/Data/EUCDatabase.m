@@ -672,6 +672,47 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
     return bursts;
 }
 
+-(NSMutableArray *)getBurstsForDeploymentsWithIds:(NSSet *)setOfIDs  {
+    NSDateFormatter * parser = [[NSDateFormatter alloc] init];
+    [parser setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z"];
+    [parser setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+
+    NSMutableArray * bursts = [[NSMutableArray alloc] initWithCapacity:128];
+    NSString * sql;
+    sql = @"CREATE TEMPORARY TABLE depIds (depId int)";
+    [self.db executeUpdate:sql];
+    
+    sql = @"insert into depIds (depId) values(?)";
+    for (NSNumber * number in setOfIDs) {
+        [self.db executeUpdate:sql, number];
+    }
+    
+    sql = @"Select id, burst_date from burst b join depIds i on b.deployment_id = i.depId order by id";
+    FMResultSet * rs = [self.db executeQuery:sql];
+    
+    while ([rs next]) {
+        EUCBurst * burst = [[EUCBurst alloc] init];
+        burst.burstId = [rs intForColumnIndex:0];
+        [bursts addObject:burst];
+    }
+    [rs close];
+    
+    sql = @"SELECT id, strftime('%Y-%m-%dT%H:%M:%S.000Z', image_date), file_name, width, height from image where burst_id=? order by id";
+    for (EUCBurst * burst in bursts) {
+        rs = [self.db executeQuery:sql, @(burst.burstId)];
+        burst.images = [NSMutableArray arrayWithCapacity:9];
+        while ([rs next]) {
+            EUCImage * image = [[EUCImage alloc] init];
+            image.filename = [rs stringForColumnIndex:2];
+            image.assetDate = [parser dateFromString:[rs stringForColumnIndex:1]];
+            image.dimensions = CGSizeMake([rs intForColumnIndex:3], [rs intForColumnIndex:4]);
+            [burst.images addObject:image];
+        }
+        [rs close];
+    }
+    
+    return bursts;
+}
 
 
 #pragma mark - labels

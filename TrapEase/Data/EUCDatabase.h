@@ -76,6 +76,7 @@
 -(NSMutableArray *) getDeploymentImagesForDeploymentWithId: (NSInteger) deploymentId;
 
 -(NSMutableArray *) getBurstForDeploymentWithId: (NSInteger) deploymentId withParser: (NSDateFormatter *) parser;
+-(NSMutableArray *) getBurstsForDeploymentsWithIds: (NSSet *) setOfIDs;
 
 
 #pragma mark - labels
