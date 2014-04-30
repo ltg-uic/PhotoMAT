@@ -7,14 +7,19 @@
 //
 
 #import "EUCCloudViewController.h"
+#import "EUCAppDelegate.h"
+#import "EUCSelectedSet.h"
 
-@interface EUCCloudViewController ()
-
+@interface EUCCloudViewController () {
+    EUCAppDelegate *appDelegate;
+}
 @end
 
 @implementation EUCCloudViewController
 
 #define HOME_URL @"http://ltg.evl.uic.edu:8080/"
+#define ICS_URL @"http://ltg.evl.uic.edu:8080/"
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -24,6 +29,9 @@
         self.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Resources", "Resources")
                                                         image:[UIImage imageNamed:@"cloud"]
                                                 selectedImage:nil];
+
+        appDelegate = (EUCAppDelegate *) [[UIApplication sharedApplication] delegate];
+
     }
     return self;
 }
@@ -32,7 +40,27 @@
 {
     [super viewDidLoad];
     _webView.delegate = self;
-    [self loadURL:[NSURL URLWithString:HOME_URL]];
+    [self selectURL];
+}
+
+//-(void)viewDidAppear:(BOOL)animated {
+//    [self viewDidAppear:animated];
+//}
+
+//-(void)viewWillAppear:(BOOL)animated {
+//    [self viewWillAppear:animated];
+//    [self selectURL];
+//}
+
+
+-(void)selectURL {
+        EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
+
+        if([[selectedSet schoolName] isEqualToString:@"ICS"]) {
+            [self loadURL:[NSURL URLWithString:ICS_URL]];
+        } else {
+            [self loadURL:[NSURL URLWithString:HOME_URL]];
+        }
 }
 
 - (void)didReceiveMemoryWarning

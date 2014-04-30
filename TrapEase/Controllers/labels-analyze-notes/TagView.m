@@ -48,6 +48,14 @@ static const CGFloat TagViewCornerHeight = 5.0;
     return self;
 }
 
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    state = TagViewStateNormal;
+    self.fontColor = [UIColor whiteColor];
+    [self setBackgroundColor:[UIColor clearColor]];
+    self.layer.cornerRadius = 5.0f;
+}
+
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
