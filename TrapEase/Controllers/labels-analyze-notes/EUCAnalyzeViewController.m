@@ -16,10 +16,11 @@
 #import "AnalyzeLabelUIView.h"
 #import "AnalyzeDatePopoverViewController.h"
 #import "TimelineUIViewController.h"
+#import "EUCDeploymentMasterViewController.h"
 
 
 @interface EUCAnalyzeViewController () <UIPopoverControllerDelegate> {
-    NSMutableArray *bursts;
+    NSArray *bursts;
     NSMutableArray *analyzeItems;
     NSInteger deploymentId;
     NSDate *startDate;
@@ -71,7 +72,7 @@
     endDate = nil;
 
     EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
-    bursts = burstDetailController.importedBursts;
+    bursts = [burstDetailController.master burstsForSelectedSets];
 
     //check the date
     if (startDate == nil && endDate == nil ) {

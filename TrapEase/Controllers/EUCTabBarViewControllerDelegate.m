@@ -13,6 +13,7 @@
 #import "EUCNetwork.h"
 #import "EUCTimeUtilities.h"
 #import "Toast+UIView.h"
+#import "EUCTabBarViewControllerDelegate.h"
 
 
 static BOOL DEV = NO;
@@ -33,15 +34,6 @@ static BOOL DEV = NO;
 #pragma mark - UITabBarControllerDelegate
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-//    if (viewController == self.snapshot) {
-//        UIImage * image = [EUCImageUtilities snapshotForWindow:self.window];
-//        EUCKnapsackViewController * snapshot = (EUCKnapsackViewController *) self.snapshot;
-//        snapshot.imageView.image = image;
-//        return YES;
-//    }
-//    else {
-//        return YES;
-//    }
     EUCDatabase *db = [EUCDatabase sharedInstance];
     NSDictionary *settings = db.settings;
     if ([settings[@"personId"] isEqualToNumber:@0]) {
@@ -53,16 +45,16 @@ static BOOL DEV = NO;
             (tabBarController.selectedViewController != self.snapshot)
             ) {
         UIImage *image = [EUCImageUtilities snapshotForWindow:self.window];
-//        EUCKnapsackViewController *snapshot = (EUCKnapsackViewController *) self.snapshot;
-//        snapshot.imageView.image = image;
-//        snapshot.savedImage = image;
         self.screenshotImage = image;
         [self save:nil];
         
         return NO;
     }
-    if (viewController == self.analyze ||
-            viewController == self.label) {
+    if (viewController == self.analyze) {
+        NSInteger numSelected = [self.master numberOfSelectedSets];
+        return (numSelected > 0);
+    }
+    else if (viewController == self.label) {
         return self.setSelected;
     }
 

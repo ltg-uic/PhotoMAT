@@ -9,10 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "EUCDeploymentMasterViewController.h"
 
+@class EUCDeploymentMasterViewController;
+
 @interface EUCTabBarViewControllerDelegate : NSObject <UITabBarControllerDelegate, SetChangedDelegate>
 @property(weak, nonatomic) UIViewController *snapshot;
 @property(weak, nonatomic) UIViewController *photos;
 @property(weak, nonatomic) UIWindow *window;
 @property(weak, nonatomic) UIViewController *analyze;
 @property(weak, nonatomic) UIViewController *label;
+@property (strong, nonatomic) EUCDeploymentMasterViewController *master;
+
 @end

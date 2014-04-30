@@ -105,6 +105,7 @@
     self.tabBarVCDelegate.photos = photos;
     self.tabBarVCDelegate.analyze = analyze;
     self.tabBarVCDelegate.label = label;
+    self.tabBarVCDelegate.master = master;
     self.homeViewController.delegate = self.tabBarVCDelegate;
     self.tabBarVCDelegate.window = self.window;
     master.setSelectedDelegate = self.tabBarVCDelegate;
