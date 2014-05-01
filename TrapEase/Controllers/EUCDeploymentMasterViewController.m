@@ -94,7 +94,6 @@
     cell.master = self;
     
     NSInteger setId = [deployment[@"id"] integerValue];
-    NSLog(@"setId in configure is %ld", (long) setId);
     
     BOOL cellSelected = [self.selectedStatusBySetId[@(setId)] boolValue];
     
@@ -145,7 +144,6 @@
     }
     
     NSInteger numSelected = [self numberOfSelectedSets];
-    NSLog(@"NumSelected = %ld", (long) numSelected);
 
     if (numSelected == 1) {
         NSSet * set = [self selectedSets];

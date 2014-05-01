@@ -1252,7 +1252,6 @@ typedef enum : NSUInteger {
     self.burstStatus.text = [NSString stringWithFormat:@"%ld burst%@ added", (unsigned long)[self.importedBursts count],
                              ([self.importedBursts count] == 1)?@"" : @"s"];
     
-    NSLog(@"array is %@", [self.master namesOfSelectedSets]);
 }
 
 
