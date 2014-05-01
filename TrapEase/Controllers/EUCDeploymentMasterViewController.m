@@ -32,7 +32,6 @@
     // Do any additional setup after loading the view from its nib.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
 
     [self.tableView registerNib:[UINib nibWithNibName:@"EUCDeploymentMasterCell" bundle:nil] forCellReuseIdentifier:@"deploymentMasterCell"];
 }
@@ -93,6 +92,23 @@
     cell.date.text = deployment[@"date"];
     cell.setId = [deployment[@"id"] integerValue];
     cell.master = self;
+    
+    NSInteger setId = [deployment[@"id"] integerValue];
+    NSLog(@"setId in configure is %ld", (long) setId);
+    
+    BOOL cellSelected = [self.selectedStatusBySetId[@(setId)] boolValue];
+    
+    if (cellSelected) {
+        cell.contentView.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
+//        cell.name.backgroundColor = [UIColor redColor];
+    }
+    else {
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+//        cell.name.backgroundColor = [UIColor blackColor];
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -103,31 +119,72 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *deployment = (NSDictionary *) self.deployments[indexPath.row];
+    
+    NSInteger setId = [deployment[@"id"] integerValue];
+    BOOL cellSelected = NO;
+    if (self.selectedStatusBySetId[@(setId)] == nil) {
+        self.selectedStatusBySetId[@(setId)] = @YES;
+        cellSelected = YES;
+    }
+    else if ([self.selectedStatusBySetId[@(setId)] isEqual:@(NO)]) {
+        self.selectedStatusBySetId[@(setId)] = @YES;
+        cellSelected = YES;
+    }
+    else if ([self.selectedStatusBySetId[@(setId)] isEqual:@(YES)]) {
+        self.selectedStatusBySetId[@(setId)] = @NO;
+        cellSelected = NO;
+    }
+    
+    EUCDeploymentCell * cell = (EUCDeploymentCell *)[tableView cellForRowAtIndexPath:indexPath];
+    
+    if (cellSelected) {
+        cell.contentView.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
+    }
+    else {
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+    }
+    
+    NSInteger numSelected = [self numberOfSelectedSets];
+    NSLog(@"NumSelected = %ld", (long) numSelected);
 
-    self.detailViewController.editViewVisible = YES;
-    self.detailViewController.updateMode = YES;
+    if (numSelected == 1) {
+        NSSet * set = [self selectedSets];
+        setId = [[set anyObject] integerValue];
+        
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"id = %@", @(setId)];
 
-    EUCSelectedSet *selected = [EUCSelectedSet sharedInstance];
-    selected.schoolName = deployment[@"school_name"];
-    selected.className = deployment[@"class_name"];
-    selected.groupName = deployment[@"person_name"];
-    selected.deploymentName = deployment[@"short_name"];
-    NSNumber *ownerId = deployment[@"person_id"];
-    selected.ownerId = [ownerId integerValue];
+        NSDictionary *deployment = (NSDictionary *) [self.deployments filteredArrayUsingPredicate: pred][0];
 
-
-    [self.detailViewController loadDeployment:deployment[@"id"]];
-    NSNumber *depId = deployment[@"id"];
-    [self.setChangedDelegate currentDeploymentIdSetTo:[depId integerValue]];
-    [self.setSelectedDelegate currentDeploymentIdSetTo:[depId integerValue]];
+        self.detailViewController.view.hidden = NO;
+        self.detailViewController.editViewVisible = YES;
+        self.detailViewController.updateMode = YES;
+        
+        EUCSelectedSet *selected = [EUCSelectedSet sharedInstance];
+        selected.schoolName = deployment[@"school_name"];
+        selected.className = deployment[@"class_name"];
+        selected.groupName = deployment[@"person_name"];
+        selected.deploymentName = deployment[@"short_name"];
+        NSNumber *ownerId = deployment[@"person_id"];
+        selected.ownerId = [ownerId integerValue];
+        
+        
+        [self.detailViewController loadDeployment:deployment[@"id"]];
+        NSNumber *depId = deployment[@"id"];
+        [self.setChangedDelegate currentDeploymentIdSetTo:[depId integerValue]];
+        [self.setSelectedDelegate currentDeploymentIdSetTo:[depId integerValue]];
+    }
+    else {
+        self.detailViewController.view.hidden = YES;
+    }
+    
+    [self.tableView reloadData];
 }
+
 
 #pragma mark - selected sets
 
 -(NSInteger)numberOfSelectedSets {
-    NSSet *resultSet = [self.selectedStatusBySetId keysOfEntriesPassingTest:^BOOL(id key, id obj, BOOL *stop) {
-        return [obj isEqual:@YES];
-    }];
+    NSSet *resultSet = [self selectedSets];
     return [resultSet count];
 }
 
@@ -135,7 +192,15 @@
     return [self.selectedStatusBySetId keysOfEntriesPassingTest:^BOOL(id key, id obj, BOOL *stop) {
         return [obj isEqual:@YES];
     }];
+    
+}
 
+// todo: write this
+-(NSSet *) namesOfSelectedSets {
+    return [self.selectedStatusBySetId keysOfEntriesPassingTest:^BOOL(id key, id obj, BOOL *stop) {
+        return [obj isEqual:@YES];
+    }];
+    
 }
 
 -(NSArray *)burstsForSelectedSets {

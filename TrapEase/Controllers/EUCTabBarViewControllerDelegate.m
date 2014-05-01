@@ -55,7 +55,8 @@ static BOOL DEV = NO;
         return (numSelected > 0);
     }
     else if (viewController == self.label) {
-        return self.setSelected;
+        NSInteger numSelected = [self.master numberOfSelectedSets];
+        return (numSelected == 1);
     }
 
     return YES;
