@@ -588,7 +588,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         burst.hasBeenVisited = YES;
         burst.highlighted = YES;
         bursts[burstIndex] = burst;
-        highlightedImageIndex = 0;
+
         [self updateTimelineWithBurstHighlightingBursts:bursts];
 
         [self updatePhotoLabels:burst];
@@ -597,10 +597,12 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
         _noteTextView.text = note;
 
-        [self addLabelsToDropOverlay:burst];
-
 
         BOOL wasPlaying = [self pauseAnimation];
+
+        [self addLabelsToDropOverlay:burst];
+
+        highlightedImageIndex = 0;
 
         if (wasPlaying)
             [self playAnimation];
@@ -644,9 +646,11 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
         EUCBurst *burst = bursts[burstIndex];
         [burst setHasBeenVisited: YES];
         burst.highlighted = YES;
-        highlightedImageIndex = 0;
+
+
         bursts[burstIndex] = burst;
 
+        _imageView.image = nil;
         [self updatePhotoLabels:burst];
 
 
@@ -656,9 +660,11 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
         [self updateTimelineWithBurstHighlightingBursts:bursts];
 
+        BOOL wasPlaying = [self pauseAnimation];
+
         [self addLabelsToDropOverlay:burst];
 
-        BOOL wasPlaying = [self pauseAnimation];
+        highlightedImageIndex = 0;
 
         if (wasPlaying)
             [self playAnimation];
@@ -666,6 +672,53 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     }
     
+}
+
+- (void)playAnimation {
+
+    if (burstIndex >= 0 && burstIndex < bursts.count) {
+        EUCBurst *burst = bursts[burstIndex];
+
+
+        _imageView.highlighted = NO;
+
+
+        highlightedImageIndex++;
+
+
+        [_imageView startAnimating];
+
+        [_animateButton setTitle:@"Pause" forState:UIControlStateNormal];
+
+    }
+}
+
+- (BOOL)pauseAnimation {
+    if (_imageView.isAnimating) {
+        [_imageView stopAnimating];
+
+        //_imageView.animationImages = nil;
+//        _imageView.animationDuration = 0;
+//        _imageView.animationRepeatCount = 0;
+        _imageView.highlighted = YES;
+
+
+        EUCBurst *currentBurst = bursts[burstIndex];
+
+        if (highlightedImageIndex >= currentBurst.images.count) {
+            highlightedImageIndex = 0;
+        }
+
+        EUCImage *image = currentBurst.images[highlightedImageIndex];
+
+        _imageView.highlightedImage = [UIImage imageWithContentsOfFile:image.filename];
+
+
+        [_animateButton setTitle:@"Play" forState:UIControlStateNormal];
+
+        return YES;
+    }
+    return NO;
 }
 
 - (void)updateTimelineWithBurstHighlightingBursts:(NSMutableArray *)array {
@@ -677,21 +730,28 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     EUCImage *image = burst.images[0];
     currentImageName = image.filename;
     _imageView.image = [UIImage imageWithContentsOfFile:currentImageName];
+    _imageView.highlightedImage = [UIImage imageWithContentsOfFile:currentImageName];
 
+    NSMutableArray *ani = [[NSMutableArray alloc] init];
+    for (EUCImage *image in burst.images) {
+        [ani addObject:[UIImage imageWithContentsOfFile:image.filename]];
+    }
+
+    _imageView.animationImages = ani;
+    _imageView.animationDuration = 3;
+    _imageView.animationRepeatCount = 0;
 
     NSMutableArray *labels = [[EUCDatabase sharedInstance] labelsForBurst:burst.burstId];
 
     for (EUCLabel *l in labels) {
-
         TagView *tv = [_tagList createDropTagView:l.name withLabelId:l.labelId];
-
         [self enableImageViewGesturesOnTagView:tv];
         [self enableDropColor:tv];
         [_dropOverlayView addSubview:tv];
         tv.center = l.location;
-
-
     }
+
+
 }
 
 - (void)removeAllTagsFromDragOverlay {
@@ -726,56 +786,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     }
 }
 
-- (void)playAnimation {
 
-    if (burstIndex >= 0 && burstIndex < bursts.count) {
-        EUCBurst *burst = bursts[burstIndex];
-
-
-        NSMutableArray *ani = [[NSMutableArray alloc] init];
-        for (EUCImage *image in burst.images) {
-            [ani addObject:[UIImage imageWithContentsOfFile:image.filename]];
-        }
-
-        _imageView.highlighted = NO;
-
-
-        EUCImage *image = burst.images[highlightedImageIndex];
-
-        _imageView.highlightedImage = [UIImage imageWithContentsOfFile:image.filename];
-        _imageView.animationImages = ani;
-        _imageView.animationDuration = 3;
-        _imageView.animationRepeatCount = 0;
-
-        [_imageView startAnimating];
-
-        [_animateButton setTitle:@"Pause" forState:UIControlStateNormal];
-
-    }
-}
-
-- (BOOL)pauseAnimation {
-    if (_imageView.isAnimating) {
-        [_imageView stopAnimating];
-
-        _imageView.animationImages = nil;
-        _imageView.animationDuration = 0;
-        _imageView.animationRepeatCount = 0;
-        _imageView.highlighted = YES;
-        highlightedImageIndex++;
-
-
-        EUCBurst *currentBurst = bursts[burstIndex];
-
-        if (highlightedImageIndex >= currentBurst.images.count) {
-            highlightedImageIndex = 0;
-        }
-
-        [_animateButton setTitle:@"Play" forState:UIControlStateNormal];
-
-        return YES;
-    }
-    return NO;
-}
 
 @end

@@ -14,7 +14,6 @@
     CGFloat xposStart;
     CGFloat xposEnd;
 
-
     NSTimeInterval totalTime;
 }
 
@@ -101,6 +100,12 @@ int textWidth = 80;
         }
         //[self drawCircleTickMarkAtPoint:lastTextLabel atPoint:CGPointMake(xposEnd, ypos) isHighlighted:NO hasBeenVisited:YES showLabel:NO];
 
+        //drawing
+
+        //loop #days
+        int daysBetweenStartAndEnd = [self daysBetween:_startDate and:_endDate];
+
+
     } else if (_bursts != nil ) {
 
 
@@ -135,6 +140,13 @@ int textWidth = 80;
     }
 }
 
+- (NSInteger)daysBetween:(NSDate *)date1 and:(NSDate *)date2 {
+    NSUInteger unitFlags = NSDayCalendarUnit;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:unitFlags fromDate:date1 toDate:date2 options:0];
+    NSInteger daysBetween = abs([components day]);
+    return daysBetween + 1;
+}
 
 - (void)drawRectOpenCircle:(CGRect)rect {
     UIBezierPath *ovalPath = [UIBezierPath bezierPathWithOvalInRect:rect];
