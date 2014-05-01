@@ -155,7 +155,6 @@
 
         NSDictionary *deployment = (NSDictionary *) [self.deployments filteredArrayUsingPredicate: pred][0];
 
-        self.detailViewController.view.hidden = NO;
         self.detailViewController.editViewVisible = YES;
         self.detailViewController.updateMode = YES;
         
@@ -172,9 +171,11 @@
         NSNumber *depId = deployment[@"id"];
         [self.setChangedDelegate currentDeploymentIdSetTo:[depId integerValue]];
         [self.setSelectedDelegate currentDeploymentIdSetTo:[depId integerValue]];
+        
+        [self.detailViewController setupForSingle];
     }
     else {
-        self.detailViewController.view.hidden = YES;
+        [self.detailViewController setupForMultiple];
     }
     
     [self.tableView reloadData];

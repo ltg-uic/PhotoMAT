@@ -34,5 +34,7 @@
 
 - (void)loadDeployment:(NSNumber *)deploymentId;
 
+-(void) setupForSingle;
+-(void) setupForMultiple;
 
 @end

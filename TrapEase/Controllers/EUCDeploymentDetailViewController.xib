@@ -13,6 +13,8 @@
                 <outlet property="cancelButton" destination="Zfc-Vj-PoV" id="BZW-XI-mAs"/>
                 <outlet property="deploymentIdLabel" destination="ljs-HU-nhh" id="SHL-h2-baI"/>
                 <outlet property="deploymentImages" destination="CpW-sc-Ja7" id="vMY-0e-LKD"/>
+                <outlet property="deploymentImagesLabel" destination="mVu-9o-JUO" id="Wv6-b5-gz8"/>
+                <outlet property="deploymentTimeLabel" destination="TVC-qV-eyW" id="bjI-ed-pYB"/>
                 <outlet property="doneButton" destination="cf3-iW-F94" id="MO0-BR-OeP"/>
                 <outlet property="downloadActivityIndicator" destination="OS0-pd-5iV" id="yPl-ce-Hpc"/>
                 <outlet property="downloadButton" destination="fQK-Gl-alc" id="mcf-Lx-xAF"/>
@@ -20,6 +22,7 @@
                 <outlet property="downloadStatus" destination="SUQ-la-fG5" id="TEZ-s5-VSc"/>
                 <outlet property="editView" destination="WmK-qE-Jwf" id="VMx-Vk-1Cv"/>
                 <outlet property="notes" destination="5bj-Qu-PeV" id="Kn3-rs-7xl"/>
+                <outlet property="notesLabel" destination="VUQ-Jb-iPT" id="BRR-RK-9XQ"/>
                 <outlet property="shortName" destination="LRj-mf-HpL" id="qyI-Jt-iUd"/>
                 <outlet property="titleLabel" destination="WDu-Rj-mch" id="AAj-MG-Ltd"/>
                 <outlet property="trapNumber" destination="pTZ-p1-Z21" id="spA-Tu-6SP"/>

@@ -36,6 +36,8 @@ typedef enum : NSUInteger {
     UIPopoverController *imagePopoverController;
 }
 
+@property (weak, nonatomic) IBOutlet UILabel *deploymentTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *deploymentImagesLabel;
 @property (weak, nonatomic) IBOutlet UITextField *shortName;
 @property (weak, nonatomic) IBOutlet UITextView *notes;
 @property (weak, nonatomic) IBOutlet UITextField *height;
@@ -53,6 +55,7 @@ typedef enum : NSUInteger {
 @property (weak, nonatomic) IBOutlet UIButton *actualButton;
 @property (weak, nonatomic) IBOutlet UILabel *deploymentIdLabel;
 @property (weak, nonatomic) IBOutlet UIButton *downloadButton;
+@property (weak, nonatomic) IBOutlet UILabel *notesLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *downloadActivityIndicator;
 @property (weak, nonatomic) IBOutlet UIProgressView *downloadProgressView;
 @property (weak, nonatomic) IBOutlet UILabel *downloadStatus;
@@ -1219,5 +1222,36 @@ typedef enum : NSUInteger {
         self.doneButton.enabled = NO;
     }
 }
+
+#pragma mark - setup for single/multiple
+
+-(void) setupWithHidden: (BOOL) hidden {
+    self.titleLabel.hidden = hidden;
+    self.shortName.hidden = hidden;
+
+    self.notesLabel.hidden = hidden;
+    self.notes.hidden = hidden;
+    
+    self.deploymentTimeLabel.hidden = hidden;
+    self.actualButton.hidden = hidden;
+    
+    self.deploymentImagesLabel.hidden = hidden;
+    self.deploymentImages.hidden = hidden;
+    
+    self.addDeploymentImageButton.hidden = hidden;
+    
+}
+
+-(void)setupForSingle {
+    [self setupWithHidden:NO];
+}
+
+-(void)setupForMultiple {
+    [self setupWithHidden:YES];
+    self.importedBursts = [NSMutableArray arrayWithArray: [self.master burstsForSelectedSets]];
+    self.burstStatus.text = [NSString stringWithFormat:@"%ld burst%@ added", (unsigned long)[self.importedBursts count],
+                             ([self.importedBursts count] == 1)?@"" : @"s"];
+}
+
 
 @end
