@@ -197,11 +197,20 @@
 }
 
 // todo: write this
--(NSSet *) namesOfSelectedSets {
-    return [self.selectedStatusBySetId keysOfEntriesPassingTest:^BOOL(id key, id obj, BOOL *stop) {
-        return [obj isEqual:@YES];
-    }];
+-(NSArray *) namesOfSelectedSets {
+    NSSet * selectedSets = [self selectedSets];
     
+    NSMutableArray * result = [NSMutableArray arrayWithCapacity:[self.deployments count]];
+    
+    for (NSDictionary * deployment in self.deployments) {
+        if ([selectedSets containsObject:deployment[@"id"]]) {
+            [result addObject:[NSString stringWithFormat:@"%@ : %@ : %@ : %@", deployment[@"school_name"],
+                              deployment[@"class_name"],
+                              deployment[@"person_name"],
+                               deployment[@"short_name"]]];
+        }
+    }
+    return [NSArray arrayWithArray:result];
 }
 
 -(NSArray *)burstsForSelectedSets {

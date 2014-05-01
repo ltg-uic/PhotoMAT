@@ -73,6 +73,8 @@
 
     EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
     bursts = [burstDetailController.master burstsForSelectedSets];
+    // call [burstDetailController.master namesOfSelectedSets] to get list of names
+
 
     //check the date
     if (startDate == nil && endDate == nil ) {
