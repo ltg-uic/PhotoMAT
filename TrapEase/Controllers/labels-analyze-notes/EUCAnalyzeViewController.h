@@ -19,9 +19,17 @@
 @property(weak, nonatomic) IBOutlet UILabel *labelLabel;
 @property(weak, nonatomic) IBOutlet UILabel *startTimeLabel;
 @property(weak, nonatomic) IBOutlet UILabel *endTimeLabel;
+@property(weak, nonatomic) IBOutlet UIButton *setNamesButton;
+@property(weak, nonatomic) IBOutlet UILabel *startRangeLabel;
+@property(weak, nonatomic) IBOutlet UIButton *startRangeButton;
+@property(weak, nonatomic) IBOutlet UILabel *endRangeLabel;
+@property(weak, nonatomic) IBOutlet UIButton *endRangeButton;
+
 
 - (IBAction)showStartDatePicker:(id)sender;
 
 - (IBAction)showEndDatePicker:(id)sender;
+
+- (IBAction)showSetNamesPopover:(id)sender;
 
 @end

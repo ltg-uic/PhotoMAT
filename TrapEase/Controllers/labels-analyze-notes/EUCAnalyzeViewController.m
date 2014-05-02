@@ -17,6 +17,7 @@
 #import "AnalyzeDatePopoverViewController.h"
 #import "TimelineUIViewController.h"
 #import "EUCDeploymentMasterViewController.h"
+#import "SetNameContentViewController.h"
 
 
 @interface EUCAnalyzeViewController () <UIPopoverControllerDelegate> {
@@ -32,12 +33,14 @@
     UIPopoverController *errorPopoverController;
 
     NSDateFormatter *dateformat;
+    NSArray *namesOfSelectedSets;
 
 
 }
 @end
 
-@implementation EUCAnalyzeViewController
+@implementation EUCAnalyzeViewController {
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -73,7 +76,7 @@
 
     EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
     bursts = [burstDetailController.master burstsForSelectedSets];
-    // call [burstDetailController.master namesOfSelectedSets] to get list of names
+    namesOfSelectedSets = [burstDetailController.master namesOfSelectedSets];
 
 
     //check the date
@@ -148,7 +151,41 @@
     _labelLabel.hidden = !shouldShow;
     _startTimeLabel.hidden = !shouldShow;
     _endTimeLabel.hidden = !shouldShow;
+    _setNamesButton.hidden = !shouldShow;
+    _startRangeLabel.hidden = !shouldShow;
+    _startRangeButton.hidden = !shouldShow;
+    _endRangeLabel.hidden = !shouldShow;
+    _endRangeButton.hidden = !shouldShow;
+
+    [self displaySetNames];
 }
+
+- (void)displaySetNames {
+
+    if (namesOfSelectedSets.count > 0) {
+        NSString *firstName = [namesOfSelectedSets firstObject];
+
+        NSString *names;
+        for (NSString *n in namesOfSelectedSets) {
+            if ([n isEqualToString:firstName]) {
+                names = firstName;
+            } else {
+                names = [names stringByAppendingFormat:@", %@", n];
+            }
+        }
+
+
+//        if( namesOfSelectedSets.count > 1) {
+//            names = [firstName stringByAppendingFormat:@" . . . "];
+//        }
+
+        [_setNamesButton setTitle:names forState:UIControlStateNormal];
+        [_setNamesButton setTitle:names forState:UIControlStateNormal];
+        [_setNamesButton setTitle:names forState:UIControlStateHighlighted];
+
+    }
+}
+
 
 - (void)refreshViews {
 
@@ -276,6 +313,32 @@
     content.finishedHandler = finishedHandler;
     [popoverController setPopoverContentSize:CGSizeMake(250, 240) animated:true];
     [popoverController presentPopoverFromRect:_endDateButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (IBAction)showSetNamesPopover:(id)sender {
+
+    SetNameContentViewController *content = [[SetNameContentViewController alloc] initWithNibName:@"SetNameContentViewController" bundle:nil];
+
+
+    errorPopoverController = [[UIPopoverController alloc]
+            initWithContentViewController:content];
+
+    NSString *firstName = [namesOfSelectedSets firstObject];
+
+    NSString *names;
+    for (NSString *name in namesOfSelectedSets) {
+        if ([name isEqualToString:firstName]) {
+            names = firstName;
+        } else {
+            names = [names stringByAppendingFormat:@"\n%@", name];
+        }
+    }
+    content.textView.text = names;
+
+    [errorPopoverController setPopoverContentSize:CGSizeMake(300, 190) animated:true];
+    [errorPopoverController presentPopoverFromRect:_setNamesButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+
+
 }
 
 - (void)changeButtonTitleWithButton:(UIButton *)button andStringDate:(NSString *)newDate {
