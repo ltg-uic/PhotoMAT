@@ -1,4 +1,3 @@
-
 // To check if a library is compiled with CocoaPods you
 // can use the `COCOAPODS` macro definition which is
 // defined in the xcconfigs so it is available in
@@ -65,6 +64,12 @@
 #define COCOAPODS_VERSION_MAJOR_CocoaLumberjack_Extensions 1
 #define COCOAPODS_VERSION_MINOR_CocoaLumberjack_Extensions 8
 #define COCOAPODS_VERSION_PATCH_CocoaLumberjack_Extensions 1
+
+// DDPopoverBackgroundView
+#define COCOAPODS_POD_AVAILABLE_DDPopoverBackgroundView
+#define COCOAPODS_VERSION_MAJOR_DDPopoverBackgroundView 1
+#define COCOAPODS_VERSION_MINOR_DDPopoverBackgroundView 0
+#define COCOAPODS_VERSION_PATCH_DDPopoverBackgroundView 0
 
 // FMDB
 #define COCOAPODS_POD_AVAILABLE_FMDB

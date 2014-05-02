@@ -23,6 +23,7 @@ PODS:
   - CocoaLumberjack/Core (1.8.1)
   - CocoaLumberjack/Extensions (1.8.1):
     - CocoaLumberjack/Core
+  - DDPopoverBackgroundView (1.0.0)
   - FMDB (2.2):
     - FMDB/standard
   - FMDB/common (2.2)
@@ -33,13 +34,15 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.2.1)
   - CocoaLumberjack
+  - DDPopoverBackgroundView
   - FMDB
   - OBDragDrop
 
 SPEC CHECKSUMS:
   AFNetworking: 0121f4b69be3fa58d1ab317866e036e12ac9651d
   CocoaLumberjack: 020378ec400d658923bf5887178394f65f052c90
+  DDPopoverBackgroundView: 5867278dcaab821e3870b69c2f7e33ab687dea8a
   FMDB: e0dd09464b4e1a1cd7fa51ea835ae821b5656865
   OBDragDrop: 083ddfb38d3fa7f9386f52d4bbaeaf1713db6ff3
 
-COCOAPODS: 0.29.0
+COCOAPODS: 0.32.1

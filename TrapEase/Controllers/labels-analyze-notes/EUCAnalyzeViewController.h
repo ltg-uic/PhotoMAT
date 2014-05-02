@@ -24,6 +24,8 @@
 @property(weak, nonatomic) IBOutlet UIButton *startRangeButton;
 @property(weak, nonatomic) IBOutlet UILabel *endRangeLabel;
 @property(weak, nonatomic) IBOutlet UIButton *endRangeButton;
+@property(weak, nonatomic) IBOutlet UILabel *analysisPeriodLabel;
+@property(weak, nonatomic) IBOutlet UILabel *dailyWindowLabel;
 
 
 - (IBAction)showStartDatePicker:(id)sender;

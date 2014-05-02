@@ -18,6 +18,7 @@
 #import "TimelineUIViewController.h"
 #import "EUCDeploymentMasterViewController.h"
 #import "SetNameContentViewController.h"
+#import "DDPopoverBackgroundView.h"
 
 
 @interface EUCAnalyzeViewController () <UIPopoverControllerDelegate> {
@@ -156,8 +157,10 @@
     _startRangeButton.hidden = !shouldShow;
     _endRangeLabel.hidden = !shouldShow;
     _endRangeButton.hidden = !shouldShow;
+    _analysisPeriodLabel.hidden = !shouldShow;
+    _dailyWindowLabel.hidden = !shouldShow;
 
-    [self displaySetNames];
+    //[self displaySetNames];
 }
 
 - (void)displaySetNames {
@@ -166,18 +169,10 @@
         NSString *firstName = [namesOfSelectedSets firstObject];
 
         NSString *names;
-        for (NSString *n in namesOfSelectedSets) {
-            if ([n isEqualToString:firstName]) {
-                names = firstName;
-            } else {
-                names = [names stringByAppendingFormat:@", %@", n];
-            }
+
+        if (namesOfSelectedSets.count > 1) {
+            names = [firstName stringByAppendingFormat:@" . . . "];
         }
-
-
-//        if( namesOfSelectedSets.count > 1) {
-//            names = [firstName stringByAppendingFormat:@" . . . "];
-//        }
 
         [_setNamesButton setTitle:names forState:UIControlStateNormal];
         [_setNamesButton setTitle:names forState:UIControlStateNormal];
@@ -334,6 +329,15 @@
         }
     }
     content.textView.text = names;
+    //content.textView.backgroundColor =  [UIColor clearColor];
+
+    //content.textView.alpha = .2f;
+    // errorPopoverController.backgroundColor =  [UIColor clearColor];
+
+    [errorPopoverController setPopoverBackgroundViewClass:[DDPopoverBackgroundView class]];
+    [DDPopoverBackgroundView setShadowEnabled:YES];
+    [DDPopoverBackgroundView setTintColor:[UIColor colorWithRed:127 green:127 blue:127 alpha:.5]];
+
 
     [errorPopoverController setPopoverContentSize:CGSizeMake(300, 190) animated:true];
     [errorPopoverController presentPopoverFromRect:_setNamesButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
