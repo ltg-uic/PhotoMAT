@@ -687,7 +687,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [self.db executeUpdate:sql, number];
     }
     
-    sql = @"Select id, burst_date from burst b join depIds i on b.deployment_id = i.depId order by id";
+    sql = @"Select id, burst_date from burst b join depIds i on b.deployment_id = i.depId order by burst_date";
     FMResultSet * rs = [self.db executeQuery:sql];
     
     while ([rs next]) {
