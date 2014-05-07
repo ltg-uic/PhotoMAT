@@ -21,7 +21,7 @@
 #import "DDPopoverBackgroundView.h"
 
 
-@interface EUCAnalyzeViewController () <UIPopoverControllerDelegate> {
+@interface EUCAnalyzeViewController () <UIPopoverControllerDelegate, UIPickerViewDelegate> {
     NSArray *bursts;
     NSMutableArray *analyzeItems;
     NSInteger deploymentId;
@@ -29,14 +29,19 @@
     NSDate *endDate;
     NSDate *orginalStartDate;
     NSDate *orginalEndDate;
+
+    NSDate *periodEndDate;
+    NSDate *periodStartDate;
+
     EUCAppDelegate *appDelegate;
     UIPopoverController *popoverController;
     UIPopoverController *errorPopoverController;
 
     NSDateFormatter *dateformat;
+    NSDateFormatter *periodDateformat;
     NSArray *namesOfSelectedSets;
 
-
+    int isNextDay;
 }
 @end
 
@@ -55,6 +60,10 @@
         dateformat = [[NSDateFormatter alloc] init];
         [dateformat setDateFormat:@"hh:mm a M/d/Y"];
 
+
+        periodDateformat = [[NSDateFormatter alloc] init];
+        [periodDateformat setDateFormat:@"hh:mm a"];
+
     }
     return self;
 }
@@ -62,6 +71,72 @@
 - (void)viewDidLoad {
     [self.view addSubview:_completeTimelineView];
     //[self loadData];
+
+    [_daySelector addTarget:self action:@selector(dayChanged:) forControlEvents:UIControlEventValueChanged];
+
+}
+
+- (void)dayChanged:(id)dayChanged {
+
+    //0 is sameday
+    //1 nextday
+    int whichDay = _daySelector.selectedSegmentIndex;
+
+    if (whichDay == 1) {
+
+        NSDate *startWindow = [periodDateformat dateFromString:_startRangeButton.currentTitle];
+        NSDate *endWindow = [periodDateformat dateFromString:_endRangeButton.currentTitle];
+
+
+        if ([endWindow timeIntervalSinceDate:startWindow] > 0) {
+
+            [self changeButtonTitleWithButton:_startRangeButton andStringDate:[periodDateformat stringFromDate:startWindow]];
+
+            [self changeButtonTitleWithButton:_endRangeButton andStringDate:[periodDateformat stringFromDate:startWindow]];
+
+            periodEndDate = startWindow;
+
+            [self refreshViews];
+        }
+
+
+    } else {
+
+        NSDate *startWindow = [periodDateformat dateFromString:_startRangeButton.currentTitle];
+        NSDate *endWindow = [periodDateformat dateFromString:_endRangeButton.currentTitle];
+
+
+        if ([endWindow timeIntervalSinceDate:startWindow] < 0) {
+
+
+            NSCalendar *calendar = [NSCalendar currentCalendar];
+
+            NSDateComponents *tempStartComps = [[NSDateComponents alloc] init];
+
+            [tempStartComps setHour:23];
+            [tempStartComps setMinute:59];
+            [tempStartComps setSecond:59];
+
+            NSDate *midnight = [calendar dateFromComponents:tempStartComps];
+
+
+            [self changeButtonTitleWithButton:_startRangeButton andStringDate:[periodDateformat stringFromDate:startWindow]];
+
+            [self changeButtonTitleWithButton:_endRangeButton andStringDate:[periodDateformat stringFromDate:midnight]];
+
+            periodEndDate = startWindow;
+
+            [self refreshViews];
+        }
+
+
+    }
+
+}
+
+- (void)checkTimes {
+
+
 }
 
 - (void)loadData {
@@ -159,7 +234,8 @@
     _endRangeButton.hidden = !shouldShow;
     _analysisPeriodLabel.hidden = !shouldShow;
     _dailyWindowLabel.hidden = !shouldShow;
-
+    _periodDayLabel.hidden = !shouldShow;
+    _daySelector.hidden = !shouldShow;
     //[self displaySetNames];
 }
 
@@ -193,6 +269,15 @@
 
     if (analyzeItems != nil && analyzeItems.count > 0) {
 
+        //period buttons
+        periodStartDate = [periodDateformat dateFromString:_startRangeButton.currentTitle];
+        periodEndDate = [periodDateformat dateFromString:_endRangeButton.currentTitle];
+
+
+        NSInteger isNextDay = _daySelector.selectedSegmentIndex;
+        if (isNextDay == 1) {
+            periodEndDate = [periodEndDate dateByAddingTimeInterval:86400];
+        }
 
         int y = 0;
         int offset = 47;
@@ -208,7 +293,7 @@
             AnalyzeLabelUIView *labelUIView = [[AnalyzeLabelUIView alloc] init];
 
 
-            [labelUIView displayAnalyzeItem:a withStartDate:startDate endDate:endDate];
+            [labelUIView displayAnalyzeItem:a withStartDate:startDate withEndDate:endDate withStartPeriod:periodStartDate withEndPeriod:periodEndDate];
             CGRect newFrame = CGRectMake(5, y, labelUIView.frame.size.width, labelUIView.frame.size.width);
             labelUIView.frame = newFrame;
             UIPanGestureRecognizer *pgr = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
@@ -223,6 +308,8 @@
 
         [self displayLabeling:YES];
         _errorLabel.hidden = YES;
+
+
         [self.view setNeedsDisplay];
 
     } else {
@@ -242,6 +329,17 @@
     [_endDateButton setTitle:[dateformat stringFromDate:endDate] forState:UIControlStateNormal];
     [_endDateButton setTitle:[dateformat stringFromDate:endDate] forState:UIControlStateHighlighted];
     [_endDateButton setTitle:[dateformat stringFromDate:endDate] forState:UIControlStateSelected];
+
+}
+
+- (void)setButtonLabelDateStartPeriod:(NSDate *)startDate withEndPeriod:(NSDate *)endDate {
+    [_startRangeButton setTitle:[dateformat stringFromDate:startDate] forState:UIControlStateNormal];
+    [_startRangeButton setTitle:[dateformat stringFromDate:startDate] forState:UIControlStateHighlighted];
+    [_startRangeButton setTitle:[dateformat stringFromDate:startDate] forState:UIControlStateSelected];
+
+    [_endRangeButton setTitle:[dateformat stringFromDate:endDate] forState:UIControlStateNormal];
+    [_endRangeButton setTitle:[dateformat stringFromDate:endDate] forState:UIControlStateHighlighted];
+    [_endRangeButton setTitle:[dateformat stringFromDate:endDate] forState:UIControlStateSelected];
 
 }
 
@@ -310,6 +408,87 @@
     [popoverController presentPopoverFromRect:_endDateButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
+
+- (IBAction)showStartPeriodPickerPopover:(id)sender {
+
+
+    AnalyzeDatePopoverViewController *content = [[AnalyzeDatePopoverViewController alloc] initWithNibName:@"AnalyzeDatePopoverViewController" bundle:nil];
+
+    popoverController = [[UIPopoverController alloc]
+            initWithContentViewController:content];
+
+
+    content.somePopoverController = popoverController;
+
+    content.dateformat.dateFormat = periodDateformat;
+
+//    NSInteger isNextDay = _daySelector.selectedSegmentIndex;
+//    if(isNextDay == 1) {
+//        content.datePicker.minimumDate = [periodEndDate dateByAddingTimeInterval:-86400];
+//    } else {
+//        content.datePicker.maximumDate  = [periodEndDate dateByAddingTimeInterval:-60];
+//    }
+
+    content.datePicker.date = [periodDateformat dateFromString:_startRangeButton.titleLabel.text];
+    content.orginalDate = periodStartDate;
+    content.datePicker.datePickerMode = UIDatePickerModeTime;
+    content.modalInPopover = YES;
+    void (^finishedHandler)(NSDate *) = ^(NSDate *newDate) {
+
+        periodStartDate = newDate;
+        [self changeButtonTitleWithButton:_startRangeButton andStringDate:[periodDateformat stringFromDate:newDate]];
+
+        [self dayChanged:nil];
+
+    };
+    content.finishedHandler = finishedHandler;
+    [popoverController setPopoverContentSize:CGSizeMake(250, 240) animated:true];
+    [popoverController presentPopoverFromRect:_startRangeButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (IBAction)whichSelected:(id)sender {
+
+    [self refreshViews];
+}
+
+- (IBAction)showEndPeriodPickerPopover:(id)sender {
+
+    AnalyzeDatePopoverViewController *content = [[AnalyzeDatePopoverViewController alloc] initWithNibName:@"AnalyzeDatePopoverViewController" bundle:nil];
+
+    popoverController = [[UIPopoverController alloc]
+            initWithContentViewController:content];
+
+
+    content.somePopoverController = popoverController;
+
+    content.dateformat.dateFormat = periodDateformat;
+
+    NSInteger isNextDay = _daySelector.selectedSegmentIndex;
+    if (isNextDay == 1) {
+        content.isNextDay = YES;
+    } else {
+        content.isNextDay = NO;
+        content.datePicker.minimumDate = [periodStartDate dateByAddingTimeInterval:+60];
+    }
+
+    content.startPeriodDate = periodStartDate;
+    content.datePicker.date = [periodDateformat dateFromString:_endRangeButton.titleLabel.text];
+    content.orginalDate = periodEndDate;
+    content.datePicker.datePickerMode = UIDatePickerModeTime;
+    content.modalInPopover = YES;
+    void (^finishedHandler)(NSDate *) = ^(NSDate *newDate) {
+
+        periodEndDate = newDate;
+        [self changeButtonTitleWithButton:_endRangeButton andStringDate:[periodDateformat stringFromDate:newDate]];
+        [self refreshViews];
+
+    };
+    content.finishedHandler = finishedHandler;
+    [popoverController setPopoverContentSize:CGSizeMake(250, 240) animated:true];
+    [popoverController presentPopoverFromRect:_endRangeButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+
 - (IBAction)showSetNamesPopover:(id)sender {
 
     SetNameContentViewController *content = [[SetNameContentViewController alloc] initWithNibName:@"SetNameContentViewController" bundle:nil];
@@ -318,6 +497,8 @@
     errorPopoverController = [[UIPopoverController alloc]
             initWithContentViewController:content];
 
+    EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
+    namesOfSelectedSets = [burstDetailController.master namesOfSelectedSets];
     NSString *firstName = [namesOfSelectedSets firstObject];
 
     NSString *names;
@@ -344,6 +525,7 @@
 
 
 }
+
 
 - (void)changeButtonTitleWithButton:(UIButton *)button andStringDate:(NSString *)newDate {
     [button setTitle:newDate forState:UIControlStateNormal];

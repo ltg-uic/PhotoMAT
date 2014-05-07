@@ -17,7 +17,6 @@
 #import "EUCDeploymentSplitViewController.h"
 #import "EUCDeploymentDetailViewController.h"
 #import "EUCNotesViewController.h"
-#import "EUCUserViewController.h"
 
 #import "EUCDatabase.h"
 #import "DDFileLogger.h"
@@ -28,7 +27,7 @@
 #import "EUCTabBarViewControllerDelegate.h"
 #import "EUCFileSystem.h"
 
-@interface EUCAppDelegate () {
+@interface EUCAppDelegate () <UIGestureRecognizerDelegate> {
 }
 
 @property(strong, nonatomic) EUCTabBarViewControllerDelegate *tabBarVCDelegate;
@@ -87,7 +86,7 @@
     master.detailViewController = self.detail;
     master.setChangedDelegate = label;
     self.detail.master = master;
-    
+
     user.loginChangedDelegate = cloud;
 
     dsvc.viewControllers = @[master, self.detail];
@@ -122,8 +121,24 @@
 
     OBDragDropManager *manager = [OBDragDropManager sharedManager];
     [manager prepareOverlayWindowUsingMainWindow:self.window];
+
+//    SUNButtonBoard *board = [SUNButtonBoard defaultButtonBoard];
+//    board.boardImage = [UIImage imageNamed:@"button3.png"];
+//    board.buttonNumber = 3;
+////    NSArray *imgArray = [NSArray arrayWithObjects:[UIImage imageNamed:@"button1.png"],
+////                                                  [UIImage imageNamed:@"button2.png"],
+////                                                  [UIImage imageNamed:@"button3.png"],nil];
+////    board.buttonImageArray = imgArray;
+//    if (!board.running) {
+//        [board startRunning];
+//    }
+
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)boardButtonClick:(id)boardButtonClick {
+    NSLog(@"helejrlejre");
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

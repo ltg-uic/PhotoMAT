@@ -39,14 +39,10 @@ int textWidth = 80;
 
     dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"hh:mm:ss a M/d/Y"];
-//    [dateformat setAMSymbol:@"am"];
-//    [dateformat setPMSymbol:@"pm"];
-
-
 
 }
 
-- (void)drawLineWithStartDate:(NSDate *)sDate andEndDate:(NSDate *)eDate andXStart:(CGFloat)xStart {
+- (void)drawLineWithStartDate:(NSDate *)sDate andEndDate:(NSDate *)eDate andXStart:(CGFloat)xStart withColor:(UIColor *)lineColor {
     //init
 
     xposStart = xStart;
@@ -72,15 +68,15 @@ int textWidth = 80;
     [bezierPath addLineToPoint:CGPointMake(xposEnd, ypos)];
     bezierPath.lineCapStyle = kCGLineCapRound;
 
-    [[UIColor blackColor] setStroke];
-    bezierPath.lineWidth = 1;
+    [lineColor setStroke];
+    bezierPath.lineWidth = 3;
     [bezierPath stroke];
 }
 
 - (void)drawRect:(CGRect)rect {
 
     if (_startDate != nil && _endDate != nil ) {
-        [self drawLineWithStartDate:_startDate andEndDate:_endDate andXStart:12];
+        [self drawLineWithStartDate:_startDate andEndDate:_endDate andXStart:12 withColor:[UIColor colorWithRed:184.0f / 255.0f green:184.0f / 255.0f blue:184.0f / 255.0f alpha:.5]];
 
 
         NSString *firstTextLabel = [dateformat stringFromDate:_startDate];
@@ -102,8 +98,46 @@ int textWidth = 80;
 
         //drawing
 
+
         //loop #days
-        int daysBetweenStartAndEnd = [self daysBetween:_startDate and:_endDate];
+
+        if (![_bandStartTime isEqualToDate:_bandEndTime]) {
+
+
+            int daysBetweenStartAndEnd = [self daysBetween:_startDate and:_endDate];
+
+            for (int j = 0; j <= daysBetweenStartAndEnd; j++) {
+
+
+                // 86400 seconds in a day * j (which day)
+                int dayOffset = (86400) * j;
+
+                NSDate *periodStartTime = [self combineTimeFromDate:_bandStartTime andDayMonthYearFromDate:_startDate];
+
+                periodStartTime = [periodStartTime dateByAddingTimeInterval:dayOffset];
+
+
+                CGFloat startOffset = xposStart + ([_startDate timeIntervalSinceDate:periodStartTime] / (totalTime)) * lineLength;
+
+                NSString *formatedLabel = [dateformat stringFromDate:periodStartTime];
+
+                //[self drawCircleTickMarkAtPoint:formatedLabel atPoint:CGPointMake(startOffset, ypos) isHighlighted:NO hasBeenVisited:YES showLabel:YES];
+
+                //draw the end point
+                NSTimeInterval timeDifference = [_bandEndTime timeIntervalSinceDate:_bandStartTime];
+
+                NSDate *periodEndTime = [periodStartTime dateByAddingTimeInterval:timeDifference];
+
+                CGFloat endOffset = xposStart + ([_startDate timeIntervalSinceDate:periodEndTime] / (totalTime)) * lineLength;
+
+                formatedLabel = [dateformat stringFromDate:periodEndTime];
+
+                //[self drawCircleTickMarkAtPoint:formatedLabel atPoint:CGPointMake(endOffset, ypos) isHighlighted:NO hasBeenVisited:YES showLabel:YES];
+
+                [self drawLineAtPoint:CGPointMake(startOffset, ypos) atPoint:CGPointMake(endOffset, ypos) withColor:[UIColor blackColor]];
+            }
+
+        }
 
 
     } else if (_bursts != nil ) {
@@ -118,7 +152,7 @@ int textWidth = 80;
         EUCBurst *lastBurst = [_bursts lastObject];
         NSString *lastTextLabel = [dateformat stringFromDate:lastBurst.date];
 
-        [self drawLineWithStartDate:firstBurst.date andEndDate:lastBurst.date andXStart:(textWidth / 2.0f)];
+        [self drawLineWithStartDate:firstBurst.date andEndDate:lastBurst.date andXStart:(textWidth / 2.0f) withColor:NULL ];
 
         [self drawCircleTickMarkAtPoint:firstTextLabel atPoint:CGPointMake(xposStart, ypos) isHighlighted:firstBurst.highlighted hasBeenVisited:firstBurst.hasBeenVisited showLabel:YES];
 
@@ -140,12 +174,66 @@ int textWidth = 80;
     }
 }
 
+- (void)drawLineAtPoint:(CGPoint)pointA atPoint:(CGPoint)pointB withColor:(UIColor *)lineColor {
+    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+    [bezierPath moveToPoint:pointA];
+    [bezierPath addLineToPoint:pointB];
+    bezierPath.lineCapStyle = kCGLineCapRound;
+
+    [lineColor setStroke];
+    bezierPath.lineWidth = 3;
+    [bezierPath stroke];
+}
+
+- (NSDate *)combineTimeFromDate:(NSDate *)timeDate andDayMonthYearFromDate:(NSDate *)dayDate {
+
+    NSDateComponents *timeDateComponents = [[NSCalendar currentCalendar] components:NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:timeDate];
+
+    NSDateComponents *dayDateComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit
+                                                                          fromDate:dayDate];
+
+    NSDateComponents *newTimeDateComponents = [[NSDateComponents alloc] init];
+    [newTimeDateComponents setYear:dayDateComponents.year];
+    [newTimeDateComponents setMonth:dayDateComponents.month];
+    [newTimeDateComponents setDay:dayDateComponents.day];
+    [newTimeDateComponents setHour:timeDateComponents.hour];
+    [newTimeDateComponents setMinute:timeDateComponents.minute];
+    [newTimeDateComponents setSecond:timeDateComponents.second];
+
+    NSDate *newDate = [[NSCalendar currentCalendar] dateFromComponents:newTimeDateComponents];
+
+    return newDate;
+}
+
 - (NSInteger)daysBetween:(NSDate *)date1 and:(NSDate *)date2 {
-    NSUInteger unitFlags = NSDayCalendarUnit;
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:unitFlags fromDate:date1 toDate:date2 options:0];
-    NSInteger daysBetween = abs([components day]);
-    return daysBetween + 1;
+    unsigned int unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit | NSYearCalendarUnit;
+    NSDateComponents *compsDate1 = [[NSCalendar currentCalendar] components:unitFlags fromDate:date1];
+    NSDateComponents *compsDate2 = [[NSCalendar currentCalendar] components:unitFlags fromDate:date2];
+
+    //same day
+    if ((compsDate1.month == compsDate2.month) && (compsDate1.day == compsDate2.day)) {
+        return 0;
+    } else if ((compsDate1.month == compsDate2.month)) {
+        return abs(compsDate1.day - compsDate2.day);
+    } else {
+
+        NSDate *fromDate;
+        NSDate *toDate;
+
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+
+        [calendar rangeOfUnit:NSDayCalendarUnit startDate:&fromDate
+                     interval:NULL forDate:date1];
+        [calendar rangeOfUnit:NSDayCalendarUnit startDate:&toDate
+                     interval:NULL forDate:date2];
+
+        NSDateComponents *difference = [calendar components:NSDayCalendarUnit
+                                                   fromDate:fromDate toDate:toDate options:0];
+
+        return [difference day];
+    }
+
+    return 0;
 }
 
 - (void)drawRectOpenCircle:(CGRect)rect {
@@ -171,12 +259,21 @@ int textWidth = 80;
 
     int offset = 10;
     CGFloat circleRadius = 20;
+    int haloOffsetRadius = circleRadius + 4;
 
     UIBezierPath *ovalPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(point.x - (circleRadius / 2), point.y - (circleRadius / 2), circleRadius, circleRadius)];
     [[UIColor lightGrayColor] setStroke];
 
     if (isHighlighted) {
+
         [[UIColor blueColor] setFill];
+
+        UIBezierPath *ovalPath2 = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(point.x - (haloOffsetRadius / 2), point.y - (haloOffsetRadius / 2), haloOffsetRadius, haloOffsetRadius)];
+        ovalPath2.lineWidth = 1;
+        [[UIColor colorWithRed:0.343 green:0.781 blue:1 alpha:1] setStroke];
+        [ovalPath2 stroke];
+
+
     } else {
         if (hasBeenVisited) {
             [[UIColor blackColor] setFill];

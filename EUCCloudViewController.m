@@ -21,8 +21,7 @@
 #define ICS_URL @"http://ltg.evl.uic.edu:8080/"
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -36,40 +35,32 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     _webView.delegate = self;
     [self selectURL];
 }
 
-//-(void)viewDidAppear:(BOOL)animated {
-//    [self viewDidAppear:animated];
-//}
-
-//-(void)viewWillAppear:(BOOL)animated {
-//    [self viewWillAppear:animated];
-//    [self selectURL];
-//}
-
-
--(void)selectURL {
-        EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
-
-        if([[selectedSet schoolName] isEqualToString:@"ICS"]) {
-            [self loadURL:[NSURL URLWithString:ICS_URL]];
-        } else {
-            [self loadURL:[NSURL URLWithString:HOME_URL]];
-        }
+- (void)viewDidAppear:(BOOL)animated {
+    [_webView reload];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)selectURL {
+    EUCSelectedSet *selectedSet = [EUCSelectedSet sharedInstance];
+
+    if ([[selectedSet schoolName] isEqualToString:@"ICS"]) {
+        [self loadURL:[NSURL URLWithString:ICS_URL]];
+    } else {
+        [self loadURL:[NSURL URLWithString:HOME_URL]];
+    }
+}
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
--(void)loadURL:(NSURL *)url {
-   [_webView loadRequest:[NSURLRequest requestWithURL:url]];
+- (void)loadURL:(NSURL *)url {
+    [_webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
@@ -104,7 +95,7 @@
 
 #pragma mark - LoginChangedDelegate
 
--(void)loginDidChangeToSchool:(NSString *)schoolName {
+- (void)loginDidChangeToSchool:(NSString *)schoolName {
     // do stuff here
 }
 

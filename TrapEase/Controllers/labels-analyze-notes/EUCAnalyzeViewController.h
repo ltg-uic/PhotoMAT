@@ -26,6 +26,8 @@
 @property(weak, nonatomic) IBOutlet UIButton *endRangeButton;
 @property(weak, nonatomic) IBOutlet UILabel *analysisPeriodLabel;
 @property(weak, nonatomic) IBOutlet UILabel *dailyWindowLabel;
+@property(weak, nonatomic) IBOutlet UILabel *periodDayLabel;
+@property(weak, nonatomic) IBOutlet UISegmentedControl *daySelector;
 
 
 - (IBAction)showStartDatePicker:(id)sender;
@@ -33,5 +35,11 @@
 - (IBAction)showEndDatePicker:(id)sender;
 
 - (IBAction)showSetNamesPopover:(id)sender;
+
+- (IBAction)showEndPeriodPickerPopover:(id)sender;
+
+- (IBAction)showStartPeriodPickerPopover:(id)sender;
+
+- (IBAction)whichSelected:(id)sender;
 
 @end

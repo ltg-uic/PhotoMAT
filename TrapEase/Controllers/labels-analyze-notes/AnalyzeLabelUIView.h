@@ -12,11 +12,11 @@
 #import "AnalyzeItem.h"
 
 @interface AnalyzeLabelUIView : UIView {
-    
-}
-@property (weak, nonatomic) IBOutlet TagView *tagView;
-@property (weak, nonatomic) IBOutlet TimelineView *timeliveView;
-@property (weak, nonatomic) IBOutlet UILabel *countLabel;
 
-- (void)displayAnalyzeItem:(AnalyzeItem *)analyzeItem withStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
+}
+@property(weak, nonatomic) IBOutlet TagView *tagView;
+@property(weak, nonatomic) IBOutlet TimelineView *timeliveView;
+@property(weak, nonatomic) IBOutlet UILabel *countLabel;
+
+- (void)displayAnalyzeItem:(AnalyzeItem *)analyzeItem withStartDate:(NSDate *)startDate withEndDate:(NSDate *)endDate withStartPeriod:(NSDate *)startPeriodDate withEndPeriod:(NSDate *)endPeriodDate;
 @end
