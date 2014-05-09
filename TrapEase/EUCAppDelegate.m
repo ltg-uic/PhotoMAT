@@ -26,6 +26,7 @@
 #import "EUCNetwork.h"
 #import "EUCTabBarViewControllerDelegate.h"
 #import "EUCFileSystem.h"
+#import <Crashlytics/Crashlytics.h>
 
 @interface EUCAppDelegate () <UIGestureRecognizerDelegate> {
 }
@@ -37,6 +38,7 @@
 @implementation EUCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -134,6 +136,10 @@
 //    }
 
     [self.window makeKeyAndVisible];
+
+
+    [Crashlytics startWithAPIKey:@"edc8bdc3e62738f894091653db9d30eab1c2acfe"];
+
     return YES;
 }
 

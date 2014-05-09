@@ -101,8 +101,8 @@ int textWidth = 80;
 
         //loop #days
 
-        if (![_bandStartTime isEqualToDate:_bandEndTime]) {
 
+        if (![_bandStartTime isEqualToDate:_bandEndTime]) {
 
             int daysBetweenStartAndEnd = [self daysBetween:_startDate and:_endDate];
 

@@ -38,6 +38,7 @@
 		70BB004C190487FC00ACB494 /* AnalyzeLabelUIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70BB004B190487FC00ACB494 /* AnalyzeLabelUIView.xib */; };
 		70CC82F71912EC8600D242A7 /* SetNameContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC82F51912EC8600D242A7 /* SetNameContentViewController.m */; };
 		70CC82F81912EC8600D242A7 /* SetNameContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70CC82F61912EC8600D242A7 /* SetNameContentViewController.xib */; };
+		70DEC970191BF23600479C3B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70DEC96F191BF23600479C3B /* Crashlytics.framework */; };
 		B4116D9918F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */; };
 		B41BB22F18FDF28700388779 /* EUCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B41BB22E18FDF28700388779 /* EUCLabel.m */; };
 		B43658D518E4B95F0017672E /* EUCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = B43658D418E4B95F0017672E /* EUCImage.m */; };
@@ -227,6 +228,7 @@
 		70CC82F41912EC8600D242A7 /* SetNameContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetNameContentViewController.h; sourceTree = "<group>"; };
 		70CC82F51912EC8600D242A7 /* SetNameContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetNameContentViewController.m; sourceTree = "<group>"; };
 		70CC82F61912EC8600D242A7 /* SetNameContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetNameContentViewController.xib; sourceTree = "<group>"; };
+		70DEC96F191BF23600479C3B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		B4116D9718F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCTabBarViewControllerDelegate.h; path = TrapEase/Controllers/EUCTabBarViewControllerDelegate.h; sourceTree = "<group>"; };
 		B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCTabBarViewControllerDelegate.m; path = TrapEase/Controllers/EUCTabBarViewControllerDelegate.m; sourceTree = "<group>"; };
 		B41BB22D18FDF28700388779 /* EUCLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCLabel.h; path = Model/EUCLabel.h; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 			files = (
 				B4521C6818FB3096001F42AF /* OpenGLES.framework in Frameworks */,
 				B4521C6618FB308B001F42AF /* CoreVideo.framework in Frameworks */,
+				70DEC970191BF23600479C3B /* Crashlytics.framework in Frameworks */,
 				B4521C6418FB307E001F42AF /* CoreMedia.framework in Frameworks */,
 				B4521C6218FB306A001F42AF /* libGPUImage.a in Frameworks */,
 				B4E6BE3718DE4CD200AC9D84 /* AssetsLibrary.framework in Frameworks */,
@@ -619,6 +622,7 @@
 		B4D1EC2F18BD729300E01EFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				70DEC96F191BF23600479C3B /* Crashlytics.framework */,
 				B4521C6718FB3096001F42AF /* OpenGLES.framework */,
 				B4521C6518FB308B001F42AF /* CoreVideo.framework */,
 				B4521C6318FB307E001F42AF /* CoreMedia.framework */,
@@ -841,6 +845,7 @@
 				B4D1EC2A18BD729300E01EFE /* Frameworks */,
 				B4D1EC2B18BD729300E01EFE /* Resources */,
 				34626F0EF4E344728D2E8176 /* Copy Pods Resources */,
+				70DEC96C191BF14700479C3B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1036,6 +1041,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		70DEC96C191BF14700479C3B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run edc8bdc3e62738f894091653db9d30eab1c2acfe 2a2695d2dc14b000c842d2b7d7dd49133e19b863e32aedfb105a9561971c1317";
 		};
 		F0FA585A028947C28F010ADB /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1237,7 +1255,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrapEase/PhotoMat-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1267,7 +1285,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrapEase/PhotoMat-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
