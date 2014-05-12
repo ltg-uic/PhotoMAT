@@ -22,6 +22,7 @@
 #import "EUCLabel.h"
 #import "EUCMasterLabel.h"
 #import "TimelineView.h"
+#import "CountPickerViewController.h"
 
 
 @interface EUCLabelViewController () <UITextFieldDelegate, UITextViewDelegate, OBOvumSource, OBDropZone> {
@@ -101,7 +102,6 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     _tagList.maxNumberOfLabels = 12;
     [self refreshLocalBurstCache];
 
-
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -180,9 +180,14 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 - (void)updatePhotoLabels:(EUCBurst *)burst {
     _timestampLabel.text = [dateformat stringFromDate:burst.date];
 
-    _countLabel.text = [NSString stringWithFormat:@"%d/%d",burstIndex+1, bursts.count];
+    [self changeCountLabel:[NSString stringWithFormat:@"%d/%d", burstIndex + 1, bursts.count]];
 }
 
+- (void)changeCountLabel:(NSString *)title {
+    [_countLabel setTitle:title forState:UIControlStateNormal];
+    [_countLabel setTitle:title forState:UIControlStateHighlighted];
+    [_countLabel setTitle:title forState:UIControlStateSelected];
+}
 
 - (void)createImageBorder {
     CALayer *layer = _imageView.layer;
@@ -207,7 +212,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 - (void)saveNote {
 
-    if( burstIndex >= 0 && burstIndex < bursts.count ) {
+    if (burstIndex >= 0 && burstIndex < bursts.count) {
         EUCBurst *burst = bursts[burstIndex];
 
         [[EUCDatabase sharedInstance] addNote:_noteTextView.text toBurst:burst.burstId];
@@ -220,7 +225,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
 
-   [self saveNote];
+    [self saveNote];
 }
 
 #pragma mark - Textfield delegates
@@ -611,6 +616,51 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     }
 }
 
+- (void)jumpToImageWithIndex:(int)newBurstIndex {
+
+    [self saveNote];
+
+
+    //previous index
+    EUCBurst *oldBurst = bursts[burstIndex];
+    [oldBurst setHasBeenVisited:YES];
+    oldBurst.highlighted = NO;
+    bursts[burstIndex] = oldBurst;
+
+
+    burstIndex = newBurstIndex;
+
+
+    //current burst
+    EUCBurst *burst = bursts[burstIndex];
+    [burst setHasBeenVisited:YES];
+    burst.highlighted = YES;
+
+
+    bursts[burstIndex] = burst;
+
+    _imageView.image = nil;
+    [self updatePhotoLabels:burst];
+
+
+    NSString *note = [[EUCDatabase sharedInstance] getNoteForBurst:burst.burstId];
+
+    _noteTextView.text = note;
+
+    [self updateTimelineWithBurstHighlightingBursts:bursts];
+
+    BOOL wasPlaying = [self pauseAnimation];
+
+    [self addLabelsToDropOverlay:burst];
+
+    highlightedImageIndex = 0;
+
+    if (wasPlaying)
+        [self playAnimation];
+
+
+}
+
 - (IBAction)swipeImageNext:(id)sender {
     [self saveNote];
 
@@ -637,14 +687,14 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
         if (hasPrevious) {
             EUCBurst *burst = bursts[burstIndex - 1];
-            [burst setHasBeenVisited: YES];
+            [burst setHasBeenVisited:YES];
             burst.highlighted = NO;
             bursts[burstIndex - 1] = burst;
         }
 
         //current burst
         EUCBurst *burst = bursts[burstIndex];
-        [burst setHasBeenVisited: YES];
+        [burst setHasBeenVisited:YES];
         burst.highlighted = YES;
 
 
@@ -671,7 +721,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
 
     }
-    
+
 }
 
 - (void)playAnimation {
@@ -787,5 +837,38 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 }
 
 
+- (IBAction)changeCountAction:(id)sender {
+    CountPickerViewController *content = [[CountPickerViewController alloc] initWithNibName:@"CountPickerViewController" bundle:nil];
 
+    popoverController = [[UIPopoverController alloc]
+            initWithContentViewController:content];
+
+    //popoverController = self;
+    content.somePopoverController = popoverController;
+    content.modalInPopover = YES;
+
+
+    NSMutableArray *burstIndexes = [[NSMutableArray alloc] init];
+
+    for (int i = 0; i < bursts.count; i++) {
+        [burstIndexes addObject:[@(i + 1) stringValue]];
+    }
+
+    content.burstIndexes = burstIndexes;
+    [content selectRow:burstIndex];
+
+    void (^finishedHandler)(NSString *) = ^(NSString *newBurstIndex) {
+
+
+        [self changeCountLabel:[NSString stringWithFormat:@"%d/%d", burstIndex + 1, bursts.count]];
+
+        [self jumpToImageWithIndex:[newBurstIndex intValue] - 1];
+
+    };
+    content.finishedHandler = finishedHandler;
+    [popoverController setPopoverContentSize:CGSizeMake(180, 200) animated:true];
+    CGRect buttonRect = [_countLabel convertRect:_countLabel.frame toView:self.view];
+
+    [popoverController presentPopoverFromRect:_countLabel.frame inView:_countLabel.superview permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
 @end

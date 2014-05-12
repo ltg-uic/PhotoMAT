@@ -142,8 +142,6 @@ int textWidth = 80;
 
     } else if (_bursts != nil ) {
 
-
-
         //create end point labels
         EUCBurst *firstBurst = [_bursts firstObject];
         NSString *firstTextLabel = [dateformat stringFromDate:firstBurst.date];

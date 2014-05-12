@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13D45a" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -9,7 +9,7 @@
                 <outlet property="addLabelField" destination="cyW-qK-TDZ" id="ggV-Lc-wSl"/>
                 <outlet property="animateButton" destination="uxm-XQ-Tal" id="QtZ-O8-ooD"/>
                 <outlet property="cameraLabel" destination="PAA-HB-vpY" id="kEP-S5-1CX"/>
-                <outlet property="countLabel" destination="e9B-dn-WUX" id="VZ9-c1-J7H"/>
+                <outlet property="countLabel" destination="Eup-Ss-mDU" id="EEh-Pj-W4n"/>
                 <outlet property="dropOverlayView" destination="Zld-3c-CHl" id="c8N-nv-F31"/>
                 <outlet property="imageView" destination="CQh-Pk-2XZ" id="VVw-a6-sLG"/>
                 <outlet property="noteTextView" destination="KSW-OA-Awf" id="HLX-tw-dqD"/>
@@ -39,12 +39,6 @@
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1000/1000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9B-dn-WUX">
-                            <rect key="frame" x="610" y="8" width="82" height="21"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uxm-XQ-Tal">
                             <rect key="frame" x="313" y="5" width="75" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -53,6 +47,16 @@
                             </state>
                             <connections>
                                 <action selector="animateButton:" destination="-1" eventType="touchUpInside" id="7lh-3L-OWF"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eup-Ss-mDU">
+                            <rect key="frame" x="618" y="4" width="74" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="1000/1000">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="changeCountAction:" destination="-1" eventType="touchUpInside" id="jXV-2e-bqQ"/>
                             </connections>
                         </button>
                     </subviews>

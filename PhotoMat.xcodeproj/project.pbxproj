@@ -33,6 +33,8 @@
 		7080F7DD18F746F60087A66F /* PopoverTagContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7D918F746F60087A66F /* PopoverTagContentViewController.xib */; };
 		7080F7E118F747620087A66F /* EUCNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7080F7DF18F747620087A66F /* EUCNotesViewController.m */; };
 		7080F7E218F747620087A66F /* EUCNotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7080F7E018F747620087A66F /* EUCNotesViewController.xib */; };
+		708DAED5191EC8BA00E747A9 /* CountPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 708DAED3191EC8BA00E747A9 /* CountPickerViewController.m */; };
+		708DAED6191EC8BA00E747A9 /* CountPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 708DAED4191EC8BA00E747A9 /* CountPickerViewController.xib */; };
 		70BB003919044C5400ACB494 /* EUCAnalyzeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BB003719044C5400ACB494 /* EUCAnalyzeViewController.m */; };
 		70BB003A19044C5400ACB494 /* EUCAnalyzeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70BB003819044C5400ACB494 /* EUCAnalyzeViewController.xib */; };
 		70BB004C190487FC00ACB494 /* AnalyzeLabelUIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70BB004B190487FC00ACB494 /* AnalyzeLabelUIView.xib */; };
@@ -221,6 +223,9 @@
 		7080F7DE18F747620087A66F /* EUCNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUCNotesViewController.h; sourceTree = "<group>"; };
 		7080F7DF18F747620087A66F /* EUCNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUCNotesViewController.m; sourceTree = "<group>"; };
 		7080F7E018F747620087A66F /* EUCNotesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCNotesViewController.xib; sourceTree = "<group>"; };
+		708DAED2191EC8BA00E747A9 /* CountPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountPickerViewController.h; sourceTree = "<group>"; };
+		708DAED3191EC8BA00E747A9 /* CountPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountPickerViewController.m; sourceTree = "<group>"; };
+		708DAED4191EC8BA00E747A9 /* CountPickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountPickerViewController.xib; sourceTree = "<group>"; };
 		70BB003619044C5400ACB494 /* EUCAnalyzeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EUCAnalyzeViewController.h; sourceTree = "<group>"; };
 		70BB003719044C5400ACB494 /* EUCAnalyzeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUCAnalyzeViewController.m; sourceTree = "<group>"; };
 		70BB003819044C5400ACB494 /* EUCAnalyzeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCAnalyzeViewController.xib; sourceTree = "<group>"; };
@@ -458,6 +463,9 @@
 				7080F7A918F743210087A66F /* EUCLabelViewController.h */,
 				7080F7AA18F743210087A66F /* EUCLabelViewController.m */,
 				7080F7AB18F743210087A66F /* EUCLabelViewController.xib */,
+				708DAED2191EC8BA00E747A9 /* CountPickerViewController.h */,
+				708DAED3191EC8BA00E747A9 /* CountPickerViewController.m */,
+				708DAED4191EC8BA00E747A9 /* CountPickerViewController.xib */,
 				7080F7AE18F743210087A66F /* TagList.h */,
 				7080F7AF18F743210087A66F /* TagList.m */,
 				7080F7B018F743210087A66F /* TagView.h */,
@@ -970,6 +978,7 @@
 				B4E6BE2118DE3EB400AC9D84 /* gear@2x.png in Resources */,
 				B4E6BE4918DEA5E700AC9D84 /* EUCSelectCell.xib in Resources */,
 				B4E6BE9518E13C5800AC9D84 /* camera.png in Resources */,
+				708DAED6191EC8BA00E747A9 /* CountPickerViewController.xib in Resources */,
 				702ACBC318F756760001C9D7 /* EUCCloudViewController.xib in Resources */,
 				B4E6BE1918DE008000AC9D84 /* EUCKnapsackViewController.xib in Resources */,
 				7080F7B818F743210087A66F /* EUCLabelViewController.xib in Resources */,
@@ -1085,6 +1094,7 @@
 				B4E6BD6818DDC33C00AC9D84 /* EUCFilterViewController.m in Sources */,
 				B4E6BD5718DDBB5600AC9D84 /* EUCFileSystem.m in Sources */,
 				B4E6BE3F18DE9EBC00AC9D84 /* UIImage+ImageEffects.m in Sources */,
+				708DAED5191EC8BA00E747A9 /* CountPickerViewController.m in Sources */,
 				B4E6BE4318DEA37C00AC9D84 /* EUCSelectViewController.m in Sources */,
 				B43658EE18F18BF10017672E /* NSString+EUCStringExtensions.m in Sources */,
 				B4E6BE7418DFC51300AC9D84 /* EUCDeploymentCell.m in Sources */,
