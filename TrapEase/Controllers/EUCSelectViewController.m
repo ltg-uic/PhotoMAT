@@ -24,6 +24,8 @@ extern CGFloat defaultWideness;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) NSArray *sortedArrayOfImages;
 
+- (IBAction)selectAll:(id)sender;
+- (IBAction)unselectAll:(id)sender;
 @end
 
 @implementation EUCSelectViewController
@@ -264,4 +266,27 @@ extern CGFloat defaultWideness;
     [self.presentingViewController.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 
+- (IBAction)selectAll:(id)sender {
+    NSInteger row = 0;
+    NSIndexPath * indexPath;
+    for (EUCBurst * burst in self.bursts) {
+        burst.selected = YES;
+        indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+        EUCSelectCell * cell = (EUCSelectCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+        row++;
+        [self configureCell:cell atIndexPath:indexPath];
+    }
+}
+
+- (IBAction)unselectAll:(id)sender {
+    NSInteger row = 0;
+    NSIndexPath * indexPath;
+    for (EUCBurst * burst in self.bursts) {
+        burst.selected = NO;
+        indexPath = [NSIndexPath indexPathForRow:row inSection:0];
+        EUCSelectCell * cell = (EUCSelectCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+        row++;
+        [self configureCell:cell atIndexPath:indexPath];
+    }
+}
 @end
