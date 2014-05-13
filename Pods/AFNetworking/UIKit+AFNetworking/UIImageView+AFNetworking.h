@@ -1,6 +1,6 @@
 // UIImageView+AFNetworking.h
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -62,7 +62,7 @@
  
  @discussion Subclasses of `AFImageResponseSerializer` could be used to perform post-processing, such as color correction, face detection, or other effects. See https://github.com/AFNetworking/AFCoreImageSerializer
  */
-@property (nonatomic, strong) AFImageResponseSerializer <AFURLResponseSerialization> * imageResponseSerializer;
+@property(nonatomic, strong) AFImageResponseSerializer <AFURLResponseSerialization> *imageResponseSerializer;
 
 ///--------------------
 /// @name Setting Image

@@ -1,6 +1,6 @@
 // AFNetworkActivityIndicatorManager.m
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,19 +27,21 @@
 #import "AFHTTPRequestOperation.h"
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
+
 #import "AFURLSessionManager.h"
+
 #endif
 
 static NSTimeInterval const kAFNetworkActivityIndicatorInvisibilityDelay = 0.17;
 
-static NSURLRequest * AFNetworkRequestFromNotification(NSNotification *notification) {
+static NSURLRequest *AFNetworkRequestFromNotification(NSNotification *notification) {
     if ([[notification object] isKindOfClass:[AFURLConnectionOperation class]]) {
-        return [(AFURLConnectionOperation *)[notification object] request];
+        return [(AFURLConnectionOperation *) [notification object] request];
     }
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000
     if ([[notification object] respondsToSelector:@selector(originalRequest)]) {
-        return [(NSURLSessionTask *)[notification object] originalRequest];
+        return [(NSURLSessionTask *) [notification object] originalRequest];
     }
 #endif
 
@@ -47,11 +49,12 @@ static NSURLRequest * AFNetworkRequestFromNotification(NSNotification *notificat
 }
 
 @interface AFNetworkActivityIndicatorManager ()
-@property (readwrite, nonatomic, assign) NSInteger activityCount;
-@property (readwrite, nonatomic, strong) NSTimer *activityIndicatorVisibilityTimer;
-@property (readonly, nonatomic, getter = isNetworkActivityIndicatorVisible) BOOL networkActivityIndicatorVisible;
+@property(readwrite, nonatomic, assign) NSInteger activityCount;
+@property(readwrite, nonatomic, strong) NSTimer *activityIndicatorVisibilityTimer;
+@property(readonly, nonatomic, getter = isNetworkActivityIndicatorVisible) BOOL networkActivityIndicatorVisible;
 
 - (void)updateNetworkActivityIndicatorVisibility;
+
 - (void)updateNetworkActivityIndicatorVisibilityDelayed;
 @end
 
@@ -118,10 +121,10 @@ static NSURLRequest * AFNetworkRequestFromNotification(NSNotification *notificat
 }
 
 - (void)setActivityCount:(NSInteger)activityCount {
-	@synchronized(self) {
-		_activityCount = activityCount;
-	}
-    
+    @synchronized (self) {
+        _activityCount = activityCount;
+    }
+
     dispatch_async(dispatch_get_main_queue(), ^{
         [self updateNetworkActivityIndicatorVisibilityDelayed];
     });
@@ -129,11 +132,11 @@ static NSURLRequest * AFNetworkRequestFromNotification(NSNotification *notificat
 
 - (void)incrementActivityCount {
     [self willChangeValueForKey:@"activityCount"];
-	@synchronized(self) {
-		_activityCount++;
-	}
+    @synchronized (self) {
+        _activityCount++;
+    }
     [self didChangeValueForKey:@"activityCount"];
-    
+
     dispatch_async(dispatch_get_main_queue(), ^{
         [self updateNetworkActivityIndicatorVisibilityDelayed];
     });
@@ -141,14 +144,14 @@ static NSURLRequest * AFNetworkRequestFromNotification(NSNotification *notificat
 
 - (void)decrementActivityCount {
     [self willChangeValueForKey:@"activityCount"];
-	@synchronized(self) {
+    @synchronized (self) {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wgnu"
-		_activityCount = MAX(_activityCount - 1, 0);
+        _activityCount = MAX(_activityCount - 1, 0);
 #pragma clang diagnostic pop
-	}
+    }
     [self didChangeValueForKey:@"activityCount"];
-    
+
     dispatch_async(dispatch_get_main_queue(), ^{
         [self updateNetworkActivityIndicatorVisibilityDelayed];
     });

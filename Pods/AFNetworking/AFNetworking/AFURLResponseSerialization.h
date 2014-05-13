@@ -1,6 +1,6 @@
 // AFSerialization.h
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@
  */
 - (id)responseObjectForResponse:(NSURLResponse *)response
                            data:(NSData *)data
-                          error:(NSError *__autoreleasing *)error;
+                          error:(NSError * __autoreleasing *)error;
 
 @end
 
@@ -57,7 +57,7 @@
 /**
  The string encoding used to serialize parameters.
  */
-@property (nonatomic, assign) NSStringEncoding stringEncoding;
+@property(nonatomic, assign) NSStringEncoding stringEncoding;
 
 /**
  Creates and returns a serializer with default configuration.
@@ -73,12 +73,12 @@
 
  See http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
  */
-@property (nonatomic, strong) NSIndexSet *acceptableStatusCodes;
+@property(nonatomic, strong) NSIndexSet *acceptableStatusCodes;
 
 /**
  The acceptable MIME types for responses. When non-`nil`, responses with a `Content-Type` with MIME types that do not intersect with the set will result in an error during validation.
  */
-@property (nonatomic, strong) NSSet *acceptableContentTypes;
+@property(nonatomic, strong) NSSet *acceptableContentTypes;
 
 /**
  Validates the specified response and data.
@@ -93,7 +93,7 @@
  */
 - (BOOL)validateResponse:(NSHTTPURLResponse *)response
                     data:(NSData *)data
-                   error:(NSError *__autoreleasing *)error;
+                   error:(NSError * __autoreleasing *)error;
 
 @end
 
@@ -114,7 +114,12 @@
 /**
  Options for reading the response JSON data and creating the Foundation objects. For possible values, see the `NSJSONSerialization` documentation section "NSJSONReadingOptions". `0` by default.
  */
-@property (nonatomic, assign) NSJSONReadingOptions readingOptions;
+@property(nonatomic, assign) NSJSONReadingOptions readingOptions;
+
+/**
+ Whether to remove keys with `NSNull` values from response JSON. Defaults to `NO`.
+ */
+@property(nonatomic, assign) BOOL removesKeysWithNullValues;
 
 /**
  Creates and returns a JSON serializer with specified reading and writing options.
@@ -183,12 +188,12 @@
 /**
  The property list format. Possible values are described in "NSPropertyListFormat".
  */
-@property (nonatomic, assign) NSPropertyListFormat format;
+@property(nonatomic, assign) NSPropertyListFormat format;
 
 /**
  The property list reading options. Possible values are described in "NSPropertyListMutabilityOptions."
  */
-@property (nonatomic, assign) NSPropertyListReadOptions readOptions;
+@property(nonatomic, assign) NSPropertyListReadOptions readOptions;
 
 /**
  Creates and returns a property list serializer with a specified format, read options, and write options.
@@ -225,12 +230,12 @@
 /**
  The scale factor used when interpreting the image data to construct `responseImage`. Specifying a scale factor of 1.0 results in an image whose size matches the pixel-based dimensions of the image. Applying a different scale factor changes the size of the image as reported by the size property. This is set to the value of scale of the main screen by default, which automatically scales images for retina displays, for instance.
  */
-@property (nonatomic, assign) CGFloat imageScale;
+@property(nonatomic, assign) CGFloat imageScale;
 
 /**
  Whether to automatically inflate response image data for compressed formats (such as PNG or JPEG). Enabling this can significantly improve drawing performance on iOS when used with `setCompletionBlockWithSuccess:failure:`, as it allows a bitmap representation to be constructed in the background rather than on the main thread. `YES` by default.
  */
-@property (nonatomic, assign) BOOL automaticallyInflatesResponseImage;
+@property(nonatomic, assign) BOOL automaticallyInflatesResponseImage;
 #endif
 
 @end
@@ -245,7 +250,7 @@
 /**
  The component response serializers.
  */
-@property (readonly, nonatomic, strong) NSArray *responseSerializers;
+@property(readonly, nonatomic, strong) NSArray *responseSerializers;
 
 /**
  Creates and returns a compound serializer comprised of the specified response serializers.

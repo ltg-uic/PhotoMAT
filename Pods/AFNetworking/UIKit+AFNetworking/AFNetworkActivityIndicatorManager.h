@@ -1,6 +1,6 @@
 // AFNetworkActivityIndicatorManager.h
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -47,12 +47,12 @@
 
  If YES, the manager will change status bar network activity indicator according to network operation notifications it receives. The default value is NO.
  */
-@property (nonatomic, assign, getter = isEnabled) BOOL enabled;
+@property(nonatomic, assign, getter = isEnabled) BOOL enabled;
 
 /**
  A Boolean value indicating whether the network activity indicator is currently displayed in the status bar.
  */
-@property (readonly, nonatomic, assign) BOOL isNetworkActivityIndicatorVisible;
+@property(readonly, nonatomic, assign) BOOL isNetworkActivityIndicatorVisible;
 
 /**
  Returns the shared network activity indicator manager object for the system.

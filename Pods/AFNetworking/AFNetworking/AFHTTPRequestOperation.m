@@ -1,6 +1,6 @@
 // AFHTTPRequestOperation.m
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -45,15 +45,15 @@ static dispatch_group_t http_request_operation_completion_group() {
 #pragma mark -
 
 @interface AFURLConnectionOperation ()
-@property (readwrite, nonatomic, strong) NSURLRequest *request;
-@property (readwrite, nonatomic, strong) NSURLResponse *response;
+@property(readwrite, nonatomic, strong) NSURLRequest *request;
+@property(readwrite, nonatomic, strong) NSURLResponse *response;
 @end
 
 @interface AFHTTPRequestOperation ()
-@property (readwrite, nonatomic, strong) NSHTTPURLResponse *response;
-@property (readwrite, nonatomic, strong) id responseObject;
-@property (readwrite, nonatomic, strong) NSError *responseSerializationError;
-@property (readwrite, nonatomic, strong) NSRecursiveLock *lock;
+@property(readwrite, nonatomic, strong) NSHTTPURLResponse *response;
+@property(readwrite, nonatomic, strong) id responseObject;
+@property(readwrite, nonatomic, strong) NSError *responseSerializationError;
+@property(readwrite, nonatomic, strong) NSRecursiveLock *lock;
 @end
 
 @implementation AFHTTPRequestOperation
@@ -105,8 +105,7 @@ static dispatch_group_t http_request_operation_completion_group() {
 #pragma mark - AFHTTPRequestOperation
 
 - (void)setCompletionBlockWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
-{
+                              failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     // completionBlock is manually nilled out in AFURLConnectionOperation to break the retain cycle.
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
@@ -153,9 +152,9 @@ static dispatch_group_t http_request_operation_completion_group() {
 - (void)pause {
     u_int64_t offset = 0;
     if ([self.outputStream propertyForKey:NSStreamFileCurrentOffsetKey]) {
-        offset = [(NSNumber *)[self.outputStream propertyForKey:NSStreamFileCurrentOffsetKey] unsignedLongLongValue];
+        offset = [(NSNumber *) [self.outputStream propertyForKey:NSStreamFileCurrentOffsetKey] unsignedLongLongValue];
     } else {
-        offset = [(NSData *)[self.outputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey] length];
+        offset = [(NSData *) [self.outputStream propertyForKey:NSStreamDataWrittenToMemoryStreamKey] length];
     }
 
     NSMutableURLRequest *mutableURLRequest = [self.request mutableCopy];
@@ -195,7 +194,7 @@ static dispatch_group_t http_request_operation_completion_group() {
     operation.responseSerializer = [self.responseSerializer copyWithZone:zone];
     operation.completionQueue = self.completionQueue;
     operation.completionGroup = self.completionGroup;
-    
+
     return operation;
 }
 

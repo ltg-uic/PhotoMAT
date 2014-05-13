@@ -1,6 +1,6 @@
 // UIProgressView+AFNetworking.m
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -29,18 +29,17 @@
 #import "AFURLConnectionOperation.h"
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
-#import "AFURLSessionManager.h"
 #endif
 
-static void * AFTaskCountOfBytesSentContext = &AFTaskCountOfBytesSentContext;
-static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedContext;
+static void *AFTaskCountOfBytesSentContext = &AFTaskCountOfBytesSentContext;
+static void *AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedContext;
 
 @interface AFURLConnectionOperation (_UIProgressView)
-@property (readwrite, nonatomic, copy) void (^uploadProgress)(NSUInteger bytes, NSInteger totalBytes, NSInteger totalBytesExpected);
-@property (readwrite, nonatomic, assign, setter = af_setUploadProgressAnimated:) BOOL af_uploadProgressAnimated;
+@property(readwrite, nonatomic, copy) void (^uploadProgress)(NSUInteger bytes, long long totalBytes, long long totalBytesExpected);
+@property(readwrite, nonatomic, assign, setter = af_setUploadProgressAnimated:) BOOL af_uploadProgressAnimated;
 
-@property (readwrite, nonatomic, copy) void (^downloadProgress)(NSUInteger bytes, NSInteger totalBytes, NSInteger totalBytesExpected);
-@property (readwrite, nonatomic, assign, setter = af_setDownloadProgressAnimated:) BOOL af_downloadProgressAnimated;
+@property(readwrite, nonatomic, copy) void (^downloadProgress)(NSUInteger bytes, long long totalBytes, long long totalBytesExpected);
+@property(readwrite, nonatomic, assign, setter = af_setDownloadProgressAnimated:) BOOL af_downloadProgressAnimated;
 @end
 
 @implementation AFURLConnectionOperation (_UIProgressView)
@@ -56,7 +55,7 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
 @implementation UIProgressView (AFNetworking)
 
 - (BOOL)af_uploadProgressAnimated {
-    return [(NSNumber *)objc_getAssociatedObject(self, @selector(af_uploadProgressAnimated)) boolValue];
+    return [(NSNumber *) objc_getAssociatedObject(self, @selector(af_uploadProgressAnimated)) boolValue];
 }
 
 - (void)af_setUploadProgressAnimated:(BOOL)animated {
@@ -64,7 +63,7 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
 }
 
 - (BOOL)af_downloadProgressAnimated {
-    return [(NSNumber *)objc_getAssociatedObject(self, @selector(af_downloadProgressAnimated)) boolValue];
+    return [(NSNumber *) objc_getAssociatedObject(self, @selector(af_downloadProgressAnimated)) boolValue];
 }
 
 - (void)af_setDownloadProgressAnimated:(BOOL)animated {
@@ -74,9 +73,9 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
 #pragma mark -
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+
 - (void)setProgressWithUploadProgressOfTask:(NSURLSessionUploadTask *)task
-                                   animated:(BOOL)animated
-{
+                                   animated:(BOOL)animated {
     [task addObserver:self forKeyPath:@"state" options:0 context:AFTaskCountOfBytesSentContext];
     [task addObserver:self forKeyPath:@"countOfBytesSent" options:0 context:AFTaskCountOfBytesSentContext];
 
@@ -84,30 +83,29 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
 }
 
 - (void)setProgressWithDownloadProgressOfTask:(NSURLSessionDownloadTask *)task
-                                     animated:(BOOL)animated
-{
+                                     animated:(BOOL)animated {
     [task addObserver:self forKeyPath:@"state" options:0 context:AFTaskCountOfBytesReceivedContext];
     [task addObserver:self forKeyPath:@"countOfBytesReceived" options:0 context:AFTaskCountOfBytesReceivedContext];
 
     [self af_setDownloadProgressAnimated:animated];
 }
+
 #endif
 
 #pragma mark -
 
 - (void)setProgressWithUploadProgressOfOperation:(AFURLConnectionOperation *)operation
-                                        animated:(BOOL)animated
-{
-    __weak __typeof(self)weakSelf = self;
-    void (^original)(NSUInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) = [operation.uploadProgress copy];
-    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
+                                        animated:(BOOL)animated {
+    __weak __typeof (self) weakSelf = self;
+    void (^original)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) = [operation.uploadProgress copy];
+    [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
         if (original) {
             original(bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
             if (totalBytesExpectedToWrite > 0) {
-                __strong __typeof(weakSelf)strongSelf = weakSelf;
+                __strong __typeof (weakSelf) strongSelf = weakSelf;
                 [strongSelf setProgress:(totalBytesWritten / (totalBytesExpectedToWrite * 1.0f)) animated:animated];
             }
         });
@@ -115,19 +113,18 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
 }
 
 - (void)setProgressWithDownloadProgressOfOperation:(AFURLConnectionOperation *)operation
-                                          animated:(BOOL)animated
-{
-    __weak __typeof(self)weakSelf = self;
-    void (^original)(NSUInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead) = [operation.downloadProgress copy];
-    [operation setDownloadProgressBlock:^(NSUInteger bytesRead, NSInteger totalBytesRead, NSInteger totalBytesExpectedToRead) {
+                                          animated:(BOOL)animated {
+    __weak __typeof (self) weakSelf = self;
+    void (^original)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) = [operation.downloadProgress copy];
+    [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
         if (original) {
             original(bytesRead, totalBytesRead, totalBytesExpectedToRead);
         }
 
         dispatch_async(dispatch_get_main_queue(), ^{
             if (totalBytesExpectedToRead > 0) {
-                __strong __typeof(weakSelf)strongSelf = weakSelf;
-                [strongSelf setProgress:(totalBytesRead / (totalBytesExpectedToRead  * 1.0f)) animated:animated];
+                __strong __typeof (weakSelf) strongSelf = weakSelf;
+                [strongSelf setProgress:(totalBytesRead / (totalBytesExpectedToRead * 1.0f)) animated:animated];
             }
         });
     }];
@@ -138,8 +135,7 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(__unused NSDictionary *)change
-                       context:(void *)context
-{
+                       context:(void *)context {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
     if (context == AFTaskCountOfBytesSentContext || context == AFTaskCountOfBytesReceivedContext) {
         if ([keyPath isEqualToString:NSStringFromSelector(@selector(countOfBytesSent))]) {
@@ -159,7 +155,7 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
         }
 
         if ([keyPath isEqualToString:NSStringFromSelector(@selector(state))]) {
-            if ([(NSURLSessionTask *)object state] == NSURLSessionTaskStateCompleted) {
+            if ([(NSURLSessionTask *) object state] == NSURLSessionTaskStateCompleted) {
                 @try {
                     [object removeObserver:self forKeyPath:NSStringFromSelector(@selector(state))];
 
@@ -171,7 +167,7 @@ static void * AFTaskCountOfBytesReceivedContext = &AFTaskCountOfBytesReceivedCon
                         [object removeObserver:self forKeyPath:NSStringFromSelector(@selector(countOfBytesReceived))];
                     }
                 }
-                @catch (NSException * __unused exception) {}
+                @catch (NSException *__unused exception) {}
             }
         }
     }

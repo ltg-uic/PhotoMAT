@@ -1,6 +1,6 @@
 // AFSecurity.h
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,27 +39,27 @@ typedef NS_ENUM(NSUInteger, AFSSLPinningMode) {
 /**
  The criteria by which server trust should be evaluated against the pinned SSL certificates. Defaults to `AFSSLPinningModeNone`.
  */
-@property (nonatomic, assign) AFSSLPinningMode SSLPinningMode;
+@property(nonatomic, assign) AFSSLPinningMode SSLPinningMode;
 
 /**
  Whether to evaluate an entire SSL certificate chain, or just the leaf certificate. Defaults to `YES`.
  */
-@property (nonatomic, assign) BOOL validatesCertificateChain;
+@property(nonatomic, assign) BOOL validatesCertificateChain;
 
 /**
  The certificates used to evaluate server trust according to the SSL pinning mode. By default, this property is set to any (`.cer`) certificates included in the app bundle.
  */
-@property (nonatomic, strong) NSArray *pinnedCertificates;
+@property(nonatomic, strong) NSArray *pinnedCertificates;
 
 /**
  Whether or not to trust servers with an invalid or expired SSL certificates. Defaults to `NO`.
  */
-@property (nonatomic, assign) BOOL allowInvalidCertificates;
+@property(nonatomic, assign) BOOL allowInvalidCertificates;
 
 /**
  Whether or not to validate the domain name in the certificates CN field. Defaults to `YES` for `AFSSLPinningModePublicKey` or `AFSSLPinningModeCertificate`, otherwise `NO`.
  */
-@property (nonatomic, assign) BOOL validatesDomainName;
+@property(nonatomic, assign) BOOL validatesDomainName;
 
 ///-----------------------------------------
 /// @name Getting Specific Security Policies

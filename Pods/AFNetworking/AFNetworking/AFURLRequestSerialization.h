@@ -1,6 +1,6 @@
 // AFSerialization.h
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,8 +21,11 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+
 #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
+
 #import <UIKit/UIKit.h>
+
 #endif
 
 /**
@@ -68,49 +71,49 @@ typedef NS_ENUM(NSUInteger, AFHTTPRequestQueryStringSerializationStyle) {
 /**
  The string encoding used to serialize parameters. `NSUTF8StringEncoding` by default.
  */
-@property (nonatomic, assign) NSStringEncoding stringEncoding;
+@property(nonatomic, assign) NSStringEncoding stringEncoding;
 
 /**
  Whether created requests can use the device’s cellular radio (if present). `YES` by default.
  
  @see NSMutableURLRequest -setAllowsCellularAccess:
  */
-@property (nonatomic, assign) BOOL allowsCellularAccess;
+@property(nonatomic, assign) BOOL allowsCellularAccess;
 
 /**
  The cache policy of created requests. `NSURLRequestUseProtocolCachePolicy` by default.
  
  @see NSMutableURLRequest -setCachePolicy:
  */
-@property (nonatomic, assign) NSURLRequestCachePolicy cachePolicy;
+@property(nonatomic, assign) NSURLRequestCachePolicy cachePolicy;
 
 /**
  Whether created requests should use the default cookie handling. `YES` by default.
  
  @see NSMutableURLRequest -setHTTPShouldHandleCookies:
  */
-@property (nonatomic, assign) BOOL HTTPShouldHandleCookies;
+@property(nonatomic, assign) BOOL HTTPShouldHandleCookies;
 
 /**
  Whether created requests can continue transmitting data before receiving a response from an earlier transmission. `NO` by default
  
  @see NSMutableURLRequest -setHTTPShouldUsePipelining:
  */
-@property (nonatomic, assign) BOOL HTTPShouldUsePipelining;
+@property(nonatomic, assign) BOOL HTTPShouldUsePipelining;
 
 /**
  The network service type for created requests. `NSURLNetworkServiceTypeDefault` by default.
  
  @see NSMutableURLRequest -setNetworkServiceType:
  */
-@property (nonatomic, assign) NSURLRequestNetworkServiceType networkServiceType;
+@property(nonatomic, assign) NSURLRequestNetworkServiceType networkServiceType;
 
 /**
  The timeout interval, in seconds, for created requests. The default timeout interval is 60 seconds.
  
  @see NSMutableURLRequest -setTimeoutInterval:
  */
-@property (nonatomic, assign) NSTimeInterval timeoutInterval;
+@property(nonatomic, assign) NSTimeInterval timeoutInterval;
 
 ///---------------------------------------
 /// @name Configuring HTTP Request Headers
@@ -119,7 +122,7 @@ typedef NS_ENUM(NSUInteger, AFHTTPRequestQueryStringSerializationStyle) {
 /**
  Default HTTP header field values to be applied to serialized requests.
  */
-@property (readonly, nonatomic, strong) NSDictionary *HTTPRequestHeaders;
+@property(readonly, nonatomic, strong) NSDictionary *HTTPRequestHeaders;
 
 /**
  Creates and returns a serializer with default configuration.
@@ -132,7 +135,7 @@ typedef NS_ENUM(NSUInteger, AFHTTPRequestQueryStringSerializationStyle) {
  @param field The HTTP header to set a default value for
  @param value The value set as default for the specified header, or `nil`
  */
-- (void)setValue:(NSString *)value
+- (void)  setValue:(NSString *)value
 forHTTPHeaderField:(NSString *)field;
 
 /**
@@ -145,11 +148,9 @@ forHTTPHeaderField:(NSString *)field;
                                        password:(NSString *)password;
 
 /**
- Sets the "Authorization" HTTP header set in request objects made by the HTTP client to a token-based authentication value, such as an OAuth access token. This overwrites any existing value for this header.
-
- @param token The authentication token
+ @deprecated This method has been deprecated. Use -setValue:forHTTPHeaderField: instead.
  */
-- (void)setAuthorizationHeaderFieldWithToken:(NSString *)token;
+- (void)setAuthorizationHeaderFieldWithToken:(NSString *)token DEPRECATED_ATTRIBUTE;
 
 
 /**
@@ -164,7 +165,7 @@ forHTTPHeaderField:(NSString *)field;
 /**
  HTTP methods for which serialized requests will encode parameters as a query string. `GET`, `HEAD`, and `DELETE` by default.
  */
-@property (nonatomic, strong) NSSet *HTTPMethodsEncodingParametersInURI;
+@property(nonatomic, strong) NSSet *HTTPMethodsEncodingParametersInURI;
 
 /**
  Set the method of query string serialization according to one of the pre-defined styles.
@@ -180,7 +181,7 @@ forHTTPHeaderField:(NSString *)field;
 
  @param block A block that defines a process of encoding parameters into a query string. This block returns the query string and takes three arguments: the request, the parameters to encode, and the error that occurred when attempting to encode parameters for the given request.
  */
-- (void)setQueryStringSerializationWithBlock:(NSString * (^)(NSURLRequest *request, NSDictionary *parameters, NSError * __autoreleasing *error))block;
+- (void)setQueryStringSerializationWithBlock:(NSString * (^)(NSURLRequest *request, NSDictionary *parameters, NSError *__autoreleasing *error))block;
 
 ///-------------------------------
 /// @name Creating Request Objects
@@ -308,7 +309,7 @@ extern NSTimeInterval const kAFUploadStream3GSuggestedDelay;
 - (void)appendPartWithInputStream:(NSInputStream *)inputStream
                              name:(NSString *)name
                          fileName:(NSString *)fileName
-                           length:(NSUInteger)length
+                           length:(int64_t)length
                          mimeType:(NSString *)mimeType;
 
 /**
@@ -380,7 +381,7 @@ extern NSTimeInterval const kAFUploadStream3GSuggestedDelay;
 /**
  Options for writing the request JSON data from Foundation objects. For possible values, see the `NSJSONSerialization` documentation section "NSJSONWritingOptions". `0` by default.
  */
-@property (nonatomic, assign) NSJSONWritingOptions writingOptions;
+@property(nonatomic, assign) NSJSONWritingOptions writingOptions;
 
 /**
  Creates and returns a JSON serializer with specified reading and writing options.
@@ -396,12 +397,12 @@ extern NSTimeInterval const kAFUploadStream3GSuggestedDelay;
 /**
  The property list format. Possible values are described in "NSPropertyListFormat".
  */
-@property (nonatomic, assign) NSPropertyListFormat format;
+@property(nonatomic, assign) NSPropertyListFormat format;
 
 /**
  @warning The `writeOptions` property is currently unused.
  */
-@property (nonatomic, assign) NSPropertyListWriteOptions writeOptions;
+@property(nonatomic, assign) NSPropertyListWriteOptions writeOptions;
 
 /**
  Creates and returns a property list serializer with a specified format, read options, and write options.

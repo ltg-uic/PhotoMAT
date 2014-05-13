@@ -619,7 +619,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 - (void)jumpToImageWithIndex:(int)newBurstIndex {
 
     [self saveNote];
-
+    [self removeAllTagsFromDragOverlay];
 
     //previous index
     EUCBurst *oldBurst = bursts[burstIndex];

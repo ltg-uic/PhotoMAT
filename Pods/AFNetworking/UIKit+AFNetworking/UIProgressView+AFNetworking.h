@@ -1,6 +1,6 @@
 // UIProgressView+AFNetworking.h
 //
-// Copyright (c) 2013 AFNetworking (http://afnetworking.com)
+// Copyright (c) 2013-2014 AFNetworking (http://afnetworking.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -48,6 +48,7 @@
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
 - (void)setProgressWithUploadProgressOfTask:(NSURLSessionUploadTask *)task
                                    animated:(BOOL)animated;
+
 #endif
 
 /**
@@ -57,8 +58,10 @@
  @param animated `YES` if the change should be animated, `NO` if the change should happen immediately.
  */
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+
 - (void)setProgressWithDownloadProgressOfTask:(NSURLSessionDownloadTask *)task
                                      animated:(BOOL)animated;
+
 #endif
 
 ///------------------------------------
