@@ -5,6 +5,8 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol TimelineTappedDelegate;
+
 
 @interface TimelineView : UIView {
 
@@ -18,6 +20,7 @@
 @property(nonatomic, strong) NSDate *bandStartTime;
 
 @property(nonatomic, strong) NSDate *bandEndTime;
+@property(nonatomic, weak) id <TimelineTappedDelegate> timelineDelegate;
 
 - (NSString *)getDateForTouchPointXY:(CGPoint)point withStartDate:(NSDate *)startDate;
 @end

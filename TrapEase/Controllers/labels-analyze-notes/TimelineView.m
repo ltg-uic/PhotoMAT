@@ -5,6 +5,7 @@
 
 #import "TimelineView.h"
 #import "EUCBurst.h"
+#import "TimelineTappedDelegate.h"
 
 
 @implementation TimelineView {
@@ -40,6 +41,39 @@ int textWidth = 80;
     dateformat = [[NSDateFormatter alloc] init];
     [dateformat setDateFormat:@"hh:mm:ss a M/d/Y"];
 
+
+    UITapGestureRecognizer *singleFingerTap =
+            [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                    action:@selector(handleSingleTap:)];
+    [self addGestureRecognizer:singleFingerTap];
+
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    CGPoint touchLocation = [recognizer locationInView:self];
+
+    EUCBurst *firstBurst = [_bursts firstObject];
+
+    CGFloat touchPosition = ((touchLocation.x - xposStart) / lineLength) * abs(totalTime);
+
+    NSDate *selectedDate = [[firstBurst date] dateByAddingTimeInterval:touchPosition];
+
+    NSInteger shortestInterval = 0;
+    int selectedIndex = 0;
+    for (int j = 0; j < _bursts.count; j++) {
+        EUCBurst *burst = _bursts[j];
+
+        NSTimeInterval secondsBetween = abs([[burst date] timeIntervalSinceDate:selectedDate]);
+
+        if (j == 0) {
+            shortestInterval = secondsBetween;
+        } else if (secondsBetween <= shortestInterval) {
+            shortestInterval = secondsBetween;
+            selectedIndex = j;
+        }
+    }
+
+    [_timelineDelegate didSelectBurstIndexFromTap:selectedIndex];
 }
 
 - (void)drawLineWithStartDate:(NSDate *)sDate andEndDate:(NSDate *)eDate andXStart:(CGFloat)xStart withColor:(UIColor *)lineColor {

@@ -91,6 +91,7 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
     [self textViewLikeTextField:_noteTextView];
     [_noteTextView setDelegate:self];
     [_addLabelField setDelegate:self];
+    _timelineView.timelineDelegate = self;
     [_addLabelField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 
     //setup drag and drop
@@ -871,4 +872,9 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     [popoverController presentPopoverFromRect:_countLabel.frame inView:_countLabel.superview permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
+
+- (void)didSelectBurstIndexFromTap:(int)selectedBurstIndex {
+    [self jumpToImageWithIndex:selectedBurstIndex];
+}
+
 @end

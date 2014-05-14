@@ -384,6 +384,7 @@
 		C0A7D0F33421A37116664BBA /* AnalyzeLabelUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeLabelUIView.h; sourceTree = "<group>"; };
 		C0A7D2396E491114269E9078 /* TransparentPopoverBackGroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentPopoverBackGroundView.h; sourceTree = "<group>"; };
 		C0A7D509BAB3CB9B4AA610B1 /* TransparentPopoverBackGroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentPopoverBackGroundView.m; sourceTree = "<group>"; };
+		C0A7D570982DC196B489E707 /* TimelineTappedDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineTappedDelegate.h; sourceTree = "<group>"; };
 		C0A7D6E70C791FBA3DE6FD43 /* AnalyzeItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeItem.m; sourceTree = "<group>"; };
 		C0A7D7FAFABDDCAA110F111F /* AnalyzeLabelUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalyzeLabelUIView.m; sourceTree = "<group>"; };
 		C0A7DDF318662ADEE1385028 /* AnalyzeItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalyzeItem.h; sourceTree = "<group>"; };
@@ -472,6 +473,7 @@
 				7080F7B118F743210087A66F /* TagView.m */,
 				7080F7B518F743210087A66F /* TimelineView.h */,
 				7080F7B618F743210087A66F /* TimelineView.m */,
+				C0A7D570982DC196B489E707 /* TimelineTappedDelegate.h */,
 			);
 			name = "label-tab";
 			sourceTree = "<group>";

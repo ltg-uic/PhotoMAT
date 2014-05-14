@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "EUCDeploymentMasterViewController.h"
+#import "TimelineTappedDelegate.h"
 
-@interface EUCLabelViewController : UIViewController <SetChangedDelegate> {
+@interface EUCLabelViewController : UIViewController <SetChangedDelegate, TimelineTappedDelegate> {
 
     __weak IBOutlet UILabel *schoolClassGroupLabel;
 }
