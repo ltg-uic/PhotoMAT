@@ -64,7 +64,6 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="done:" destination="-1" eventType="touchUpInside" id="Gl2-cP-DE2"/>
                         <action selector="unselectAll:" destination="-1" eventType="touchUpInside" id="gjG-43-w2g"/>
                     </connections>
                 </button>
