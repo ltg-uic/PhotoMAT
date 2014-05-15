@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DFCE20DD47024A9A91C979BE"
+               BlueprintIdentifier = "DE8DC20F846541ADBC3A743F"
                BuildableName = "libPods-OBDragDrop.a"
                BlueprintName = "Pods-OBDragDrop"
                ReferencedContainer = "container:Pods.xcodeproj">

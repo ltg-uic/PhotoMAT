@@ -37,7 +37,7 @@
  * and will only be visible in your Crashlytics dashboard.
  *
  **/
-OBJC_EXTERN void CLSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
+OBJC_EXTERN void CLSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
 
 /**
  *
@@ -45,17 +45,17 @@ OBJC_EXTERN void CLSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
  * and your Crashlytics dashboard. It is not recommended for Release builds.
  *
  **/
-OBJC_EXTERN void CLSNSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
+OBJC_EXTERN void CLSNSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1,2);
 
 @protocol CrashlyticsDelegate;
 
 @interface Crashlytics : NSObject
 
-@property(nonatomic, readonly, copy) NSString *apiKey;
-@property(nonatomic, readonly, copy) NSString *version;
-@property(nonatomic, assign) BOOL debugMode;
+@property (nonatomic, readonly, copy) NSString *apiKey;
+@property (nonatomic, readonly, copy) NSString *version;
+@property (nonatomic, assign)         BOOL      debugMode;
 
-@property(nonatomic, assign) NSObject <CrashlyticsDelegate> *delegate;
+@property (nonatomic, assign)         NSObject <CrashlyticsDelegate> *delegate;
 
 /**
  *
@@ -67,7 +67,6 @@ OBJC_EXTERN void CLSNSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
  *
  **/
 + (Crashlytics *)startWithAPIKey:(NSString *)apiKey;
-
 + (Crashlytics *)startWithAPIKey:(NSString *)apiKey afterDelay:(NSTimeInterval)delay;
 
 /**
@@ -77,7 +76,6 @@ OBJC_EXTERN void CLSNSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
  *
  **/
 + (Crashlytics *)startWithAPIKey:(NSString *)apiKey delegate:(NSObject <CrashlyticsDelegate> *)delegate;
-
 + (Crashlytics *)startWithAPIKey:(NSString *)apiKey delegate:(NSObject <CrashlyticsDelegate> *)delegate afterDelay:(NSTimeInterval)delay;
 
 /**
@@ -115,15 +113,11 @@ OBJC_EXTERN void CLSNSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
  *
  **/
 - (void)setUserIdentifier:(NSString *)identifier;
-
 - (void)setUserName:(NSString *)name;
-
 - (void)setUserEmail:(NSString *)email;
 
 + (void)setUserIdentifier:(NSString *)identifier;
-
 + (void)setUserName:(NSString *)name;
-
 + (void)setUserEmail:(NSString *)email;
 
 /**
@@ -132,19 +126,13 @@ OBJC_EXTERN void CLSNSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
  *
  **/
 - (void)setObjectValue:(id)value forKey:(NSString *)key;
-
 - (void)setIntValue:(int)value forKey:(NSString *)key;
-
 - (void)setBoolValue:(BOOL)value forKey:(NSString *)key;
-
 - (void)setFloatValue:(float)value forKey:(NSString *)key;
 
 + (void)setObjectValue:(id)value forKey:(NSString *)key;
-
 + (void)setIntValue:(int)value forKey:(NSString *)key;
-
 + (void)setBoolValue:(BOOL)value forKey:(NSString *)key;
-
 + (void)setFloatValue:(float)value forKey:(NSString *)key;
 
 @end
@@ -160,37 +148,37 @@ OBJC_EXTERN void CLSNSLog(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
 /**
  * Returns the session identifier for the crash report.
  **/
-@property(nonatomic, readonly) NSString *identifier;
+@property (nonatomic, readonly) NSString *identifier;
 
 /**
  * Returns the custom key value data for the crash report.
  **/
-@property(nonatomic, readonly) NSDictionary *customKeys;
+@property (nonatomic, readonly) NSDictionary *customKeys;
 
 /**
  * Returns the CFBundleVersion of the application that crashed.
  **/
-@property(nonatomic, readonly) NSString *bundleVersion;
+@property (nonatomic, readonly) NSString *bundleVersion;
 
 /**
  * Returns the CFBundleShortVersionString of the application that crashed.
  **/
-@property(nonatomic, readonly) NSString *bundleShortVersionString;
+@property (nonatomic, readonly) NSString *bundleShortVersionString;
 
 /**
  * Returns the date that the application crashed at.
  **/
-@property(nonatomic, readonly) NSDate *crashedOnDate;
+@property (nonatomic, readonly) NSDate *crashedOnDate;
 
 /**
  * Returns the os version that the application crashed on.
  **/
-@property(nonatomic, readonly) NSString *OSVersion;
+@property (nonatomic, readonly) NSString *OSVersion;
 
 /**
  * Returns the os build version that the application crashed on.
  **/
-@property(nonatomic, readonly) NSString *OSBuildVersion;
+@property (nonatomic, readonly) NSString *OSBuildVersion;
 
 @end
 
