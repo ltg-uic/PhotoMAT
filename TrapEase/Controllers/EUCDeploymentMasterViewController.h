@@ -38,6 +38,7 @@
 -(NSArray *) burstsForSelectedSets;
 -(NSArray *) namesOfSelectedSets;
 
+- (IBAction)handleRefreshForSetWithId: (NSInteger) setId;
 
 
 @end

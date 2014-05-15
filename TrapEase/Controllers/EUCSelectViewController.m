@@ -26,6 +26,7 @@ extern CGFloat defaultWideness;
 
 - (IBAction)selectAll:(id)sender;
 - (IBAction)unselectAll:(id)sender;
+- (IBAction)cancel:(id)sender;
 @end
 
 @implementation EUCSelectViewController
@@ -274,8 +275,9 @@ extern CGFloat defaultWideness;
         indexPath = [NSIndexPath indexPathForRow:row inSection:0];
         EUCSelectCell * cell = (EUCSelectCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
         row++;
-        [self configureCell:cell atIndexPath:indexPath];
+        [self configureSelectedForCell:cell atIndexPath:indexPath];
     }
+
 }
 
 - (IBAction)unselectAll:(id)sender {
@@ -286,7 +288,12 @@ extern CGFloat defaultWideness;
         indexPath = [NSIndexPath indexPathForRow:row inSection:0];
         EUCSelectCell * cell = (EUCSelectCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
         row++;
-        [self configureCell:cell atIndexPath:indexPath];
+        [self configureSelectedForCell:cell atIndexPath:indexPath];
     }
+}
+
+- (IBAction)cancel:(id)sender {
+    [self unselectAll:sender];
+    [self done:sender];
 }
 @end

@@ -772,7 +772,7 @@ typedef enum : NSUInteger {
         }
     }
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self.master handleRefresh:nil];
+    [self.master handleRefreshForSetWithId:deploymentId];
 
 }
 

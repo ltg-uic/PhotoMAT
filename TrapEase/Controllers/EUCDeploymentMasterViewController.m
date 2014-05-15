@@ -62,6 +62,26 @@
     [self.tableView reloadData];
 }
 
+-(void)handleRefreshForSetWithId:(NSInteger)setId {
+    self.deployments = [[EUCDatabase sharedInstance] getDeployments];
+    [self.tableView reloadData];
+    
+    NSInteger row = 0;
+    NSInteger goodRow = 0;
+    for (NSDictionary * deployment in self.deployments) {
+        if ([deployment[@"id"] integerValue] == setId) {
+            goodRow = row;
+        }
+        else {
+            row++;
+        }
+        self.selectedStatusBySetId[deployment[@"id"]] = @NO;
+    }
+    
+    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:goodRow inSection:0];
+    [self.tableView selectRowAtIndexPath:indexPath animated:NSOSF1OperatingSystem scrollPosition:UITableViewScrollPositionTop];
+    [self tableView:_tableView didSelectRowAtIndexPath:indexPath];
+}
 
 #pragma mark - UITableViewDataSource
 
