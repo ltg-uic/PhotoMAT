@@ -26,6 +26,7 @@ extern CGFloat defaultWideness;
 
 - (IBAction)selectAll:(id)sender;
 - (IBAction)unselectAll:(id)sender;
+- (IBAction)cancel:(id)sender;
 @end
 
 @implementation EUCSelectViewController
@@ -293,5 +294,10 @@ extern CGFloat defaultWideness;
         [self configureSelectedForCell:cell atIndexPath:indexPath];
     }
     NSLog(@"diff %ld", (long)[d1 timeIntervalSinceNow] * -1);
+}
+
+- (IBAction)cancel:(id)sender {
+    [self unselectAll:sender];
+    [self done:sender];
 }
 @end
