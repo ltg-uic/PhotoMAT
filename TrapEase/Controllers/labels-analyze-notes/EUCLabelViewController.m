@@ -631,6 +631,11 @@ NSString *const DELETE_SELECTED_LABEL = @"DELETE_SELECTED_LABEL";
 
     burstIndex = newBurstIndex;
 
+    BOOL exists = burstIndex < [bursts count] ? YES : NO;
+
+    if (exists == NO) {
+        burstIndex--;
+    }
 
     //current burst
     EUCBurst *burst = bursts[burstIndex];
