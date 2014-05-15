@@ -270,7 +270,6 @@ extern CGFloat defaultWideness;
 - (IBAction)selectAll:(id)sender {
     NSInteger row = 0;
     NSIndexPath * indexPath;
-    NSDate * d1 = [NSDate date];
     for (EUCBurst * burst in self.bursts) {
         burst.selected = YES;
         indexPath = [NSIndexPath indexPathForRow:row inSection:0];
@@ -278,14 +277,12 @@ extern CGFloat defaultWideness;
         row++;
         [self configureSelectedForCell:cell atIndexPath:indexPath];
     }
-    NSLog(@"diff %ld", (long)[d1 timeIntervalSinceNow] * -1);
 
 }
 
 - (IBAction)unselectAll:(id)sender {
     NSInteger row = 0;
     NSIndexPath * indexPath;
-    NSDate * d1 = [NSDate date];
     for (EUCBurst * burst in self.bursts) {
         burst.selected = NO;
         indexPath = [NSIndexPath indexPathForRow:row inSection:0];
@@ -293,7 +290,6 @@ extern CGFloat defaultWideness;
         row++;
         [self configureSelectedForCell:cell atIndexPath:indexPath];
     }
-    NSLog(@"diff %ld", (long)[d1 timeIntervalSinceNow] * -1);
 }
 
 - (IBAction)cancel:(id)sender {
