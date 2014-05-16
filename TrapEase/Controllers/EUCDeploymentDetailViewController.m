@@ -747,6 +747,8 @@ typedef enum : NSUInteger {
         EUCImage * firstImage = burst.images[0];
         [db saveLocalBurstWithId:burstId owner:personId deployment_id:deploymentId burstDate:[self.format stringFromDate:firstImage.assetDate]];
         
+        NSInteger numImages = [burst.images count];
+        __block NSInteger currentImageNumber = 0;
         for (EUCImage * image in burst.images) {
             [self.assetsLibrary assetForURL:image.url resultBlock:^(ALAsset *asset) {
                 if (asset != nil) {
@@ -763,6 +765,10 @@ typedef enum : NSUInteger {
                                          fileName:fileName
                                             width:image.dimensions.width
                                            height:image.dimensions.height];
+                    currentImageNumber++;
+                    if (currentImageNumber == numImages) {
+                        [self.master handleRefreshForSetWithId:deploymentId];
+                    }
                 }
             }
                                failureBlock:^(NSError *error) {
@@ -772,7 +778,6 @@ typedef enum : NSUInteger {
         }
     }
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self.master handleRefreshForSetWithId:deploymentId];
 
 }
 
