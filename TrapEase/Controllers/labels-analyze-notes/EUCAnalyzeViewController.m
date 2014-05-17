@@ -160,9 +160,18 @@
         EUCBurst *firstBurst = [bursts firstObject];
         startDate = firstBurst.date;
         orginalStartDate = firstBurst.date;
-        EUCBurst *lastBurst = [bursts lastObject];
-        endDate = lastBurst.date;
-        orginalEndDate = lastBurst.date;
+
+        EUCBurst *lastBurst;
+        if (bursts.count == 1) {
+
+            endDate = [startDate dateByAddingTimeInterval:SECONDS_IN_DAY];
+            orginalEndDate = endDate;
+        } else {
+            lastBurst = [bursts lastObject];
+            endDate = lastBurst.date;
+            orginalEndDate = lastBurst.date;
+        }
+
 
         [self setButtonLabelDateStartDate:startDate withEndDate:endDate];
     }
