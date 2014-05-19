@@ -1,5 +1,5 @@
 //
-//  SetNameContentViewController.h
+//  SetNameContentUIView.h
 //  PhotoMat
 //
 //  Created by Anthony Perritano on 5/1/14.
@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIView+NibLoading.h"
 
-@interface SetNameContentViewController : UIViewController
-
+@interface SetNameContentUIView : NibLoadedView
 @property(weak, nonatomic) IBOutlet UITextView *textView;
-
 @end

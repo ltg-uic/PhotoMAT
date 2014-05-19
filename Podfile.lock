@@ -30,6 +30,7 @@ PODS:
   - FMDB/standard (2.3):
     - FMDB/common
   - OBDragDrop (1.0.0)
+  - UIView+NibLoading (1.0.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.2.1)
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - DDPopoverBackgroundView
   - FMDB
   - OBDragDrop
+  - UIView+NibLoading
 
 SPEC CHECKSUMS:
   AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
@@ -44,5 +46,6 @@ SPEC CHECKSUMS:
   DDPopoverBackgroundView: 5867278dcaab821e3870b69c2f7e33ab687dea8a
   FMDB: 8b6b69b1164e3007d7f4b3b3719e667602ec247e
   OBDragDrop: 083ddfb38d3fa7f9386f52d4bbaeaf1713db6ff3
+  UIView+NibLoading: 731bd128ccb9998b43658dc124d910732d3b7420
 
 COCOAPODS: 0.32.1

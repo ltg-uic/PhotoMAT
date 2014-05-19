@@ -27,18 +27,18 @@
 }
 
 - (void)datePickerDateChanged:(id)datePickerDateChanged {
-    if (_isNextDay) {
-        if (_startPeriodDate != nil ) {
-            NSDate *adjustedEndPeriod = [_datePicker.date dateByAddingTimeInterval:SECONDS_IN_DAY];
-            NSDate *adjustedStartPeriod = [_startPeriodDate dateByAddingTimeInterval:SECONDS_IN_DAY];
-
-            NSTimeInterval dif = [adjustedEndPeriod timeIntervalSinceDate:_startPeriodDate];
-
-            if (dif > SECONDS_IN_DAY) {
-                _datePicker.date = _startPeriodDate;
-            }
-        }
-    }
+//    if (_isNextDay) {
+//        if (_startPeriodDate != nil ) {
+//            NSDate *adjustedEndPeriod = [_datePicker.date dateByAddingTimeInterval:SECONDS_IN_DAY];
+//            NSDate *adjustedStartPeriod = [_startPeriodDate dateByAddingTimeInterval:SECONDS_IN_DAY];
+//
+//            NSTimeInterval dif = [adjustedEndPeriod timeIntervalSinceDate:_startPeriodDate];
+//
+//            if (dif > SECONDS_IN_DAY) {
+//                _datePicker.date = _startPeriodDate;
+//            }
+//        }
+//    }
 }
 
 - (void)viewDidLoad {

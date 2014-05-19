@@ -25,6 +25,7 @@
     // _tagView.frame
     _tagView.text = analyzeItem.labelName;
 
+
     NSMutableArray *burstsInRange = [[NSMutableArray alloc] init];
     NSDate *startTime;
     NSDate *endTime;
@@ -89,13 +90,17 @@
         }
     }
 
+
+    _labelTagView.text = [NSString stringWithFormat:@"%d", newLabelCount];
+    //[_labelTagView setNeedsDisplay];
     _timeliveView.bursts = burstsInRange;
     _timeliveView.startDate = startDate;
     _timeliveView.endDate = endDate;
     _timeliveView.bandStartTime = startPeriodDate;
     _timeliveView.bandEndTime = endPeriodDate;
 
-    _countLabel.text = [NSString stringWithFormat:@"%d", newLabelCount];
+
+    // _countLabel.text = [NSString stringWithFormat:@"%d", newLabelCount];
 
     [self setNeedsDisplay];
 

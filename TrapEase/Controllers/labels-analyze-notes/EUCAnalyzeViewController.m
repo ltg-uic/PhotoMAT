@@ -17,8 +17,6 @@
 #import "AnalyzeDatePopoverViewController.h"
 #import "TimelineUIViewController.h"
 #import "EUCDeploymentMasterViewController.h"
-#import "SetNameContentViewController.h"
-#import "DDPopoverBackgroundView.h"
 
 
 @interface EUCAnalyzeViewController () <UIPopoverControllerDelegate, UIPickerViewDelegate> {
@@ -71,6 +69,7 @@
 - (void)viewDidLoad {
     [self.view addSubview:_completeTimelineView];
     //[self loadData];
+
 
     [_daySelector addTarget:self action:@selector(dayChanged:) forControlEvents:UIControlEventValueChanged];
 
@@ -244,7 +243,8 @@
     _analysisPeriodLabel.hidden = !shouldShow;
     _dailyWindowLabel.hidden = !shouldShow;
     _periodDayLabel.hidden = !shouldShow;
-    _daySelector.hidden = !shouldShow;
+    // _daySelector.hidden = !shouldShow;
+    _dayLabel.hidden = !shouldShow;
     //[self displaySetNames];
 }
 
@@ -445,9 +445,28 @@
     void (^finishedHandler)(NSDate *) = ^(NSDate *newDate) {
 
         periodStartDate = newDate;
+
+        NSString *stringDate = [periodDateformat stringFromDate:periodStartDate];
+
+        NSDate *fromTimeOnly = [self timeOnly:periodStartDate];
+        NSDate *untilTimeOnly = [self timeOnly:periodEndDate];
+
+        if (([stringDate isEqualToString:@"12:00 AM"] == NO) && [self isSameDay:fromTimeOnly and:untilTimeOnly]) {
+
+            _dayLabel.text = @"Same Day";
+            _daySelector.selectedSegmentIndex = 0;
+
+
+        } else {
+            _dayLabel.text = @"Next Day";
+            periodEndDate = [periodEndDate dateByAddingTimeInterval:SECONDS_IN_DAY];
+            _daySelector.selectedSegmentIndex = 1;
+        }
+
+
         [self changeButtonTitleWithButton:_startRangeButton andStringDate:[periodDateformat stringFromDate:newDate]];
 
-        [self dayChanged:nil];
+        [self refreshViews];
 
     };
     content.finishedHandler = finishedHandler;
@@ -472,13 +491,13 @@
 
     content.dateformat.dateFormat = periodDateformat;
 
-    NSInteger isNextDay = _daySelector.selectedSegmentIndex;
-    if (isNextDay == 1) {
-        content.isNextDay = YES;
-    } else {
-        content.isNextDay = NO;
-        content.datePicker.minimumDate = [periodStartDate dateByAddingTimeInterval:+60];
-    }
+//    NSInteger isNextDay = _daySelector.selectedSegmentIndex;
+//    if (isNextDay == 1) {
+//        content.isNextDay = YES;
+//    } else {
+//        content.isNextDay = NO;
+//        content.datePicker.minimumDate = [periodStartDate dateByAddingTimeInterval:+60];
+//    }
 
     content.startPeriodDate = periodStartDate;
     content.datePicker.date = [periodDateformat dateFromString:_endRangeButton.titleLabel.text];
@@ -487,8 +506,29 @@
     content.modalInPopover = YES;
     void (^finishedHandler)(NSDate *) = ^(NSDate *newDate) {
 
+        NSString *stringDate = [periodDateformat stringFromDate:periodStartDate];
+
+        NSDate *fromTimeOnly = [self timeOnly:periodStartDate];
+        NSDate *untilTimeOnly = [self timeOnly:newDate];
+
+        if (([stringDate isEqualToString:@"12:00 AM"] == NO) && [self isSameDay:fromTimeOnly and:untilTimeOnly]) {
+
+            _dayLabel.text = @"Same Day";
+            _daySelector.selectedSegmentIndex = 0;
+
+
+        } else {
+            _dayLabel.text = @"Next Day";
+            [newDate dateByAddingTimeInterval:SECONDS_IN_DAY];
+            _daySelector.selectedSegmentIndex = 1;
+        }
+
+        // [self dayChanged:nil];
+
         periodEndDate = newDate;
+
         [self changeButtonTitleWithButton:_endRangeButton andStringDate:[periodDateformat stringFromDate:newDate]];
+        // [self dayChanged:nil];
         [self refreshViews];
 
     };
@@ -498,39 +538,71 @@
 }
 
 
+- (BOOL)isSameDay:(NSDate *)dateOne and:(NSDate *)dateTwo {
+    switch ([dateOne compare:dateTwo]) {
+        case NSOrderedAscending:
+            // dateOne is earlier in time than dateTwo
+            return YES;
+        case NSOrderedSame:
+            // The dates are the same
+            return YES;
+        case NSOrderedDescending:
+            // dateOne is later in time than dateTwo
+            return NO;
+    }
+}
+
+
+- (NSDate *)timeOnly:(NSDate *)date {
+    unsigned int flags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:flags fromDate:date];
+    NSDate *timeOnly = [calendar dateFromComponents:components];
+    return timeOnly;
+}
+
 - (IBAction)showSetNamesPopover:(id)sender {
 
-    SetNameContentViewController *content = [[SetNameContentViewController alloc] initWithNibName:@"SetNameContentViewController" bundle:nil];
+    if (_setNameView.hidden == NO) {
+        _setNameView.hidden = YES;
+    } else {
+        _setNameView.hidden = NO;
+        ///_imageSetView.frame = CGRectMake(362, 51, _imageSetView.frame.size.width, _imageSetView.frame.size.height);
 
+        NSLog(@"NAMES Popover origin=%@", NSStringFromCGPoint(_setNameView.frame.origin));
 
-    errorPopoverController = [[UIPopoverController alloc]
-            initWithContentViewController:content];
+//    errorPopoverController = [[UIPopoverController alloc]
+//            initWithContentViewController:content];
 
-    EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
-    namesOfSelectedSets = [burstDetailController.master namesOfSelectedSets];
-    NSString *firstName = [namesOfSelectedSets firstObject];
+        EUCDeploymentDetailViewController *burstDetailController = appDelegate.detail;
+        namesOfSelectedSets = [burstDetailController.master namesOfSelectedSets];
+        NSString *firstName = [namesOfSelectedSets firstObject];
 
-    NSString *names;
-    for (NSString *name in namesOfSelectedSets) {
-        if ([name isEqualToString:firstName]) {
-            names = firstName;
-        } else {
-            names = [names stringByAppendingFormat:@"\n%@", name];
+        NSString *names;
+        for (NSString *name in namesOfSelectedSets) {
+            if ([name isEqualToString:firstName]) {
+                names = firstName;
+            } else {
+                names = [names stringByAppendingFormat:@"\n%@", name];
+            }
         }
+        _setNameView.textView.text = names;
     }
-    content.textView.text = names;
+
+
+
     //content.textView.backgroundColor =  [UIColor clearColor];
 
     //content.textView.alpha = .2f;
     // errorPopoverController.backgroundColor =  [UIColor clearColor];
 
-    [errorPopoverController setPopoverBackgroundViewClass:[DDPopoverBackgroundView class]];
-    [DDPopoverBackgroundView setShadowEnabled:YES];
-    [DDPopoverBackgroundView setTintColor:[UIColor colorWithRed:127 green:127 blue:127 alpha:.5]];
+//    [errorPopoverController setPopoverBackgroundViewClass:[DDPopoverBackgroundView class]];
+//    [DDPopoverBackgroundView setShadowEnabled:YES];
+//    [DDPopoverBackgroundView setTintColor:[UIColor colorWithRed:127 green:127 blue:127 alpha:.5]];
 
 
-    [errorPopoverController setPopoverContentSize:CGSizeMake(300, 190) animated:true];
-    [errorPopoverController presentPopoverFromRect:_setNamesButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+//    [errorPopoverController setPopoverContentSize:CGSizeMake(300, 190) animated:true];
+//    [errorPopoverController presentPopoverFromRect:_setNamesButton.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13D45a" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -10,6 +10,7 @@
                 <outlet property="completeTimelineView" destination="0na-it-j5n" id="M3l-hH-Gz3"/>
                 <outlet property="countLabel" destination="HPl-WR-xRT" id="DfH-5W-REP"/>
                 <outlet property="dailyWindowLabel" destination="q9b-K1-SxG" id="Xxc-by-w3p"/>
+                <outlet property="dayLabel" destination="Nvq-ob-Lyr" id="NWy-Pa-Pgx"/>
                 <outlet property="daySelector" destination="uKr-kF-ieX" id="Vch-Ob-ZTo"/>
                 <outlet property="endDateButton" destination="4iE-P9-2Fy" id="suO-u1-akq"/>
                 <outlet property="endRangeButton" destination="GNI-RJ-Ec7" id="Ckm-eX-3Vy"/>
@@ -17,6 +18,7 @@
                 <outlet property="endTimeLabel" destination="hlT-IV-2vw" id="2jI-xK-Hi3"/>
                 <outlet property="errorLabel" destination="YTL-L3-pGY" id="30V-hF-j0z"/>
                 <outlet property="labelLabel" destination="hUu-Mx-dNg" id="0cR-Uf-gJL"/>
+                <outlet property="setNameView" destination="R7U-Kj-hje" id="5Xb-j9-oub"/>
                 <outlet property="setNamesButton" destination="rJN-lH-7RA" id="J8y-tF-OV2"/>
                 <outlet property="startDateButton" destination="Efs-Fb-1Lg" id="cVX-f7-u4L"/>
                 <outlet property="startRangeButton" destination="A38-BY-7NE" id="brb-5a-gAW"/>
@@ -171,7 +173,7 @@
                     <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <size key="shadowOffset" width="1" height="0.0"/>
                 </label>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJN-lH-7RA">
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rJN-lH-7RA">
                     <rect key="frame" x="454" y="15" width="117" height="33"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
@@ -184,7 +186,7 @@
                     </connections>
                 </button>
                 <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="uKr-kF-ieX">
-                    <rect key="frame" x="797" y="134" width="153" height="29"/>
+                    <rect key="frame" x="540" y="94" width="153" height="29"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <segments>
                         <segment title="Same Day"/>
@@ -194,6 +196,18 @@
                         <action selector="whichSelected:" destination="-1" eventType="valueChanged" id="MGa-ay-Jql"/>
                     </connections>
                 </segmentedControl>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Next Day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nvq-ob-Lyr">
+                    <rect key="frame" x="802" y="130" width="135" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R7U-Kj-hje" customClass="SetNameContentUIView">
+                    <rect key="frame" x="362" y="51" width="300" height="210"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

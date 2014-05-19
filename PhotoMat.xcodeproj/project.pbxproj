@@ -38,8 +38,8 @@
 		70BB003919044C5400ACB494 /* EUCAnalyzeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BB003719044C5400ACB494 /* EUCAnalyzeViewController.m */; };
 		70BB003A19044C5400ACB494 /* EUCAnalyzeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70BB003819044C5400ACB494 /* EUCAnalyzeViewController.xib */; };
 		70BB004C190487FC00ACB494 /* AnalyzeLabelUIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70BB004B190487FC00ACB494 /* AnalyzeLabelUIView.xib */; };
-		70CC82F71912EC8600D242A7 /* SetNameContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC82F51912EC8600D242A7 /* SetNameContentViewController.m */; };
-		70CC82F81912EC8600D242A7 /* SetNameContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70CC82F61912EC8600D242A7 /* SetNameContentViewController.xib */; };
+		70CC82F71912EC8600D242A7 /* SetNameContentUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70CC82F51912EC8600D242A7 /* SetNameContentUIView.m */; };
+		70CC82F81912EC8600D242A7 /* SetNameContentUIView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 70CC82F61912EC8600D242A7 /* SetNameContentUIView.xib */; };
 		70DEC970191BF23600479C3B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70DEC96F191BF23600479C3B /* Crashlytics.framework */; };
 		B4116D9918F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */; };
 		B41BB22F18FDF28700388779 /* EUCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B41BB22E18FDF28700388779 /* EUCLabel.m */; };
@@ -230,9 +230,9 @@
 		70BB003719044C5400ACB494 /* EUCAnalyzeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EUCAnalyzeViewController.m; sourceTree = "<group>"; };
 		70BB003819044C5400ACB494 /* EUCAnalyzeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EUCAnalyzeViewController.xib; sourceTree = "<group>"; };
 		70BB004B190487FC00ACB494 /* AnalyzeLabelUIView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalyzeLabelUIView.xib; sourceTree = "<group>"; };
-		70CC82F41912EC8600D242A7 /* SetNameContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetNameContentViewController.h; sourceTree = "<group>"; };
-		70CC82F51912EC8600D242A7 /* SetNameContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetNameContentViewController.m; sourceTree = "<group>"; };
-		70CC82F61912EC8600D242A7 /* SetNameContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetNameContentViewController.xib; sourceTree = "<group>"; };
+		70CC82F41912EC8600D242A7 /* SetNameContentUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetNameContentUIView.h; sourceTree = "<group>"; };
+		70CC82F51912EC8600D242A7 /* SetNameContentUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetNameContentUIView.m; sourceTree = "<group>"; };
+		70CC82F61912EC8600D242A7 /* SetNameContentUIView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetNameContentUIView.xib; sourceTree = "<group>"; };
 		70DEC96F191BF23600479C3B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		B4116D9718F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUCTabBarViewControllerDelegate.h; path = TrapEase/Controllers/EUCTabBarViewControllerDelegate.h; sourceTree = "<group>"; };
 		B4116D9818F3A01400AAA7AC /* EUCTabBarViewControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EUCTabBarViewControllerDelegate.m; path = TrapEase/Controllers/EUCTabBarViewControllerDelegate.m; sourceTree = "<group>"; };
@@ -445,9 +445,9 @@
 				7080F7D718F746F60087A66F /* PopoverTagContentViewController.h */,
 				7080F7D818F746F60087A66F /* PopoverTagContentViewController.m */,
 				7080F7D918F746F60087A66F /* PopoverTagContentViewController.xib */,
-				70CC82F41912EC8600D242A7 /* SetNameContentViewController.h */,
-				70CC82F51912EC8600D242A7 /* SetNameContentViewController.m */,
-				70CC82F61912EC8600D242A7 /* SetNameContentViewController.xib */,
+				70CC82F41912EC8600D242A7 /* SetNameContentUIView.h */,
+				70CC82F51912EC8600D242A7 /* SetNameContentUIView.m */,
+				70CC82F61912EC8600D242A7 /* SetNameContentUIView.xib */,
 				7043EAF51906106600BC16D8 /* AnalyzeDatePopoverViewController.h */,
 				7043EAF61906106600BC16D8 /* AnalyzeDatePopoverViewController.m */,
 				7043EAF71906106600BC16D8 /* AnalyzeDatePopoverViewController.xib */,
@@ -1002,7 +1002,7 @@
 				B4E6BE1018DDFF2F00AC9D84 /* upload@2x.png in Resources */,
 				7080F7E218F747620087A66F /* EUCNotesViewController.xib in Resources */,
 				B4E6BD9018DDC82600AC9D84 /* share@2x.png in Resources */,
-				70CC82F81912EC8600D242A7 /* SetNameContentViewController.xib in Resources */,
+				70CC82F81912EC8600D242A7 /* SetNameContentUIView.xib in Resources */,
 				B4E6BD8B18DDC82600AC9D84 /* filter.png in Resources */,
 				B4E6BE2B18DE3EE200AC9D84 /* EUCSettingsViewController.xib in Resources */,
 				7080F7CC18F7439B0087A66F /* webview-back@2x.png in Resources */,
@@ -1111,7 +1111,7 @@
 				7080F7BB18F743210087A66F /* TagView.m in Sources */,
 				B4521C4718F9BE67001F42AF /* Toast+UIView.m in Sources */,
 				B4D1EC3D18BD729300E01EFE /* main.m in Sources */,
-				70CC82F71912EC8600D242A7 /* SetNameContentViewController.m in Sources */,
+				70CC82F71912EC8600D242A7 /* SetNameContentUIView.m in Sources */,
 				B4E6BD5A18DDC26000AC9D84 /* EUCHomeViewController.m in Sources */,
 				B4E6BE8218DFD47700AC9D84 /* EUCDeploymentMasterViewController.m in Sources */,
 				B4E6BE0B18DDFD3400AC9D84 /* EUCUploadViewController.m in Sources */,

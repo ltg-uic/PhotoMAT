@@ -5,48 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>47DCB5FE-1D3E-4672-877A-55C92284DD27</string>
+	<string>B72B2FB5-A364-46C0-A7EA-7C7DBE0190DF</string>
 	<key>IDESourceControlProjectName</key>
 	<string>TrapEase</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>4408B69B-8D6E-40CB-AE2A-8BFE037A7F3D</key>
-		<string>https://github.com/BradLarson/GPUImage</string>
-		<key>92AC7DE9-217E-4575-8F7C-2F8DF67C9E63</key>
-		<string>ssh://bitbucket.org/euclidsoftware/trapease.git</string>
+		<key>AD64107B-D04B-4841-A2C3-74FB07B5EFF0</key>
+		<string>https://github.com/ltg-uic/PhotoMAT.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>TrapEase.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>4408B69B-8D6E-40CB-AE2A-8BFE037A7F3D</key>
-		<string>../Vendor/GPUImage/GPUImage</string>
-		<key>92AC7DE9-217E-4575-8F7C-2F8DF67C9E63</key>
+		<key>AD64107B-D04B-4841-A2C3-74FB07B5EFF0</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://bitbucket.org/euclidsoftware/trapease.git</string>
+	<string>https://github.com/ltg-uic/PhotoMAT.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>92AC7DE9-217E-4575-8F7C-2F8DF67C9E63</string>
+	<string>AD64107B-D04B-4841-A2C3-74FB07B5EFF0</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4408B69B-8D6E-40CB-AE2A-8BFE037A7F3D</string>
+			<string>AD64107B-D04B-4841-A2C3-74FB07B5EFF0</string>
 			<key>IDESourceControlWCCName</key>
-			<string>GPUImage</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>92AC7DE9-217E-4575-8F7C-2F8DF67C9E63</string>
-			<key>IDESourceControlWCCName</key>
-			<string>TrapEase</string>
+			<string>PhotoMAT</string>
 		</dict>
 	</array>
 </dict>

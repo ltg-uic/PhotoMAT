@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SetNameContentUIView.h"
 
 @interface EUCAnalyzeViewController : UIViewController {
 }
@@ -28,6 +29,8 @@
 @property(weak, nonatomic) IBOutlet UILabel *dailyWindowLabel;
 @property(weak, nonatomic) IBOutlet UILabel *periodDayLabel;
 @property(weak, nonatomic) IBOutlet UISegmentedControl *daySelector;
+@property(weak, nonatomic) IBOutlet UILabel *dayLabel;
+@property(weak, nonatomic) IBOutlet SetNameContentUIView *setNameView;
 
 
 - (IBAction)showStartDatePicker:(id)sender;
