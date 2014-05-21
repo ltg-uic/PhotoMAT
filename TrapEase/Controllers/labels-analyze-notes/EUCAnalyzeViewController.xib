@@ -18,6 +18,7 @@
                 <outlet property="endTimeLabel" destination="hlT-IV-2vw" id="2jI-xK-Hi3"/>
                 <outlet property="errorLabel" destination="YTL-L3-pGY" id="30V-hF-j0z"/>
                 <outlet property="labelLabel" destination="hUu-Mx-dNg" id="0cR-Uf-gJL"/>
+                <outlet property="scrollView" destination="C3J-CS-vqg" id="UnY-YK-vDN"/>
                 <outlet property="setNameView" destination="R7U-Kj-hje" id="5Xb-j9-oub"/>
                 <outlet property="setNamesButton" destination="rJN-lH-7RA" id="J8y-tF-OV2"/>
                 <outlet property="startDateButton" destination="Efs-Fb-1Lg" id="cVX-f7-u4L"/>
@@ -40,11 +41,6 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0na-it-j5n">
-                    <rect key="frame" x="0.0" y="194" width="1024" height="518"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </view>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efs-Fb-1Lg">
                     <rect key="frame" x="119" y="58" width="186" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -208,6 +204,22 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C3J-CS-vqg">
+                    <rect key="frame" x="0.0" y="190" width="1059" height="518"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0na-it-j5n" userLabel="timelineView">
+                            <rect key="frame" x="0.0" y="0.0" width="1024" height="1000"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="size" keyPath="contentSize">
+                            <size key="value" width="1024" height="518"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

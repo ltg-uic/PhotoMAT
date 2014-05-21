@@ -67,7 +67,8 @@
 }
 
 - (void)viewDidLoad {
-    [self.view addSubview:_completeTimelineView];
+
+    //[self.view addSubview:_scrollView];
     //[self loadData];
 
 
@@ -270,6 +271,8 @@
 - (void)refreshViews {
 
 
+    [_completeTimelineView setAutoresizingMask:UIViewAutoresizingFlexibleHeight];
+
     NSArray *subviews = [_completeTimelineView subviews];
 
     for (UIView *v in subviews) {
@@ -319,6 +322,9 @@
         _errorLabel.hidden = YES;
 
 
+        NSLog(@"%@", NSStringFromCGSize(_completeTimelineView.frame.size));
+
+
         [self.view setNeedsDisplay];
 
     } else {
@@ -354,6 +360,9 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+
+    [_scrollView setContentSize:CGSizeMake(1024, 1000)];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {

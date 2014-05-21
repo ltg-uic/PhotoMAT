@@ -31,7 +31,7 @@
 @property(weak, nonatomic) IBOutlet UISegmentedControl *daySelector;
 @property(weak, nonatomic) IBOutlet UILabel *dayLabel;
 @property(weak, nonatomic) IBOutlet SetNameContentUIView *setNameView;
-
+@property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)showStartDatePicker:(id)sender;
 
